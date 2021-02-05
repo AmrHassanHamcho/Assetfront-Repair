@@ -1,6 +1,0 @@
-THis group is for bachelor thesis. 
-Group memebers are:
-Amr Hamcho
-Abdi Bako
-Mustafa....
-Shamil....
