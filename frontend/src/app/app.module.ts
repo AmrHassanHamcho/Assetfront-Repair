@@ -7,8 +7,10 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SearchComponent } from './search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from "@angular/material/button";
-import {FormsModule} from "@angular/forms";
+import {MatButtonModule} from '@angular/material/button';
+import {FormsModule} from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
+import {VehiclesService} from './vehicle.service';
 
 @NgModule({
   declarations: [
@@ -22,9 +24,10 @@ import {FormsModule} from "@angular/forms";
         AppRoutingModule,
         BrowserAnimationsModule,
         MatButtonModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule
     ],
-  providers: [],
+  providers: [VehiclesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
