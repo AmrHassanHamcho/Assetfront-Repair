@@ -24,7 +24,7 @@ export class VehiclesService  {
       // We are connecting to the Api through self made springboot application(API)
      // Assetfront Api:  'https://test-assetlookup.dev.assetfront.com/asset/lookup/'
     };
-    const url = 'http://localhost:8080/asset/lookup/\n'  + serialNo;
+    const url = 'http://localhost:8080/asset/lookup/'  + serialNo;
 
     return this.httpClient.get<IVehicle[]>(url, httpOptions);
   }
