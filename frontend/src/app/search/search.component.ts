@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {VehiclesService} from '../vehicle.service';
+import {VehiclesService} from '../../vehicle-service/vehicle.service';
+import {catchError} from 'rxjs/operators';
+import {of, pipe} from 'rxjs';
 
 @Component({
   selector: 'app-search',
@@ -9,6 +11,7 @@ import {VehiclesService} from '../vehicle.service';
 export class SearchComponent implements OnInit {
 
   public vehcilesDetail: any = [];
+  public errorMsg: string;
 
   constructor(private request: VehiclesService) {
   }
@@ -21,6 +24,10 @@ export class SearchComponent implements OnInit {
       this.request.getVehicleData(value)
         // assigns deta recieved from observable to this local SearchComponent property
         .subscribe(data => this.vehcilesDetail = data);
+      catchError(error => {
+          this.errorMsg = error.message;
+          return of([]);
+        });
     }
   }
 
