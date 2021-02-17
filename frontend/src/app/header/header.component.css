@@ -1,0 +1,17 @@
+.navbar{
+  height: 100px;
+  background: black;
+  border-radius: 0px;
+
+}
+
+.navbar container-fluid{
+  display: flex;
+}
+
+.navbar img{
+  width: 400px;
+  height: 99px;
+  margin-top: 0px;
+  margin-left: 50px;
+}
