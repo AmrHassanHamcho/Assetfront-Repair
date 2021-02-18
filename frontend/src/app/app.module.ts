@@ -9,8 +9,9 @@ import { SearchComponent } from './search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import {VehiclesService} from './vehicle.service';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {VehiclesService} from '../vehicle-service/vehicle.service';
+import {AppHttpInterceptor} from './interceptor/appIntercerptor';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,14 @@ import {VehiclesService} from './vehicle.service';
         FormsModule,
         HttpClientModule
     ],
-  providers: [VehiclesService],
+  providers: [VehiclesService,
+
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AppHttpInterceptor,
+    multi: true
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
