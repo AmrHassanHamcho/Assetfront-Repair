@@ -13,11 +13,12 @@
   text-transform:uppercase;
   font-weight:bold;
   font-size: 1.5rem;
+
 }
 
 .nav-item {
   display: flex;
-  margin-left: 100px;
+  margin-left: 40px;
   text-align: center;
 }
 

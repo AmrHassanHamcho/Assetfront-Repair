@@ -9,11 +9,13 @@ import { SearchComponent } from './search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
-import {VehiclesService} from './vehicle.service';
-import { AboutComponent } from './about/about.component';
-import { ContactUsComponent } from './contact-us/contact-us.component';
+import { AboutComponent } from './header/about/about.component';
+import { ContactUsComponent } from './header/contact-us/contact-us.component';
 import { SubHeaderComponent } from './sub-header/sub-header.component';
+
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {VehiclesService} from '../vehicle-service/vehicle.service';
+import {AppHttpInterceptor} from './interceptor/appIntercerptor';
 
 @NgModule({
   declarations: [
@@ -33,7 +35,14 @@ import { SubHeaderComponent } from './sub-header/sub-header.component';
         FormsModule,
         HttpClientModule
     ],
-  providers: [VehiclesService],
+  providers: [VehiclesService,
+
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AppHttpInterceptor,
+    multi: true
+  }
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

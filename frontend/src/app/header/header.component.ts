@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {VehiclesService} from '../../vehicle-service/vehicle.service';
 
 @Component({
   selector: 'app-header',
@@ -8,15 +9,15 @@ import { Component, OnInit } from '@angular/core';
 export class HeaderComponent implements OnInit {
   navbarOpen = false;
 
-  constructor() { }
+  constructor(public ser: VehiclesService) {
 
+  }
   ngOnInit(): void {
   }
 
   toggleNavbar(){
     this.navbarOpen = !this.navbarOpen;
   }
-
 }
 
 
