@@ -9,16 +9,25 @@ import { SearchComponent } from './search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
+import { HomeComponent } from './home/home.component';
+import { ServiceComponent } from './service/service.component';
+import { InspectionComponent } from './inspection/inspection.component';
+import {MatMenuModule} from "@angular/material/menu";
+
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {VehiclesService} from '../vehicle-service/vehicle.service';
 import {AppHttpInterceptor} from './interceptor/appIntercerptor';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    SearchComponent
+    SearchComponent,
+    HomeComponent,
+    ServiceComponent,
+    InspectionComponent
   ],
     imports: [
         BrowserModule,
@@ -26,7 +35,8 @@ import {AppHttpInterceptor} from './interceptor/appIntercerptor';
         BrowserAnimationsModule,
         MatButtonModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        MatMenuModule
     ],
   providers: [VehiclesService,
 

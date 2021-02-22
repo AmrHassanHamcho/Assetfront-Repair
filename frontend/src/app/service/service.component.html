@@ -1,0 +1,100 @@
+
+
+<div class="container">
+  <div class="row row-1">
+    <div class="col-xs-3">
+      <p> Attach a document or image:</p>
+    </div>
+
+    <div class="col-xs-3">
+
+      <input type="file" (change)="onFileSelect($event)">
+      <button class="btn btn-primary btn-add" type="button" (click)="onFileUpload()" >Add file</button>
+    </div>
+
+    <div class="col-xs-3">
+      <p style="color: red">* </p>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="row row-2">
+    <div class="col-xs-2">
+      <p> Service Date: </p>
+    </div>
+    <div class="col-xs-2">
+      <input (input)="onUpdateDate($event)" type="date" required />
+    </div>
+    <div class="col-xs-2">
+      <p style="color: red">* </p>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="row row-3">
+    <div class="col-xs-2">
+      <p> Hours: </p>
+    </div>
+    <div class="col-xs-2 ">
+      <input (input) = "onUpdateHours($event)" type="number" placeholder="Hours" required />
+      <p>{{hours}}</p>
+    </div>
+
+    <div class="col-xs-2 ">
+      <p style="color: red">* </p>
+    </div>
+
+  </div>
+
+  <hr>
+
+  <div class="row row-4">
+    <div class="col-xs-2">
+      <p> Coast: </p>
+    </div>
+    <div class="col-xs-2 ">
+      <input (input) = "onUpdateCoast($event)"  type="number" placeholder="Cost (nok)" required />
+    </div>
+
+    <div class="col-xs-2 ">
+      <p style="color: red">* </p>
+    </div>
+
+  </div>
+
+
+  <hr>
+
+  <div class="row row-5">
+    <div class="col-xs-2">
+      <p> Comment: </p>
+    </div>
+    <div class="col-xs-2 ">
+      <input (input)="onUpdateComment($event)" class="comment" type="text" placeholder="Write your comment here"  />
+    </div>
+
+
+  </div>
+
+  <hr class="last-hr">
+
+  <div class="row row-6">
+    <div class="col-xs-4">
+      <a class="btn btn-primary btn-submit" role="button" href="#">Submit</a>
+    </div>
+    <div class="col-xs-4 btn-back">
+      <a class="btn btn-link btn-back" role="button" href="#">Back</a>
+    </div>
+  </div>
+
+
+</div>
+
+
+
+
+
