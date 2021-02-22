@@ -1,6 +1,11 @@
+
 import {Component, Input, OnInit} from '@angular/core';
-import {VehiclesService} from '../vehicle.service';
-import {Test1Service} from "../test1.service";
+
+
+
+import {VehiclesService} from '../../vehicle-service/vehicle.service';
+import {catchError} from 'rxjs/operators';
+import {of, pipe} from 'rxjs';
 
 
 @Component({
@@ -11,8 +16,9 @@ import {Test1Service} from "../test1.service";
 export class SearchComponent implements OnInit {
 
   public vehcilesDetail: any = [];
+  public errorMsg: string;
 
-  constructor(private request: VehiclesService, public ser: Test1Service) {
+  constructor(private request: VehiclesService) {
   }
 
   ngOnInit(): void {
@@ -24,15 +30,15 @@ export class SearchComponent implements OnInit {
       this.request.getVehicleData(value)
         // assigns deta recieved from observable to this local SearchComponent property
         .subscribe(data => this.vehcilesDetail = data);
-      this.ser.setSer(value);
+
+      catchError(error => {
+          this.errorMsg = error.message;
+          return of([]);
+        });
     }
   }
 
 
-
-  //getProductId(){
-    //return this.vehcilesDetail.productClass.id;
-  //}
 
 }
 
