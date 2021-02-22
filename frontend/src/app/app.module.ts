@@ -12,10 +12,15 @@ import {FormsModule} from '@angular/forms';
 import { AboutComponent } from './header/about/about.component';
 import { ContactUsComponent } from './header/contact-us/contact-us.component';
 import { SubHeaderComponent } from './sub-header/sub-header.component';
+import { HomeComponent } from './home/home.component';
+import { ServiceComponent } from './service/service.component';
+import { InspectionComponent } from './inspection/inspection.component';
+import {MatMenuModule} from '@angular/material/menu';
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {VehiclesService} from '../vehicle-service/vehicle.service';
 import {AppHttpInterceptor} from './interceptor/appIntercerptor';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +30,11 @@ import {AppHttpInterceptor} from './interceptor/appIntercerptor';
     SearchComponent,
     AboutComponent,
     ContactUsComponent,
-    SubHeaderComponent
+    SubHeaderComponent,
+    HomeComponent,
+    ServiceComponent,
+    InspectionComponent
+
   ],
     imports: [
         BrowserModule,
@@ -33,7 +42,8 @@ import {AppHttpInterceptor} from './interceptor/appIntercerptor';
         BrowserAnimationsModule,
         MatButtonModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        MatMenuModule
     ],
   providers: [VehiclesService,
 

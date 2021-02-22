@@ -1,0 +1,43 @@
+
+.btn-add{
+
+  background: #e1efe6;
+  color: black;
+}
+
+
+.row{
+  height: auto;
+}
+
+hr{
+  position: relative;
+  background: black;
+  height: 1px;
+}
+.last-hr{
+  position: relative;
+  background: transparent;
+  height: 1px;
+
+}
+
+.hours{
+  height: 50px;
+  width: 200px;
+  border-radius: 16px;
+}
+
+.comment{
+  height: 80px;
+  width: 400px;
+}
+.btn-submit{
+  border-radius: 9px;
+  background-color: dodgerblue;
+}
+.btn-back{
+  border-radius: 9px;
+  border-color: gray;
+  color: black;
+}

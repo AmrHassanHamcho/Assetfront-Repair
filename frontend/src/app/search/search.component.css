@@ -17,23 +17,30 @@
   width: 100px;
 }
 
-@media  screen and (max-width: 375px){
-  .container{
+.container .btn {
+  margin: 75px;
+  background: #e1efe6;
+  color: black;
+}
+
+@media  screen and (max-width: 375px) {
+  .container {
     display: flex;
     margin-top: 200px;
     width: 250px;
   }
 
-  #label{
+  #label {
     margin-left: 20px;
   }
 
-  .form-group{
+  .form-group {
     width: 200px;
     margin-left: 10px;
   }
 
-  .btn-primary{
+  .btn-primary {
     margin-left: 60px;
   }
+
 }
