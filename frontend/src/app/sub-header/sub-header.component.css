@@ -1,7 +1,8 @@
 .navbar {
   width: 100%;
-  background: black;
+  background: grey;
 }
+
 .navbar img{
   height: 74px;
   margin-left: 50px;
@@ -11,17 +12,13 @@
 .nav-link {
   text-transform:uppercase;
   font-weight:bold;
-  font-size: 1.25rem;
+  font-size: 1.5rem;
 }
 
 .nav-item {
   display: flex;
-  margin-left: 20px;
+  margin-left: 100px;
   text-align: center;
-}
-
-#myAccount{
-  margin-left: 1000px;
 }
 
 @media  screen and (max-width: 375px){
@@ -36,9 +33,6 @@
   }
   .nav-item {
     margin-top: 0px;
-    margin-left: 0px;
-  }
-  #myAccount{
     margin-left: 0px;
   }
 }

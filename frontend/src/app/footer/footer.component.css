@@ -1,21 +1,42 @@
 .footer-dark{
   display: flex;
   background-color: black;
-  height: 185px;
+  height: 150px;
   position: fixed;
-  bottom: 0;
+  bottom: 0px;
   width: 100%;
+  left: 0px;
+  right: 0px;
+  margin-bottom: 0px;
 }
 
 .footer-dark img{
-  width:100%;
-  height: 100px;: 5px;
+  display: flex;
+  height: 74px;
   margin-top: 30px;
   margin-left: 50px;
 }
 
 .footer-dark p {
-  font-size: 16px;
   color: white;
-  margin-top: 30px;
+  margin-top: 20px;
+  margin-left: 100px;
+  width: 300px;
+  font-size: 1rem;
+}
+
+@media  screen and (max-width: 375px){
+  .footer-dark img{
+    height: 60px;
+    margin-top: 50px;
+    margin-left: 10px;
+  }
+
+  .footer-dark p {
+    font-size: 0.5rem;
+    color: white;
+    margin-top: 1px;
+    margin-left: 200px;
+    width: 150px;
+  }
 }

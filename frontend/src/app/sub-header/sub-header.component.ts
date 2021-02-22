@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css']
+  selector: 'app-sub-header',
+  templateUrl: './sub-header.component.html',
+  styleUrls: ['./sub-header.component.css']
 })
-export class HeaderComponent implements OnInit {
+export class SubHeaderComponent implements OnInit {
+
   navbarOpen = false;
 
   constructor() { }
@@ -17,6 +18,5 @@ export class HeaderComponent implements OnInit {
     this.navbarOpen = !this.navbarOpen;
   }
 
+
 }
-
-

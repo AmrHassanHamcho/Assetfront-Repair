@@ -1,37 +1,23 @@
 <div class="container">
-  <div class="row">
     <div class="col-xs-12">
-
       <form>
         <div class="form-group">
-          <label>Please enter VIN number!</label>
+          <label id="label">Please enter VIN number!</label>
           <input #serialNo class="form-control input-lg" id="inputlg"  aria-describedby="emailHelp" placeholder="Search VIN">
-
-
-
-
         </div>
         <button (click)="setSerialNo(serialNo.value)" type="submit" class="btn btn-primary" > Submit</button>
-
-          <!--          This is just To test whether we get the expected value or not-->
+        <!--          This is just To test whether we get the expected value or not-->
         <h2 *ngFor="let vehicleInfo of vehcilesDetail">
           {{'Title: ' + vehicleInfo.productClass.title  }}
           <hr>
           {{'product id: ' + vehicleInfo.productClass.id  }}
           <hr>
-
           {{'resource Id: ' + vehicleInfo.resourceId  }}
           <hr>
           {{'Main image URL: ' + vehicleInfo.mainImageUrl  }}
           <hr>
         </h2>
-
       </form>
-
-
     </div>
-  </div>
 </div>
-
-
 

@@ -11,13 +11,19 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {VehiclesService} from './vehicle.service';
+import { AboutComponent } from './about/about.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
+import { SubHeaderComponent } from './sub-header/sub-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    SearchComponent
+    SearchComponent,
+    AboutComponent,
+    ContactUsComponent,
+    SubHeaderComponent
   ],
     imports: [
         BrowserModule,
