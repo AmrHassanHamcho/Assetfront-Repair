@@ -11,6 +11,7 @@ import {VehiclesService} from '../../vehicle-service/vehicle.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+  navbarOpen = false;
 
 
   constructor() {
@@ -20,5 +21,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-
+  toggleNavbar(){
+    this.navbarOpen = !this.navbarOpen;
+  }
 }
+
+

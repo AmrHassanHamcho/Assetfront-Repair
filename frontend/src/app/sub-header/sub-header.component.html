@@ -1,21 +1,20 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
-  <a class="navbar-brand" href="#"><img src="../../assets/images/Logo.png" alt="logo"></a>
   <button class="navbar-toggler" type="button" (click)="toggleNavbar()" data-toggle="collapse" data-target="#collapse_target" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav" [ngClass]="{ 'show': navbarOpen }">
     <ul class="navbar-nav">
       <li class="nav-item d-flex p-2">
-        <a class="nav-link" [routerLink]="['/search']"> Search <span class="sr-only">(current)</span> </a>
+        <a class="nav-link" [routerLink]="['/search']"> Home <span class="sr-only">(current)</span> </a>
       </li>
       <li class="nav-item d-flex p-2">
-        <a class="nav-link" [routerLink]="['/about']"> About Repair <span class="sr-only">(current)</span> </a>
+        <a class="nav-link" [routerLink]="['/about']"> TCR <span class="sr-only">(current)</span> </a>
       </li>
       <li class="nav-item d-flex p-2">
-        <a class="nav-link" [routerLink]="['/contactUs']"> Contact us <span class="sr-only">(current)</span></a>
+        <a class="nav-link" [routerLink]="['/inspection']"> Inspection <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item d-flex p-2" id="myAccount">
-        <a class="nav-link" href="#"> My Account <span class="sr-only">(current)</span></a>
+      <li class="nav-item d-flex p-2">
+        <a class="nav-link" [routerLink]="['/service']"> Service <span class="sr-only">(current)</span></a>
       </li>
     </ul>
   </div>
