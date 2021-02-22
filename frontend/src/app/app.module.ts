@@ -11,13 +11,20 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {VehiclesService} from './vehicle.service';
+import { HomeComponent } from './home/home.component';
+import { ServiceComponent } from './service/service.component';
+import { InspectionComponent } from './inspection/inspection.component';
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    SearchComponent
+    SearchComponent,
+    HomeComponent,
+    ServiceComponent,
+    InspectionComponent
   ],
     imports: [
         BrowserModule,
@@ -25,7 +32,8 @@ import {VehiclesService} from './vehicle.service';
         BrowserAnimationsModule,
         MatButtonModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        MatMenuModule
     ],
   providers: [VehiclesService],
   bootstrap: [AppComponent]
