@@ -1,12 +1,6 @@
 
-import {Component, Input, OnInit} from '@angular/core';
-
-
-
+import {Component, OnInit} from '@angular/core';
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
-import {catchError} from 'rxjs/operators';
-import {of, pipe} from 'rxjs';
-
 
 @Component({
   selector: 'app-search',
@@ -23,18 +17,15 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  public serieNo : string;
+/**
+ * @param value of serial number entered by a user
+ */
   setSerialNo(value: string): void {
-    if (value) {
+    if (value) { // calls request.getVehicleData() if and only if the value is entered
+      // if not does nothing
       this.request.getVehicleData(value)
         // assigns deta recieved from observable to this local SearchComponent property
         .subscribe(data => this.vehcilesDetail = data);
-
-      catchError(error => {
-          this.errorMsg = error.message;
-          return of([]);
-        });
     }
   }
 
