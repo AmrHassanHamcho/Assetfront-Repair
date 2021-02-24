@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
-import {IVehicle} from '../app/search/IVehicle';
+import { Asset} from "../app/asset/asset";
 
 
 @Injectable({
@@ -34,7 +34,7 @@ export class VehiclesService {
     this.serSerialNo(serialNo);
     const url =   'https://test-assetlookup.dev.assetfront.com/asset/lookup/' + serialNo;
 
-    return this.httpClient.get<IVehicle[]>(url);
+    return this.httpClient.get<Asset[]>(url);
 
 
   }

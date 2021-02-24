@@ -20,6 +20,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {VehiclesService} from '../vehicle-service/vehicle.service';
 import {AppHttpInterceptor} from './interceptor/appIntercerptor';
+import { TcrComponent } from './tcr/tcr.component';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {AppHttpInterceptor} from './interceptor/appIntercerptor';
     SubHeaderComponent,
     HomeComponent,
     ServiceComponent,
-    InspectionComponent
+    InspectionComponent,
+    TcrComponent
 
   ],
     imports: [

@@ -2,7 +2,7 @@
 import {Injectable} from '@angular/core';
 import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
 import {Observable} from 'rxjs/';
-import {IVehicle} from '../search/IVehicle';
+import { Asset} from "../asset/asset";
 
 @Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
@@ -15,7 +15,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
  * Authorization of type api_key to JFg26WuKBjgZ.
  * @return returns request header.
  */
-  intercept(req: HttpRequest<IVehicle>, next: HttpHandler): Observable<HttpEvent<any>> {
+  intercept(req: HttpRequest<Asset>, next: HttpHandler): Observable<HttpEvent<any>> {
     req = req.clone({ headers: req.headers.set('content-type', 'application/json') });
     req = req.clone({ headers: req.headers.set('Authorization', ' api_key JFg26WuKBjgZ') });
     return next.handle(req);
