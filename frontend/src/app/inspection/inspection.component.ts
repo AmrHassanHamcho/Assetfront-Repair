@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-inspection',
   templateUrl: './inspection.component.html',
-  styleUrls: ['./inspection.component.css']
+  styleUrls: ['./inspection.component.scss']
 })
 export class InspectionComponent implements OnInit {
   inspectionStatus = '';
