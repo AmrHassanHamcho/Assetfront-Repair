@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SubHeaderComponent implements OnInit {
 
   navbarOpen = false;
+  componentHidden = true;
 
   constructor() { }
 
@@ -17,6 +18,10 @@ export class SubHeaderComponent implements OnInit {
   toggleNavbar(){
     this.navbarOpen = !this.navbarOpen;
   }
-
-
+  hideComponent(): boolean{
+    return this.componentHidden;
+}
+setHideComponent(componentHidden: boolean){
+    this.componentHidden = componentHidden;
+}
 }
