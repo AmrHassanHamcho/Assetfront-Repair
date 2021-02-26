@@ -1,42 +1,31 @@
 
-import {Component, Input, OnInit} from '@angular/core';
-
-
-
+import {Component, OnInit} from '@angular/core';
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
-import {catchError} from 'rxjs/operators';
-import {of, pipe} from 'rxjs';
-
-
+import {ApiRequestService} from "../API-request/api-request.service";
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
 
-  public vehcilesDetail: any = [];
-  public errorMsg: string;
-
-  constructor(private request: VehiclesService) {
+  constructor(public request: ApiRequestService ) {
   }
-
   ngOnInit(): void {
   }
-
-  public serieNo : string;
-  setSerialNo(value: string): void {
-    if (value) {
-      this.request.getVehicleData(value)
-        // assigns deta recieved from observable to this local SearchComponent property
-        .subscribe(data => this.vehcilesDetail = data);
-
-      catchError(error => {
-          this.errorMsg = error.message;
-          return of([]);
-        });
-    }
-  }
+/**
+ * @param value of serial number entered by a user
+ */
+  // setSerialNo(value: string): void {
+  //   if (value) { // calls request.getVehicleData() if and only if the value is entered
+  //     // if not does nothing
+  //     this.request.getVehicleData(value)
+  //       // assigns deta recieved from observable to this local SearchComponent property
+  //       .subscribe(data => this.vehcilesDetail = data);
+  //
+  //
+  //   }
+  //}
 
 
 
