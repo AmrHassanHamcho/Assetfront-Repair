@@ -25,7 +25,7 @@ export class ServiceComponent implements OnInit {
   onFileUpload(){
     const fd = new FormData();
     fd.append('image', this.selectedFile,this.selectedFile.name);
-    //this.http.post(url,fd) // any backend function that accepts forgein data, in our case AWS url
+    //this.http.post(url,fd) // any backend function that accepts foreign data, in our case AWS url
     //.subscribe(event=> {
     // msg to usr
     // or log to console: console.log(event)
