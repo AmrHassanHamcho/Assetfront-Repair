@@ -35,8 +35,7 @@ import { TcrComponent } from './tcr/tcr.component';
     HomeComponent,
     ServiceComponent,
     InspectionComponent,
-    TcrComponent
-
+    TcrComponent,
   ],
     imports: [
         BrowserModule,
