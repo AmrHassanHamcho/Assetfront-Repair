@@ -13,6 +13,7 @@ import {ApiRequestService} from '../API-request/api-request.service';
 
 export class HeaderComponent implements OnInit {
   navbarOpen = false;
+  displayHeader = false;
 
   constructor(public apiRequest: ApiRequestService){ }
 
@@ -21,6 +22,13 @@ export class HeaderComponent implements OnInit {
 
   toggleNavbar(){
     this.navbarOpen = !this.navbarOpen;
+  }
+
+  display(){
+    if(this.apiRequest.assetDetails.length>0){
+      this.displayHeader = true;
+    }
+    return this.displayHeader;
   }
 }
 

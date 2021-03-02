@@ -34,7 +34,7 @@ export class VehiclesService {
     this.serSerialNo(serialNo);
     const url =   'https://test-assetlookup.dev.assetfront.com/asset/lookup/' + serialNo;
 
-    return this.httpClient.get<Asset[]>(url);
+    return this.httpClient.get(url);
 
 
   }
