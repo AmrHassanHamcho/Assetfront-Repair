@@ -19,6 +19,9 @@ import {MatMenuModule} from '@angular/material/menu';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {VehiclesService} from '../vehicle-service/vehicle.service';
 import {AppHttpInterceptor} from './interceptor/appIntercerptor';
+import { TcrComponent } from './tcr/tcr.component';
+import {MatFormFieldModule} from "@angular/material/form-field";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -31,18 +34,20 @@ import {AppHttpInterceptor} from './interceptor/appIntercerptor';
     ContactUsComponent,
     HomeComponent,
     ServiceComponent,
-    InspectionComponent
-
+    InspectionComponent,
+    TcrComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatButtonModule,
-        FormsModule,
-        HttpClientModule,
-        MatMenuModule
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    FormsModule,
+    HttpClientModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatSelectModule
+  ],
   providers: [VehiclesService,
 
   {
