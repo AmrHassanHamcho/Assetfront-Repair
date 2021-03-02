@@ -1,23 +1,22 @@
-.footer-dark{
+.footer{
   display: flex;
   background-color: black;
   height: 150px;
-  position: fixed;
-  bottom: 0px;
+  position: relative;
+  bottom: 0;
   width: 100%;
-  left: 0px;
-  right: 0px;
-  margin-bottom: 0px;
+  margin-top: 50px;
 }
 
-.footer-dark img{
+.footer img{
   display: flex;
   height: 74px;
   margin-top: 30px;
   margin-left: 50px;
+  padding: 0px;
 }
 
-.footer-dark p {
+.footer p {
   color: white;
   margin-top: 20px;
   margin-left: 100px;
@@ -26,13 +25,13 @@
 }
 
 @media  screen and (max-width: 375px){
-  .footer-dark img{
+  .footer img{
     height: 60px;
     margin-top: 50px;
     margin-left: 10px;
   }
 
-  .footer-dark p {
+  .footer p {
     font-size: 0.5rem;
     color: white;
     margin-top: 1px;
