@@ -6,7 +6,7 @@ import {VehiclesService} from "../../vehicle-service/vehicle.service";
   providedIn: 'root'
 })
 export class ApiRequestService {
-
+  hide = false;
   public assetDetails: any = [];
   constructor(private request: VehiclesService) { }
 
@@ -16,10 +16,11 @@ export class ApiRequestService {
       this.request.getVehicleData(value)
         // assigns deta recieved from observable to this local SearchComponent property
         .subscribe(data => this.assetDetails = data);
-
-
+      this.hide = true;
     }
 
   }
-
+  getHide(){
+    return this.hide;
+  }
 }
