@@ -11,7 +11,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {FormsModule} from '@angular/forms';
 import { AboutComponent } from './header/about/about.component';
 import { ContactUsComponent } from './header/contact-us/contact-us.component';
-import { SubHeaderComponent } from './sub-header/sub-header.component';
 import { HomeComponent } from './home/home.component';
 import { ServiceComponent } from './service/service.component';
 import { InspectionComponent } from './inspection/inspection.component';
@@ -30,7 +29,6 @@ import {AppHttpInterceptor} from './interceptor/appIntercerptor';
     SearchComponent,
     AboutComponent,
     ContactUsComponent,
-    SubHeaderComponent,
     HomeComponent,
     ServiceComponent,
     InspectionComponent
