@@ -8,6 +8,7 @@ import {ApiRequestService} from '../API-request/api-request.service';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
+  errorMessage = '';
 
   constructor(public request: ApiRequestService ) {
   }
@@ -29,4 +30,6 @@ export class SearchComponent implements OnInit {
   //   }
 
   // }
+
+
 }
