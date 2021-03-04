@@ -1,4 +1,7 @@
 
+.container{
+  font-size: large;
+}
 .btn-add{
 
   background: #e1efe6;
@@ -8,6 +11,9 @@
 
 .row{
   height: auto;
+}
+.row-1{
+margin-top: 20px;
 }
 
 hr{
@@ -28,8 +34,8 @@ hr{
 }
 
  .comment{
-   height: 80px;
-   width: 400px;
+   height: 100px;
+   width: 600px;
  }
 .btn-submit{
   border-radius: 9px;
@@ -40,3 +46,4 @@ hr{
   border-color: gray;
   color: black;
 }
+

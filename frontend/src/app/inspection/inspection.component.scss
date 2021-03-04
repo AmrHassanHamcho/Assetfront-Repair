@@ -1,4 +1,8 @@
 
+.container{
+  font-size: large;
+}
+
 .btn-add{
 
   background: #e1efe6;
@@ -10,12 +14,18 @@
   height: auto;
 }
 
+
+.row-1{
+  margin-top: 20px;
+}
+
+
 hr{
   position: relative;
   background: black;
   height: 1px;
 }
-.last-hr{
+.finalHr{
   position: relative;
   background: transparent;
   height: 1px;
@@ -41,3 +51,4 @@ hr{
   border-color: gray;
   color: black;
 }
+

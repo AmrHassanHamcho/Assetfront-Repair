@@ -1,3 +1,42 @@
-<li *ngFor="let amr of request.assetDetails">
-  <ul> {{amr.tcr[0].name}}</ul>
-</li>
+<div *ngIf="onSuccessfulSearch()">
+
+  <mat-accordion >
+    <div *ngFor=" let item of ttrCopy.tcr; let indexTcr = index">
+            <mat-expansion-panel style="color: red">
+              <mat-expansion-panel-header matRipple [matRippleColor]="color" >
+                <mat-panel-title class="test" >
+                  <h3>{{ttrCopy.tcr[indexTcr].name}}</h3>
+                </mat-panel-title>
+                <ng-template matExpansionPanelContent>
+                  <h1 *ngFor="let checkp of ttrCopy.tcr[indexTcr].checkpoint; let indexCp = index">
+                    <mat-card class="cardColor">
+                      <mat-card-content>
+                        <h1>{{ttrCopy.tcr[indexTcr].checkpoint[indexCp].name }}
+                        <p class="required" style="color: red">{{'*'}}</p>
+                        </h1>
+                          <h1 *ngFor="let op of ttrCopy.tcr[indexTcr].checkpoint[indexCp].options; let value = index">
+                          <mat-radio-button value="value" labelPosition="after" (change)="updateValue(value,indexTcr,indexCp)" color="primary">
+                          {{logToconsole(indexTcr,indexCp)}}
+                            <div class="container">
+                              <div class="row">
+                                <div class="col-sm-2">
+                                  {{ttrCopy.tcr[indexTcr].checkpoint[indexCp].options[value].value}}
+                                </div>
+                                {{printHeleArray()}}
+                                <div class="col-sm-2">
+                                 {{ttrCopy.tcr[indexTcr].checkpoint[indexCp].options[value].description}}
+                                </div>
+                                <hr>
+                              </div>
+                            </div>
+                        </mat-radio-button>
+                      </h1>
+                      </mat-card-content>
+                    </mat-card>
+                  </h1>
+                </ng-template>
+              </mat-expansion-panel-header>
+            </mat-expansion-panel>
+</div>
+  </mat-accordion>
+</div>
