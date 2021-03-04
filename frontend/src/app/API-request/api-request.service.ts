@@ -25,7 +25,7 @@ export class ApiRequestService {
     this.errorMessage = 'Invalid Serial number, please try again!';
 
   }
-getErrorMessage(){
-  return this.errorMessage;
-}
+  getErrorMessage(){
+    return this.errorMessage;
+  }
 }
