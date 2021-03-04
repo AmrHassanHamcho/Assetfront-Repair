@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import {VehiclesService} from "../../vehicle-service/vehicle.service";
-
+import {VehiclesService} from '../../vehicle-service/vehicle.service';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +15,5 @@ export class ApiRequestService {
         // assigns deta recieved from observable to this local SearchComponent property
         .subscribe(data => this.assetDetails = data);
     }
-
   }
 }
