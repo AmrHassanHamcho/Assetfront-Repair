@@ -8,7 +8,7 @@ import {VehiclesService} from '../../vehicle-service/vehicle.service';
 export class ApiRequestService {
   public assetDetails: any = [];
   submitButtonPressed = false;
-  private errorMessage = 'Invalid input! please try again';
+  errorMessage = '';
   constructor(private request: VehiclesService) { }
 
   setSerialNo(value: string): void {
@@ -18,7 +18,9 @@ export class ApiRequestService {
         // assigns data recieved from observable to this local SearchComponent property
         .subscribe(data => this.assetDetails = data);
       this.submitButtonPressed = true;
+      this.errorMessage = "Invalid input. Please try again!";
     }
+
 
   }
   getAssetDetails() {
@@ -27,7 +29,8 @@ export class ApiRequestService {
   invalidSerialNo(){
     if (this.getSubmitButtonPressed() && this.getAssetDetails().length <= 0) {
       console.log(this.assetDetails);
-    }  }
+    }
+  }
   getSubmitButtonPressed(){
     return this.submitButtonPressed;
   }
