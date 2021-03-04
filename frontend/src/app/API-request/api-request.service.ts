@@ -8,6 +8,7 @@ import {VehiclesService} from '../../vehicle-service/vehicle.service';
 export class ApiRequestService {
   public assetDetails: any = [];
   submitButtonPressed = false;
+  private errorMessage = 'Invalid input! please try again';
   constructor(private request: VehiclesService) { }
 
   setSerialNo(value: string): void {
@@ -29,6 +30,10 @@ export class ApiRequestService {
     }  }
   getSubmitButtonPressed(){
     return this.submitButtonPressed;
+  }
+
+  getErrorMessage(){
+    return this.errorMessage;
   }
 
 }

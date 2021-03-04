@@ -8,6 +8,8 @@ import {Observable} from 'rxjs';
 })@Injectable()
 export class VehiclesService {
   public serNo: string;
+  private getUrl: Observable<Object>;
+  dataRead: boolean = false;
 /**@param serNo serialNumber
  */
   serSerialNo(serNo: string) {
@@ -33,8 +35,22 @@ export class VehiclesService {
     this.serSerialNo(serialNo);
     const url =   'https://test-assetlookup.dev.assetfront.com/asset/lookup/' + serialNo;
 
-    return this.httpClient.get(url);
+    this.getUrl = this.httpClient.get(url);
+    return this.getUrl;
+  }
+  loadingFunction(){
+    console.log("loading....");
+  }
+  onDataRead() : boolean{
+    if (this.getUrl === undefined){
+      this.dataRead = false;
+      this.loadingFunction();
+    }
+    else{
+      this.dataRead = true;
+    }
 
+    return this.dataRead;
 
   }
 }
