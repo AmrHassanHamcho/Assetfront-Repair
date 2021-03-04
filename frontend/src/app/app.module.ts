@@ -20,8 +20,15 @@ import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {VehiclesService} from '../vehicle-service/vehicle.service';
 import {AppHttpInterceptor} from './interceptor/appIntercerptor';
 import { TcrComponent } from './tcr/tcr.component';
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatSelectModule} from "@angular/material/select";
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatRadioModule} from '@angular/material/radio';
+import {MatCardModule} from '@angular/material/card';
+import {MatRippleModule} from '@angular/material/core';
+import {Checkpoint} from './asset/checkPoint';
+import { FallBackComponent } from './fall-back/fall-back.component';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -36,6 +43,7 @@ import {MatSelectModule} from "@angular/material/select";
     ServiceComponent,
     InspectionComponent,
     TcrComponent,
+    FallBackComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,16 +54,20 @@ import {MatSelectModule} from "@angular/material/select";
     HttpClientModule,
     MatMenuModule,
     MatFormFieldModule,
-    MatSelectModule
+    MatSelectModule,
+    MatExpansionModule,
+    MatRadioModule,
+    MatCardModule,
+    MatRippleModule,
+    MatIconModule
   ],
   providers: [VehiclesService,
-
-  {
-    provide: HTTP_INTERCEPTORS,
-    useClass: AppHttpInterceptor,
-    multi: true
-  }
-],
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AppHttpInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

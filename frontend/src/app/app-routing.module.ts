@@ -5,6 +5,8 @@ import {ContactUsComponent} from './header/contact-us/contact-us.component';
 import {SearchComponent} from './search/search.component';
 import {InspectionComponent} from './inspection/inspection.component';
 import {ServiceComponent} from './service/service.component';
+import {TcrComponent} from './tcr/tcr.component';
+import {FallBackComponent} from './fall-back/fall-back.component';
 
 
 const routes: Routes = [
@@ -14,6 +16,10 @@ const routes: Routes = [
   {path: 'contactUs', component: ContactUsComponent},
   {path: 'inspection', component: InspectionComponent},
   {path: 'service', component: ServiceComponent},
+  {path: 'tcr', component: TcrComponent},
+  {path: '**', component: FallBackComponent},
+
+
 ];
 
 @NgModule({
