@@ -9,6 +9,8 @@ export class ApiRequestService {
   public assetDetails: any = [];
   submitButtonPressed = false;
   errorMessage = '';
+  statusCode: number;
+  successfulRequest = false;
   constructor(private request: VehiclesService) { }
 
   setSerialNo(value: string): void {
@@ -16,9 +18,16 @@ export class ApiRequestService {
       // if not does nothing
       this.request.getVehicleData(value)
         // assigns data recieved from observable to this local SearchComponent property
-        .subscribe(data => this.assetDetails = data);
+        .subscribe(resp => {
+          this.statusCode = resp.status;
+          this.assetDetails = resp.body;
+          const statusText = resp.statusText;
+          if (statusText === 'OK') {
+            this.successfulRequest = true;
+          }
+          console.log(statusText);
+        });
       this.submitButtonPressed = true;
-      this.errorMessage = "Invalid input. Please try again!";
     }
 
 
@@ -26,17 +35,20 @@ export class ApiRequestService {
   getAssetDetails() {
     return this.assetDetails;
   }
-  invalidSerialNo(){
-    if (this.getSubmitButtonPressed() && this.getAssetDetails().length <= 0) {
-      console.log(this.assetDetails);
-    }
-  }
-  getSubmitButtonPressed(){
-    return this.submitButtonPressed;
-  }
-
+  /**
+   * @return return the error message( empty string if correct serialNo entered )
+   */
   getErrorMessage(){
-    return this.errorMessage;
+    if (this.successfulRequest){
+      this.errorMessage = 'Invalid input. Please try again!';
+
+    }
+    return this.errorMessage; }
+  /**
+   * @return returns true if statuaText is 'OK' false otherwise
+   */
+  getSuccessfulRequest(){
+    return this.successfulRequest;
   }
 
 }
