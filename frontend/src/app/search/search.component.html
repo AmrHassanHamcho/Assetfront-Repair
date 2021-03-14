@@ -11,6 +11,9 @@
 
       <!-- This is just To test whether we get the expected value or not-->
       <h1 *ngFor="let vehicleInfo of request.assetDetails">
+      <p style="color:red" *ngIf="request.assetDetails.length === 0">
+        {{request.getErrorMessage()}}
+      </p>
         {{'Title: ' + vehicleInfo.productClass.title  }}
         <hr>
         {{'product id: ' + vehicleInfo.productClass.id  }}
