@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Observable} from 'rxjs';
 
 
@@ -8,17 +8,15 @@ import {Observable} from 'rxjs';
 })@Injectable()
 export class VehiclesService {
   public serNo: string;
-  private getUrl: Observable<Object>;
-  dataRead: boolean = false;
-/**@param serNo serialNumber
- */
+  /**@param serNo serialNumber
+   */
   serSerialNo(serNo: string) {
     this.serNo = serNo;
 
   }
-/**
- * @return serNo returns the serial number
- */
+  /**
+   * @return serNo returns the serial number
+   */
   public getSerNo() {
     return this.serNo;
   }
@@ -31,26 +29,13 @@ export class VehiclesService {
    * @return Observable
    * request the api and returns the fetched value which is of type observable
    */
-  getVehicleData(serialNo: string): Observable<any> {
+  getVehicleData(serialNo: string): Observable<HttpResponse<any>> {
     this.serSerialNo(serialNo);
     const url =   'https://test-assetlookup.dev.assetfront.com/asset/lookup/' + serialNo;
+    return this.httpClient.get(url, {observe: 'response'});
 
-    this.getUrl = this.httpClient.get(url);
-    return this.getUrl;
   }
   loadingFunction(){
-    console.log("loading....");
-  }
-  onDataRead() : boolean{
-    if (this.getUrl === undefined){
-      this.dataRead = false;
-      this.loadingFunction();
-    }
-    else{
-      this.dataRead = true;
-    }
-
-    return this.dataRead;
-
+    console.log('loading....');
   }
 }

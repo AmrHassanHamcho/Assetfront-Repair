@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
   display(){
     if (this.apiRequest.assetDetails.length > 0){
       this.displayHeader = true;
-      //this.goToHome();
+      // this.goToHome();
     }
     return this.displayHeader;
   }
