@@ -5,14 +5,16 @@
         <label id="label">Please enter VIN number!</label>
         <input #serialNo class="form-control input-lg" id="inputlg"  aria-describedby="emailHelp" placeholder="Search VIN">
       </div>
-      <button (click)="request.setSerialNo(serialNo.value)" type="submit" class="btn btn-primary" > Submit</button>
+
+      <button id="submit" type="submit" (click)="request.setSerialNo(serialNo.value)"  class="btn btn-primary" >Submit</button>
       <!--          This is just To test whether we get the expected value or not-->
 
       <!-- This is just To test whether we get the expected value or not-->
-      <p style="color:red" *ngIf="request.assetDetails.length === 0" >
+
+      <p style="color:red" *ngIf="request.assetDetails.length === 0">
         {{request.getErrorMessage()}}
       </p>
-      <h2 *ngFor="let vehicleInfo of request.assetDetails">
+        <h2 *ngFor="let vehicleInfo of request.assetDetails">
         {{'Title: ' + vehicleInfo.productClass.title  }}
         <hr>
         {{'product id: ' + vehicleInfo.productClass.id  }}

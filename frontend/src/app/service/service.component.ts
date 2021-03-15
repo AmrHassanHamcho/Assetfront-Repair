@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from '@angular/common/http';
 
 @Component({
   selector: 'app-service',
@@ -13,29 +13,29 @@ export class ServiceComponent implements OnInit {
   hours = '';
   coast = '';
   date = '';
-  constructor(private http:HttpClientModule) { }
+  constructor(private http: HttpClientModule) { }
 
   ngOnInit(): void {
   }
 
   onFileSelect(event){
     console.log(event);
-    this.selectedFile =<File>event.target.files[0];
+    this.selectedFile = (event.target.files[0] as File);
   }
   onFileUpload(){
     const fd = new FormData();
-    fd.append('image', this.selectedFile,this.selectedFile.name);
-    //this.http.post(url,fd) // any backend function that accepts foreign data, in our case AWS url
-    //.subscribe(event=> {
+    fd.append('image', this.selectedFile, this.selectedFile.name);
+    // this.http.post(url,fd) // any backend function that accepts foreign data, in our case AWS url
+    // .subscribe(event=> {
     // msg to usr
     // or log to console: console.log(event)
-    //})
+    // })
 
 
 
     // in case we want to track the progress of the file upload
 
-    //this.http.post(url,fd, {
+    // this.http.post(url,fd, {
     //  reportProgress: true,
     //  observe: 'events'
     //
@@ -45,21 +45,21 @@ export class ServiceComponent implements OnInit {
 
   onUpdateHours(event: Event)
   {
-    this.hours = (<HTMLInputElement>event.target).value;
+    this.hours = (event.target as HTMLInputElement).value;
   }
 
   onUpdateComment(event: Event)
   {
-    this.comment = (<HTMLInputElement>event.target).value;
+    this.comment = (event.target as HTMLInputElement).value;
   }
 
   onUpdateCoast(event: Event)
   {
-    this.coast = (<HTMLInputElement>event.target).value;
+    this.coast = (event.target as HTMLInputElement).value;
   }
 
   onUpdateDate(event: Event)
   {
-    this.date = (<HTMLInputElement>event.target).value;
+    this.date = (event.target as HTMLInputElement).value;
   }
 }

@@ -10,8 +10,9 @@ import {ApiRequestService} from '../API-request/api-request.service';
 export class SearchComponent implements OnInit {
   errorMessage = '';
 
-  constructor(public request: ApiRequestService ) {
+  constructor(public request: ApiRequestService) {
   }
+
   ngOnInit(): void {
 
   }
