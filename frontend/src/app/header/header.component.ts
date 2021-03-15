@@ -30,6 +30,9 @@ export class HeaderComponent implements OnInit {
       this.displayHeader = true;
       // this.goToHome();
     }
+    else {
+      this.displayHeader = false;
+    }
     return this.displayHeader;
   }
 

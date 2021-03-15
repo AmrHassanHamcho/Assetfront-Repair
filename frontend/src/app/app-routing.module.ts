@@ -10,7 +10,7 @@ import {TcrComponent} from './tcr/tcr.component';
 import {FallBackComponent} from './fall-back/fall-back.component';
 
 const routes: Routes = [
-  {path: '', pathMatch: 'full', redirectTo: 'home'},
+  {path: '', pathMatch: 'full', redirectTo: 'search'},
   {path: 'home', component: HomeComponent},
   {path: 'search', component: SearchComponent},
   {path: 'about', component: AboutComponent},
