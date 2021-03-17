@@ -1,12 +1,8 @@
 import {Component, Injectable, OnInit} from '@angular/core';
-import { Router } from '@angular/router';
 
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
 import {ApiRequestService} from '../API-request/api-request.service';
 
-@Injectable({
-  providedIn: 'root'
-})
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -16,11 +12,10 @@ import {ApiRequestService} from '../API-request/api-request.service';
 export class HeaderComponent implements OnInit {
   navbarOpen = false;
   displayHeader = false;
-  AcceptOrDenied = false;
 
   constructor(
     public request: ApiRequestService,
-    private router: Router,
+    public service: VehiclesService,
     ){ }
 
   ngOnInit(): void {
@@ -29,11 +24,9 @@ export class HeaderComponent implements OnInit {
   toggleNavbar(){
     this.navbarOpen = !this.navbarOpen;
   }
-  acceptRequest(){
-    return this.AcceptOrDenied = true;
-  }
+
   display(){
-    if (this.request.assetDetails.length > 0){
+    if (this.service.AcceptOrDenied === true && this.request.assetDetails.length > 0){
       this.displayHeader = true;
     }
     else {
