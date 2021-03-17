@@ -1,8 +1,8 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ApiRequestService} from '../../API-request/api-request.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
-import {HeaderComponent} from '../../header/header.component';
+import {VehiclesService} from '../../../vehicle-service/vehicle.service';
 
 @Component({
   selector: 'app-dialog-window',
@@ -10,10 +10,8 @@ import {HeaderComponent} from '../../header/header.component';
   styleUrls: ['./dialog-window.component.scss']
 })
 export class DialogWindowComponent implements OnInit {
-  x = false;
-
   constructor(
-    public header: HeaderComponent,
+    public service: VehiclesService,
     public request: ApiRequestService,
     public router: Router,
     private dialogRef: MatDialogRef<DialogWindowComponent>
@@ -23,7 +21,7 @@ export class DialogWindowComponent implements OnInit {
   }
 
   acceptVehicle(){
-    this.header.acceptRequest();
+    this.service.AcceptOrDenied = true;
     this.router.navigate(['/home']);
     this.dialogRef.close();
   }
@@ -31,6 +29,6 @@ export class DialogWindowComponent implements OnInit {
   deniedVehicle(){
     this.router.navigate(['/search']);
     this.dialogRef.close();
-    return this.header.AcceptOrDenied = false;
+    this.service.AcceptOrDenied = false;
   }
 }
