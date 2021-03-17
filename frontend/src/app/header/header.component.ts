@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
 
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
 import {ApiRequestService} from '../API-request/api-request.service';
 
-
+@Injectable({
+  providedIn: 'root'
+})
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -14,9 +16,12 @@ import {ApiRequestService} from '../API-request/api-request.service';
 export class HeaderComponent implements OnInit {
   navbarOpen = false;
   displayHeader = false;
-  goHome = false;
+  AcceptOrDenied = false;
 
-  constructor(public apiRequest: ApiRequestService, private router: Router){ }
+  constructor(
+    public request: ApiRequestService,
+    private router: Router,
+    ){ }
 
   ngOnInit(): void {
   }
@@ -24,20 +29,17 @@ export class HeaderComponent implements OnInit {
   toggleNavbar(){
     this.navbarOpen = !this.navbarOpen;
   }
-
+  acceptRequest(){
+    return this.AcceptOrDenied = true;
+  }
   display(){
-    if (this.apiRequest.assetDetails.length > 0){
+    if (this.request.assetDetails.length > 0){
       this.displayHeader = true;
-      // this.goToHome();
     }
     else {
       this.displayHeader = false;
     }
     return this.displayHeader;
-  }
-
-  goToHome(){
-      this.router.navigate(['/home']);
   }
 }
 
