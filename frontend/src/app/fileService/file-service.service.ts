@@ -7,6 +7,8 @@ import * as S3 from 'aws-sdk/clients/s3';
 })
 export class FileServiceService {
 
+  private fileUploaded = false;
+
   constructor() { }
 
   private getS3Bucket(): any {
@@ -35,12 +37,17 @@ export class FileServiceService {
         console.log('There was an error uploading your file: ', err);
         return false;
       }
+
       console.log('Successfully uploaded file.', data);
       return true;
     });
 
+    this.fileUploaded = true;
 
 
+  }
 
+  oneFileUploadSuccess(){
+    return this.fileUploaded;
   }
 }

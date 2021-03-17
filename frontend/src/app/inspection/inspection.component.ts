@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FileServiceService} from "../fileService/file-service.service";
 import {ApiRequestService} from "../API-request/api-request.service";
+import {FormControl, Validators} from "@angular/forms";
 
 
 interface InspectionState {
@@ -8,6 +9,10 @@ interface InspectionState {
   viewValue: string;
 }
 
+interface Animal {
+  name: string;
+  sound: string;
+}
 
 @Component({
   selector: 'app-inspection',
@@ -33,7 +38,7 @@ export class InspectionComponent implements OnInit {
 
 
 
-  constructor( private fileService:FileServiceService, private apiRequest: ApiRequestService) { }
+  constructor( public fileService:FileServiceService, private apiRequest: ApiRequestService) { }
 
   ngOnInit(): void {
   }
@@ -45,10 +50,15 @@ export class InspectionComponent implements OnInit {
   }
 
 
+
+
+  stateControl = new FormControl('', Validators.required);
+  selectFormControl = new FormControl('', Validators.required);
   inspectionStates: InspectionState[] = [
+    {value: 'Bad', viewValue: 'Bad'},
     {value: 'Good', viewValue: 'Good'},
-    {value: 'Excellent', viewValue: 'Excellent'},
-    {value: 'Bad', viewValue: 'Bad'}
+    {value: 'Excellent', viewValue: 'Excellent'}
+
   ];
 
   ////////////////////////////////////////////
@@ -57,14 +67,13 @@ export class InspectionComponent implements OnInit {
 
     this.selFiles = event.target.files;
     this.counter = this.selFiles.length;
-    var fileName = event.target.value;
+    var fileName = (<HTMLInputElement>event.target).value;
     var extension = fileName.substr(fileName.lastIndexOf('.'));
 
-    if ((extension.toLowerCase() != ".pdf" || extension.toLowerCase() != ".png"))
+    if ((extension!= '.pdf' && extension != '.png' && extension != '.jpeg'))
     {
-      //this.selFiles = null;
       alert("Could not allow to upload " + extension);
-
+      //this.selFiles = null;
     }
 
 

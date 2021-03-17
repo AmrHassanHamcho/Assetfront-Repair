@@ -15,7 +15,7 @@
 
     <div class="col-sm-4">
       <button class="btn btn-primary btn-add" type="button" (click)="upload()">Upload</button>
-      <p *ngIf="oneFileUploadSuccess()" style="color: aquamarine"> File was Uploaded successfully! </p>
+      <h1 *ngIf="fileService.oneFileUploadSuccess()" style="color: green"> File was Uploaded successfully! </h1>
     </div>
 
   </div>

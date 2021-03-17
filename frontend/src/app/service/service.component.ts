@@ -16,7 +16,6 @@ import {ApiRequestService} from "../API-request/api-request.service";
 })
 export class ServiceComponent implements OnInit {
 
-  selectedFile: File = null;
   selFiles : FileList;
   comment = '';
   hours = '';
@@ -24,123 +23,55 @@ export class ServiceComponent implements OnInit {
   date = '';
 
   private files: any;
-  private bucket: any;
-  private FOLDER = 'test';
   private counter = 0;
   private contentType = '';
   private name = '';
-  private fileUploaded = false;
 
 
-
-
-
-
-  constructor(private http:HttpClient, private fileService:FileServiceService, private apiRequest: ApiRequestService) { }
+  constructor(private http:HttpClient, public fileService:FileServiceService, private apiRequest: ApiRequestService) { }
 
 
   ngOnInit(): void {
   }
 
-  onFileSelect(event){
-    console.log(event);
-    this.selectedFile = (event.target.files[0] as File);
-  }
-
-  // onFileChange(files){
-  //   for(let index = 0; index<files.length; index++){
-  //     console.log("inside loop")
-  //     const file = files[index];
-  //     this.files.push({ data:file, inProgress: false, progress:0});
-  //   }
-  //   this.files.forEach(file => {
-  //     this.uploadFile(file);
-  //   });
-  // }
-
-//   uploadFile(file){
-//
-//     var params = {Bucket : 'assetfront-repair', key: 'repair'+'/Service' + file.data.name, Expires: 3600, contentType:file.data.type};
-//     var url = this.bucket.getSignedUrl('putObject', params);
-//     this.http.put<any>(url,file.data).subscribe({
-//       next: data =>{console.log(data);},
-//       error: error =>{console.error('There is an error!', error)
-//       alert(JSON.stringify(error))}
-//     });
-//
-//   }
-
-
-
-
-
-  onFileUpload(){
-    const fd = new FormData();
-    fd.append('image', this.selectedFile, this.selectedFile.name);
-    // this.http.post(url,fd) // any backend function that accepts foreign data, in our case AWS url
-    // .subscribe(event=> {
-    // msg to usr
-    // or log to console: console.log(event)
-    // })
-
-
-
-    // in case we want to track the progress of the file upload
-
-    // this.http.post(url,fd, {
-    //  reportProgress: true,
-    //  observe: 'events'
-    //
-    //
-    // })
-  }
-
   onUpdateHours(event: Event)
   {
-    this.hours = (event.target as HTMLInputElement).value;
+    this.hours = (<HTMLInputElement>event.target).value;
   }
 
   onUpdateComment(event: Event)
   {
-    this.comment = (event.target as HTMLInputElement).value;
+    this.comment = (<HTMLInputElement>event.target).value;
   }
 
   onUpdateCoast(event: Event)
   {
-    this.coast = (event.target as HTMLInputElement).value;
+    this.coast = (<HTMLInputElement>event.target).value;
   }
 
   onUpdateDate(event: Event)
   {
-    this.date = (event.target as HTMLInputElement).value;
+    this.date = (<HTMLInputElement>event.target).value;
   }
 
 
 
-
-
-
-
-
-
-
-
 /////////////////////////////////////////////////////////////////////////////////////
+// File Upload //
 
-  selectFile(event) {
-
-
+  selectFile(event)
+  {
     this.selFiles = event.target.files;
     this.counter = this.selFiles.length;
-    var fileName = event.target.value;
+    var fileName =  (<HTMLInputElement>event.target).value;
     var extension = fileName.substr(fileName.lastIndexOf('.'));
+    console.log(extension);
 
-    if ((extension.toLowerCase() != ".pdf" || extension.toLowerCase() != ".png"))
+    if ((extension!= '.pdf' && extension != '.png' && extension != '.jpeg'))
     {
-      //this.selFiles = null;
       alert("Could not allow to upload " + extension);
-
-      }
+      this.selFiles = null;
+    }
 
 
   }
@@ -184,8 +115,6 @@ export class ServiceComponent implements OnInit {
      }
   }
 
-  oneFileUploadSuccess(){
-    return this.fileUploaded;
-  }
+
 
 }
