@@ -15,7 +15,7 @@ import { HomeComponent } from './home/home.component';
 import { ServiceComponent } from './service/service.component';
 import { InspectionComponent } from './inspection/inspection.component';
 import { DialogWindowComponent } from './search/dialog-window/dialog-window.component';
-
+import {MatMenuModule} from '@angular/material/menu';
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {VehiclesService} from '../vehicle-service/vehicle.service';
@@ -31,7 +31,7 @@ import {Checkpoint} from './asset/checkPoint';
 import { FallBackComponent } from './fall-back/fall-back.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
-import {MatMenuModule} from '@angular/material/menu';
+
 
 
 @NgModule({

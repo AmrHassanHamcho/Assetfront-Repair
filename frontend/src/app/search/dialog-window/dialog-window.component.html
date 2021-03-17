@@ -7,12 +7,15 @@
       <img mat-card-image src="{{vehicleInfo.mainImageUrl}}" alt="Machine Image" id="vehicle-image">
       <mat-card-actions>
         <div class="row justify-content-center">
+          <h1>Is this the right vehicle?</h1>
+        </div>
+        <div class="row justify-content-center">
           <div class="col-md-4">
-            <button mat-button id="tcr" type="submit" (click)="acceptVehicle()" mat-raised-button>Yes
+            <button mat-button id="tcr" type="submit" (click)="acceptVehicle()" mat-raised-button color="warn">Yes
             </button>
           </div>
           <div class="col-md-4">
-            <button mat-button id="service" type="submit" (click)="deniedVehicle()" mat-raised-button>No</button>
+            <button mat-button id="service" type="submit" (click)="deniedVehicle()" mat-raised-button color="primary">No</button>
           </div>
         </div>
       </mat-card-actions>

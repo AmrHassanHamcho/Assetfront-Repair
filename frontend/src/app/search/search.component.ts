@@ -12,7 +12,6 @@ import {VehiclesService} from '../../vehicle-service/vehicle.service';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-  errorMessage = '';
 
   constructor(
     public request: ApiRequestService,
