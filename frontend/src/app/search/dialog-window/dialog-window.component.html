@@ -1,0 +1,21 @@
+<h1 *ngFor="let vehicleInfo of request.assetDetails">
+  <div class="row justify-content-center" id="card-row">
+    <mat-card class="card">
+      <mat-card-header>
+        <mat-card-title id="title">{{vehicleInfo.productClass.title}}</mat-card-title>
+      </mat-card-header>
+      <img mat-card-image src="{{vehicleInfo.mainImageUrl}}" alt="Machine Image" id="vehicle-image">
+      <mat-card-actions>
+        <div class="row justify-content-center">
+          <div class="col-md-4">
+            <button mat-button id="tcr" type="submit" (click)="acceptVehicle()" mat-raised-button>Yes
+            </button>
+          </div>
+          <div class="col-md-4">
+            <button mat-button id="service" type="submit" (click)="deniedVehicle()" mat-raised-button>No</button>
+          </div>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</h1>

@@ -1,6 +1,10 @@
 
 import {Component, OnInit} from '@angular/core';
 import {ApiRequestService} from '../API-request/api-request.service';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {DialogWindowComponent} from './dialog-window/dialog-window.component';
+import {VehiclesService} from '../../vehicle-service/vehicle.service';
+
 
 @Component({
   selector: 'app-search',
@@ -10,11 +14,21 @@ import {ApiRequestService} from '../API-request/api-request.service';
 export class SearchComponent implements OnInit {
   errorMessage = '';
 
-  constructor(public request: ApiRequestService) {
+  constructor(
+    public request: ApiRequestService,
+    private dialog: MatDialog,
+    public vehicle: VehiclesService,
+    ) {
   }
 
   ngOnInit(): void {
 
+  }
+
+  openDialog() {
+      const dialogConfig = new MatDialogConfig();
+      dialogConfig.autoFocus = true;
+      this.dialog.open(DialogWindowComponent, dialogConfig);
   }
   /**
    * @param value of serial number entered by a user
