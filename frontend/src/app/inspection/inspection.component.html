@@ -9,12 +9,12 @@
 
     <div class="col-sm-4">
 
-      <input type="file" (change)="onFileSelect($event)">
+      <input type="file" (change)="selectFile($event)">
 
     </div>
 
     <div class="col-sm-4">
-      <button class="btn btn-primary btn-add" type="button" (click)="onFileUpload()" >Upload</button>
+      <button class="btn btn-primary btn-add" type="button" (click)="upload()" >Upload</button>
     </div>
 
   </div>
@@ -44,19 +44,19 @@
       <p> State: </p>
     </div>
     <div class="col-xs-3">
-      <form>
-        <h4>Inspection state: </h4>
-        <mat-form-field appearance="fill">
-<!--          <mat-label>Select state (required)</mat-label>-->
-          <select style="height: 30px;width: 180px" matNativeControl [(ngModel)]="selectedStatus" name="state">
-            <option value="" selected></option>
-            <option *ngFor="let is of inspectionStates" [value]="is.value">
-              {{is.viewValue}}
-            </option>
-          </select>
-        </mat-form-field>
-<!--        <p> Selected option: {{selectedStatus}} </p>-->
-      </form>
+<!--      <form>-->
+<!--        <h4>Inspection state: </h4>-->
+<!--        <mat-form-field appearance="fill">-->
+<!--&lt;!&ndash;          <mat-label>Select state (required)</mat-label>&ndash;&gt;-->
+<!--          <select style="height: 30px;width: 180px" matNativeControl [(ngModel)]="selectedStatus" name="state">-->
+<!--            <option value="" selected></option>-->
+<!--            <option *ngFor="let is of inspectionStates" [value]="is.value">-->
+<!--              {{is.viewValue}}-->
+<!--            </option>-->
+<!--          </select>-->
+<!--        </mat-form-field>-->
+<!--&lt;!&ndash;        <p> Selected option: {{selectedStatus}} </p>&ndash;&gt;-->
+<!--      </form>-->
 
     </div>
 

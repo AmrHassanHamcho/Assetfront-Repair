@@ -8,12 +8,14 @@
 
     <div class="col-sm-4">
 
-      <input type="file" (change)="onFileSelect($event)">
+      <input type="file" id="fileUpload" multiple = "multiple" accept = "application/pdf, image/jpeg, image/png" (change)="selectFile($event) ">
+
 
     </div>
 
     <div class="col-sm-4">
-      <button class="btn btn-primary btn-add" type="button" (click)="onFileUpload()" >Upload</button>
+      <button class="btn btn-primary btn-add" type="button" (click)="upload()">Upload</button>
+      <p *ngIf="oneFileUploadSuccess()" style="color: aquamarine"> File was Uploaded successfully! </p>
     </div>
 
   </div>
@@ -28,7 +30,7 @@
       <input (input)="onUpdateDate($event)" type="date" required />
     </div>
     <div class="col-sm-3">
-      <p style="color: red">* </p>
+      <p style="color: red">*</p>
     </div>
 
   </div>
@@ -41,7 +43,7 @@
     </div>
     <div class="col-sm-3 ">
       <input (input) = "onUpdateHours($event)" type="number" placeholder="Hours" required />
-      
+
     </div>
 
     <div class="col-sm-3 ">

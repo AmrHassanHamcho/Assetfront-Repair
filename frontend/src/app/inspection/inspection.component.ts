@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {FileServiceService} from "../fileService/file-service.service";
+import {ApiRequestService} from "../API-request/api-request.service";
+
 
 interface InspectionState {
   value: string;
@@ -18,35 +21,24 @@ export class InspectionComponent implements OnInit {
   date = '';
 
 
-  constructor() { }
+
+
+  selFiles : FileList;
+
+  private files: any;
+
+  private counter = 0;
+  private contentType = '';
+  private name = '';
+
+
+
+  constructor( private fileService:FileServiceService, private apiRequest: ApiRequestService) { }
 
   ngOnInit(): void {
   }
 
-  onFileSelect(event){
-    console.log(event);
-    this.selectedFile =<File>event.target.files[0];
-  }
-  onFileUpload(){
-    const fd = new FormData();
-    fd.append('image', this.selectedFile,this.selectedFile.name);
-    //this.http.post(url,fd) // any backend function that accepts foreign data, in our case AWS url
-    //.subscribe(event=> {
-    // msg to usr
-    // or log to console: console.log(event)
-    //})
 
-
-
-    // in case we want to track the progress of the file upload
-
-    //this.http.post(url,fd, {
-    //  reportProgress: true,
-    //  observe: 'events'
-    //
-    //
-    // })
-  }
   onUpdateDate(event: Event)
   {
     this.date = (<HTMLInputElement>event.target).value;
@@ -58,4 +50,35 @@ export class InspectionComponent implements OnInit {
     {value: 'Excellent', viewValue: 'Excellent'},
     {value: 'Bad', viewValue: 'Bad'}
   ];
+
+  ////////////////////////////////////////////
+  selectFile(event) {
+
+
+    this.selFiles = event.target.files;
+    this.counter = this.selFiles.length;
+    var fileName = event.target.value;
+    var extension = fileName.substr(fileName.lastIndexOf('.'));
+
+    if ((extension.toLowerCase() != ".pdf" || extension.toLowerCase() != ".png"))
+    {
+      //this.selFiles = null;
+      alert("Could not allow to upload " + extension);
+
+    }
+
+
+  }
+  upload() {
+
+   // for (let index = 0; index <=this.counter; index ++){
+
+      const file = this.selFiles.item(0);
+      console.log(file.type);
+      this.contentType = file.type;
+      this.name = file.name;
+      this.fileService.uploadFile(file, 'Inspection', this.apiRequest.assetDetails[0].resourceId);
+    }
+  //}
+
 }

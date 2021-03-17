@@ -29,6 +29,8 @@ import {MatRippleModule} from '@angular/material/core';
 import {Checkpoint} from './asset/checkPoint';
 import { FallBackComponent } from './fall-back/fall-back.component';
 import {MatIconModule} from '@angular/material/icon';
+import {MatInputModule} from "@angular/material/input";
+
 
 
 @NgModule({
@@ -59,7 +61,8 @@ import {MatIconModule} from '@angular/material/icon';
     MatRadioModule,
     MatCardModule,
     MatRippleModule,
-    MatIconModule
+    MatIconModule,
+    MatInputModule
   ],
   providers: [VehiclesService,
     {
