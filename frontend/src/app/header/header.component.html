@@ -1,7 +1,7 @@
 <header >
   <div class="container-1">
     <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav navbar-dark">
-      <a class="navbar-brand" href="#"><img src="../../assets/images/Logo.png" alt="logo"></a>
+      <a class="navbar-brand" [routerLink]="['/search']"><img src="../../assets/images/Logo.png" alt="logo"></a>
       <button class="navbar-toggler" type="button" (click)="toggleNavbar()" data-toggle="collapse"
               data-target=".navbar1and2" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -9,7 +9,7 @@
       <div class="collapse navbar-collapse" id="navbar-1" [ngClass]="{ 'show': navbarOpen }">
           <ul class="navbar-nav" id="#nav-2">
             <li class="nav-item d-flex p-2">
-              <a class="nav-link" href="#"> Search <span class="sr-only">(current)</span> </a>
+              <a class="nav-link" [routerLink]="['/search']"> Search <span class="sr-only">(current)</span> </a>
             </li>
             <li class="nav-item d-flex p-2">
               <a class="nav-link" [routerLink]="['/about']"> About Repair <span class="sr-only">(current)</span> </a>
@@ -25,7 +25,7 @@
     </nav>
   </div>
 
-  <div *ngIf="display()" class="container-2" >
+  <div *ngIf="display()" class="container-2">
     <nav class="navbar second-navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav navbar-dark" id="second-navbar">
       <div class="collapse navbar-collapse .navbar1and2" id="navbar-2" [ngClass]="{ 'show': navbarOpen }">
         <ul class="navbar-nav">

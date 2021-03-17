@@ -8,12 +8,13 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchComponent } from './search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AboutComponent } from './header/about/about.component';
 import { ContactUsComponent } from './header/contact-us/contact-us.component';
 import { HomeComponent } from './home/home.component';
 import { ServiceComponent } from './service/service.component';
 import { InspectionComponent } from './inspection/inspection.component';
+import { DialogWindowComponent } from './search/dialog-window/dialog-window.component';
 import {MatMenuModule} from '@angular/material/menu';
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -29,6 +30,8 @@ import {MatRippleModule} from '@angular/material/core';
 import {Checkpoint} from './asset/checkPoint';
 import { FallBackComponent } from './fall-back/fall-back.component';
 import {MatIconModule} from '@angular/material/icon';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 @NgModule({
@@ -44,6 +47,7 @@ import {MatIconModule} from '@angular/material/icon';
     InspectionComponent,
     TcrComponent,
     FallBackComponent,
+    DialogWindowComponent,
   ],
   imports: [
     BrowserModule,
@@ -59,7 +63,9 @@ import {MatIconModule} from '@angular/material/icon';
     MatRadioModule,
     MatCardModule,
     MatRippleModule,
-    MatIconModule
+    MatIconModule,
+    MatDialogModule,
+    ReactiveFormsModule
   ],
   providers: [VehiclesService,
     {
@@ -68,6 +74,7 @@ import {MatIconModule} from '@angular/material/icon';
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogWindowComponent]
 })
 export class AppModule { }

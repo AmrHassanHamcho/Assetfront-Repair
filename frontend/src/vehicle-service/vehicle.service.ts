@@ -7,6 +7,8 @@ import {Observable} from 'rxjs';
   providedIn: 'root'
 })@Injectable()
 export class VehiclesService {
+  AcceptOrDenied  = false;
+
   public serNo: string;
   /**@param serNo serialNumber
    */
