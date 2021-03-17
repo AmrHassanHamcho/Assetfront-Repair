@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -29,9 +28,8 @@ export class ApiRequestService {
         });
       this.submitButtonPressed = true;
     }
-
-
   }
+
   getAssetDetails() {
     return this.assetDetails;
   }
@@ -50,5 +48,4 @@ export class ApiRequestService {
   getSuccessfulRequest(){
     return this.successfulRequest;
   }
-
 }

@@ -8,12 +8,13 @@ import { FooterComponent } from './footer/footer.component';
 import { SearchComponent } from './search/search.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AboutComponent } from './header/about/about.component';
 import { ContactUsComponent } from './header/contact-us/contact-us.component';
 import { HomeComponent } from './home/home.component';
 import { ServiceComponent } from './service/service.component';
 import { InspectionComponent } from './inspection/inspection.component';
+import { DialogWindowComponent } from './search/dialog-window/dialog-window.component';
 import {MatMenuModule} from '@angular/material/menu';
 
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
@@ -29,7 +30,11 @@ import {MatRippleModule} from '@angular/material/core';
 import {Checkpoint} from './asset/checkPoint';
 import { FallBackComponent } from './fall-back/fall-back.component';
 import {MatIconModule} from '@angular/material/icon';
+
 import {MatInputModule} from "@angular/material/input";
+
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 
@@ -46,6 +51,7 @@ import {MatInputModule} from "@angular/material/input";
     InspectionComponent,
     TcrComponent,
     FallBackComponent,
+    DialogWindowComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +68,12 @@ import {MatInputModule} from "@angular/material/input";
     MatCardModule,
     MatRippleModule,
     MatIconModule,
-    MatInputModule
+
+    MatInputModule,
+
+    MatDialogModule,
+    ReactiveFormsModule
+
   ],
   providers: [VehiclesService,
     {
@@ -71,6 +82,7 @@ import {MatInputModule} from "@angular/material/input";
       multi: true
     }
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [DialogWindowComponent]
 })
 export class AppModule { }

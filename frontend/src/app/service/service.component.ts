@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
 import {FileServiceService} from "../fileService/file-service.service";
 import {ApiRequestService} from "../API-request/api-request.service";
+
 
 
 
@@ -20,6 +22,7 @@ export class ServiceComponent implements OnInit {
   hours = '';
   coast = '';
   date = '';
+
   private files: any;
   private bucket: any;
   private FOLDER = 'test';
@@ -35,12 +38,13 @@ export class ServiceComponent implements OnInit {
 
   constructor(private http:HttpClient, private fileService:FileServiceService, private apiRequest: ApiRequestService) { }
 
+
   ngOnInit(): void {
   }
 
   onFileSelect(event){
     console.log(event);
-    this.selectedFile =<File>event.target.files[0];
+    this.selectedFile = (event.target.files[0] as File);
   }
 
   // onFileChange(files){
@@ -72,18 +76,18 @@ export class ServiceComponent implements OnInit {
 
   onFileUpload(){
     const fd = new FormData();
-    fd.append('image', this.selectedFile,this.selectedFile.name);
-    //this.http.post(url,fd) // any backend function that accepts foreign data, in our case AWS url
-    //.subscribe(event=> {
+    fd.append('image', this.selectedFile, this.selectedFile.name);
+    // this.http.post(url,fd) // any backend function that accepts foreign data, in our case AWS url
+    // .subscribe(event=> {
     // msg to usr
     // or log to console: console.log(event)
-    //})
+    // })
 
 
 
     // in case we want to track the progress of the file upload
 
-    //this.http.post(url,fd, {
+    // this.http.post(url,fd, {
     //  reportProgress: true,
     //  observe: 'events'
     //
@@ -93,22 +97,22 @@ export class ServiceComponent implements OnInit {
 
   onUpdateHours(event: Event)
   {
-    this.hours = (<HTMLInputElement>event.target).value;
+    this.hours = (event.target as HTMLInputElement).value;
   }
 
   onUpdateComment(event: Event)
   {
-    this.comment = (<HTMLInputElement>event.target).value;
+    this.comment = (event.target as HTMLInputElement).value;
   }
 
   onUpdateCoast(event: Event)
   {
-    this.coast = (<HTMLInputElement>event.target).value;
+    this.coast = (event.target as HTMLInputElement).value;
   }
 
   onUpdateDate(event: Event)
   {
-    this.date = (<HTMLInputElement>event.target).value;
+    this.date = (event.target as HTMLInputElement).value;
   }
 
 

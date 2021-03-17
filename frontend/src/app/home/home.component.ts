@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {SearchComponent} from "../search/search.component";
-import{ VehiclesService} from "../../vehicle-service/vehicle.service";
+import {SearchComponent} from '../search/search.component';
+import { VehiclesService} from '../../vehicle-service/vehicle.service';
+import {ApiRequestService} from '../API-request/api-request.service';
 
 @Component({
   selector: 'app-home',
@@ -9,17 +10,20 @@ import{ VehiclesService} from "../../vehicle-service/vehicle.service";
 })
 export class HomeComponent implements OnInit {
 
-  public vehcilesDetail: any = [];
-
-  constructor(private request: VehiclesService) {
-
-
-  }
+  constructor(public request: ApiRequestService) { }
 
   ngOnInit(): void {
   }
 
+  exportTCR(): void {
+    alert('Export TCR');
+  }
 
+  exportInspection(): void {
+    alert('Export Inspection');
+  }
 
-
+  exportService(): void {
+    alert('Export Service');
+  }
 }

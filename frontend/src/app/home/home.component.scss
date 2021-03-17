@@ -1,0 +1,76 @@
+#home{
+  #card-row{
+    box-shadow: 0 10px 20px 0 rgba(0,0,0,.15);
+    width: 600px;
+      .card {
+        width: 100%;
+        height: 100%;
+        background-color: darkgrey;
+        #title{
+          margin-left: auto;
+          font-size: 1.7rem;
+          font-weight: 450;
+        }
+        #vehicle-image{
+          width: 100%;
+          margin-left: auto;
+        }
+        .list-group-item{
+          background: linear-gradient(45deg, #d22424, #e53d06);
+          width: 100%;
+        }
+        .mat-button{
+          width: 11rem;
+          border: none;
+          box-shadow: 0 10px 20px 0 rgba(153, 153, 153, 0.15);
+          transition: .8s cubic-bezier(.2,1,.2,1);
+          cursor: pointer;
+        }
+      }
+    }
+  }
+/*
+  .row{
+    .col-md-8{
+      border: solid red;
+    }
+    #title{
+      font-size: 2rem;
+      font-weight: 600;
+      height: 100px;
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+      border: solid red;
+    }
+    #bilde{
+      display: block;
+      height: 300px;
+      width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      border: solid red;
+    }
+    .col-md-4{
+      border: solid red;
+    }
+    #tittle{
+      font-size: 2rem;
+      font-weight: 600;
+      height: 100px;
+      margin-right: auto;
+      margin-left: auto;
+      text-align: center;
+      border: solid red;
+    }
+    #bilder{
+      display: block;
+      height: 300px;
+      width: 300px;
+      margin-left: auto;
+      margin-right: auto;
+      border: solid red;
+    }
+  }
+*/
+
