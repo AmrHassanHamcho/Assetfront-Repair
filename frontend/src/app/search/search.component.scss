@@ -1,27 +1,20 @@
-.container{
-  display: flex;
-  margin-top: 200px;
-  justify-content: center;
-  width: 600px;
+.container-fluid{
+  #searchBar{
+    display: flex;
+    margin: 0 auto;
+    #label{
+      min-font-size: 1rem;
+      font-size: 1.3rem;
+    }
+    #submit{
+      width: 5rem;
+      height: 10px;
+      color: black;
+    }
+  }
 }
 
-.form-group{
-  width: 400px;
 
-}
-.label{
-  justify-content: center;
-}
-.btn-primary{
-  margin-left: 140px;
-  width: 100px;
-}
-
-.container .btn {
-  margin: 75px;
-  background: #e1efe6;
-  color: black;
-}
 
 @media  screen and (max-width: 375px) {
   .container {
