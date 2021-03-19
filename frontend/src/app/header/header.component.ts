@@ -10,7 +10,6 @@ import {ApiRequestService} from '../API-request/api-request.service';
 })
 
 export class HeaderComponent implements OnInit {
-  navbarOpen = false;
   displayHeader = false;
 
   constructor(
@@ -20,9 +19,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  toggleNavbar(){
-    this.navbarOpen = !this.navbarOpen;
+  displayFalse(){
+    this.service.AcceptOrDenied = false;
   }
 
   display(){
