@@ -15,21 +15,22 @@
                         <p class="required" style="color: red">{{'*'}}</p>
                         </h1>
                           <h1 *ngFor="let op of ttrCopy.tcr[indexTcr].checkpoint[indexCp].options; let value = index">
-                          <mat-radio-button value="value" labelPosition="after" (change)="updateValue(value,indexTcr,indexCp)" color="primary">
-                          {{logToconsole(indexTcr,indexCp)}}
                             <div class="container">
                               <div class="row">
                                 <div class="col-sm-2">
+                                  <mat-radio-button value="value" labelPosition="after" (change)="updateValue(value,indexTcr,indexCp)" color="primary">
+
                                   {{ttrCopy.tcr[indexTcr].checkpoint[indexCp].options[value].value}}
+                                  </mat-radio-button>
+
                                 </div>
                                 {{printHeleArray()}}
                                 <div class="col-sm-2">
                                  {{ttrCopy.tcr[indexTcr].checkpoint[indexCp].options[value].description}}
+                                  <hr>
                                 </div>
-                                <hr>
                               </div>
                             </div>
-                        </mat-radio-button>
                       </h1>
                       </mat-card-content>
                     </mat-card>
