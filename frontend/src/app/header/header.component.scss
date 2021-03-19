@@ -1,82 +1,36 @@
-.container-1 {
-  display: flex;
-  margin-top: 150px;
-  .navbar{
-    width: 100%;
-    background: black;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 1.25rem;
-      img {
-        height: 74px;
-        margin-left: 50px;
-        padding: 0;
-      }
+.navbar {
+  padding:0;
+  margin-bottom:2rem;
+  width: 100vw;
+  #logo{
+    height: 6.5rem;
+    padding: 1rem;
   }
-  .nav-item {
-    display: flex;
-    margin-left: 20px;
-    text-align: center;
+  .nav-link{
+    font-size: 1.5rem;
   }
-}
-
-.container-2 {
-  margin-bottom: 50px;
-  .navbar{
-    width: 100%;
-    background: grey !important;
-    margin-top: 100px;
-    transition: all .5s ease-in-out;
+  #navbar-row-1{
+    padding: 1rem;
   }
-  .nav-link {
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 1.25rem;
-  }
-  .nav-item {
-    display: flex;
-    margin-left: 40px;
-    text-align: center;
-  }
-  #navbar-2{
-    margin-left: 50px;
+  #navbar-row-2{
+    padding: 1rem;
   }
 }
 
 @media screen and (max-width: 375px) {
-  .container-1 {
-    .navbar {
-      width: 100%;
-      img {
-        margin-left: 0;
-        height: 4rem;
-      }
+  .navbar {
+    padding:0;
+    margin-bottom:1rem;
+    width: 375px;
+    .navbar-toggler-right{
+      margin-right: 3rem;
     }
-    .nav-link {
+    #logo{
+      height: 4.5rem;
+      padding: 0.5rem;
+    }
+    .nav-link{
       font-size: 1rem;
-    }
-    .nav-item {
-      margin-top: 0;
-      margin-left: 0;
-    }
-    #myAccount {
-      margin-left: 0;
-    }
-  }
-
-  .container-2 {
-    .navbar {
-      width: 100%;
-      height: 30px;
-      margin-top: 90px;
-      margin-left: 0;
-    }
-    .nav-link {
-      font-size: 1rem;
-    }
-    .nav-item {
-      margin-top: 0;
-      margin-left: 0;
     }
   }
 }
