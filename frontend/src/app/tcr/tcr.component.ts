@@ -15,7 +15,7 @@ export class TcrComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  onSuccessfulSearch(): boolean {
+  onSuccessfullSearch(): boolean {
     if (this.ttrCopy === undefined){
       this.searchedSerialNo = false;
       return this.searchedSerialNo;
