@@ -1,15 +1,8 @@
 mat-accordion{
   padding: 1rem;
   margin: auto;
-  .helpButton{
-    align-content: end}
-  .cardColor{
+  #card{
     background-color: #a3b8af;
-  }
-  .buttonPos{
-    font-size: large;
-    background-color: aqua;
-    align-items: end;
   }
   #subTitle{
     margin: 0;
@@ -29,15 +22,8 @@ mat-accordion{
     padding: 2rem;
     box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
   }
-  .value{
-    font-size: 1rem;
-  }
 }
-@media screen and (max-width: 280px) {
-  mat-accordion{
-    margin-left: 6rem;
-  }
-}
+
 @media  screen and (max-width: 375px){
   mat-accordion{
     .mat-expansion-panel-header-title{
@@ -47,7 +33,7 @@ mat-accordion{
       padding: 0;
       border: solid darkgrey;
     }
-    .mat-card{
+    #card{
       padding: 0;
     }
     .col-lg-7{
@@ -58,6 +44,9 @@ mat-accordion{
     .col-lg-1{
       padding: 0;
       margin: auto
+    }
+    #subTitle{
+      font-size: 1rem;
     }
   }
 }
