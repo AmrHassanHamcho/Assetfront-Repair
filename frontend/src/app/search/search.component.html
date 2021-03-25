@@ -1,18 +1,24 @@
-<div class="container-fluid">
-  <div id="searchBar" class="row align-items-center">
-    <div class="col-xs-5 col-lg-5 mx-auto" id="col-lg-6">
-      <label id="label">Please enter VIN number!</label>
-      <div class="input-group">
-        <input #serialNo type="text" class="form-control" placeholder="Search Vin/serial number">
-        <span class="input-group-btn">
-          <button (click)="openDialog(); request.setSerialNo(serialNo.value);" class="btn btn-primary" type="submit">
-            Submit</button>
-        </span>
-        <p style="color:red" *ngIf="request.assetDetails.length === 0">
-          {{request.getErrorMessage()}}
-        </p>
-      </div>
+<div class="row mx-0" id="searchBar" >
+  <div class="col- col-md-5 col-lg-5 mx-auto" id="col">
+    <label id="label">Please enter VIN number!</label>
+    <input
+      #serialNo
+      type="text"
+      class="form-control"
+      placeholder="Search ...">
+
+    <p *ngIf="request.assetDetails.length === 0" id="errorMessage">
+    {{request.getErrorMessage()}}
+    </p>
+    <div class="input-group">
+      <span class="input-group-btn mx-auto">
+        <button
+          (click)="openDialog(); request.setSerialNo(serialNo.value);"
+          class="btn btn-secondary"
+          type="submit"
+          id="submit"
+        >Search</button>
+      </span>
     </div>
   </div>
 </div>
-

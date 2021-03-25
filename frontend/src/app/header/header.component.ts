@@ -11,7 +11,6 @@ import {ApiRequestService} from '../API-request/api-request.service';
 
 export class HeaderComponent implements OnInit {
   displayHeader = false;
-
   constructor(
     public request: ApiRequestService,
     public service: VehiclesService,

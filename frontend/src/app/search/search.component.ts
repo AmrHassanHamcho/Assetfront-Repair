@@ -1,7 +1,7 @@
 
 import {Component, OnInit} from '@angular/core';
 import {ApiRequestService} from '../API-request/api-request.service';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {DialogWindowComponent} from './dialog-window/dialog-window.component';
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
 

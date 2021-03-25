@@ -1,39 +1,17 @@
-.container-fluid{
-  #searchBar{
-    display: flex;
-    margin: 0 auto;
-    #label{
-      min-font-size: 1rem;
-      font-size: 1.3rem;
-    }
+#searchBar{
+  #col{
+    margin-top: 10rem;
+    max-width: 25rem !important;
     #submit{
-      width: 5rem;
-      height: 10px;
       color: black;
     }
+    #label{
+      font-size: 1.3rem;
+      filter: drop-shadow(2px 4px 8px #131516);
+    }
+    #errorMessage{
+      margin-top: 1rem;
+      color: red;
+    }
   }
-}
-
-
-
-@media  screen and (max-width: 375px) {
-  .container {
-    display: flex;
-    margin-top: 200px;
-    width: 250px;
-  }
-
-  #label {
-    margin-left: 20px;
-  }
-
-  .form-group {
-    width: 200px;
-    margin-left: 10px;
-  }
-
-  .btn-primary {
-    margin-left: 60px;
-  }
-
 }
