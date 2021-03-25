@@ -1,13 +1,22 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-  <a class="img-responsive navbar-brand " [routerLink]="['/search']" (click)="displayFalse()"><img src="../../assets/images/Logo.png" alt="logo" id="logo"></a>
+<nav class="navbar navbar-expand-md" id="navigation">
+  <a class="img-responsive navbar-brand " [routerLink]="['/search']" (click)="displayFalse()">
+    <img src="../../assets/images/Logo.png" alt="logo" id="logo">
+  </a>
   <div class="navbar-toggler-right">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbar"
+      aria-controls="navbarToggler"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
   </div>
 
   <div class="collapse navbar-collapse flex-column " id="navbar">
-    <ul class="navbar-nav  w-100  px-3" id="navbar-row-1">
+    <ul class="navbar-nav w-100 px-3" id="navbar-row-1">
       <li class="nav-item active">
         <a class="nav-link" [routerLink]="['/search']" (click)="displayFalse()">Search<span class="sr-only">(current)</span></a>
       </li>
@@ -15,14 +24,11 @@
         <a class="nav-link" [routerLink]="['/about']">About Repair<span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/contactUs']">Contact Us<span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item active">
-        <a class="nav-link" [routerLink]="['/search']">My Account<span class="sr-only">(current)</span></a>
+        <a class="nav-link" [routerLink]="['/contactUs']">Contact Repair<span class="sr-only">(current)</span></a>
       </li>
     </ul>
 
-    <ul *ngIf="display()" class="navbar-nav w-100 bg-secondary px-3" id="navbar-row-2">
+    <ul *ngIf="display()" class="navbar-nav w-100 px-3 bg-secondary" id="navbar-row-2">
       <li class="nav-item active">
         <a class="nav-link" [routerLink]="['/home']">Home<span class="sr-only">(current)</span></a>
       </li>
