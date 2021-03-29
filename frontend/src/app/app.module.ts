@@ -12,7 +12,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AboutComponent } from './header/about/about.component';
 import { ContactUsComponent } from './header/contact-us/contact-us.component';
 import { HomeComponent } from './home/home.component';
-import { ServiceComponent } from './service/service.component';
+import {DialogContentExampleDialog, ServiceComponent} from './service/service.component';
 import { InspectionComponent } from './inspection/inspection.component';
 import { DialogWindowComponent } from './search/dialog-window/dialog-window.component';
 import {MatMenuModule} from '@angular/material/menu';
@@ -34,6 +34,10 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from "@angular/material/input";
 
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from '@angular/material/core';
+import { TestComponent } from './test/test.component';
+
 
 
 
@@ -52,37 +56,44 @@ import {MatDialogModule} from '@angular/material/dialog';
     TcrComponent,
     FallBackComponent,
     DialogWindowComponent,
+    TestComponent,
+    DialogContentExampleDialog
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatButtonModule,
-    FormsModule,
-    HttpClientModule,
-    MatMenuModule,
-    MatFormFieldModule,
-    MatSelectModule,
-    MatExpansionModule,
-    MatRadioModule,
-    MatCardModule,
-    MatRippleModule,
-    MatIconModule,
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatButtonModule,
+        FormsModule,
+        HttpClientModule,
+        MatMenuModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatExpansionModule,
+        MatRadioModule,
+        MatCardModule,
+        MatRippleModule,
+        MatIconModule,
 
-    MatInputModule,
+        MatInputModule,
 
-    MatDialogModule,
-    ReactiveFormsModule
+        MatDialogModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
 
-  ],
+
+    ],
   providers: [VehiclesService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AppHttpInterceptor,
       multi: true
-    }
+    },
+    ServiceComponent
   ],
   bootstrap: [AppComponent],
-  entryComponents: [DialogWindowComponent]
+  entryComponents: [DialogWindowComponent],
+
 })
 export class AppModule { }

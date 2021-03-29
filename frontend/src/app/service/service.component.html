@@ -1,77 +1,75 @@
 
+<form [formGroup]="form" (ngSubmit)="onSubmit($event)">
+  <div class="container">
+    <div class="row row-1">
+      <div class="col-sm-4">
+        <p> Attach a document or image: </p>
+      </div>
 
-<div class="container">
-  <div class="row row-1">
-    <div class="col-sm-4">
-      <p> Attach a document or image: </p>
-    </div>
+      <div class="col-sm-4">
 
-    <div class="col-sm-4">
-
-      <input type="file" id="fileUpload" multiple = "multiple" accept = "application/pdf, image/jpeg, image/png" (change)="selectFile($event) ">
+        <input type="file" id="fileUpload" multiple = "multiple" accept = "application/pdf, image/jpeg, image/png" (change)="selectFile($event) ">
 
 
-    </div>
+      </div>
 
-    <div class="col-sm-4">
-      <button class="btn btn-primary btn-add" type="button" (click)="upload()">Upload</button>
-      <h1 *ngIf="fileService.oneFileUploadSuccess()" style="color: green"> File was Uploaded successfully! </h1>
-    </div>
-
-  </div>
-
-  <hr>
-
-  <div class="row row-2">
-    <div class="col-sm-3">
-      <p> Service Date: </p>
-    </div>
-    <div class="col-sm-3">
-      <input (input)="onUpdateDate($event)" type="date" required />
-    </div>
-    <div class="col-sm-3">
-      <p style="color: red">*</p>
-    </div>
-
-  </div>
-
-  <hr>
-
-  <div class="row row-3">
-    <div class="col-sm-3">
-      <p> Hours: </p>
-    </div>
-    <div class="col-sm-3 ">
-      <input (input) = "onUpdateHours($event)" type="number" placeholder="Hours" required />
+      <div class="col-sm-4">
+        <button class="btn btn-primary btn-add" type="button" (click)="upload()">Upload</button>
+        <h1 *ngIf="fileService.oneFileUploadSuccess()" style="color: green"> File was Uploaded successfully! </h1>
+      </div>
 
     </div>
 
-    <div class="col-sm-3 ">
-      <p style="color: red">* </p>
+    <hr>
+
+    <div class="row row-2">
+      <div class="col-sm-3">
+        <p> Service Date: </p>
+      </div>
+      <div class="col-sm-3">
+        <input (input)="onUpdateDate($event)"type="date" formControlName="date" [ngClass]="{'form-submitted': formSubmitted}" required />
+
+      </div>
+
     </div>
 
-  </div>
+    <hr>
 
-  <hr>
+    <div class="row row-3">
+      <div class="col-sm-3">
+        <p> Hours: </p>
+      </div>
+      <div class="col-sm-3 ">
+        <input (input) = "onUpdateHours($event)" type="number" placeholder="Hours" formControlName="hours" [ngClass]="{'form-submitted': formSubmitted}" required />
+        <p>{{hours}}</p>
+      </div>
 
-  <div class="row row-4">
-    <div class="col-sm-3">
-      <p> Coast: </p>
+      <div class="col-sm-3 ">
+        <p style="color: red">* </p>
+      </div>
+
     </div>
-    <div class="col-sm-3 ">
-      <input (input) = "onUpdateCoast($event)"  type="number" placeholder="Cost (nok)" required />
+
+    <hr>
+
+    <div class="row row-4">
+      <div class="col-sm-3">
+        <p> Coast: </p>
+      </div>
+      <div class="col-sm-3 ">
+        <input (input) = "onUpdateCoast($event)"  type="number" placeholder="Coast" formControlName="coast" [ngClass]="{'form-submitted': formSubmitted}" required />
+      </div>
+
+      <div class="col-sm-3 ">
+        <p style="color: red">* </p>
+      </div>
+
     </div>
 
-    <div class="col-sm-3 ">
-      <p style="color: red">* </p>
-    </div>
 
-  </div>
+    <hr>
 
-
-  <hr>
-
-  <div class="row row-5">
+    <div class="row row-5">
     <div class="col-sm-3">
       <p> Comment: </p>
     </div>
@@ -82,27 +80,104 @@
 
   </div>
 
-  <hr class="last-hr">
+    <hr>
 
-  <div class="row row-6">
-    <div class="col-sm-4">
-      <a class="btn btn-primary btn-submit" role="button" href="#">Submit</a>
+<!--    User details-->
+
+
+    <h3 class="text-center" style="font-size: xx-large">User Details</h3>
+    <hr>
+    <div class="row row-6">
+      <div class="col-sm-3">
+
+        <p> Name: </p>
+      </div>
+      <div class="col-sm-3 ">
+        <input (input) = "onUpdateName($event)"  type="text" placeholder="Name" formControlName="name" [ngClass]="{'form-submitted': formSubmitted}" required />
+      </div>
+
+      <div class="col-sm-3 ">
+        <p style="color: red">* </p>
+      </div>
+
     </div>
-    <div class="col-sm-4 btn-back">
-      <a class="btn btn-link btn-back" role="button" href="#">Back</a>
+
+    <hr>
+    <!--    Email: -->
+
+    <div class="row row-7">
+      <div class="col-sm-3">
+        <p> Email: </p>
+      </div>
+      <div class="col-sm-3 ">
+        <input (input) = "onUpdateEmail($event)"  type="email" placeholder="Email" formControlName="email"  [ngClass]="{'form-submitted': formSubmitted}" required />
+      </div>
+
+      <div class="col-sm-3 ">
+        <p style="color: red">* </p>
+      </div>
+
     </div>
+
+    <hr>
+
+    <!-- Bedrift -->
+
+    <div class="row row-7">
+      <div class="col-sm-3">
+        <p> Company: </p>
+      </div>
+      <div class="col-sm-3 ">
+        <input (input) = "onUpdateCompany($event)"  type="text" placeholder="Company"  />
+      </div>
+
+
+  </div>
+    <hr>
+
+    <!-- Tlf nr -->
+
+    <div class="row row-7">
+      <div class="col-sm-3">
+        <p> Telephone number: </p>
+      </div>
+      <div class="col-sm-3 ">
+        <input (input) = "onUpdatePhone($event)"  type="tel" placeholder="tlf number" formControlName="phone" [ngClass]="{'form-submitted': formSubmitted}" required />
+      </div>
+
+      <div class="col-sm-3 ">
+        <p style="color: red">* </p>
+      </div>
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <hr class="last-hr">
+    <!--    Submit    -->
+
+
+
+    <div class="row row-last">
+      <div class="col-sm-4">
+         <button class="btn btn-primary btn-submit" type="submit" [disabled]="!form.valid" role="button" (click)="onRouteSubmit() " >Submit</button>
+
+      </div>
+      <div class="col-sm-4 btn-back">
+        <button class="btn btn-link btn-back" role="button" (click)="onBackSubmit() ">Back</button>
+      </div>
+    </div>
+
+
   </div>
 
-
-</div>
-
-
-
-
-
-
-
-
+</form>
 
 
 

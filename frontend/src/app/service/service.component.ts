@@ -6,33 +6,56 @@ import * as S3 from 'aws-sdk/clients/s3';
 import {FileServiceService} from "../fileService/file-service.service";
 import {ApiRequestService} from "../API-request/api-request.service";
 
-
-
+import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {Router} from "@angular/router";
+import {Inject} from '@angular/core';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { Injectable } from '@angular/core';
 
 @Component({
   selector: 'app-service',
   templateUrl: './service.component.html',
-  styleUrls: ['./service.component.scss']
+  styleUrls: ['./service.component.scss'],
+
 })
 export class ServiceComponent implements OnInit {
+
+  form: FormGroup;
+  formSubmitted = false;
 
   selFiles : FileList;
   comment = '';
   hours = '';
   coast = '';
   date = '';
+  name = '';
+  email = '';
+  phone='';
+  company = '';
+
+
+
 
   private files: any;
   private counter = 0;
   private contentType = '';
-  private name = '';
 
 
-  constructor(private http:HttpClient, public fileService:FileServiceService, private apiRequest: ApiRequestService) { }
+
+  constructor(
+    private http:HttpClient,
+    public fileService:FileServiceService,
+    private apiRequest: ApiRequestService,
+    private formBuilder: FormBuilder,
+    public dialog: MatDialog,
+    private router : Router){ }
 
 
   ngOnInit(): void {
+    this.buildForm();
   }
+
+
 
   onUpdateHours(event: Event)
   {
@@ -53,8 +76,22 @@ export class ServiceComponent implements OnInit {
   {
     this.date = (<HTMLInputElement>event.target).value;
   }
-
-
+  onUpdateName(event: Event)
+  {
+    this.name = (<HTMLInputElement>event.target).value;
+  }
+  onUpdateEmail(event: Event)
+  {
+    this.email = (<HTMLInputElement>event.target).value;
+  }
+  onUpdatePhone(event: Event)
+  {
+    this.phone = (<HTMLInputElement>event.target).value;
+  }
+  onUpdateCompany(event: Event)
+  {
+    this.company = (<HTMLInputElement>event.target).value;
+  }
 
 /////////////////////////////////////////////////////////////////////////////////////
 // File Upload //
@@ -75,34 +112,6 @@ export class ServiceComponent implements OnInit {
 
 
   }
-
-  // uploadFile(file) {
-  //
-  //     const bucket = new S3(
-  //       {
-  //         accessKeyId: 'AKIA3MSMUCO2MSPHGAKV',
-  //         secretAccessKey: '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',
-  //         region: 'eu-north-1'
-  //       }
-  //     );
-  //
-  //     const params = {
-  //       Bucket: 'assetfront-repair/' + this.FOLDER,
-  //       Key:   this.name,
-  //       Body: file,
-  //       ACL: 'public-read',
-  //       ContentType: this.contentType
-  //     };
-  //     bucket.upload(params, function (err, data) {
-  //       if (err) {
-  //         console.log('There was an error uploading your file: ', err);
-  //         return false;
-  //       }
-  //       console.log('Successfully uploaded file.', data);
-  //       return true;
-  //     });
-  // }
-
   upload() {
 
      for (let index =0; index <=this.counter; index ++){
@@ -115,6 +124,51 @@ export class ServiceComponent implements OnInit {
      }
   }
 
+  buildForm() {
+    this.form = this.formBuilder.group({
+      hours: [null, [Validators.required]],
+      coast: [null, [Validators.required]],
+      date: [null, [Validators.required]],
+      name: [null, [Validators.required]],
+      email: [null, [Validators.required]],
+      phone: [null, [Validators.required]],
 
 
+    });
+  }
+
+  onSubmit(event) {
+    event.preventDefault();
+    this.formSubmitted = true;
+
+    if (this.form.valid) {
+      console.log(this.form.value); // Process your form
+    }
+  }
+
+  onRouteSubmit() {
+    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+
+  }
+
+  onBackSubmit(){
+
+    this.router.navigate(['../home']);
+  }
+}
+
+
+@Component({
+  selector: 'app-service',
+  templateUrl: 'dialog-content-dialog.html',
+  styleUrls: ['./dialog-content-dialog.scss'],
+  providers: [ServiceComponent],
+})
+export class DialogContentExampleDialog {
+  constructor( public service: ServiceComponent ) {
+  }
 }

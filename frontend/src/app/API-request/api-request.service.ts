@@ -36,6 +36,10 @@ export class ApiRequestService {
   /**
    * @return return the error message( empty string if correct serialNo entered )
    */
+
+
+
+
   getErrorMessage(){
     if (this.successfulRequest){
       this.errorMessage = 'Invalid input. Please try again!';

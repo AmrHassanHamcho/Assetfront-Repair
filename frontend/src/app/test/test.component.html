@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row row-1">
+    <div class="col-sm-4">
+      <p> Attach a document or image: </p>
+    </div>
+
+    <div class="col-sm-4">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+
+    </div>
+
+    <div class="col-sm-4">
+
+    </div>
+
+  </div>
+
+  <hr>
+</div>
