@@ -42,6 +42,7 @@ export class FileServiceService {
       return true;
     });
 
+
     this.fileUploaded = true;
 
 

@@ -13,11 +13,6 @@
 
       </div>
 
-      <div class="col-sm-4">
-        <button class="btn btn-primary btn-add" type="button" (click)="upload()">Upload</button>
-        <h1 *ngIf="fileService.oneFileUploadSuccess()" style="color: green"> File was Uploaded successfully! </h1>
-      </div>
-
     </div>
 
     <hr>
@@ -166,7 +161,7 @@
 
     <div class="row row-last">
       <div class="col-sm-4">
-         <button class="btn btn-primary btn-submit" type="submit" [disabled]="!form.valid" role="button" (click)="onRouteSubmit() " >Submit</button>
+         <button class="btn btn-primary btn-submit" type="submit" [disabled]="!form.valid" role="button"  (click)="upload()" >Submit</button>
 
       </div>
       <div class="col-sm-4 btn-back">

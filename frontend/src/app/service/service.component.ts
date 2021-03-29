@@ -32,6 +32,8 @@ export class ServiceComponent implements OnInit {
   email = '';
   phone='';
   company = '';
+  fileName='';
+  extension = '';
 
 
 
@@ -100,28 +102,43 @@ export class ServiceComponent implements OnInit {
   {
     this.selFiles = event.target.files;
     this.counter = this.selFiles.length;
-    var fileName =  (<HTMLInputElement>event.target).value;
-    var extension = fileName.substr(fileName.lastIndexOf('.'));
-    console.log(extension);
 
-    if ((extension!= '.pdf' && extension != '.png' && extension != '.jpeg'))
-    {
-      alert("Could not allow to upload " + extension);
-      this.selFiles = null;
+    for(let index = 0; index < this.counter ; index++){
+           this.fileName =  this.selFiles.item(index).name;
+            this.extension = this.selFiles.item(index).type;
+          console.log(this.extension);
+
+           if ((this.extension != 'application/pdf' && this.extension != 'image/png' && this.extension != 'image/jpeg'))
+           {
+            alert("Could not allow to upload " + this.extension);
+             this.selFiles = null;
+             break;
+          }
+
     }
-
+    console.log(this.selFiles);
 
   }
   upload() {
+    if(this.selFiles !== null){
+      let file;
+      let contentType;
+      let name;
+     for (let index =0 ; index <= this.counter; index ++){
 
-     for (let index =0; index <=this.counter; index ++){
-
-      const file = this.selFiles.item(index);
-      console.log(file.type);
-      this.contentType = file.type;
-      this.name = file.name;
-     this.fileService.uploadFile(file, 'Service', this.apiRequest.assetDetails[0].resourceId);
+       file= this.selFiles.item(index);
+       contentType = file.type;
+        name = file.name;
+      this.fileService.uploadFile(file, 'Service', this.apiRequest.assetDetails[0].resourceId);
+      this.onRouteSubmit();
      }
+    } else{
+       alert("No files uploaded!");
+       this.onRouteSubmit();
+     }
+
+
+
   }
 
   buildForm() {
@@ -148,7 +165,6 @@ export class ServiceComponent implements OnInit {
 
   onRouteSubmit() {
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
-
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });

@@ -7,7 +7,7 @@ import {ApiRequestService} from '../API-request/api-request.service';
   styleUrls: ['./tcr.component.scss']
 })
 export class TcrComponent implements OnInit {
-  i: number;
+  private i = 0;
   color: 'lightblue';
   val = [1, 1, 1];
   test = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 14];
@@ -32,6 +32,7 @@ export class TcrComponent implements OnInit {
 
     }
   }
+  
   updateValue(value: number, indexTcr: number, indexCp: number){
       this.ttrCopy.tcr[indexTcr].checkpoint[indexCp].value = value;
       this.x = this.ttrCopy.tcr[indexTcr].checkpoint[indexCp].value;
