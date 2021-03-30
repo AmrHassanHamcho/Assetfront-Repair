@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, ElementRef, Injectable, OnInit, ViewChild} from '@angular/core';
 
 import {HttpClient, HttpClientModule} from "@angular/common/http";
 import * as AWS from 'aws-sdk/global';
@@ -6,45 +6,63 @@ import * as S3 from 'aws-sdk/clients/s3';
 import {FileServiceService} from "../fileService/file-service.service";
 import {ApiRequestService} from "../API-request/api-request.service";
 
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
+import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {Router} from "@angular/router";
 import {Inject} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Injectable } from '@angular/core';
+
+@Component({
+  selector: 'app-service',
+  templateUrl: 'dialog-content-dialog.html',
+  styleUrls: ['./dialog-content-dialog.scss'],
+//  providers: [ServiceComponent],
+})
+
+
+export class DialogContentExampleDialog {
+  constructor( public service: ServiceComponent ) {
+  }
+}
 
 @Component({
   selector: 'app-service',
   templateUrl: './service.component.html',
   styleUrls: ['./service.component.scss'],
+  providers: [DialogContentExampleDialog],
 
 })
 export class ServiceComponent implements OnInit {
 
   form: FormGroup;
-  formSubmitted = false;
-
   selFiles : FileList;
-  comment = '';
-  hours = '';
-  coast = '';
-  date = '';
-  name = '';
-  email = '';
-  phone='';
-  company = '';
   fileName='';
   extension = '';
+
+
+
+  Email = new FormControl('', [Validators.required, Validators.email]);
+
+  registerForm = this.formBuilder.group({
+    workshop: [''],
+    Email: ['', { validators: [Validators.required, Validators.email]}],
+    fName: [''],
+    lName: [''],
+    date: [''],
+    hours: [''],
+    comment: [''],
+    company: [''],
+    phone: [''],
+    coast: [''],
+    filesControl: [''],
+  });
 
 
 
 
   private files: any;
   private counter = 0;
-  private contentType = '';
-
-
-
   constructor(
+
     private http:HttpClient,
     public fileService:FileServiceService,
     private apiRequest: ApiRequestService,
@@ -54,49 +72,26 @@ export class ServiceComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.buildForm();
+   // this.buildForm();
+  }
+
+
+  getErrorMessage(){
+    if (this.Email.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.Email.hasError('email') ? 'Not a valid email' : '';
   }
 
 
 
-  onUpdateHours(event: Event)
-  {
-    this.hours = (<HTMLInputElement>event.target).value;
-  }
 
-  onUpdateComment(event: Event)
-  {
-    this.comment = (<HTMLInputElement>event.target).value;
-  }
 
-  onUpdateCoast(event: Event)
-  {
-    this.coast = (<HTMLInputElement>event.target).value;
-  }
 
-  onUpdateDate(event: Event)
-  {
-    this.date = (<HTMLInputElement>event.target).value;
-  }
-  onUpdateName(event: Event)
-  {
-    this.name = (<HTMLInputElement>event.target).value;
-  }
-  onUpdateEmail(event: Event)
-  {
-    this.email = (<HTMLInputElement>event.target).value;
-  }
-  onUpdatePhone(event: Event)
-  {
-    this.phone = (<HTMLInputElement>event.target).value;
-  }
-  onUpdateCompany(event: Event)
-  {
-    this.company = (<HTMLInputElement>event.target).value;
-  }
 
-/////////////////////////////////////////////////////////////////////////////////////
-// File Upload //
+
+
 
   selectFile(event)
   {
@@ -120,19 +115,21 @@ export class ServiceComponent implements OnInit {
 
   }
   upload() {
-    if(this.selFiles !== null){
+
+    if(this.selFiles !== undefined && this.selFiles !== null){
       let file;
       let contentType;
       let name;
-     for (let index =0 ; index <= this.counter; index ++){
+     for (let index = 0 ; index <= this.counter; index ++){
 
-       file= this.selFiles.item(index);
+       file = this.selFiles.item(index);
        contentType = file.type;
         name = file.name;
       this.fileService.uploadFile(file, 'Service', this.apiRequest.assetDetails[0].resourceId);
       this.onRouteSubmit();
      }
-    } else{
+    }
+    else{
        alert("No files uploaded!");
        this.onRouteSubmit();
      }
@@ -141,27 +138,27 @@ export class ServiceComponent implements OnInit {
 
   }
 
-  buildForm() {
-    this.form = this.formBuilder.group({
-      hours: [null, [Validators.required]],
-      coast: [null, [Validators.required]],
-      date: [null, [Validators.required]],
-      name: [null, [Validators.required]],
-      email: [null, [Validators.required]],
-      phone: [null, [Validators.required]],
+  // buildForm() {
+  //   this.form = this.formBuilder.group({
+  //     hours: [null, [Validators.required]],
+  //     coast: [null, [Validators.required]],
+  //     date: [null, [Validators.required]],
+  //     name: [null, [Validators.required]],
+  //     email: [null, [Validators.required]],
+  //     phone: [null, [Validators.required]],
+  //
+  //
+  //   });
+  // }
 
-
-    });
-  }
-
-  onSubmit(event) {
-    event.preventDefault();
-    this.formSubmitted = true;
-
-    if (this.form.valid) {
-      console.log(this.form.value); // Process your form
-    }
-  }
+  // onSubmit(event) {
+  //   event.preventDefault();
+  //   this.formSubmitted = true;
+  //
+  //   if (this.form.valid) {
+  //     console.log(this.form.value); // Process your form
+  //   }
+  // }
 
   onRouteSubmit() {
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
@@ -178,13 +175,3 @@ export class ServiceComponent implements OnInit {
 }
 
 
-@Component({
-  selector: 'app-service',
-  templateUrl: 'dialog-content-dialog.html',
-  styleUrls: ['./dialog-content-dialog.scss'],
-  providers: [ServiceComponent],
-})
-export class DialogContentExampleDialog {
-  constructor( public service: ServiceComponent ) {
-  }
-}

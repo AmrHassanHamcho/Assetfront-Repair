@@ -1,6 +1,7 @@
 
 .container{
   font-size: large;
+  background-color: white;
 }
 .btn-add{
 
@@ -47,3 +48,23 @@ hr{
   color: black;
 }
 
+.mat-button{
+  margin: 3rem;
+}
+.form-field{
+  width: 70%;
+}
+.card{
+  align-items: center;
+}
+
+.mat-dialog-actions {
+
+  &[align='end'] {
+    justify-content: flex-end;
+  }
+
+  &[align='start'] {
+    justify-content: start;
+  }
+}

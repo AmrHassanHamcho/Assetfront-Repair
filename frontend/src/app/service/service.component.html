@@ -1,178 +1,299 @@
+<!--<form [formGroup]="form" (ngSubmit)="onSubmit($event)">-->
+<!--  <div class="container">-->
+<!--    <div class="row row-1">-->
+<!--      <div class="col-sm-4">-->
+<!--        <p> Attach a document or image: </p>-->
+<!--      </div>-->
 
-<form [formGroup]="form" (ngSubmit)="onSubmit($event)">
-  <div class="container">
-    <div class="row row-1">
-      <div class="col-sm-4">
-        <p> Attach a document or image: </p>
+<!--      <div class="col-sm-4">-->
+
+<!--        <input type="file" id="fileUpload" multiple = "multiple" accept = "application/pdf, image/jpeg, image/png" (change)="selectFile($event) ">-->
+
+
+<!--      </div>-->
+
+<!--    </div>-->
+
+<!--    <hr>-->
+
+<!--    <div class="row row-2">-->
+<!--      <div class="col-sm-3">-->
+<!--        <p> Service Date: </p>-->
+<!--      </div>-->
+<!--      <div class="col-sm-3">-->
+<!--        <input (input)="onUpdateDate($event)"type="date" formControlName="date" [ngClass]="{'form-submitted': formSubmitted}" required />-->
+
+<!--      </div>-->
+
+<!--    </div>-->
+
+<!--    <hr>-->
+
+<!--    <div class="row row-3">-->
+<!--      <div class="col-sm-3">-->
+<!--        <p> Hours: </p>-->
+<!--      </div>-->
+<!--      <div class="col-sm-3 ">-->
+<!--        <input (input) = "onUpdateHours($event)" type="number" placeholder="Hours" formControlName="hours" [ngClass]="{'form-submitted': formSubmitted}" required />-->
+<!--        <p>{{hours}}</p>-->
+<!--      </div>-->
+
+<!--      <div class="col-sm-3 ">-->
+<!--        <p style="color: red">* </p>-->
+<!--      </div>-->
+
+<!--    </div>-->
+
+<!--    <hr>-->
+
+<!--    <div class="row row-4">-->
+<!--      <div class="col-sm-3">-->
+<!--        <p> Coast: </p>-->
+<!--      </div>-->
+<!--      <div class="col-sm-3 ">-->
+<!--        <input (input) = "onUpdateCoast($event)"  type="number" placeholder="Coast" formControlName="coast" [ngClass]="{'form-submitted': formSubmitted}" required />-->
+<!--      </div>-->
+
+<!--      <div class="col-sm-3 ">-->
+<!--        <p style="color: red">* </p>-->
+<!--      </div>-->
+
+<!--    </div>-->
+
+
+<!--    <hr>-->
+
+<!--    <div class="row row-5">-->
+<!--    <div class="col-sm-3">-->
+<!--      <p> Comment: </p>-->
+<!--    </div>-->
+<!--    <div class="col-sm-3 ">-->
+<!--      <input (input)="onUpdateComment($event)" class="comment" type="text" placeholder="Write your comment here"  />-->
+<!--    </div>-->
+
+
+<!--  </div>-->
+
+<!--    <hr>-->
+
+<!--&lt;!&ndash;    User details&ndash;&gt;-->
+
+
+<!--    <h3 class="text-center" style="font-size: xx-large">User Details</h3>-->
+<!--    <hr>-->
+<!--    <div class="row row-6">-->
+<!--      <div class="col-sm-3">-->
+
+<!--        <p> Name: </p>-->
+<!--      </div>-->
+<!--      <div class="col-sm-3 ">-->
+<!--        <input (input) = "onUpdateName($event)"  type="text" placeholder="Name" formControlName="name" [ngClass]="{'form-submitted': formSubmitted}" required />-->
+<!--      </div>-->
+
+<!--      <div class="col-sm-3 ">-->
+<!--        <p style="color: red">* </p>-->
+<!--      </div>-->
+
+<!--    </div>-->
+
+<!--    <hr>-->
+<!--    &lt;!&ndash;    Email: &ndash;&gt;-->
+
+<!--    <div class="row row-7">-->
+<!--      <div class="col-sm-3">-->
+<!--        <p> Email: </p>-->
+<!--      </div>-->
+<!--      <div class="col-sm-3 ">-->
+<!--        <input (input) = "onUpdateEmail($event)"  type="email" placeholder="Email" formControlName="email"  [ngClass]="{'form-submitted': formSubmitted}" required />-->
+<!--      </div>-->
+
+<!--      <div class="col-sm-3 ">-->
+<!--        <p style="color: red">* </p>-->
+<!--      </div>-->
+
+<!--    </div>-->
+
+<!--    <hr>-->
+
+<!--    &lt;!&ndash; Bedrift &ndash;&gt;-->
+
+<!--    <div class="row row-7">-->
+<!--      <div class="col-sm-3">-->
+<!--        <p> Company: </p>-->
+<!--      </div>-->
+<!--      <div class="col-sm-3 ">-->
+<!--        <input (input) = "onUpdateCompany($event)"  type="text" placeholder="Company"  />-->
+<!--      </div>-->
+
+
+<!--  </div>-->
+<!--    <hr>-->
+
+<!--    &lt;!&ndash; Tlf nr &ndash;&gt;-->
+
+<!--    <div class="row row-7">-->
+<!--      <div class="col-sm-3">-->
+<!--        <p> Telephone number: </p>-->
+<!--      </div>-->
+<!--      <div class="col-sm-3 ">-->
+<!--        <input (input) = "onUpdatePhone($event)"  type="tel" placeholder="tlf number" formControlName="phone" [ngClass]="{'form-submitted': formSubmitted}" required />-->
+<!--      </div>-->
+
+<!--      <div class="col-sm-3 ">-->
+<!--        <p style="color: red">* </p>-->
+<!--      </div>-->
+
+<!--    </div>-->
+
+
+
+
+
+
+
+
+
+<!--    <hr class="last-hr">-->
+<!--    &lt;!&ndash;    Submit    &ndash;&gt;-->
+
+
+
+<!--    <div class="row row-last">-->
+<!--      <div class="col-sm-4">-->
+<!--         <button class="btn btn-primary btn-submit" type="submit" [disabled]="!form.valid" role="button"  (click)="upload()" >Submit</button>-->
+
+<!--      </div>-->
+<!--      <div class="col-sm-4 btn-back">-->
+<!--        <button class="btn btn-link btn-back" role="button" (click)="onBackSubmit() ">Back</button>-->
+<!--      </div>-->
+<!--    </div>-->
+
+
+<!--  </div>-->
+
+<!--</form>-->
+
+
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
+
+
+
+          <!--  <mat-card  fxLayoutAlign="space-between center end " fxLayout="column">-->
+
+          <!--    <mat-card-content fxLayoutAlign="space-between center end">-->
+
+
+
+          <form  [formGroup]="registerForm" (submit)="registerForm">
+
+
+            <!--   <input  type="file" id="fileUpload" multiple ="multiple" accept = "application/pdf, image/jpeg, image/png" (change)="selectFile($event) ">-->
+
+            <mat-form-field class="form-field"  appearance="fill">
+              <mat-label>Please Upload files here (PDF, PNG, JPEG only)</mat-label>
+              <ngx-mat-file-input  formControlName="filesControl" [accept]="'.pdf, .jpeg, .png'" (change)="selectFile($event)" multiple></ngx-mat-file-input>
+
+
+              <mat-icon matSuffix>folder</mat-icon>
+
+
+
+
+
+
+            </mat-form-field>
+
+            <mat-form-field class="form-field"  appearance="fill">
+              <mat-label>Service Date: DD-MM-YYYY</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+
+
+
+
+            </mat-form-field>
+
+            <mat-form-field class="form-field"  appearance="fill">
+              <mat-label>Service Hours </mat-label>
+              <input matInput type="number" required formControlName="hours">
+
+
+            </mat-form-field>
+
+            <mat-form-field class="form-field"  appearance="fill">
+              <mat-label>Coast </mat-label>
+              <input matInput type="number" required formControlName="coast">
+
+            </mat-form-field>
+
+            <mat-form-field class="form-field"  appearance="fill" floatLabel="auto">
+              <mat-label>Comment </mat-label>
+              <textarea matInput  formControlName="comment"></textarea>
+
+            </mat-form-field>
+
+            <h2 mat-card-title> Personal Details</h2>
+
+            <mat-form-field class="form-field" appearance="fill">
+              <mat-label>Company</mat-label>
+              <input matInput type="text" required formControlName="company">
+            </mat-form-field>
+
+            <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+              <mat-label>First Name</mat-label>
+
+              <input matInput required type="text" formControlName="fName" >
+
+
+            </mat-form-field>
+
+            <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+              <mat-label>Last Name</mat-label>
+              <input matInput required type="text" placeholder="L Name" formControlName="lName">
+
+            </mat-form-field>
+
+
+
+
+            <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput required placeholder="you@example.no"  formControlName="Email" >
+              <mat-error *ngIf="Email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+              <mat-label>Phone Number: </mat-label>
+              <input type="tel" matInput required formControlName="phone" >
+
+            </mat-form-field>
+
+          </form>
+
+
+              <div class="row">
+                  <div class="col">
+                    <button  mat-button  mat-raised-button [disabled]="!registerForm.valid"  color="primary" (click)="upload()" mat-ripple> Submit</button>
+
+                  </div>
+                  <div class="col">
+                    <button mat-button  mat-raised-button color="basic" (click)="onBackSubmit()"> Back</button>
+                  </div>
+
+              </div>
+
+
+
+
+
+
+        </div>
       </div>
-
-      <div class="col-sm-4">
-
-        <input type="file" id="fileUpload" multiple = "multiple" accept = "application/pdf, image/jpeg, image/png" (change)="selectFile($event) ">
-
-
-      </div>
-
     </div>
-
-    <hr>
-
-    <div class="row row-2">
-      <div class="col-sm-3">
-        <p> Service Date: </p>
-      </div>
-      <div class="col-sm-3">
-        <input (input)="onUpdateDate($event)"type="date" formControlName="date" [ngClass]="{'form-submitted': formSubmitted}" required />
-
-      </div>
-
-    </div>
-
-    <hr>
-
-    <div class="row row-3">
-      <div class="col-sm-3">
-        <p> Hours: </p>
-      </div>
-      <div class="col-sm-3 ">
-        <input (input) = "onUpdateHours($event)" type="number" placeholder="Hours" formControlName="hours" [ngClass]="{'form-submitted': formSubmitted}" required />
-        <p>{{hours}}</p>
-      </div>
-
-      <div class="col-sm-3 ">
-        <p style="color: red">* </p>
-      </div>
-
-    </div>
-
-    <hr>
-
-    <div class="row row-4">
-      <div class="col-sm-3">
-        <p> Coast: </p>
-      </div>
-      <div class="col-sm-3 ">
-        <input (input) = "onUpdateCoast($event)"  type="number" placeholder="Coast" formControlName="coast" [ngClass]="{'form-submitted': formSubmitted}" required />
-      </div>
-
-      <div class="col-sm-3 ">
-        <p style="color: red">* </p>
-      </div>
-
-    </div>
-
-
-    <hr>
-
-    <div class="row row-5">
-    <div class="col-sm-3">
-      <p> Comment: </p>
-    </div>
-    <div class="col-sm-3 ">
-      <input (input)="onUpdateComment($event)" class="comment" type="text" placeholder="Write your comment here"  />
-    </div>
-
-
-  </div>
-
-    <hr>
-
-<!--    User details-->
-
-
-    <h3 class="text-center" style="font-size: xx-large">User Details</h3>
-    <hr>
-    <div class="row row-6">
-      <div class="col-sm-3">
-
-        <p> Name: </p>
-      </div>
-      <div class="col-sm-3 ">
-        <input (input) = "onUpdateName($event)"  type="text" placeholder="Name" formControlName="name" [ngClass]="{'form-submitted': formSubmitted}" required />
-      </div>
-
-      <div class="col-sm-3 ">
-        <p style="color: red">* </p>
-      </div>
-
-    </div>
-
-    <hr>
-    <!--    Email: -->
-
-    <div class="row row-7">
-      <div class="col-sm-3">
-        <p> Email: </p>
-      </div>
-      <div class="col-sm-3 ">
-        <input (input) = "onUpdateEmail($event)"  type="email" placeholder="Email" formControlName="email"  [ngClass]="{'form-submitted': formSubmitted}" required />
-      </div>
-
-      <div class="col-sm-3 ">
-        <p style="color: red">* </p>
-      </div>
-
-    </div>
-
-    <hr>
-
-    <!-- Bedrift -->
-
-    <div class="row row-7">
-      <div class="col-sm-3">
-        <p> Company: </p>
-      </div>
-      <div class="col-sm-3 ">
-        <input (input) = "onUpdateCompany($event)"  type="text" placeholder="Company"  />
-      </div>
-
-
-  </div>
-    <hr>
-
-    <!-- Tlf nr -->
-
-    <div class="row row-7">
-      <div class="col-sm-3">
-        <p> Telephone number: </p>
-      </div>
-      <div class="col-sm-3 ">
-        <input (input) = "onUpdatePhone($event)"  type="tel" placeholder="tlf number" formControlName="phone" [ngClass]="{'form-submitted': formSubmitted}" required />
-      </div>
-
-      <div class="col-sm-3 ">
-        <p style="color: red">* </p>
-      </div>
-
-    </div>
-
-
-
-
-
-
-
-
-
-    <hr class="last-hr">
-    <!--    Submit    -->
-
-
-
-    <div class="row row-last">
-      <div class="col-sm-4">
-         <button class="btn btn-primary btn-submit" type="submit" [disabled]="!form.valid" role="button"  (click)="upload()" >Submit</button>
-
-      </div>
-      <div class="col-sm-4 btn-back">
-        <button class="btn btn-link btn-back" role="button" (click)="onBackSubmit() ">Back</button>
-      </div>
-    </div>
-
-
-  </div>
-
-</form>
 
 
 

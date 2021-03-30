@@ -37,6 +37,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from '@angular/material/core';
 import { TestComponent } from './test/test.component';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {MaterialFileInputModule} from "ngx-material-file-input";
 
 
 
@@ -81,6 +83,8 @@ import { TestComponent } from './test/test.component';
         ReactiveFormsModule,
         MatDatepickerModule,
         MatNativeDateModule,
+        FlexLayoutModule,
+        MaterialFileInputModule,
 
 
     ],
