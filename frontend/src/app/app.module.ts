@@ -26,12 +26,15 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCardModule} from '@angular/material/card';
-import {MatRippleModule} from '@angular/material/core';
 import {Checkpoint} from './asset/checkPoint';
 import { FallBackComponent } from './fall-back/fall-back.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDialogModule} from '@angular/material/dialog';
-
+import { PersonalDataComponent } from './tcr/personal-data/personal-data.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
+import {FlexLayoutModule} from '@angular/flex-layout';
 
 
 @NgModule({
@@ -46,6 +49,7 @@ import {MatDialogModule} from '@angular/material/dialog';
     ServiceComponent,
     InspectionComponent,
     TcrComponent,
+    PersonalDataComponent,
     FallBackComponent,
     DialogWindowComponent,
   ],
@@ -65,7 +69,12 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatRippleModule,
     MatIconModule,
     MatDialogModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FlexLayoutModule
+
   ],
   providers: [VehiclesService,
     {
