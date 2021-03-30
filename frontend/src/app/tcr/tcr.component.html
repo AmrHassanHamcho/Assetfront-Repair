@@ -1,4 +1,5 @@
 <div *ngIf="onSuccessfullSearch()">
+  <mat-card>
   <mat-accordion >
     <div *ngFor=" let item of ttrCopy.tcr; let indexTcr = index;">
       <mat-expansion-panel>
@@ -34,4 +35,10 @@
       </mat-expansion-panel>
     </div>
   </mat-accordion>
+    <mat-card-actions fxLayoutAlign="space-between center end" >
+      <div >
+  <button mat-button mat-flat-button (click)="personData()" color="primary">  Next >> </button>
+</div>
+    </mat-card-actions>
+  </mat-card>
 </div>
