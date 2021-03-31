@@ -35,6 +35,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 @NgModule({
@@ -73,7 +74,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatToolbarModule
 
   ],
   providers: [VehiclesService,

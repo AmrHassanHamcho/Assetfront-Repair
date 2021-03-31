@@ -1,4 +1,5 @@
 <div *ngIf="onSuccessfullSearch()">
+  <form [formGroup]="registerForm" #ngForm="ngForm" class="form-container">
   <mat-card>
   <mat-accordion >
     <div *ngFor=" let item of ttrCopy.tcr; let indexTcr = index;">
@@ -10,35 +11,39 @@
           <ng-template matExpansionPanelContent>
             <h1 *ngFor="let checkp of ttrCopy.tcr[indexTcr].checkpoint; let indexCp = index">
               <mat-card class="card" id="card">
+
                 <mat-card-content>
                   <h1 id="subTitle">{{ttrCopy.tcr[indexTcr].checkpoint[indexCp].name }}
-                    <p id="required" style="color: red">{{'*'}}</p>
+                   <p id="required" style="color: red">{{'*'}}</p>
                   </h1>
                   <h2 *ngFor="let op of ttrCopy.tcr[indexTcr].checkpoint[indexCp].options; let value = index" class="value">
                     <div class="row">
                       <div class="col-lg-1">
-                        <mat-radio-button value="value" name="{{ttrCopy.tcr[indexTcr].checkpoint[indexCp].name}}" labelPosition="after" (change)="updateValue(value,indexTcr,indexCp)" color="primary">
-                          {{ttrCopy.tcr[indexTcr].checkpoint[indexCp].options[value].value}}
-                        </mat-radio-button>
-                      </div>
-                      {{printHeleArray()}}
-                      <div class="col-lg-7">
-                        {{ttrCopy.tcr[indexTcr].checkpoint[indexCp].options[value].description}}
-                      </div>
-                    </div>
-                  </h2>
-                </mat-card-content>
-              </mat-card>
-            </h1>
-          </ng-template>
-        </mat-expansion-panel-header>
-      </mat-expansion-panel>
-    </div>
-  </mat-accordion>
-    <mat-card-actions fxLayoutAlign="space-between center end" >
-      <div >
-  <button mat-button mat-flat-button (click)="personData()" color="primary">  Next >> </button>
+                       <mat-radio-group required name="{{ttrCopy.tcr[indexTcr].checkpoint[indexCp].name}}">
+                            <mat-radio-button value="value"  labelPosition="after" (change)="updateValue(value,indexTcr,indexCp)" color="primary">
+                    {{ttrCopy.tcr[indexTcr].checkpoint[indexCp].options[value].value}}
+                          </mat-radio-button>
+                  </mat-radio-group>
+                </div>
+                {{printHeleArray()}}
+                <div class="col-lg-7">
+                  {{ttrCopy.tcr[indexTcr].checkpoint[indexCp].options[value].description}}
+                </div>
+              </div>
+            </h2>
+          </mat-card-content>
+        </mat-card>
+      </h1>
+    </ng-template>
+  </mat-expansion-panel-header>
+</mat-expansion-panel>
 </div>
-    </mat-card-actions>
-  </mat-card>
+</mat-accordion>
+<mat-card-actions fxLayoutAlign="space-between even end" >
+<div >
+<button mat-button mat-flat-button [disabled]="!allSelected" (click)="personData()" color="primary" >  Next >> </button>
+</div>
+</mat-card-actions>
+</mat-card>
+</form>
 </div>

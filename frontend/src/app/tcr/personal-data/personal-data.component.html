@@ -1,9 +1,15 @@
 <div *ngIf="requset.successfulRequest && requset.assetDetails.length>0">
 
   <mat-card  fxLayoutAlign="space-between center end " fxLayout="column">
-        <mat-card-title > Filled By </mat-card-title>
-        <div>
+          <div>
           <mat-card>
+           <!-- <mat-toolbar>
+              <span class="fill-remaining-space"></span>
+              <span>Personal Details</span>
+              <span class="fill-remaining-space"></span>
+
+            </mat-toolbar>-->
+            <mat-card-title style="align-self: center; color: grey" >Personal Detail</mat-card-title>
             <mat-card-content fxLayoutAlign="space-between center end">
               <form [formGroup]="registerForm" (submit)="registerForm">
 

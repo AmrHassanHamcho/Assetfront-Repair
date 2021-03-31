@@ -32,12 +32,7 @@ export class PersonalDataComponent implements OnInit {
     date: [''],
   });
 
- /* submitForm() {
-return this.registerForm;
-  }*/
-  color = 'Green';
-
-  ngOnInit(): void {
+   ngOnInit(): void {
   }
 
   upload() {
