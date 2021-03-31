@@ -1,48 +1,46 @@
-<header >
-  <div class="container-1">
-    <nav class="navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav navbar-dark">
-      <a class="navbar-brand" [routerLink]="['/search']"><img src="../../assets/images/Logo.png" alt="logo"></a>
-      <button class="navbar-toggler" type="button" (click)="toggleNavbar()" data-toggle="collapse"
-              data-target=".navbar1and2" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbar-1" [ngClass]="{ 'show': navbarOpen }">
-          <ul class="navbar-nav" id="#nav-2">
-            <li class="nav-item d-flex p-2">
-              <a class="nav-link" [routerLink]="['/search']"> Search <span class="sr-only">(current)</span> </a>
-            </li>
-            <li class="nav-item d-flex p-2">
-              <a class="nav-link" [routerLink]="['/about']"> About Repair <span class="sr-only">(current)</span> </a>
-            </li>
-            <li class="nav-item d-flex p-2">
-              <a class="nav-link" [routerLink]="['/contactUs']"> Contact us <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item d-flex p-2" id="myAccount">
-              <a class="nav-link" href="#"> My Account <span class="sr-only">(current)</span></a>
-            </li>
-          </ul>
-        </div>
-    </nav>
+<nav class="navbar navbar-expand-md navbar-dark" id="navigation">
+  <a class="img-responsive navbar-brand " [routerLink]="['/search']" (click)="displayFalse()">
+    <img src="../../assets/images/Logo.png" alt="logo" id="logo">
+  </a>
+  <div class="navbar-toggler-right">
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbar"
+      aria-controls="navbarToggler"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
   </div>
 
-  <div *ngIf="display()" class="container-2">
-    <nav class="navbar second-navbar fixed-top navbar-toggleable-md navbar-expand-lg scrolling-navbar double-nav navbar-dark" id="second-navbar">
-      <div class="collapse navbar-collapse .navbar1and2" id="navbar-2" [ngClass]="{ 'show': navbarOpen }">
-        <ul class="navbar-nav">
-          <li class="nav-item d-flex p-2">
-            <a class="nav-link" [routerLink]="['/home']"> Home <span class="sr-only">(current)</span> </a>
-          </li>
-          <li class="nav-item d-flex p-2">
-            <a class="nav-link" [routerLink]="['/tcr']"> TCR <span class="sr-only">(current)</span> </a>
-          </li>
-          <li class="nav-item d-flex p-2">
-            <a class="nav-link" [routerLink]="['/inspection']"> Inspection <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item d-flex p-2">
-            <a class="nav-link" [routerLink]="['/service']"> Service <span class="sr-only">(current)</span></a>
-          </li>
-        </ul>
-      </div>
-    </nav>
+  <div class="collapse navbar-collapse flex-column " id="navbar">
+    <ul class="navbar-nav w-100 px-3" id="navbar-row-1">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/search']" (click)="displayFalse()">Search<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/about']">About Repair<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/contactUs']">Contact Repair<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
+
+    <ul *ngIf="display()" class="navbar-nav w-100 px-3 bg-secondary" id="navbar-row-2">
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/home']">Home<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/tcr']">TCR <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/inspection']">Inspection<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item" routerLinkActive="active">
+        <a class="nav-link" [routerLink]="['/service']">Service<span class="sr-only">(current)</span></a>
+      </li>
+    </ul>
   </div>
-</header>
+</nav>

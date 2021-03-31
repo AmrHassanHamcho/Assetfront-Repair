@@ -10,25 +10,16 @@ import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {Router} from "@angular/router";
 import {Inject} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-
-@Component({
-  selector: 'app-service',
-  templateUrl: 'dialog-content-dialog.html',
-  styleUrls: ['./dialog-content-dialog.scss'],
-//  providers: [ServiceComponent],
-})
+import {InputDataTransferService} from "../ inputDataTransfer/input-data-transfer.service";
+import {daLocale} from "ngx-bootstrap/chronos";
 
 
-export class DialogContentExampleDialog {
-  constructor( public service: ServiceComponent ) {
-  }
-}
 
 @Component({
   selector: 'app-service',
   templateUrl: './service.component.html',
   styleUrls: ['./service.component.scss'],
-  providers: [DialogContentExampleDialog],
+
 
 })
 export class ServiceComponent implements OnInit {
@@ -53,7 +44,7 @@ export class ServiceComponent implements OnInit {
     company: [''],
     phone: [''],
     coast: [''],
-    filesControl: [''],
+
   });
 
 
@@ -61,6 +52,8 @@ export class ServiceComponent implements OnInit {
 
   private files: any;
   private counter = 0;
+
+
   constructor(
 
     private http:HttpClient,
@@ -68,12 +61,18 @@ export class ServiceComponent implements OnInit {
     private apiRequest: ApiRequestService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
-    private router : Router){ }
+    private router : Router,
+    public idt : InputDataTransferService
+    ){
+
+  }
 
 
   ngOnInit(): void {
    // this.buildForm();
   }
+
+
 
 
   getErrorMessage(){
@@ -138,33 +137,22 @@ export class ServiceComponent implements OnInit {
 
   }
 
-  // buildForm() {
-  //   this.form = this.formBuilder.group({
-  //     hours: [null, [Validators.required]],
-  //     coast: [null, [Validators.required]],
-  //     date: [null, [Validators.required]],
-  //     name: [null, [Validators.required]],
-  //     email: [null, [Validators.required]],
-  //     phone: [null, [Validators.required]],
-  //
-  //
-  //   });
-  // }
-
-  // onSubmit(event) {
-  //   event.preventDefault();
-  //   this.formSubmitted = true;
-  //
-  //   if (this.form.valid) {
-  //     console.log(this.form.value); // Process your form
-  //   }
-  // }
-
   onRouteSubmit() {
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
+
+    //////Send data over////
+    this.idt.date = this.registerForm.value.date.toLocaleDateString();
+    this.idt.hours= this.registerForm.value.hours;
+    this.idt.coast= this.registerForm.value.coast;
+    this.idt.comment = this.registerForm.value.comment;
+    this.idt.company = this.registerForm.value.company;
+    this.idt.fName = this.registerForm.value.fName;
+    this.idt.lName = this.registerForm.value.lName;
+    this.idt.Email = this.registerForm.value.Email;
+    this.idt.phone= this.registerForm.value.phone;
 
   }
 
@@ -174,4 +162,21 @@ export class ServiceComponent implements OnInit {
   }
 }
 
+////////////////////////////////////////////DIALOG
 
+@Component({
+  selector: 'app-service',
+  templateUrl: 'dialog-content-dialog.html',
+  styleUrls: ['./dialog-content-dialog.scss'],
+//  providers: [ServiceComponent],
+})
+
+
+export class DialogContentExampleDialog {
+  constructor( public service: ServiceComponent,
+               public idf: InputDataTransferService) {
+  }
+
+
+
+}

@@ -1,0 +1,52 @@
+<div *ngIf="requset.successfulRequest && requset.assetDetails.length>0">
+
+  <mat-card  fxLayoutAlign="space-between center end " fxLayout="column">
+        <mat-card-title > Filled By </mat-card-title>
+        <div>
+          <mat-card>
+            <mat-card-content fxLayoutAlign="space-between center end">
+              <form [formGroup]="registerForm" (submit)="registerForm">
+
+              <mat-form-field class="form-field" appearance="fill">
+                <mat-label>Workshop</mat-label>
+                <input matInput type="text" required formControlName="workshop">
+              </mat-form-field>
+
+            <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+              <mat-label>First Name</mat-label>
+              <input matInput required type="text" formControlName="fName" >
+            </mat-form-field>
+
+            <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+              <mat-label>Last Name</mat-label>
+              <input matInput required type="text" placeholder="L Name" formControlName="lName">
+            </mat-form-field>
+
+
+            <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput required placeholder="you@example.no"  formControlName="email" >
+              <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="form-field"  appearance="fill">
+              <mat-label>DD-MM-YYYY</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+
+            </mat-form-field>
+              </form>
+
+      </mat-card-content>
+      </mat-card>
+        <mat-card-actions >
+          <div  fxLayoutAlign="space-between even end" fxLayout="row" class="mat-button">
+            <button class="back" mat-button  mat-raised-button  (click)="BackToTcr()"> << Back</button>
+            <button mat-button class="submit"  mat-raised-button color="primary" [disabled]="!registerForm.valid"  (click)="upload()" mat-ripple> Submit</button>
+          </div>
+        </mat-card-actions>
+        </div>
+    </mat-card>
+
+</div>

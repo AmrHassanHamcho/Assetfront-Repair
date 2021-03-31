@@ -13,7 +13,7 @@ import { AboutComponent } from './header/about/about.component';
 import { ContactUsComponent } from './header/contact-us/contact-us.component';
 import { HomeComponent } from './home/home.component';
 import {DialogContentExampleDialog, ServiceComponent} from './service/service.component';
-import { InspectionComponent } from './inspection/inspection.component';
+import {DialogInspectionComponent, InspectionComponent} from './inspection/inspection.component';
 import { DialogWindowComponent } from './search/dialog-window/dialog-window.component';
 import {MatMenuModule} from '@angular/material/menu';
 
@@ -26,7 +26,6 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
 import {MatCardModule} from '@angular/material/card';
-import {MatRippleModule} from '@angular/material/core';
 import {Checkpoint} from './asset/checkPoint';
 import { FallBackComponent } from './fall-back/fall-back.component';
 import {MatIconModule} from '@angular/material/icon';
@@ -35,13 +34,11 @@ import {MatInputModule} from "@angular/material/input";
 
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatNativeDateModule} from '@angular/material/core';
+import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import { TestComponent } from './test/test.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialFileInputModule} from "ngx-material-file-input";
-
-
-
+import { PersonalDataComponent } from './tcr/personal-data/personal-data.component';
 
 
 @NgModule({
@@ -59,7 +56,10 @@ import {MaterialFileInputModule} from "ngx-material-file-input";
     FallBackComponent,
     DialogWindowComponent,
     TestComponent,
-    DialogContentExampleDialog
+    DialogContentExampleDialog,
+    PersonalDataComponent,
+    DialogInspectionComponent,
+
   ],
     imports: [
         BrowserModule,
@@ -88,13 +88,16 @@ import {MaterialFileInputModule} from "ngx-material-file-input";
 
 
     ],
+
+
   providers: [VehiclesService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AppHttpInterceptor,
       multi: true
     },
-    ServiceComponent
+    ServiceComponent,
+    InspectionComponent
   ],
   bootstrap: [AppComponent],
   entryComponents: [DialogWindowComponent],

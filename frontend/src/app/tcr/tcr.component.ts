@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiRequestService} from '../API-request/api-request.service';
+import {PersonalDataComponent} from './personal-data/personal-data.component';
+import {Router} from '@angular/router';
+import {TcrService} from './tcr.service';
 
 @Component({
   selector: 'app-tcr',
@@ -9,46 +12,62 @@ import {ApiRequestService} from '../API-request/api-request.service';
 export class TcrComponent implements OnInit {
   private i = 0;
   color: 'lightblue';
-  val = [1, 1, 1];
-  test = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 14];
-  test2 = [1, 2, 3];
+  private allSelected = false;
+  constructor(public request: ApiRequestService,
+              private router: Router,
+              public tcr: TcrService) {
+  }
+
   searchedSerialNo: boolean;
   ttrCopy = this.request.getAssetDetails()[0];
-  x: number;
-  constructor(public request: ApiRequestService) {
-  }
+  // logToconsole(indexTcr: number, indexCp: number){
+  // console.log(this.ttrCopy.tcr[indexTcr].checkpoint[indexCp].value);
+  // }
+  tests = [];
 
   ngOnInit(): void {
   }
-  onSuccessfulSearch(): boolean {
-    if (this.ttrCopy === undefined){
+
+  onSuccessfullSearch(): boolean {
+    if (this.ttrCopy === undefined) {
       this.searchedSerialNo = false;
       return this.searchedSerialNo;
 
-    }else
-    {
+    } else {
       this.searchedSerialNo = true;
       return this.searchedSerialNo;
 
     }
   }
-  
-  updateValue(value: number, indexTcr: number, indexCp: number){
-      this.ttrCopy.tcr[indexTcr].checkpoint[indexCp].value = value;
-      this.x = this.ttrCopy.tcr[indexTcr].checkpoint[indexCp].value;
-      return this.x;
+
+  updateValue(value: number, indexTcr: number, indexCp: number) {
+    this.ttrCopy.tcr[indexTcr].checkpoint[indexCp].value = value;
+    return this.ttrCopy.tcr[indexTcr].checkpoint[indexCp].value;
   }
-  logToconsole(indexTcr: number, indexCp: number){
-    console.log(this.ttrCopy.tcr[indexTcr].checkpoint[indexCp].value);
+
+  printHeleArray() {
+    // console.log(this.ttrCopy);
+    this.tcr.setTcr(this.ttrCopy);
   }
-  getNewValue(){
-    for (let i = 0; i < this.ttrCopy.tcr.length; i++){
-    return this.ttrCopy.tcr[i].checkpoint[0].value;
+
+  personData() {
+    // if (this.allFilled())  {
+      this.router.navigate(['/tcr/personal-data']);
+    // }
+  }
+
+  allFilled() {
+    for (const tcr of this.ttrCopy.tcr) {
+      for (const cp of tcr.checkpoint) {
+        if (cp.value > 0) {
+          this.tests.push(true);
+        } else {
+          this.tests.push(false);
+        }
+      }
     }
-  }
-  printHeleArray(){
- console.log(this.ttrCopy);
+    this.allSelected = this.tests.every(v => v === false);
+    return this.allSelected;
   }
 }
-
 

@@ -82,122 +82,92 @@
 
 <!--</div>-->
 
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
 
-<mat-card>
-
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12">
-
-        <form  [formGroup]="registerForm" (submit)="registerForm">
+      <form  [formGroup]="registerForm" (submit)="registerForm">
 
 
-          <!--   <input  type="file" id="fileUpload" multiple ="multiple" accept = "application/pdf, image/jpeg, image/png" (change)="selectFile($event) ">-->
-
-          <mat-form-field class="form-field"  appearance="fill">
-            <mat-label>Please Upload files here (PDF, PNG, JPEG only)</mat-label>
-            <ngx-mat-file-input [accept]="'.pdf, .jpeg, .png'" (change)="selectFile($event)" multiple></ngx-mat-file-input>
+        <mat-form-field class="form-field"  appearance="fill">
+          <mat-label>Please Upload files here (PDF, PNG, JPEG only)</mat-label>
+          <ngx-mat-file-input  [accept]="'.pdf, .jpeg, .png'" (change)="selectFile($event)" multiple></ngx-mat-file-input>
 
 
-            <mat-icon matSuffix>folder</mat-icon>
+          <mat-icon matSuffix>folder</mat-icon>
+
+        </mat-form-field>
+
+        <mat-form-field class="form-field"  appearance="fill">
+          <mat-label>Inspection Date: DD-MM-YYYY</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label>Vehicle state</mat-label>
+                  <mat-select formControlName="inspectionStates" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let st of inspectionStates" [value]="st">
+                      {{st.value}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-hint>{{registerForm.value.inspectionStates?.viewValue}}</mat-hint>
+
+        </mat-form-field>
+        <h2 mat-card-title> Personal Details</h2>
+
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label>Company</mat-label>
+          <input matInput type="text" required formControlName="company">
+        </mat-form-field>
+
+        <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+          <mat-label>First Name</mat-label>
+
+          <input matInput required type="text" formControlName="fName" >
 
 
+        </mat-form-field>
 
+        <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput required type="text" placeholder="L Name" formControlName="lName">
 
-
-
-          </mat-form-field>
-
-          <mat-form-field class="form-field"  appearance="fill">
-            <mat-label>Service Date: DD-MM-YYYY</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="date">
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-
-
-
-
-          </mat-form-field>
-
-          <mat-form-field class="form-field"  appearance="fill">
-            <mat-label>Service Hours </mat-label>
-            <input matInput type="number" required formControlName="hours">
-
-
-          </mat-form-field>
-
-          <mat-form-field class="form-field"  appearance="fill">
-            <mat-label>Coast </mat-label>
-            <input matInput type="number" required formControlName="coast">
-
-          </mat-form-field>
-
-          <mat-form-field class="form-field"  appearance="fill" floatLabel="auto">
-            <mat-label>Comment </mat-label>
-            <textarea matInput  formControlName="comment"></textarea>
-
-          </mat-form-field>
-
-          <h2 mat-card-title> Personal Details</h2>
-
-          <mat-form-field class="form-field" appearance="fill">
-            <mat-label>Company</mat-label>
-            <input matInput type="text" required formControlName="company">
-          </mat-form-field>
-
-          <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
-            <mat-label>First Name</mat-label>
-
-            <input matInput required type="text" formControlName="fName" >
-
-
-          </mat-form-field>
-
-          <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
-            <mat-label>Last Name</mat-label>
-            <input matInput required type="text" placeholder="L Name" formControlName="lName">
-
-          </mat-form-field>
+        </mat-form-field>
 
 
 
 
-          <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
-            <mat-label>Email</mat-label>
-            <input matInput required placeholder="you@example.no"  formControlName="Email" >
-            <mat-error *ngIf="Email.invalid">{{getErrorMessage()}}</mat-error>
-          </mat-form-field>
+        <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput required placeholder="you@example.no"  formControlName="Email" >
+          <mat-error *ngIf="Email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
 
 
-          <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
-            <mat-label>Phone Number: </mat-label>
-            <input type="tel" matInput required formControlName="phone" >
+        <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+          <mat-label>Phone Number: </mat-label>
+          <input type="tel" matInput required formControlName="phone" >
 
-          </mat-form-field>
+        </mat-form-field>
 
-        </form>
+      </form>
 
 
-        <!--    </mat-card-content>-->
+      <div class="row">
+        <div class="col">
+          <button  mat-button  mat-raised-button [disabled]="!registerForm.valid"  color="primary" (click)="upload()" mat-ripple> Submit</button>
 
-        <!--      <mat-card-actions >-->
-        <div  class="mat-button">
-          <button mat-button  mat-raised-button color="accent" (click)="onBackSubmit()"> Back</button>
-          <button mat-button  mat-raised-button [disabled]="!registerForm.valid"  color="primary" (click)="upload()" mat-ripple> Submit</button>
         </div>
-        <!--      </mat-card-actions>-->
-
-        <!--  </mat-card>-->
-
-
+        <div class="col">
+          <button mat-button  mat-raised-button color="basic" (click)="onBackSubmit()"> Back</button>
+        </div>
 
       </div>
+
     </div>
   </div>
-</mat-card>
-
-
-
-
-
+</div>
 

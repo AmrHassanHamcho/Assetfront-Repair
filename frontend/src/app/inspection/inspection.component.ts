@@ -3,7 +3,10 @@ import {FileServiceService} from "../fileService/file-service.service";
 import {ApiRequestService} from "../API-request/api-request.service";
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {Router} from "@angular/router";
-import {DialogContentExampleDialog} from "../service/service.component";
+import {DialogContentExampleDialog, ServiceComponent} from "../service/service.component";
+import {MatDialog} from "@angular/material/dialog";
+import validate = WebAssembly.validate;
+import {InputDataTransferService} from "../ inputDataTransfer/input-data-transfer.service";
 
 
 interface InspectionState {
@@ -11,10 +14,6 @@ interface InspectionState {
   viewValue: string;
 }
 
-interface Animal {
-  name: string;
-  sound: string;
-}
 
 @Component({
   selector: 'app-inspection',
@@ -38,28 +37,30 @@ export class InspectionComponent implements OnInit {
   private counter = 0;
   private contentType = '';
   private name = '';
-  private formBuilder: FormBuilder;
 
   Email = new FormControl('', [Validators.required, Validators.email]);
 
 
-  registerForm = this.formBuilder.group({
-    workshop: [''],
-    Email: ['', {
-      validators: [Validators.required, Validators.email],
-    }],
-    fName: [''],
-    lName: [''],
-    date: [''],
-    comment: [''],
-    phone: [''],
-  });
 
 
 
   constructor( public fileService:FileServiceService,
+               private formBuilder : FormBuilder,
                private apiRequest: ApiRequestService,
+               public dialog: MatDialog,
+               public idt : InputDataTransferService,
                private router : Router) { }
+
+  registerForm = this.formBuilder.group({
+    company: [''],
+    Email: ['', { validators: [Validators.required, Validators.email], }],
+    fName: [''],
+    lName: [''],
+    date: [''],
+    phone: [''],
+    inspectionStates: ['',  {validate}],
+
+  });
 
   ngOnInit(): void {
   }
@@ -74,11 +75,6 @@ export class InspectionComponent implements OnInit {
 
 
 
-
-
-
-
-  stateControl = new FormControl('', Validators.required);
   inspectionStates: InspectionState[] = [
     {value: 'Bad', viewValue: 'Bad'},
     {value: 'Good', viewValue: 'Good'},
@@ -138,11 +134,36 @@ export class InspectionComponent implements OnInit {
   }
 
   onRouteSubmit() {
-    // const dialogRef = this.dialog.open(DialogContentExampleDialog);
-    // dialogRef.afterClosed().subscribe(result => {
-    //   console.log(`Dialog result: ${result}`);
-    // });
+      const dialogRef = this.dialog.open(DialogInspectionComponent);
+     dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+
+    //////Send data over////
+    this.idt.date = this.registerForm.value.date.toLocaleDateString();
+    this.idt.inspectionState= this.registerForm.value.inspectionStates?.viewValue;
+
+    this.idt.company = this.registerForm.value.company;
+    this.idt.fName = this.registerForm.value.fName;
+    this.idt.lName = this.registerForm.value.lName;
+    this.idt.Email = this.registerForm.value.Email;
+    this.idt.phone= this.registerForm.value.phone;
 
   }
 
+}
+
+
+@Component({
+  selector: 'app-service',
+  templateUrl: 'dialog-inspection.html',
+  styleUrls: ['./dialog-inspection.scss'],
+//  providers: [ServiceComponent],
+})
+
+
+export class DialogInspectionComponent {
+  constructor( public inspection:  InspectionComponent,
+               public idf: InputDataTransferService) {
+  }
 }
