@@ -173,10 +173,6 @@ export class ServiceComponent implements OnInit {
 
 
 export class DialogContentExampleDialog {
-  constructor( public service: ServiceComponent,
-               public idf: InputDataTransferService) {
+  constructor(public idf: InputDataTransferService) {
   }
-
-
-
 }

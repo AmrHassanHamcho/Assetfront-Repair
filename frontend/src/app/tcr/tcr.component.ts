@@ -66,7 +66,7 @@ export class TcrComponent implements OnInit {
         }
       }
     }
-    this.allSelected = this.tests.every(v => v === false);
+    this.allSelected = this.tests.every(v => v === true);
     return this.allSelected;
   }
 }

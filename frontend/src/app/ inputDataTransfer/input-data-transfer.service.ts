@@ -15,7 +15,6 @@ export class InputDataTransferService {
   company;
   phone;
   coast;
-  filesControl;
   inspectionState;
 
   constructor() { }
