@@ -1,106 +1,109 @@
 
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12">
 
-<div class="container">
-  <div class="row row-1">
-    <div class="col-sm-4">
-      <p> Attach a document or image: </p>
+
+
+          <!--  <mat-card  fxLayoutAlign="space-between center end " fxLayout="column">-->
+
+          <!--    <mat-card-content fxLayoutAlign="space-between center end">-->
+
+
+
+          <form  [formGroup]="registerForm" (submit)="registerForm">
+
+
+            <!--   <input  type="file" id="fileUpload" multiple ="multiple" accept = "application/pdf, image/jpeg, image/png" (change)="selectFile($event) ">-->
+
+            <mat-form-field class="form-field"  appearance="fill">
+              <mat-label>Please Upload files here (PDF, PNG, JPEG only)</mat-label>
+              <ngx-mat-file-input  [accept]="'.pdf, .jpeg, .png'" (change)="selectFile($event)" multiple></ngx-mat-file-input>
+
+
+              <mat-icon matSuffix>folder</mat-icon>
+
+            </mat-form-field>
+
+            <mat-form-field class="form-field"  appearance="fill">
+              <mat-label>Service Date: DD-MM-YYYY</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="date">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <mat-form-field class="form-field"  appearance="fill">
+              <mat-label>Service Hours </mat-label>
+              <input matInput type="number" required formControlName="hours">
+
+            </mat-form-field>
+
+            <mat-form-field class="form-field"  appearance="fill">
+              <mat-label>Coast </mat-label>
+              <input matInput type="number" required formControlName="coast">
+
+            </mat-form-field>
+
+            <mat-form-field class="form-field"  appearance="fill" floatLabel="auto">
+              <mat-label>Comment </mat-label>
+              <textarea matInput  formControlName="comment"></textarea>
+
+            </mat-form-field>
+
+            <h2 mat-card-title> Personal Details</h2>
+
+            <mat-form-field class="form-field" appearance="fill">
+              <mat-label>Company</mat-label>
+              <input matInput type="text" required formControlName="company">
+            </mat-form-field>
+
+            <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+              <mat-label>First Name</mat-label>
+
+              <input matInput required type="text" formControlName="fName" >
+
+
+            </mat-form-field>
+
+            <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+              <mat-label>Last Name</mat-label>
+              <input matInput required type="text" placeholder="L Name" formControlName="lName">
+
+            </mat-form-field>
+
+
+
+
+            <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput required placeholder="you@example.no"  formControlName="Email" >
+              <mat-error *ngIf="Email.invalid">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+              <mat-label>Phone Number: </mat-label>
+              <input type="tel" matInput required formControlName="phone" >
+
+            </mat-form-field>
+
+          </form>
+
+
+              <div class="row">
+                  <div class="col">
+                    <button  mat-button  mat-raised-button [disabled]="!registerForm.valid"  color="primary" (click)="upload()" mat-ripple> Submit</button>
+
+                  </div>
+                  <div class="col">
+                    <button mat-button  mat-raised-button color="basic" (click)="onBackSubmit()"> Back</button>
+                  </div>
+
+              </div>
+
+        </div>
+      </div>
     </div>
-
-    <div class="col-sm-4">
-
-      <input type="file" (change)="onFileSelect($event)">
-
-    </div>
-
-    <div class="col-sm-4">
-      <button class="btn btn-primary btn-add" type="button" (click)="onFileUpload()" >Upload</button>
-    </div>
-
-  </div>
-
-  <hr>
-
-  <div class="row row-2">
-    <div class="col-sm-3">
-      <p> Service Date: </p>
-    </div>
-    <div class="col-sm-3">
-      <input (input)="onUpdateDate($event)" type="date" required />
-    </div>
-    <div class="col-sm-3">
-      <p style="color: red">* </p>
-    </div>
-
-  </div>
-
-  <hr>
-
-  <div class="row row-3">
-    <div class="col-sm-3">
-      <p> Hours: </p>
-    </div>
-    <div class="col-sm-3 ">
-      <input (input) = "onUpdateHours($event)" type="number" placeholder="Hours" required />
-      
-    </div>
-
-    <div class="col-sm-3 ">
-      <p style="color: red">* </p>
-    </div>
-
-  </div>
-
-  <hr>
-
-  <div class="row row-4">
-    <div class="col-sm-3">
-      <p> Coast: </p>
-    </div>
-    <div class="col-sm-3 ">
-      <input (input) = "onUpdateCoast($event)"  type="number" placeholder="Cost (nok)" required />
-    </div>
-
-    <div class="col-sm-3 ">
-      <p style="color: red">* </p>
-    </div>
-
-  </div>
-
-
-  <hr>
-
-  <div class="row row-5">
-    <div class="col-sm-3">
-      <p> Comment: </p>
-    </div>
-    <div class="col-sm-3 ">
-      <input (input)="onUpdateComment($event)" class="comment" type="text" placeholder="Write your comment here"  />
-    </div>
-
-
-  </div>
-
-  <hr class="last-hr">
-
-  <div class="row row-6">
-    <div class="col-sm-4">
-      <a class="btn btn-primary btn-submit" role="button" href="#">Submit</a>
-    </div>
-    <div class="col-sm-4 btn-back">
-      <a class="btn btn-link btn-back" role="button" href="#">Back</a>
-    </div>
-  </div>
-
-
-</div>
-
-
-
-
-
-
-
-
 
 
 

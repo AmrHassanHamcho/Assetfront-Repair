@@ -10,6 +10,8 @@ import {TcrService} from './tcr.service';
   styleUrls: ['./tcr.component.scss']
 })
 export class TcrComponent implements OnInit {
+  private i = 0;
+  color: 'lightblue';
   private allSelected = false;
   constructor(public request: ApiRequestService,
               private router: Router,
@@ -17,7 +19,6 @@ export class TcrComponent implements OnInit {
   }
 
   searchedSerialNo: boolean;
-  color = 'lightblue';
   ttrCopy = this.request.getAssetDetails()[0];
   // logToconsole(indexTcr: number, indexCp: number){
   // console.log(this.ttrCopy.tcr[indexTcr].checkpoint[indexCp].value);
@@ -65,7 +66,7 @@ export class TcrComponent implements OnInit {
         }
       }
     }
-    this.allSelected = this.tests.every(v => v === false);
+    this.allSelected = this.tests.every(v => v === true);
     return this.allSelected;
   }
 }

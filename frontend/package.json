@@ -26,6 +26,7 @@
     "install": "^0.13.0",
     "jquery": "^3.5.1",
     "ngx-bootstrap": "^6.2.0",
+    "ngx-material-file-input": "^2.1.1",
     "npm": "^7.7.5",
     "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
