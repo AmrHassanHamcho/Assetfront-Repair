@@ -16,6 +16,7 @@ export class PersonalDataComponent implements OnInit {
               private router: Router,
               private formBuilder: FormBuilder) {
   }
+
   picker: Date;
   lName: string;
   fName: string;
@@ -32,11 +33,12 @@ export class PersonalDataComponent implements OnInit {
     date: [''],
   });
 
-   ngOnInit(): void {
+  ngOnInit(): void {
   }
 
   upload() {
     const test = this.registerForm.value;
+    // (test.workshop, test.fName + ' ' + test.lName, test.date)
     console.log('First Name: ' + test.fName);
     console.log('Last Name: ' + test.lName);
     console.log('workshop Name: ' + test.workshop);
