@@ -36,6 +36,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MatToolbarModule} from '@angular/material/toolbar';
+import {CollapseModule} from 'ngx-bootstrap/collapse';
 
 
 @NgModule({
@@ -75,7 +76,8 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatDatepickerModule,
     MatNativeDateModule,
     FlexLayoutModule,
-    MatToolbarModule
+    MatToolbarModule,
+    CollapseModule
 
   ],
   providers: [VehiclesService,
