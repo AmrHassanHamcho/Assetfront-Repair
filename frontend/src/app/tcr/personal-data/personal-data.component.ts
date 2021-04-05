@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {PDFService} from '../../PDF/pdf.service';
 @Component({
   selector: 'app-personal-data',
   templateUrl: './personal-data.component.html',
@@ -14,8 +15,10 @@ export class PersonalDataComponent implements OnInit {
   constructor(public requset: ApiRequestService,
               public tcr: TcrService,
               private router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              public pdf: PDFService) {
   }
+  optionHolder = [];
   picker: Date;
   lName: string;
   fName: string;
@@ -80,7 +83,16 @@ return this.registerForm;
     this.router.navigate(['/tcr']);
   }
 
-  createFilledBy(value) {
+  generatePdf() {
+   for( const tcri in this.tcr.getTcr().tcr){
+     for(const cpi in this.tcr.getTcr().tcr[tcri].checkpoint){
+       for (const opi in this.tcr.getTcr().tcr[tcri].checkpoint[cpi].options){
+        // console.log(this.tcr.getTcr().tcr[tcri].checkpoint[cpi].options[opi].description);
+         this.optionHolder[opi] = this.tcr.getTcr().tcr[tcri].checkpoint[cpi].options[opi].description;
+       }
+     }
+   }
+   console.log(this.optionHolder);
   }
 
   getErrorMessage() {
