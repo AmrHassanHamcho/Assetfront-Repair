@@ -33,9 +33,14 @@
   <h3>Tlf number</h3>
   <p>{{idf.phone}}</p>
 
+  <ngx-qrcode id="qrcode"  [ngStyle]="{'display': 'none'}"
+              [elementType]="idf.elementType"
+              [errorCorrectionLevel]="idf.correctionLevel"
+              [value]="idf.value"
+              cssClass="bshadow"></ngx-qrcode>
 
 </mat-dialog-content>
 <mat-dialog-actions >
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Download as PDF</button>
+  <button mat-button [mat-dialog-close]="true" (click)="idf.callPdfInspection()">Download as PDF</button>
 </mat-dialog-actions>
