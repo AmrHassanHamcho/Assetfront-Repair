@@ -1,0 +1,46 @@
+<h2 mat-dialog-title>The application has been submitted successfully!</h2>
+<mat-dialog-content class="mat-typography">
+  <h3>Inspection Date</h3>
+  <p> {{idf.date}} </p>
+  <hr>
+
+  <h3>Inspection State</h3>
+  <p>{{idf.inspectionState}}</p>
+
+  <hr>
+
+  <h2 mat-dialog-actions> Personal Details</h2>
+
+  <h3>First Name</h3>
+  <p>{{idf.fName}}</p>
+  <hr>
+
+  <h3>Last Name</h3>
+  <p>{{idf.lName}}</p>
+  <hr>
+
+
+  <h3>Email</h3>
+
+  <p>{{idf.Email}}</p>
+  <hr>
+
+  <h3>Company</h3>
+  <p>{{idf.company}}</p>
+  <hr>
+
+
+  <h3>Tlf number</h3>
+  <p>{{idf.phone}}</p>
+
+  <ngx-qrcode id="qrcode"  [ngStyle]="{'display': 'none'}"
+              [elementType]="idf.elementType"
+              [errorCorrectionLevel]="idf.correctionLevel"
+              [value]="idf.value"
+              cssClass="bshadow"></ngx-qrcode>
+
+</mat-dialog-content>
+<mat-dialog-actions >
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" (click)="idf.callPdfInspection()">Download as PDF</button>
+</mat-dialog-actions>

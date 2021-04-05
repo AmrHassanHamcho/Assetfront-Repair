@@ -1,4 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import {FileServiceService} from '../fileService/file-service.service';
+import {ApiRequestService} from '../API-request/api-request.service';
+import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import {Router} from '@angular/router';
+import {DialogContentExampleDialog, ServiceComponent} from '../service/service.component';
+import {MatDialog} from '@angular/material/dialog';
+import validate = WebAssembly.validate;
+import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
+import {PDFService} from '../PDF/pdf.service';
+
 
 interface InspectionState {
   value: string;
@@ -12,50 +22,157 @@ interface InspectionState {
   styleUrls: ['./inspection.component.scss']
 })
 export class InspectionComponent implements OnInit {
+
+
+
+
+
+  constructor( public fileService: FileServiceService,
+               private formBuilder: FormBuilder,
+               private apiRequest: ApiRequestService,
+               public dialog: MatDialog,
+               public idt: InputDataTransferService,
+               public PDF: PDFService,
+               private router: Router) { }
   inspectionStatus = '';
   selectedStatus: string;
   selectedFile: File = null;
-  date = '';
+  fileName = '';
+  extension = '';
 
 
-  constructor() { }
+
+
+  selFiles: FileList;
+
+  private files: any;
+
+  private counter = 0;
+  private contentType = '';
+  private name = '';
+
+  Email = new FormControl('', [Validators.required, Validators.email]);
+
+  registerForm = this.formBuilder.group({
+    company: [''],
+    Email: ['', { validators: [Validators.required, Validators.email], }],
+    fName: [''],
+    lName: [''],
+    date: [''],
+    phone: [''],
+    inspectionStates: ['',  {validate}],
+
+  });
+
+
+
+  inspectionStates: InspectionState[] = [
+    {value: 'Bad', viewValue: 'Bad'},
+    {value: 'Good', viewValue: 'Good'},
+    {value: 'Excellent', viewValue: 'Excellent'}
+
+  ];
 
   ngOnInit(): void {
   }
 
-  onFileSelect(event){
-    console.log(event);
-    this.selectedFile =<File>event.target.files[0];
+  getErrorMessage(){
+    if (this.Email.hasError('required')) {
+      return 'You must enter a value';
+    }
+
+    return this.Email.hasError('email') ? 'Not a valid email' : '';
   }
-  onFileUpload(){
-    const fd = new FormData();
-    fd.append('image', this.selectedFile,this.selectedFile.name);
-    //this.http.post(url,fd) // any backend function that accepts foreign data, in our case AWS url
-    //.subscribe(event=> {
-    // msg to usr
-    // or log to console: console.log(event)
-    //})
 
-
-
-    // in case we want to track the progress of the file upload
-
-    //this.http.post(url,fd, {
-    //  reportProgress: true,
-    //  observe: 'events'
-    //
-    //
-    // })
-  }
-  onUpdateDate(event: Event)
+  ////////////////////////////////////////////
+  selectFile(event)
   {
-    this.date = (<HTMLInputElement>event.target).value;
+    this.selFiles = event.target.files;
+    this.counter = this.selFiles.length;
+
+    for (let index = 0; index < this.counter ; index++){
+      this.fileName =  this.selFiles.item(index).name;
+      this.extension = this.selFiles.item(index).type;
+      console.log(this.extension);
+
+      if ((this.extension !== 'application/pdf' && this.extension !== 'image/png' && this.extension !== 'image/jpeg'))
+      {
+        alert( 'Could not allow to upload' + this.extension);
+        this.selFiles = null;
+        break;
+      }
+
+    }
+    console.log(this.selFiles);
+
+  }
+  upload() {
+
+    if (this.selFiles !== undefined && this.selFiles !== null){
+      let file;
+      let contentType;
+      let name;
+      for (let index = 0 ; index <= this.counter; index ++){
+
+        file = this.selFiles.item(index);
+        contentType = file.type;
+        name = file.name;
+        this.fileService.uploadFile(file, 'Service', this.apiRequest.assetDetails[0].resourceId);
+        this.onRouteSubmit();
+      }
+    }
+    else{
+      alert('No files uploaded!');
+      this.onRouteSubmit();
+    }
+
+
+
+  }
+
+  onBackSubmit(){
+
+    this.router.navigate(['../home']);
+  }
+
+  onRouteSubmit() {
+      const dialogRef = this.dialog.open(DialogInspectionComponent);
+      dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
+
+    ////// Send data over////
+      this.idt.date = this.registerForm.value.date.toLocaleDateString();
+      this.idt.inspectionState = this.registerForm.value.inspectionStates?.viewValue;
+      this.idt.company = this.registerForm.value.company;
+      this.idt.fName = this.registerForm.value.fName;
+      this.idt.lName = this.registerForm.value.lName;
+      this.idt.Email = this.registerForm.value.Email;
+      this.idt.phone = this.registerForm.value.phone;
+
+  }
+
+  public callPDF(){
+    // tslint:disable-next-line:max-line-length
+    this.PDF.Inspection(this.idt.company, this.idt.fName + ' ' + this.idt.lName, this.idt.date, this.idt.inspectionState, this.idt.Email, this.idt.phone);
+  }
+
+}
+
+
+@Component({
+  selector: 'app-service',
+  templateUrl: 'dialog-inspection.html',
+  styleUrls: ['./dialog-inspection.scss'],
+//  providers: [ServiceComponent],
+})
+
+
+export class DialogInspectionComponent {
+  constructor( public idf: InputDataTransferService) {
   }
 
 
-  inspectionStates: InspectionState[] = [
-    {value: 'Good', viewValue: 'Good'},
-    {value: 'Excellent', viewValue: 'Excellent'},
-    {value: 'Bad', viewValue: 'Bad'}
-  ];
+
+
 }

@@ -50,16 +50,18 @@ mat-accordion{
     }
   }
 }
-.mm{
-  background-color: red;
-}
+
 .mat-icon{
   color: darkgreen;
 }
 .mat-button.mat-flat-button{
   align-self: flex-end;
 }
-.btn{
+.btn {
   align-self: flex-end;
 
+
+  .mat-button {
+    vertical-align: middle;
+  }
 }

@@ -1,90 +1,173 @@
 
 
 
+<!--<div class="container">-->
+<!--  <div class="row row-1">-->
+<!--    <div class="col-sm-4">-->
+<!--      <p> Attach a document or image: </p>-->
+<!--    </div>-->
+
+<!--    <div class="col-sm-4">-->
+
+<!--      <input type="file" id="fileUpload" multiple = "multiple" accept = "application/pdf, image/jpeg, image/png" (change)="selectFile($event) ">-->
+
+<!--    </div>-->
+
+<!--    <div class="col-sm-4">-->
+<!--      <button class="btn btn-primary btn-add" type="button" (click)="upload()" >Upload</button>-->
+<!--      <h1 *ngIf="fileService.oneFileUploadSuccess()" style="color: green"> File was Uploaded successfully! </h1>-->
+
+<!--    </div>-->
+
+<!--  </div>-->
+
+<!--  <hr>-->
+
+<!--  <div class="row row-2">-->
+
+<!--    <div class="col-sm-3">-->
+<!--      <p> Inspection Date: </p>-->
+<!--    </div>-->
+
+<!--    <div class="col-sm-3">-->
+<!--      <input (input)="onUpdateDate($event)" type="date" required />-->
+<!--    </div>-->
+
+
+
+<!--  </div>-->
+
+<!--  <hr>-->
+
+<!--  <div class="row row-2">-->
+<!--    <div class="col-sm-3">-->
+<!--      <p> State: </p>-->
+<!--    </div>-->
+<!--    <div class="col-xs-3">-->
+
+
+
+<!--      <mat-form-field appearance="fill">-->
+<!--        <mat-label>Vehicle state</mat-label>-->
+<!--        <mat-select [formControl]="stateControl" required>-->
+<!--          <mat-option>&#45;&#45;</mat-option>-->
+<!--          <mat-option *ngFor="let st of inspectionStates" [value]="st">-->
+<!--            {{st.value}}-->
+<!--          </mat-option>-->
+<!--        </mat-select>-->
+<!--        <mat-error *ngIf="stateControl.hasError('required')">Please choose a status</mat-error>-->
+<!--        <mat-hint>{{stateControl.value?.viewValue}}</mat-hint>-->
+<!--      </mat-form-field>-->
+
+
+<!--    </div>-->
+
+<!--  </div>-->
+
+<!--  <hr class="finalHr">-->
+
+<!--  <div class="row row-6">-->
+<!--    <div class="col-sm-4">-->
+<!--      <a class="btn btn-primary btn-submit" role="button" href="#">Submit</a>-->
+<!--    </div>-->
+<!--    <div class="col-sm-4 btn-back">-->
+<!--      <a class="btn btn-link btn-back" role="button" href="#">Back</a>-->
+<!--    </div>-->
+<!--  </div>-->
+
+
+
+
+
+
+<!--</div>-->
+
 <div class="container">
-  <div class="row row-1">
-    <div class="col-sm-4">
-      <p> Attach a document or image: </p>
-    </div>
+  <div class="row">
+    <div class="col-sm-12">
 
-    <div class="col-sm-4">
+      <form  [formGroup]="registerForm" (submit)="registerForm">
 
-      <input type="file" (change)="onFileSelect($event)">
 
-    </div>
+        <mat-form-field class="form-field"  appearance="fill">
+          <mat-label>Please Upload files here (PDF, PNG, JPEG only)</mat-label>
+          <ngx-mat-file-input  [accept]="'.pdf, .jpeg, .png'" (change)="selectFile($event)" multiple></ngx-mat-file-input>
 
-    <div class="col-sm-4">
-      <button class="btn btn-primary btn-add" type="button" (click)="onFileUpload()" >Upload</button>
-    </div>
 
-  </div>
+          <mat-icon matSuffix>folder</mat-icon>
 
-  <hr>
-
-  <div class="row row-2">
-
-    <div class="col-sm-3">
-      <p> Inspection Date: </p>
-    </div>
-
-    <div class="col-sm-3">
-      <input   (input)="onUpdateDate($event)" type="date" required />
-    </div>
-
-    <div class="col-sm-3">
-      <p style="color: red">*</p>
-    </div>
-
-  </div>
-
-  <hr>
-
-  <div class="row row-2">
-    <div class="col-sm-3">
-      <p> State: </p>
-    </div>
-    <div class="col-xs-3">
-      <form>
-        <h4>Inspection state: </h4>
-        <mat-form-field appearance="fill">
-<!--          <mat-label>Select state (required)</mat-label>-->
-          <select style="height: 30px;width: 180px" matNativeControl [(ngModel)]="selectedStatus" name="state">
-            <option value="" selected></option>
-            <option *ngFor="let is of inspectionStates" [value]="is.value">
-              {{is.viewValue}}
-            </option>
-          </select>
         </mat-form-field>
-<!--        <p> Selected option: {{selectedStatus}} </p>-->
+
+        <mat-form-field class="form-field"  appearance="fill">
+          <mat-label>Inspection Date: DD-MM-YYYY</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label>Vehicle state</mat-label>
+                  <mat-select formControlName="inspectionStates" required>
+                    <mat-option>--</mat-option>
+                    <mat-option *ngFor="let st of inspectionStates" [value]="st">
+                      {{st.value}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-hint>{{registerForm.value.inspectionStates?.viewValue}}</mat-hint>
+
+        </mat-form-field>
+        <h2 mat-card-title> Personal Details</h2>
+
+        <mat-form-field class="form-field" appearance="fill">
+          <mat-label>Company</mat-label>
+          <input matInput type="text" required formControlName="company">
+        </mat-form-field>
+
+        <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+          <mat-label>First Name</mat-label>
+
+          <input matInput required type="text" formControlName="fName" >
+
+
+        </mat-form-field>
+
+        <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+          <mat-label>Last Name</mat-label>
+          <input matInput required type="text" placeholder="L Name" formControlName="lName">
+
+        </mat-form-field>
+
+
+
+
+        <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+          <mat-label>Email</mat-label>
+          <input matInput required placeholder="you@example.no"  formControlName="Email" >
+          <mat-error *ngIf="Email.invalid">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+          <mat-label>Phone Number: </mat-label>
+          <input type="tel" matInput required formControlName="phone" >
+
+        </mat-form-field>
+
       </form>
 
-    </div>
 
-    <div class="col-sm-3">
-      <p style="color: red">* </p>
-    </div>
+      <div class="row">
+        <div class="col">
+          <button  mat-button  mat-raised-button [disabled]="!registerForm.valid"  color="primary" (click)="upload();" mat-ripple> Submit</button>
 
-  </div>
+        </div>
+        <div class="col">
+          <button mat-button  mat-raised-button color="basic" (click)="onBackSubmit()"> Back</button>
+        </div>
 
-  <hr class="finalHr">
+      </div>
 
-  <div class="row row-6">
-    <div class="col-sm-4">
-      <a class="btn btn-primary btn-submit" role="button" href="#">Submit</a>
-    </div>
-    <div class="col-sm-4 btn-back">
-      <a class="btn btn-link btn-back" role="button" href="#">Back</a>
     </div>
   </div>
-
-
-
-
-
-
 </div>
-
-
-
-
 

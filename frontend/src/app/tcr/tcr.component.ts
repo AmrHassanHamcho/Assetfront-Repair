@@ -10,6 +10,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./tcr.component.scss']
 })
 export class TcrComponent implements OnInit,  AfterViewChecked {
+  color: 'lightblue';
   constructor(public request: ApiRequestService,
               private router: Router,
               public tcr: TcrService,
@@ -24,7 +25,6 @@ export class TcrComponent implements OnInit,  AfterViewChecked {
   allSelected = false;
 
   searchedSerialNo: boolean;
-  color = 'lightblue';
   ttrCopy = this.request.getAssetDetails()[0];
 
   tests = [];
@@ -156,10 +156,13 @@ export class TcrComponent implements OnInit,  AfterViewChecked {
         }
       }
     }
+<<<<<<< HEAD
+=======
+    this.allSelected = this.tests.every(v => v === true);
+    return this.allSelected;
+>>>>>>> 03e75d6a7ff00afc8fda17740f0859e02c0923df
   }
 */
-
-
   ngAfterViewChecked(): void { this.changeRef.detectChanges(); }
  /* selected(indextcr: number, indexCp: number) {
     for (let i = 0; i < indextcr; i++){
@@ -197,7 +200,7 @@ export class TcrComponent implements OnInit,  AfterViewChecked {
     this.tests = [];
     for ( let i = 0; i < this.ttrCopy.tcr[tcri].checkpoint.length; i ++){
       this.tests[i] = false;
-          if (this.ttrCopy.tcr[tcri].checkpoint[i].value > -1){
+      if (this.ttrCopy.tcr[tcri].checkpoint[i].value > -1){
             this.tests[i] = true;
           }
    }
