@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {FileServiceService} from "../fileService/file-service.service";
-import {ApiRequestService} from "../API-request/api-request.service";
+import {FileServiceService} from '../fileService/file-service.service';
+import {ApiRequestService} from '../API-request/api-request.service';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
-import {Router} from "@angular/router";
-import {DialogContentExampleDialog, ServiceComponent} from "../service/service.component";
-import {MatDialog} from "@angular/material/dialog";
+import {Router} from '@angular/router';
+import {DialogContentExampleDialog, ServiceComponent} from '../service/service.component';
+import {MatDialog} from '@angular/material/dialog';
 import validate = WebAssembly.validate;
-import {InputDataTransferService} from "../ inputDataTransfer/input-data-transfer.service";
+import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
+import {PDFService} from "../PDF/pdf.service";
 
 
 interface InspectionState {
@@ -21,16 +22,28 @@ interface InspectionState {
   styleUrls: ['./inspection.component.scss']
 })
 export class InspectionComponent implements OnInit {
+
+
+
+
+
+  constructor( public fileService: FileServiceService,
+               private formBuilder: FormBuilder,
+               private apiRequest: ApiRequestService,
+               public dialog: MatDialog,
+               public idt: InputDataTransferService,
+               public PDF: PDFService,
+               private router: Router) { }
   inspectionStatus = '';
   selectedStatus: string;
   selectedFile: File = null;
-  fileName='';
+  fileName = '';
   extension = '';
 
 
 
 
-  selFiles : FileList;
+  selFiles: FileList;
 
   private files: any;
 
@@ -39,17 +52,6 @@ export class InspectionComponent implements OnInit {
   private name = '';
 
   Email = new FormControl('', [Validators.required, Validators.email]);
-
-
-
-
-
-  constructor( public fileService:FileServiceService,
-               private formBuilder : FormBuilder,
-               private apiRequest: ApiRequestService,
-               public dialog: MatDialog,
-               public idt : InputDataTransferService,
-               private router : Router) { }
 
   registerForm = this.formBuilder.group({
     company: [''],
@@ -62,6 +64,15 @@ export class InspectionComponent implements OnInit {
 
   });
 
+
+
+  inspectionStates: InspectionState[] = [
+    {value: 'Bad', viewValue: 'Bad'},
+    {value: 'Good', viewValue: 'Good'},
+    {value: 'Excellent', viewValue: 'Excellent'}
+
+  ];
+
   ngOnInit(): void {
   }
 
@@ -73,29 +84,20 @@ export class InspectionComponent implements OnInit {
     return this.Email.hasError('email') ? 'Not a valid email' : '';
   }
 
-
-
-  inspectionStates: InspectionState[] = [
-    {value: 'Bad', viewValue: 'Bad'},
-    {value: 'Good', viewValue: 'Good'},
-    {value: 'Excellent', viewValue: 'Excellent'}
-
-  ];
-
   ////////////////////////////////////////////
   selectFile(event)
   {
     this.selFiles = event.target.files;
     this.counter = this.selFiles.length;
 
-    for(let index = 0; index < this.counter ; index++){
+    for (let index = 0; index < this.counter ; index++){
       this.fileName =  this.selFiles.item(index).name;
       this.extension = this.selFiles.item(index).type;
       console.log(this.extension);
 
-      if ((this.extension != 'application/pdf' && this.extension != 'image/png' && this.extension != 'image/jpeg'))
+      if ((this.extension !== 'application/pdf' && this.extension !== 'image/png' && this.extension !== 'image/jpeg'))
       {
-        alert("Could not allow to upload " + this.extension);
+        alert( 'Could not allow to upload' + this.extension);
         this.selFiles = null;
         break;
       }
@@ -106,7 +108,7 @@ export class InspectionComponent implements OnInit {
   }
   upload() {
 
-    if(this.selFiles !== undefined && this.selFiles !== null){
+    if (this.selFiles !== undefined && this.selFiles !== null){
       let file;
       let contentType;
       let name;
@@ -120,7 +122,7 @@ export class InspectionComponent implements OnInit {
       }
     }
     else{
-      alert("No files uploaded!");
+      alert('No files uploaded!');
       this.onRouteSubmit();
     }
 
@@ -135,20 +137,24 @@ export class InspectionComponent implements OnInit {
 
   onRouteSubmit() {
       const dialogRef = this.dialog.open(DialogInspectionComponent);
-     dialogRef.afterClosed().subscribe(result => {
+      dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
 
-    //////Send data over////
-    this.idt.date = this.registerForm.value.date.toLocaleDateString();
-    this.idt.inspectionState= this.registerForm.value.inspectionStates?.viewValue;
+    ////// Send data over////
+      this.idt.date = this.registerForm.value.date.toLocaleDateString();
+      this.idt.inspectionState = this.registerForm.value.inspectionStates?.viewValue;
+      this.idt.company = this.registerForm.value.company;
+      this.idt.fName = this.registerForm.value.fName;
+      this.idt.lName = this.registerForm.value.lName;
+      this.idt.Email = this.registerForm.value.Email;
+      this.idt.phone = this.registerForm.value.phone;
 
-    this.idt.company = this.registerForm.value.company;
-    this.idt.fName = this.registerForm.value.fName;
-    this.idt.lName = this.registerForm.value.lName;
-    this.idt.Email = this.registerForm.value.Email;
-    this.idt.phone= this.registerForm.value.phone;
+  }
 
+  public callPDF(){
+    // tslint:disable-next-line:max-line-length
+    this.PDF.Inspection(this.idt.company, this.idt.fName + ' ' + this.idt.lName, this.idt.date, this.idt.inspectionState, this.idt.Email, this.idt.phone);
   }
 
 }
@@ -163,7 +169,10 @@ export class InspectionComponent implements OnInit {
 
 
 export class DialogInspectionComponent {
-  constructor( public inspection:  InspectionComponent,
-               public idf: InputDataTransferService) {
+  constructor( public idf: InputDataTransferService) {
   }
+
+
+
+
 }

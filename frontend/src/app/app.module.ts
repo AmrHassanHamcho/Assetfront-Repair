@@ -30,17 +30,18 @@ import {Checkpoint} from './asset/checkPoint';
 import { FallBackComponent } from './fall-back/fall-back.component';
 import {MatIconModule} from '@angular/material/icon';
 
-import {MatInputModule} from "@angular/material/input";
+import {MatInputModule} from '@angular/material/input';
 
 import {MatDialogModule} from '@angular/material/dialog';
-import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import { TestComponent } from './test/test.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
-import {MaterialFileInputModule} from "ngx-material-file-input";
+import {MaterialFileInputModule} from 'ngx-material-file-input';
 import { PersonalDataComponent } from './tcr/personal-data/personal-data.component';
-
-
+import { QRCodeModule } from 'angular2-qrcode';
+import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
+import {PDFService} from './PDF/pdf.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +60,7 @@ import { PersonalDataComponent } from './tcr/personal-data/personal-data.compone
     DialogContentExampleDialog,
     PersonalDataComponent,
     DialogInspectionComponent,
+
 
   ],
     imports: [
@@ -85,8 +87,8 @@ import { PersonalDataComponent } from './tcr/personal-data/personal-data.compone
         MatNativeDateModule,
         FlexLayoutModule,
         MaterialFileInputModule,
-
-
+        QRCodeModule,
+        NgxQRCodeModule
     ],
 
 
@@ -97,7 +99,8 @@ import { PersonalDataComponent } from './tcr/personal-data/personal-data.compone
       multi: true
     },
     ServiceComponent,
-    InspectionComponent
+    InspectionComponent,
+    PDFService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [DialogWindowComponent],
