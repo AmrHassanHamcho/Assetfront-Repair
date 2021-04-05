@@ -2,14 +2,11 @@ import { Injectable } from '@angular/core';
 import {jsPDF} from 'jspdf'; // will automatically load the node version
 
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
+import {NULL_AS_ANY} from "@angular/compiler-cli/src/ngtsc/typecheck/src/expression";
 @Injectable({
   providedIn: 'root'
 })
 export class PDFService {
-
-
-
-
   private imageData: string;
   constructor() {
     this.ConstPdfStartX = 15;
@@ -139,7 +136,10 @@ export class PDFService {
   }
 
   Service(Company, Name, Date, Hours, Cost, Comment, Email, PhoneNr){
-    this.Reset();
+    this.doc = new jsPDF();
+
+    // this.Reset();
+    this.doc.addImage(this.download(), 'png', 160, 30, 20, 20);
     this.HeaderFooter();
     this.Person(Company, Name, Date, Email, PhoneNr);
 
@@ -149,17 +149,23 @@ export class PDFService {
     this.LongText(Comment);
 
     this.doc.save(this.DateToday('VinNumber'));
+    this.doc = null;
+
     this.Reset();
+
 
   }
 
   Inspection(Company, Name, Date, State, Email, PhoneNR){
+
+    this.doc = new jsPDF();
     this.Reset();
     this.HeaderFooter();
     this.doc.addImage(this.download(), 'png', 160, 30, 20, 20);
     this.Person(Company, Name, Date, Email, PhoneNR);
     this.doc.text('State: ' + State, this.PdfStartX, this.PdfStartY);
     this.doc.save(this.DateToday('Date: '));
+    this.doc = null;
     this.Reset();
   }
 
