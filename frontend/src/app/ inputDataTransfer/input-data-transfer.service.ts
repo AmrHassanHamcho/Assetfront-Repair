@@ -33,4 +33,7 @@ export class InputDataTransferService {
   {
     this.PDF.Service(this.company, this.fName + ' ' + this.lName, this.date, this.hours, this.coast, this.comment, this.Email, this.phone);
   }
+  callPdfTCR(){
+
+  }
 }

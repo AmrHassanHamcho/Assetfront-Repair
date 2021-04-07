@@ -1,5 +1,4 @@
 <div *ngIf="requset.successfulRequest && requset.assetDetails.length>0">
-
   <mat-card  fxLayoutAlign="space-between center end " fxLayout="column">
         <mat-card-title > Filled By </mat-card-title>
         <div>
@@ -43,7 +42,7 @@
         <mat-card-actions >
           <div  fxLayoutAlign="space-between even end" fxLayout="row" class="mat-button">
             <button class="back" mat-button  mat-raised-button  (click)="BackToTcr()"> << Back</button>
-            <button mat-button class="submit"  mat-raised-button color="primary" [disabled]="!registerForm.valid"  (click)="upload()" mat-ripple> Submit</button>
+            <button mat-button class="submit"  mat-raised-button color="primary" (click)="upload(); calltcr()" mat-ripple> Submit</button>
           </div>
         </mat-card-actions>
         </div>

@@ -1,20 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiRequestService} from '../../API-request/api-request.service';
 import {TcrService} from '../tcr.service';
+import {PDFService} from '../../PDF/pdf.service';
 import {Router} from '@angular/router';
 import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediaries/ngx-qrcode';
 @Component({
   selector: 'app-personal-data',
   templateUrl: './personal-data.component.html',
   styleUrls: ['./personal-data.component.scss']
 })
 export class PersonalDataComponent implements OnInit {
+  optionHolder = [];
+  elementType = NgxQrcodeElementTypes.URL;
+  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  value = 'https://assetfront.com';
   constructor(public requset: ApiRequestService,
               public tcr: TcrService,
               private router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              public pdf: PDFService ) {
   }
   picker: Date;
   lName: string;
@@ -80,10 +87,30 @@ return this.registerForm;
     this.router.navigate(['/tcr']);
   }
 
-  createFilledBy(value) {
+  /*allFilled(){
+    for (let tcri = 0; tcri < this.ttrCopy.tcr.length; tcri++){
+      for ( let cpi = 0; cpi < this.ttrCopy.tcr[tcri].checkpoint.length; cpi ++){
+        this.all[cpi] = false;
+        if (this.ttrCopy.tcr[tcri].checkpoint[cpi].value > -1){
+
+        }
+
+      }
+
+    }
+
+  }
+*/
+
+  calltcr() {
+    const person = this.registerForm.value;
+    this.pdf.PlaceForm(this.tcr.getTcr().tcr, person.workshop, person.fName + ': '
+      + person.lName, person.date.toLocaleDateString(), person.email, ' 4554 ' );
+    // (json: any, Company, Name, Date, Email, PhoneNR)
+
   }
 
-  getErrorMessage() {
+  getErrorMessage(){
     if (this.email.hasError('required')) {
       return 'You must enter a value';
     }
