@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import {jsPDF} from 'jspdf'; // will automatically load the node version
 
+
+
 @Injectable({
   providedIn: 'root'
 })
-export class PDFService {
+export class PDFService  {
   private imageData: string;
    optionHolder = [];
 
@@ -92,24 +94,30 @@ export class PDFService {
     this.doc.setFontSize(7);
   }
 
-  PlaceForm(json: any, Company, Name, Date, Email, PhoneNR){
+  PlaceForm(json: any, Company, Name, Date, Email, PhoneNR, VINNumber){
+    this.doc = new jsPDF();
     console.log(json);
     this.Person(Company, Name, Date, Email, PhoneNR);
     this.doc.setFontSize(7);
+    this.doc.setLineWidth(0);
     // this.Rectangle()
     this.PdfStartY += 2.5;
     const xNow = this.FormStartX + 25;
     let CheckpointName = '';
     let tcrName = ' ';
+    let width = 0;
     for (let tcri = 0; tcri < json.length; tcri++){
       tcrName = json[tcri].name;
       this.doc.setFontSize(9);
-      this.doc.text( tcrName + ':' , this.FormStartX - 2 , this.PdfStartY += 4.5);
-      
+      this.doc.text( tcrName , this.FormStartX - 2 , this.PdfStartY += 4.5);
+      width = this.doc.getTextWidth(tcrName);
+      this.doc.setLineWidth(0.2);
+      this.doc.line(this.FormStartX - 2, this.PdfStartY += 1, this.FormStartX + width,  this.PdfStartY);
+      this.doc.setLineWidth(0);
       this.doc.setFontSize(7);
       this.PdfStartY += 3;
       for (let cpi = 0; cpi < json[tcri].checkpoint.length; cpi ++){
-        CheckpointName = json[tcri].checkpoint[cpi].name + ':';
+        CheckpointName = json[tcri].checkpoint[cpi].name ;
         this.doc.text(CheckpointName, this.FormStartX, this.PdfStartY += 4.5);
         this.PdfStartY += 1;
         for (let opi = 0; opi < json[tcri].checkpoint[cpi].options.length; opi ++){
@@ -130,7 +138,7 @@ export class PDFService {
 
     this.HeaderFooter();
 
-    this.doc.save(this.DateToday('VinNumber'));
+    this.doc.save(this.DateToday(VINNumber));
 
     this.Reset();
     this.doc = null;
@@ -160,7 +168,7 @@ export class PDFService {
     this.doc.text(split, this.PdfStartX, this.PdfStartY += 10);
   }
 
-  Service(Company, Name, Date, Hours, Cost, Comment, Email, PhoneNr){
+  Service(Company, Name, Date, Hours, Cost, Comment, Email, PhoneNr, VINNumber){
     this.doc = new jsPDF();
 
     // this.Reset();
@@ -173,7 +181,7 @@ export class PDFService {
 
     this.LongText(Comment);
 
-    this.doc.save(this.DateToday('VinNumber'));
+    this.doc.save(this.DateToday(VINNumber));
     this.doc = null;
 
     this.Reset();
@@ -181,7 +189,7 @@ export class PDFService {
 
   }
 
-  Inspection(Company, Name, Date, State, Email, PhoneNR){
+  Inspection(Company, Name, Date, State, Email, PhoneNR, VINNumber){
 
     this.doc = new jsPDF();
     this.Reset();
@@ -189,7 +197,7 @@ export class PDFService {
     this.doc.addImage(this.download(), 'png', 160, 30, 20, 20);
     this.Person(Company, Name, Date, Email, PhoneNR);
     this.doc.text('State: ' + State, this.PdfStartX, this.PdfStartY);
-    this.doc.save(this.DateToday('Date: '));
+    this.doc.save(this.DateToday(VINNumber));
     this.doc = null;
     this.Reset();
   }

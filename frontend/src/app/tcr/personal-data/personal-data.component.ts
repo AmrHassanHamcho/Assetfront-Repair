@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {VehiclesService} from '../../../vehicle-service/vehicle.service';
 import {ApiRequestService} from '../../API-request/api-request.service';
 import {TcrService} from '../tcr.service';
 import {PDFService} from '../../PDF/pdf.service';
@@ -17,11 +18,12 @@ export class PersonalDataComponent implements OnInit {
   elementType = NgxQrcodeElementTypes.URL;
   correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   value = 'https://assetfront.com';
-  constructor(public requset: ApiRequestService,
-              public tcr: TcrService,
+  constructor(public tcr: TcrService,
               private router: Router,
               private formBuilder: FormBuilder,
-              public pdf: PDFService ) {
+              public pdf: PDFService ,
+              private vehicleservice: VehiclesService,
+              public request: ApiRequestService) {
   }
   picker: Date;
   lName: string;
@@ -105,7 +107,7 @@ return this.registerForm;
   calltcr() {
     const person = this.registerForm.value;
     this.pdf.PlaceForm(this.tcr.getTcr().tcr, person.workshop, person.fName + ': '
-      + person.lName, person.date.toLocaleDateString(), person.email, ' 4554 ' );
+      + person.lName, person.date.toLocaleDateString(), person.email, ' 4554 ', this.vehicleservice.getSerNo());
     // (json: any, Company, Name, Date, Email, PhoneNR)
 
   }

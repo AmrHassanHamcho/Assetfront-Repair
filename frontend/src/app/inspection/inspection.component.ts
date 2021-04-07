@@ -7,7 +7,7 @@ import {DialogContentExampleDialog, ServiceComponent} from '../service/service.c
 import {MatDialog} from '@angular/material/dialog';
 import validate = WebAssembly.validate;
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
-import {PDFService} from "../PDF/pdf.service";
+import {PDFService} from '../PDF/pdf.service';
 
 
 interface InspectionState {
@@ -24,23 +24,20 @@ interface InspectionState {
 export class InspectionComponent implements OnInit {
 
 
+  constructor(public fileService: FileServiceService,
+              private formBuilder: FormBuilder,
+              private apiRequest: ApiRequestService,
+              public dialog: MatDialog,
+              public idt: InputDataTransferService,
+              public PDF: PDFService,
+              private router: Router) {
+  }
 
-
-
-  constructor( public fileService: FileServiceService,
-               private formBuilder: FormBuilder,
-               private apiRequest: ApiRequestService,
-               public dialog: MatDialog,
-               public idt: InputDataTransferService,
-               public PDF: PDFService,
-               private router: Router) { }
   inspectionStatus = '';
   selectedStatus: string;
   selectedFile: File = null;
   fileName = '';
   extension = '';
-
-
 
 
   selFiles: FileList;
@@ -55,15 +52,14 @@ export class InspectionComponent implements OnInit {
 
   registerForm = this.formBuilder.group({
     company: [''],
-    Email: ['', { validators: [Validators.required, Validators.email], }],
+    Email: ['', {validators: [Validators.required, Validators.email]}],
     fName: [''],
     lName: [''],
     date: [''],
     phone: [''],
-    inspectionStates: ['',  {validate}],
+    inspectionStates: ['', {validate}],
 
   });
-
 
 
   inspectionStates: InspectionState[] = [
@@ -76,7 +72,7 @@ export class InspectionComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  getErrorMessage(){
+  getErrorMessage() {
     if (this.Email.hasError('required')) {
       return 'You must enter a value';
     }
@@ -85,19 +81,17 @@ export class InspectionComponent implements OnInit {
   }
 
   ////////////////////////////////////////////
-  selectFile(event)
-  {
+  selectFile(event) {
     this.selFiles = event.target.files;
     this.counter = this.selFiles.length;
 
-    for (let index = 0; index < this.counter ; index++){
-      this.fileName =  this.selFiles.item(index).name;
+    for (let index = 0; index < this.counter; index++) {
+      this.fileName = this.selFiles.item(index).name;
       this.extension = this.selFiles.item(index).type;
       console.log(this.extension);
 
-      if ((this.extension !== 'application/pdf' && this.extension !== 'image/png' && this.extension !== 'image/jpeg'))
-      {
-        alert( 'Could not allow to upload' + this.extension);
+      if ((this.extension !== 'application/pdf' && this.extension !== 'image/png' && this.extension !== 'image/jpeg')) {
+        alert('Could not allow to upload' + this.extension);
         this.selFiles = null;
         break;
       }
@@ -106,13 +100,14 @@ export class InspectionComponent implements OnInit {
     console.log(this.selFiles);
 
   }
+
   upload() {
 
-    if (this.selFiles !== undefined && this.selFiles !== null){
+    if (this.selFiles !== undefined && this.selFiles !== null) {
       let file;
       let contentType;
       let name;
-      for (let index = 0 ; index <= this.counter; index ++){
+      for (let index = 0; index <= this.counter; index++) {
 
         file = this.selFiles.item(index);
         contentType = file.type;
@@ -120,43 +115,45 @@ export class InspectionComponent implements OnInit {
         this.fileService.uploadFile(file, 'Service', this.apiRequest.assetDetails[0].resourceId);
         this.onRouteSubmit();
       }
-    }
-    else{
+    } else {
       alert('No files uploaded!');
       this.onRouteSubmit();
     }
 
 
-
   }
 
-  onBackSubmit(){
+  onBackSubmit() {
 
     this.router.navigate(['../home']);
   }
 
   onRouteSubmit() {
-      const dialogRef = this.dialog.open(DialogInspectionComponent);
-      dialogRef.afterClosed().subscribe(result => {
+    const dialogRef = this.dialog.open(DialogInspectionComponent);
+    dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
 
     ////// Send data over////
-      this.idt.date = this.registerForm.value.date.toLocaleDateString();
-      this.idt.inspectionState = this.registerForm.value.inspectionStates?.viewValue;
-      this.idt.company = this.registerForm.value.company;
-      this.idt.fName = this.registerForm.value.fName;
-      this.idt.lName = this.registerForm.value.lName;
-      this.idt.Email = this.registerForm.value.Email;
-      this.idt.phone = this.registerForm.value.phone;
+    this.idt.date = this.registerForm.value.date.toLocaleDateString();
+    this.idt.inspectionState = this.registerForm.value.inspectionStates?.viewValue;
+    this.idt.company = this.registerForm.value.company;
+    this.idt.fName = this.registerForm.value.fName;
+    this.idt.lName = this.registerForm.value.lName;
+    this.idt.Email = this.registerForm.value.Email;
+    this.idt.phone = this.registerForm.value.phone;
 
   }
 
-  public callPDF(){
+  /*public callPDF() {
     // tslint:disable-next-line:max-line-length
-    this.PDF.Inspection(this.idt.company, this.idt.fName + ' ' + this.idt.lName, this.idt.date, this.idt.inspectionState, this.idt.Email, this.idt.phone);
-  }
+    this.PDF.Inspection(this.idt.company,
+      this.idt.fName + ' ' + this.idt.lName,
+      this.idt.date, this.idt.inspectionState,
+      this.idt.Email, this.idt.phone, ' dsfed ');
 
+
+  }*/
 }
 
 
