@@ -6,6 +6,8 @@ import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {PDFService} from '../../PDF/pdf.service';
+import {MatDialog} from '@angular/material/dialog';
+import {TcrDialogComponent} from '../tcr-dialog/tcr-dialog.component';
 @Component({
   selector: 'app-personal-data',
   templateUrl: './personal-data.component.html',
@@ -16,8 +18,10 @@ export class PersonalDataComponent implements OnInit {
               public tcr: TcrService,
               private router: Router,
               private formBuilder: FormBuilder,
-              public pdf: PDFService) {
+              public pdf: PDFService,
+              public dialog: MatDialog) {
   }
+
   optionHolder = [];
   picker: Date;
   lName: string;
@@ -35,16 +39,12 @@ export class PersonalDataComponent implements OnInit {
     date: [''],
   });
 
- /* submitForm() {
-return this.registerForm;
-  }*/
-  color = 'Green';
-
   ngOnInit(): void {
   }
 
   upload() {
     const test = this.registerForm.value;
+    // (test.workshop, test.fName + ' ' + test.lName, test.date)
     console.log('First Name: ' + test.fName);
     console.log('Last Name: ' + test.lName);
     console.log('workshop Name: ' + test.workshop);
@@ -79,10 +79,9 @@ return this.registerForm;
     });
   }
 
-  BackToTcr() {
+  backToTcr() {
     this.router.navigate(['/tcr']);
   }
-
   generatePdf() {
    for( const tcri in this.tcr.getTcr().tcr){
      for(const cpi in this.tcr.getTcr().tcr[tcri].checkpoint){
@@ -94,7 +93,6 @@ return this.registerForm;
    }
    console.log(this.optionHolder);
   }
-
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'You must enter a value';
@@ -102,4 +100,24 @@ return this.registerForm;
 
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
+
+  success() {
+   const dialogref =  this.dialog.open(TcrDialogComponent);
+   dialogref.afterClosed().subscribe(result => {
+     if (result){
+        this.downloadAsPdf();
+      }else {
+       this.toSearch();
+     }
+   });
+  }
+  downloadAsPdf(){
+    console.log('Downloading PDF...');
+
+  }
+  toSearch() {
+    console.log('to search component...');
+    this.router.navigate(['../search']);
+  }
+
 }
