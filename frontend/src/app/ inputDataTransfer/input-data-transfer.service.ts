@@ -6,6 +6,9 @@ import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediar
 @Injectable({
   providedIn: 'root'
 })
+
+
+
 export class InputDataTransferService{
   workshop;
   Email;
@@ -19,13 +22,9 @@ export class InputDataTransferService{
   coast;
   inspectionState;
   serialNumber;
-
   elementType = NgxQrcodeElementTypes.URL;
   correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
-  value = `Mustafa
-            Abdi
-            Shamil
-            Amr`;
+  value;
 
   constructor( private PDF: PDFService,
                private vehicle: VehiclesService) {}
@@ -56,8 +55,5 @@ export class InputDataTransferService{
       this.Email,
       this.phone,
       this.serialNumber);
-  }
-
-  callPdfTCR(){
   }
 }

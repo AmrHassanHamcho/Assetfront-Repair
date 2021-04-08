@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import {jsPDF} from 'jspdf'; // will automatically load the node version
+import {jsPDF} from 'jspdf';
+import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from "@techiediaries/ngx-qrcode"; // will automatically load the node version
 
 
 
@@ -7,6 +8,7 @@ import {jsPDF} from 'jspdf'; // will automatically load the node version
   providedIn: 'root'
 })
 export class PDFService  {
+
   private imageData: string;
    optionHolder = [];
 
@@ -18,7 +20,6 @@ export class PDFService  {
     this.PdfStartY = 30;
     this.MaxWidth = 175;
     this.MaxHight = 10;
-    this.EndPage = 250;
     this.Page = 1;
     // this.HeaderFooter();
   }
@@ -31,7 +32,6 @@ export class PDFService  {
   private PdfStartY: number;
   private MaxWidth: number;
   private MaxHight: number;
-  private EndPage: number;
   private Page: number;
   doc = new jsPDF();
   private FormStartX: number;
@@ -50,9 +50,8 @@ export class PDFService  {
     this.PdfStartY += 20;
   }
 
-  PageLimit() {
-    if (this.PdfStartY > this.EndPage) {
-
+  PageLimit(PagePixelLim) {
+    if (this.PdfStartY > PagePixelLim) {
       this.HeaderFooter();
       this.PdfStartY = this.ConstPdfStartY;
       this.doc.addPage();
@@ -107,6 +106,7 @@ export class PDFService  {
     let tcrName = ' ';
     let width = 0;
     for (let tcri = 0; tcri < json.length; tcri++){
+      this.PageLimit(230);
       tcrName = json[tcri].name;
       this.doc.setFontSize(9);
       this.doc.text( tcrName , this.FormStartX - 2 , this.PdfStartY += 4.5);
@@ -117,6 +117,7 @@ export class PDFService  {
       this.doc.setFontSize(7);
       this.PdfStartY += 3;
       for (let cpi = 0; cpi < json[tcri].checkpoint.length; cpi ++){
+        this.PageLimit(240);
         CheckpointName = json[tcri].checkpoint[cpi].name ;
         this.doc.text(CheckpointName, this.FormStartX, this.PdfStartY += 4.5);
         this.PdfStartY += 1;
@@ -128,7 +129,7 @@ export class PDFService  {
           } else {
             this.SmallRectangle(false, xNow - 20, this.PdfStartY += 3); // Hollow
             this.doc.text(this.optionHolder[opi], xNow - 7, this.PdfStartY += 3.5);
-            this.PageLimit();
+
           }
         }
         this.PdfStartY += 3;
@@ -170,16 +171,18 @@ export class PDFService  {
 
   Service(Company, Name, Date, Hours, Cost, Comment, Email, PhoneNr, VINNumber){
     this.doc = new jsPDF();
-
     // this.Reset();
-    this.doc.addImage(this.download(), 'png', 160, 30, 20, 20);
+
     this.HeaderFooter();
+    this.doc.setFontSize(12);
     this.Person(Company, Name, Date, Email, PhoneNr);
 
     this.doc.text('Hours: ' + Hours, this.PdfStartX, this.PdfStartY);
     this.doc.text('Cost: ' + Cost, this.PdfStartX, this.PdfStartY += 10);
 
     this.LongText(Comment);
+
+    this.doc.addImage(this.download(), 'png', 140, 30, 30, 30);
 
     this.doc.save(this.DateToday(VINNumber));
     this.doc = null;
@@ -194,6 +197,7 @@ export class PDFService  {
     this.doc = new jsPDF();
     this.Reset();
     this.HeaderFooter();
+    this.doc.setFontSize(12);
     this.doc.addImage(this.download(), 'png', 160, 30, 20, 20);
     this.Person(Company, Name, Date, Email, PhoneNR);
     this.doc.text('State: ' + State, this.PdfStartX, this.PdfStartY);
@@ -210,9 +214,7 @@ export class PDFService  {
     this.PdfStartY = 30;
     this.MaxWidth = 175;
     this.MaxHight = 10;
-    this.EndPage = 250;
   }
-
 }
 
 

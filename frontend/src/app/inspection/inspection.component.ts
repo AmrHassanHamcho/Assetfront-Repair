@@ -143,6 +143,15 @@ export class InspectionComponent implements OnInit {
     this.idt.Email = this.registerForm.value.Email;
     this.idt.phone = this.registerForm.value.phone;
 
+    this.idt.value =
+      `
+    Name: ${this.idt.fName}  ${this.idt.lName}
+    Company: ${this.idt.company}
+    Date: ${this.idt.date}
+    Email: ${this.idt.Email}
+    Phone: ${this.idt.phone}
+    State: ${this.idt.inspectionState}
+    `;
   }
 
   /*public callPDF() {

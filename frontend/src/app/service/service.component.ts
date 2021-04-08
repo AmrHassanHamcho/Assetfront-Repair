@@ -29,6 +29,7 @@ export class ServiceComponent implements OnInit {
   selFiles: FileList;
   fileName = '';
   extension = '';
+  value;
 
 
 
@@ -155,10 +156,19 @@ export class ServiceComponent implements OnInit {
     this.idt.Email = this.registerForm.value.Email;
     this.idt.phone = this.registerForm.value.phone;
 
+    this.idt.value =
+      `
+    Name: ${this.idt.fName}  ${this.idt.lName}
+    Company: ${this.idt.company}
+    Date: ${this.idt.date}
+    Hours: ${this.idt.hours}
+    Cost: ${this.idt.coast}
+    Email: ${this.idt.Email}
+    Phone: ${this.idt.phone}
+    `
   }
 
   onBackSubmit(){
-
     this.router.navigate(['../home']);
   }
 }
