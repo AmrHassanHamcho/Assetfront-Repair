@@ -226,4 +226,8 @@ export class TcrComponent implements OnInit,  AfterViewChecked {
     this.notFilled = notFilled;
 
   }
+
+  toHome() {
+    this.router.navigate(['/home']);
+  }
 }
