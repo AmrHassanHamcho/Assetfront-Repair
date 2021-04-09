@@ -42,6 +42,9 @@ import { PersonalDataComponent } from './tcr/personal-data/personal-data.compone
 import { QRCodeModule } from 'angular2-qrcode';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import {PDFService} from './PDF/pdf.service';
+import {MultiFormatReader, BarcodeFormat} from '@zxing/library';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,7 +91,8 @@ import {PDFService} from './PDF/pdf.service';
         FlexLayoutModule,
         MaterialFileInputModule,
         QRCodeModule,
-        NgxQRCodeModule
+        NgxQRCodeModule,
+        ZXingScannerModule,
     ],
 
 

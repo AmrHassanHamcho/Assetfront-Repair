@@ -5,7 +5,6 @@ import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog
 import {DialogWindowComponent} from './dialog-window/dialog-window.component';
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
 
-
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
