@@ -7,7 +7,7 @@ import {DialogContentExampleDialog, ServiceComponent} from '../service/service.c
 import {MatDialog} from '@angular/material/dialog';
 import validate = WebAssembly.validate;
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
-import {PDFService} from "../PDF/pdf.service";
+import {PDFService} from '../PDF/pdf.service';
 
 
 interface InspectionState {

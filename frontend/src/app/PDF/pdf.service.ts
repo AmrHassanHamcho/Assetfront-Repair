@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {jsPDF} from 'jspdf'; // will automatically load the node version
 
 import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
-import {NULL_AS_ANY} from "@angular/compiler-cli/src/ngtsc/typecheck/src/expression";
+import {NULL_AS_ANY} from '@angular/compiler-cli/src/ngtsc/typecheck/src/expression';
 @Injectable({
   providedIn: 'root'
 })
