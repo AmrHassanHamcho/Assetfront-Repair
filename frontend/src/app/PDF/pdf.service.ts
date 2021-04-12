@@ -109,7 +109,6 @@ export class PDFService  {
     let CheckpointName = '';
     let tcrName = ' ';
     let width = 0;
-
     for (let tcri = 0; tcri < json.length; tcri++){
       this.PageLimit(230);
       tcrName = json[tcri].name;

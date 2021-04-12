@@ -36,10 +36,12 @@ export class SearchComponent implements OnInit {
 
   showDiv(){
     if (!this.ShowHide){
-      this.ShowHide = true;
+    this.ShowHide = true;
     }
     else{
       this.ShowHide = false;
+      // document.getElementById('QR-Window').style.display = 'none';
+      console.log(this.ShowHide);
     }
   }
 
