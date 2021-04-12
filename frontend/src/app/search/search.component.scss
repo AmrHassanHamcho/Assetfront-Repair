@@ -6,12 +6,21 @@
       color: black;
     }
     #label{
+
       font-size: 1.3rem;
-      filter: drop-shadow(2px 4px 8px #131516);
+      filter: drop-shadow(2px 4px 8px #131516)
     }
+
     #errorMessage{
       margin-top: 1rem;
       color: red;
     }
+
+
+  }
+
+  #QR-Button{
+    color: black;
+    background-color: #5A6268;
   }
 }

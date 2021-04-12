@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
-import {jsPDF} from 'jspdf'; // will automatically load the node version
+import {jsPDF} from 'jspdf';
 
-import { NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels } from '@techiediaries/ngx-qrcode';
-import {NULL_AS_ANY} from '@angular/compiler-cli/src/ngtsc/typecheck/src/expression';
 @Injectable({
   providedIn: 'root'
 })
-export class PDFService {
+export class PDFService  {
+
   private imageData: string;
+   optionHolder = [];
+
   constructor() {
     this.ConstPdfStartX = 15;
     this.ConstPdfStartY = 40;
@@ -16,7 +17,7 @@ export class PDFService {
     this.PdfStartY = 30;
     this.MaxWidth = 175;
     this.MaxHight = 10;
-    this.EndPage = 250;
+    this.Page = 1;
     // this.HeaderFooter();
   }
   reader = new FileReader();
@@ -28,7 +29,7 @@ export class PDFService {
   private PdfStartY: number;
   private MaxWidth: number;
   private MaxHight: number;
-  private EndPage: number;
+  private Page: number;
   doc = new jsPDF();
   private FormStartX: number;
 
@@ -46,8 +47,8 @@ export class PDFService {
     this.PdfStartY += 20;
   }
 
-  PageLimit() {
-    if (this.PdfStartY > this.EndPage) {
+  PageLimit(PagePixelLim) {
+    if (this.PdfStartY > PagePixelLim) {
       this.HeaderFooter();
       this.PdfStartY = this.ConstPdfStartY;
       this.doc.addPage();
@@ -55,7 +56,7 @@ export class PDFService {
   }
 
   HeaderFooter() {
-
+    this.PageCounter();
     this.doc.addImage(this.image, 'png', 0, 0, 80, 20);
     this.doc.addImage(this.image2, 'png', 130, 280, 80, 20);
   }
@@ -71,13 +72,6 @@ export class PDFService {
     return Vintoday;
   }
 
-// Creates a new rectangle and creates space for the new one
-  Rectangle() { // this is useless
-    this.PageLimit();
-    this.doc.setDrawColor(0);
-    this.doc.setFillColor(255, 255, 255);
-    this.doc.rect(this.PdfStartX, this.PdfStartY, this.MaxWidth, this.MaxHight); // Fill and Border
-  }
 
   SmallRectangle(fill, x, y) {
     if (fill === true) {
@@ -89,29 +83,71 @@ export class PDFService {
     }
   }
 
+  PageCounter(){
+    this.doc.setFontSize(10);
+    this.doc.text(String(this.Page), 104, 288);
+    this.Page++;
+    this.doc.setFontSize(7);
+  }
 
-  PlaceForm(Message, ArgPick, ArgMessages) {
+  PlaceForm(json: any, Company, Name, Date, Email, PhoneNR, VINNumber){
+    this.doc = new jsPDF();
+    this.Person(Company, Name, Date, Email, PhoneNR);
+    try {
+      this.doc.addImage(this.download(), 'png', 140, 30, 30, 30);
+    }
+    catch (error) {
+      console.error('Unable to generate QR-code', error);
+    }
+    this.doc.setFontSize(7);
+    this.doc.setLineWidth(0);
     // this.Rectangle()
     this.PdfStartY += 2.5;
-
-    Message = Message + ':';
-    this.doc.text(Message, this.FormStartX, this.PdfStartY + 4.5);
     const xNow = this.FormStartX + 25;
+    let CheckpointName = '';
+    let tcrName = ' ';
+    let width = 0;
+    for (let tcri = 0; tcri < json.length; tcri++){
+      this.PageLimit(230);
+      tcrName = json[tcri].name;
+      this.doc.setFontSize(9);
+      this.doc.text( tcrName , this.FormStartX - 2 , this.PdfStartY += 4.5);
+      width = this.doc.getTextWidth(tcrName);
+      this.doc.setLineWidth(0.2);
+      this.doc.line(this.FormStartX - 2, this.PdfStartY += 1, this.FormStartX + width,  this.PdfStartY);
+      this.doc.setLineWidth(0);
+      this.doc.setFontSize(7);
+      this.PdfStartY += 3;
+      for (let cpi = 0; cpi < json[tcri].checkpoint.length; cpi ++){
+        this.PageLimit(240);
+        CheckpointName = json[tcri].checkpoint[cpi].name ;
+        this.doc.text(CheckpointName, this.FormStartX, this.PdfStartY += 4.5);
+        this.PdfStartY += 1;
+        for (let opi = 0; opi < json[tcri].checkpoint[cpi].options.length; opi ++){
+        this.optionHolder[opi] = json[tcri].checkpoint[cpi].options[opi].description;
+        if ( opi === json[tcri].checkpoint[cpi].value) {
+            this.SmallRectangle(true, xNow - 20, this.PdfStartY += 3);  // Filled
+            this.doc.text(this.optionHolder[opi], xNow - 7, this.PdfStartY += 3.5);
+          } else {
+            this.SmallRectangle(false, xNow - 20, this.PdfStartY += 3); // Hollow
+            this.doc.text(this.optionHolder[opi], xNow - 7, this.PdfStartY += 3.5);
 
-    for (let i = 0; i < ArgMessages.length; i++) {
-      this.PdfStartY += 6;
-      if (i === ArgPick) {
-        this.SmallRectangle(true, xNow, this.PdfStartY);
-        this.doc.text(ArgMessages[i], xNow + 7, this.PdfStartY + 4.5);
-      } else {
-        this.SmallRectangle(false,
-          xNow, this.PdfStartY);
-        this.doc.text(ArgMessages[i], xNow + 7, this.PdfStartY + 4.5);
+          }
+        }
+        this.PdfStartY += 3;
       }
+
     }
-    this.PageLimit();
-    this.PdfStartY += 10;
+
+    this.HeaderFooter();
+
+    this.doc.save(this.DateToday(VINNumber));
+
+    this.Reset();
+    this.doc = null;
   }
+
+
 
   getBase64Image(img) {
     const canvas = document.createElement('canvas');
@@ -135,12 +171,12 @@ export class PDFService {
     this.doc.text(split, this.PdfStartX, this.PdfStartY += 10);
   }
 
-  Service(Company, Name, Date, Hours, Cost, Comment, Email, PhoneNr){
+  Service(Company, Name, Date, Hours, Cost, Comment, Email, PhoneNr, VINNumber){
     this.doc = new jsPDF();
-
     // this.Reset();
-    this.doc.addImage(this.download(), 'png', 160, 30, 20, 20);
+
     this.HeaderFooter();
+    this.doc.setFontSize(12);
     this.Person(Company, Name, Date, Email, PhoneNr);
 
     this.doc.text('Hours: ' + Hours, this.PdfStartX, this.PdfStartY);
@@ -148,7 +184,15 @@ export class PDFService {
 
     this.LongText(Comment);
 
-    this.doc.save(this.DateToday('VinNumber'));
+    try{
+    this.doc.addImage(this.download(), 'png', 140, 30, 30, 30);
+    }
+    catch (error){
+      console.log('Error');
+    }
+
+
+    this.doc.save(this.DateToday(VINNumber));
     this.doc = null;
 
     this.Reset();
@@ -156,15 +200,21 @@ export class PDFService {
 
   }
 
-  Inspection(Company, Name, Date, State, Email, PhoneNR){
+  Inspection(Company, Name, Date, State, Email, PhoneNR, VINNumber){
 
     this.doc = new jsPDF();
     this.Reset();
     this.HeaderFooter();
-    this.doc.addImage(this.download(), 'png', 160, 30, 20, 20);
+    this.doc.setFontSize(12);
+    try{
+      this.doc.addImage(this.download(), 'png', 140, 30, 30, 30);
+    }
+    catch (error){
+      console.log('Error');
+    }
     this.Person(Company, Name, Date, Email, PhoneNR);
     this.doc.text('State: ' + State, this.PdfStartX, this.PdfStartY);
-    this.doc.save(this.DateToday('Date: '));
+    this.doc.save(this.DateToday(VINNumber));
     this.doc = null;
     this.Reset();
   }
@@ -177,9 +227,8 @@ export class PDFService {
     this.PdfStartY = 30;
     this.MaxWidth = 175;
     this.MaxHight = 10;
-    this.EndPage = 250;
+    this.Page = 1;
   }
-
 }
 
 

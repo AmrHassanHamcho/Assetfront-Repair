@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,7 +15,6 @@ import {DialogContentExampleDialog, ServiceComponent} from './service/service.co
 import {DialogInspectionComponent, InspectionComponent} from './inspection/inspection.component';
 import { DialogWindowComponent } from './search/dialog-window/dialog-window.component';
 import {MatMenuModule} from '@angular/material/menu';
-
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {VehiclesService} from '../vehicle-service/vehicle.service';
@@ -43,6 +41,7 @@ import {MaterialFileInputModule} from 'ngx-material-file-input';
 import { PersonalDataComponent } from './tcr/personal-data/personal-data.component';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import {PDFService} from './PDF/pdf.service';
+import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { MatCardModule} from '@angular/material/card';
 import { TcrDialogComponent } from './tcr/tcr-dialog/tcr-dialog.component';
 
@@ -111,7 +110,7 @@ import { TcrDialogComponent } from './tcr/tcr-dialog/tcr-dialog.component';
         FlexLayoutModule,
         MaterialFileInputModule,
         NgxQRCodeModule,
-
+        ZXingScannerModule,
     MatDialogModule,
     ReactiveFormsModule,
     MatDatepickerModule,
@@ -120,7 +119,8 @@ import { TcrDialogComponent } from './tcr/tcr-dialog/tcr-dialog.component';
     MaterialFileInputModule,
     NgxQRCodeModule,
     MatCardModule,
-],
+
+    ],
 
   providers: [VehiclesService,
     {

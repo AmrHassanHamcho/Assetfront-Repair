@@ -1,4 +1,5 @@
-<div *ngIf="requset.successfulRequest && requset.assetDetails.length > 0">
+<div *ngIf="request.successfulRequest && request.assetDetails.length>0">
+
   <mat-card  fxLayoutAlign="space-between center end " fxLayout="column">
           <div>
           <mat-card>
@@ -37,15 +38,28 @@
             </mat-form-field>
               </form>
 
+
+
       </mat-card-content>
       </mat-card>
        <mat-card-actions>
           <div  fxLayoutAlign="space-between even end" fxLayout="row" class="mat-button">
+<!--
+            <button class="back" mat-button  mat-raised-button  (click)="backToTcr()"> << Back</button>
+            <button mat-button class="submit"  mat-raised-button color="primary" (click)="upload(); calltcr()" mat-ripple> Submit</button>
+-->
             <button class="back" mat-button  mat-raised-button  (click)="backToTcr()"> Back</button>
-            <button mat-button class="submit"  mat-raised-button color="primary" [disabled]="!registerForm.valid"  (click)="upload();success()" mat-ripple>Submit</button>
+            <button mat-button class="submit"  mat-raised-button color="primary" [disabled]="!registerForm.valid"  (click)="upload(); success()" mat-ripple>Submit</button>
+
           </div>
        </mat-card-actions>
         </div>
     </mat-card>
+
+  <ngx-qrcode id="qrcode"  [ngStyle]="{'display': 'none'}"
+              [elementType]="idt.elementType"
+              [errorCorrectionLevel]="idt.correctionLevel"
+              [value]="idt.value"
+              cssClass="shadow"></ngx-qrcode>
 
 </div>

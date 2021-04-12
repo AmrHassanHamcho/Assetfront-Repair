@@ -13,6 +13,7 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
 import {daLocale} from 'ngx-bootstrap/chronos';
 import {PDFService} from '../PDF/pdf.service';
+import {VehiclesService} from '../../vehicle-service/vehicle.service';
 
 
 
@@ -29,6 +30,7 @@ export class ServiceComponent implements OnInit {
   selFiles: FileList;
   fileName = '';
   extension = '';
+  value;
 
 
 
@@ -63,8 +65,10 @@ export class ServiceComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private router: Router,
-    public idt: InputDataTransferService
+    public idt: InputDataTransferService,
+    private service: VehiclesService
     ){
+    this.value = service.getSerNo();
 
   }
 
@@ -154,17 +158,15 @@ export class ServiceComponent implements OnInit {
     this.idt.Email = this.registerForm.value.Email;
     this.idt.phone = this.registerForm.value.phone;
 
+    this.idt.value = this.service.getSerNo();
   }
 
   onBackSubmit(){
-
     this.router.navigate(['../home']);
   }
 }
 
 //////////////////////////////////////////// DIALOG
-
-
 
 
 
@@ -175,8 +177,9 @@ export class ServiceComponent implements OnInit {
 //  providers: [ServiceComponent],
 })
 
-
 export class DialogContentExampleDialog {
   constructor(public idf: InputDataTransferService) {
   }
 }
+
+

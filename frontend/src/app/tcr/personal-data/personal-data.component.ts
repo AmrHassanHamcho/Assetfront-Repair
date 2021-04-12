@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import {VehiclesService} from '../../../vehicle-service/vehicle.service';
 import {ApiRequestService} from '../../API-request/api-request.service';
 import {TcrService} from '../tcr.service';
+import {PDFService} from '../../PDF/pdf.service';
 import {Router} from '@angular/router';
 import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {PDFService} from '../../PDF/pdf.service';
+import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediaries/ngx-qrcode';
+import {InputDataTransferService} from '../../ inputDataTransfer/input-data-transfer.service';
 import {MatDialog} from '@angular/material/dialog';
 import {TcrDialogComponent} from '../tcr-dialog/tcr-dialog.component';
 @Component({
@@ -14,15 +17,19 @@ import {TcrDialogComponent} from '../tcr-dialog/tcr-dialog.component';
   styleUrls: ['./personal-data.component.scss']
 })
 export class PersonalDataComponent implements OnInit {
-  constructor(public requset: ApiRequestService,
-              public tcr: TcrService,
+  optionHolder = [];
+  elementType = NgxQrcodeElementTypes.URL;
+  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  value = 'https://assetfront.com';
+  constructor(public tcr: TcrService,
               private router: Router,
               private formBuilder: FormBuilder,
-              public pdf: PDFService,
-              public dialog: MatDialog) {
-  }
-
-  optionHolder = [];
+              public pdf: PDFService ,
+              private vehicleservice: VehiclesService,
+              public request: ApiRequestService,
+              public idt: InputDataTransferService,
+              public dialog: MatDialog)
+  {this.idt.value =  this.vehicleservice.getSerNo(); }
   picker: Date;
   lName: string;
   fName: string;
@@ -91,6 +98,31 @@ export class PersonalDataComponent implements OnInit {
   backToTcr() {
     this.router.navigate(['/tcr']);
   }
+
+  /*allFilled(){
+    for (let tcri = 0; tcri < this.ttrCopy.tcr.length; tcri++){
+      for ( let cpi = 0; cpi < this.ttrCopy.tcr[tcri].checkpoint.length; cpi ++){
+        this.all[cpi] = false;
+        if (this.ttrCopy.tcr[tcri].checkpoint[cpi].value > -1){
+
+        }
+
+      }
+
+    }
+
+  }
+*/
+
+  calltcr() {
+    const person = this.registerForm.value;
+    this.pdf.PlaceForm(this.tcr.getTcr().tcr, person.workshop, person.fName + ' '
+      + person.lName, person.date.toLocaleDateString(), person.email, ' 4554 ', this.vehicleservice.getSerNo());
+    // (json: any, Company, Name, Date, Email, PhoneNR)
+
+  }
+
+
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'You must enter a value';
@@ -100,10 +132,10 @@ export class PersonalDataComponent implements OnInit {
   }
 
   success() {
-   const dialogref =  this.dialog.open(TcrDialogComponent);
-   dialogref.afterClosed().subscribe(result => {
+    const dialogref =  this.dialog.open(TcrDialogComponent);
+    dialogref.afterClosed().subscribe(result => {
      if (result){
-        this.downloadAsPdf();
+        this.calltcr();
       }else {
        this.toSearch();
      }
