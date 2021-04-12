@@ -54,13 +54,22 @@ export class PersonalDataComponent implements OnInit {
     const contentType = 'json';
     const FOLDER = 'TCR';
     const file = 'tcr.json';
-    const bucket = new S3(
+   /* const bucket = new S3(
       {
         accessKeyId: 'AKIAXTNQB7H3IMBOMEGL',
         secretAccessKey: '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',
         region: 'eu-north-1'
       }
+    );*/
+
+    const bucket = new S3(
+      {
+        accessKeyId: 'AKIA3MSMUCO2MSPHGAKV',
+        secretAccessKey: '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',
+        region: 'eu-north-1'
+      }
     );
+
     const params = {
       Bucket: 'json-file/' + this.tcr.getTcr().resourceId + '/' + FOLDER,
       Key: file,
@@ -81,17 +90,6 @@ export class PersonalDataComponent implements OnInit {
 
   backToTcr() {
     this.router.navigate(['/tcr']);
-  }
-  generatePdf() {
-   for( const tcri in this.tcr.getTcr().tcr){
-     for(const cpi in this.tcr.getTcr().tcr[tcri].checkpoint){
-       for (const opi in this.tcr.getTcr().tcr[tcri].checkpoint[cpi].options){
-        // console.log(this.tcr.getTcr().tcr[tcri].checkpoint[cpi].options[opi].description);
-         this.optionHolder[opi] = this.tcr.getTcr().tcr[tcri].checkpoint[cpi].options[opi].description;
-       }
-     }
-   }
-   console.log(this.optionHolder);
   }
   getErrorMessage() {
     if (this.email.hasError('required')) {
