@@ -12,7 +12,7 @@ import {Inject} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
 import {daLocale} from 'ngx-bootstrap/chronos';
-import {PDFService} from "../PDF/pdf.service";
+import {PDFService} from '../PDF/pdf.service';
 
 
 
@@ -70,7 +70,6 @@ export class ServiceComponent implements OnInit {
 
 
   ngOnInit(): void {
-   // this.buildForm();
   }
 
 
@@ -164,6 +163,10 @@ export class ServiceComponent implements OnInit {
 }
 
 //////////////////////////////////////////// DIALOG
+
+
+
+
 
 @Component({
   selector: 'app-service',

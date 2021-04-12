@@ -1,8 +1,11 @@
 
 import {Injectable} from '@angular/core';
-import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable} from 'rxjs/';
-import { Asset} from "../asset/asset";
+import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest,  HttpResponse,
+  HttpErrorResponse} from '@angular/common/http';
+import { Asset} from '../asset/asset';
+import { Observable, throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
+
 
 @Injectable()
 export class AppHttpInterceptor implements HttpInterceptor {
@@ -18,6 +21,22 @@ export class AppHttpInterceptor implements HttpInterceptor {
   intercept(req: HttpRequest<Asset>, next: HttpHandler): Observable<HttpEvent<any>> {
     req = req.clone({ headers: req.headers.set('content-type', 'application/json') });
     req = req.clone({ headers: req.headers.set('Authorization', ' api_key JFg26WuKBjgZ') });
-    return next.handle(req);
+    return next.handle(req)
+      .pipe(
+        retry(1),
+        catchError((error: HttpErrorResponse) => {
+           let errorMessage = '';
+           if (error.error instanceof ErrorEvent){
+            // if the error is client-side error
+              errorMessage = `Error: ${error.error.message}`;
+          }else {
+            // if the error is server-side error
+              errorMessage = `Error code:  ${error.status}\nMessage:  Access denied!
+             pls check your internet connection`;
+          }
+           window.alert(errorMessage);
+           return throwError(errorMessage);
+        })
+      );
   }
 }

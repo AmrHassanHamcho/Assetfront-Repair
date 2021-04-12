@@ -18,8 +18,6 @@ import { DialogWindowComponent } from './search/dialog-window/dialog-window.comp
 import {MatMenuModule} from '@angular/material/menu';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
-
-
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {VehiclesService} from '../vehicle-service/vehicle.service';
 import {AppHttpInterceptor} from './interceptor/appIntercerptor';
@@ -45,7 +43,8 @@ import {MaterialFileInputModule} from 'ngx-material-file-input';
 import { PersonalDataComponent } from './tcr/personal-data/personal-data.component';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import {PDFService} from './PDF/pdf.service';
-import {MatCardActions, MatCardModule} from '@angular/material/card';
+import { MatCardModule} from '@angular/material/card';
+import { TcrDialogComponent } from './tcr/tcr-dialog/tcr-dialog.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +63,8 @@ import {MatCardActions, MatCardModule} from '@angular/material/card';
     PersonalDataComponent,
     DialogInspectionComponent,
     TestComponent,
-    DialogContentExampleDialog
+    DialogContentExampleDialog,
+    TcrDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -104,6 +104,13 @@ import {MatCardActions, MatCardModule} from '@angular/material/card';
     MatIconModule,
 
     MatInputModule,
+    MatDialogModule,
+        ReactiveFormsModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        FlexLayoutModule,
+        MaterialFileInputModule,
+        NgxQRCodeModule,
 
     MatDialogModule,
     ReactiveFormsModule,
@@ -113,8 +120,7 @@ import {MatCardActions, MatCardModule} from '@angular/material/card';
     MaterialFileInputModule,
     NgxQRCodeModule,
     MatCardModule,
-
-  ],
+],
 
   providers: [VehiclesService,
     {

@@ -24,6 +24,7 @@
     "@angular/router": "~9.1.11",
     "@material/card": "^10.0.0",
     "@techiediaries/ngx-qrcode": "^9.1.0",
+    "angular2-qrscanner": "^1.0.7",
     "aws-sdk": "^2.874.0",
     "bootstrap": "^4.6.0",
     "install": "^0.13.0",

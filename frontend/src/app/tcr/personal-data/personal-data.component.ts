@@ -5,6 +5,9 @@ import {Router} from '@angular/router';
 import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {PDFService} from '../../PDF/pdf.service';
+import {MatDialog} from '@angular/material/dialog';
+import {TcrDialogComponent} from '../tcr-dialog/tcr-dialog.component';
 @Component({
   selector: 'app-personal-data',
   templateUrl: './personal-data.component.html',
@@ -14,9 +17,12 @@ export class PersonalDataComponent implements OnInit {
   constructor(public requset: ApiRequestService,
               public tcr: TcrService,
               private router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              public pdf: PDFService,
+              public dialog: MatDialog) {
   }
 
+  optionHolder = [];
   picker: Date;
   lName: string;
   fName: string;
@@ -48,13 +54,22 @@ export class PersonalDataComponent implements OnInit {
     const contentType = 'json';
     const FOLDER = 'TCR';
     const file = 'tcr.json';
-    const bucket = new S3(
+   /* const bucket = new S3(
       {
         accessKeyId: 'AKIAXTNQB7H3IMBOMEGL',
         secretAccessKey: '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',
         region: 'eu-north-1'
       }
+    );*/
+
+    const bucket = new S3(
+      {
+        accessKeyId: 'AKIA3MSMUCO2MSPHGAKV',
+        secretAccessKey: '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',
+        region: 'eu-north-1'
+      }
     );
+
     const params = {
       Bucket: 'json-file/' + this.tcr.getTcr().resourceId + '/' + FOLDER,
       Key: file,
@@ -73,10 +88,9 @@ export class PersonalDataComponent implements OnInit {
     });
   }
 
-  BackToTcr() {
+  backToTcr() {
     this.router.navigate(['/tcr']);
   }
-
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'You must enter a value';
@@ -84,4 +98,24 @@ export class PersonalDataComponent implements OnInit {
 
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
+
+  success() {
+   const dialogref =  this.dialog.open(TcrDialogComponent);
+   dialogref.afterClosed().subscribe(result => {
+     if (result){
+        this.downloadAsPdf();
+      }else {
+       this.toSearch();
+     }
+   });
+  }
+  downloadAsPdf(){
+    console.log('Downloading PDF...');
+
+  }
+  toSearch() {
+    console.log('to search component...');
+    this.router.navigate(['../search']);
+  }
+
 }

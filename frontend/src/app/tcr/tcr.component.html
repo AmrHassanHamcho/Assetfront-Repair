@@ -1,6 +1,7 @@
 <div *ngIf="onSuccessfullSearch()">
   <mat-card>
   <mat-accordion>
+
     <div *ngFor=" let item of ttrCopy.tcr; let indexTcr = index">
       <mat-expansion-panel >
         <mat-expansion-panel-header  matRipple [matRippleColor]="color" >
@@ -10,8 +11,8 @@
             </div>
             <div *ngFor="let n of ttrCopy.tcr[indexTcr].checkpoint let in = index">
               {{good(indexTcr)}}
-              <div *ngIf="abdi &&
-              tests.length >= ttrCopy.tcr[indexTcr].checkpoint.length">
+              <div *ngIf="allSelected &&
+              all.length >= ttrCopy.tcr[indexTcr].checkpoint.length">
               <mat-icon *ngIf=" ttrCopy.tcr[indexTcr].checkpoint.length-1 === in">
                 check_circle_outline</mat-icon>
               </div>
@@ -41,15 +42,22 @@
           </mat-card-content>
         </mat-card>
             </h1>
+
           </ng-template>
         </mat-expansion-panel-header>
       </mat-expansion-panel>
+
     </div>
-  </mat-accordion>
     <mat-card-actions>
-      <div>
-        <button mat-button [disabled]="!allSelected" color="primary"  (click)="personData()">Next</button>
+      <div fxLayoutAlign="space-between center end">
+
+        <button mat-flat-button class="back" color="primary"  (click)="toHome()">Back</button>
+        <button mat-flat-button  color="primary"  (click)="personData() " [disabled]="!allSelected">Next</button>
+
+
       </div>
     </mat-card-actions>
-  </mat-card>
+  </mat-accordion>
+     </mat-card>
+
 </div>
