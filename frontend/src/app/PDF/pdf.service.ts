@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import {jsPDF} from 'jspdf';
-import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from "@techiediaries/ngx-qrcode"; // will automatically load the node version
 
 
 
@@ -95,8 +94,13 @@ export class PDFService  {
 
   PlaceForm(json: any, Company, Name, Date, Email, PhoneNR, VINNumber){
     this.doc = new jsPDF();
-    console.log(json);
     this.Person(Company, Name, Date, Email, PhoneNR);
+    try {
+      this.doc.addImage(this.download(), 'png', 140, 30, 30, 30);
+    }
+    catch (error) {
+      console.error('Unable to generate QR-code', error);
+    }
     this.doc.setFontSize(7);
     this.doc.setLineWidth(0);
     // this.Rectangle()
@@ -105,6 +109,7 @@ export class PDFService  {
     let CheckpointName = '';
     let tcrName = ' ';
     let width = 0;
+
     for (let tcri = 0; tcri < json.length; tcri++){
       this.PageLimit(230);
       tcrName = json[tcri].name;
@@ -123,7 +128,7 @@ export class PDFService  {
         this.PdfStartY += 1;
         for (let opi = 0; opi < json[tcri].checkpoint[cpi].options.length; opi ++){
         this.optionHolder[opi] = json[tcri].checkpoint[cpi].options[opi].description;
-          if ( opi === json[tcri].checkpoint[cpi].value) {
+        if ( opi === json[tcri].checkpoint[cpi].value) {
             this.SmallRectangle(true, xNow - 20, this.PdfStartY += 3);  // Filled
             this.doc.text(this.optionHolder[opi], xNow - 7, this.PdfStartY += 3.5);
           } else {

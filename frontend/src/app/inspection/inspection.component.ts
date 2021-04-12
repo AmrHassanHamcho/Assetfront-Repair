@@ -8,6 +8,8 @@ import {MatDialog} from '@angular/material/dialog';
 import validate = WebAssembly.validate;
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
 import {PDFService} from '../PDF/pdf.service';
+import {VehiclesService} from '../../vehicle-service/vehicle.service';
+
 
 
 interface InspectionState {
@@ -30,7 +32,8 @@ export class InspectionComponent implements OnInit {
               public dialog: MatDialog,
               public idt: InputDataTransferService,
               public PDF: PDFService,
-              private router: Router) {
+              private router: Router,
+              private service: VehiclesService) {
   }
 
   inspectionStatus = '';
@@ -143,26 +146,7 @@ export class InspectionComponent implements OnInit {
     this.idt.Email = this.registerForm.value.Email;
     this.idt.phone = this.registerForm.value.phone;
 
-    this.idt.value =
-      `
-    Name: ${this.idt.fName}  ${this.idt.lName}
-    Company: ${this.idt.company}
-    Date: ${this.idt.date}
-    Email: ${this.idt.Email}
-    Phone: ${this.idt.phone}
-    State: ${this.idt.inspectionState}
-    `;
-  }
-
-  /*public callPDF() {
-    // tslint:disable-next-line:max-line-length
-    this.PDF.Inspection(this.idt.company,
-      this.idt.fName + ' ' + this.idt.lName,
-      this.idt.date, this.idt.inspectionState,
-      this.idt.Email, this.idt.phone, ' dsfed ');
-
-
-  }*/
+    this.idt.value =  this.service.getSerNo(); }
 }
 
 

@@ -8,6 +8,7 @@ import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediaries/ngx-qrcode';
+import {InputDataTransferService} from '../../ inputDataTransfer/input-data-transfer.service';
 @Component({
   selector: 'app-personal-data',
   templateUrl: './personal-data.component.html',
@@ -23,7 +24,9 @@ export class PersonalDataComponent implements OnInit {
               private formBuilder: FormBuilder,
               public pdf: PDFService ,
               private vehicleservice: VehiclesService,
-              public request: ApiRequestService) {
+              public request: ApiRequestService,
+              public idt: InputDataTransferService) {
+    this.idt.value =  this.vehicleservice.getSerNo();
   }
   picker: Date;
   lName: string;

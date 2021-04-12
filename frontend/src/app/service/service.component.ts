@@ -12,7 +12,8 @@ import {Inject} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
 import {daLocale} from 'ngx-bootstrap/chronos';
-import {PDFService} from "../PDF/pdf.service";
+import {PDFService} from '../PDF/pdf.service';
+import {VehiclesService} from '../../vehicle-service/vehicle.service';
 
 
 
@@ -64,7 +65,8 @@ export class ServiceComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private router: Router,
-    public idt: InputDataTransferService
+    public idt: InputDataTransferService,
+    private service: VehiclesService
     ){
 
   }
@@ -156,16 +158,7 @@ export class ServiceComponent implements OnInit {
     this.idt.Email = this.registerForm.value.Email;
     this.idt.phone = this.registerForm.value.phone;
 
-    this.idt.value =
-      `
-    Name: ${this.idt.fName}  ${this.idt.lName}
-    Company: ${this.idt.company}
-    Date: ${this.idt.date}
-    Hours: ${this.idt.hours}
-    Cost: ${this.idt.coast}
-    Email: ${this.idt.Email}
-    Phone: ${this.idt.phone}
-    `
+    this.idt.value = this.service.getSerNo();
   }
 
   onBackSubmit(){
