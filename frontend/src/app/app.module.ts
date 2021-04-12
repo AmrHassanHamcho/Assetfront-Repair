@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -16,34 +15,35 @@ import {DialogContentExampleDialog, ServiceComponent} from './service/service.co
 import {DialogInspectionComponent, InspectionComponent} from './inspection/inspection.component';
 import { DialogWindowComponent } from './search/dialog-window/dialog-window.component';
 import {MatMenuModule} from '@angular/material/menu';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {VehiclesService} from '../vehicle-service/vehicle.service';
 import {AppHttpInterceptor} from './interceptor/appIntercerptor';
 import { TcrComponent } from './tcr/tcr.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatRadioModule} from '@angular/material/radio';
-import {MatCardModule} from '@angular/material/card';
-import {Checkpoint} from './asset/checkPoint';
 import { FallBackComponent } from './fall-back/fall-back.component';
 import {MatIconModule} from '@angular/material/icon';
 
 import {MatInputModule} from '@angular/material/input';
 
 import {MatDialogModule} from '@angular/material/dialog';
+
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import { TestComponent } from './test/test.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {CollapseModule} from 'ngx-bootstrap/collapse';
 import {MaterialFileInputModule} from 'ngx-material-file-input';
 import { PersonalDataComponent } from './tcr/personal-data/personal-data.component';
-import { QRCodeModule } from 'angular2-qrcode';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import {PDFService} from './PDF/pdf.service';
-import {MultiFormatReader, BarcodeFormat} from '@zxing/library';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
+import { MatCardModule} from '@angular/material/card';
+import { TcrDialogComponent } from './tcr/tcr-dialog/tcr-dialog.component';
 
 @NgModule({
   declarations: [
@@ -59,42 +59,68 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     TcrComponent,
     FallBackComponent,
     DialogWindowComponent,
-    TestComponent,
-    DialogContentExampleDialog,
     PersonalDataComponent,
     DialogInspectionComponent,
-
-
+    TestComponent,
+    DialogContentExampleDialog,
+    TcrDialogComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatButtonModule,
-        FormsModule,
-        HttpClientModule,
-        MatMenuModule,
-        MatFormFieldModule,
-        MatSelectModule,
-        MatExpansionModule,
-        MatRadioModule,
-        MatCardModule,
-        MatRippleModule,
-        MatIconModule,
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    FormsModule,
+    HttpClientModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatExpansionModule,
+    MatRadioModule,
+    MatCardModule,
+    MatRippleModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FlexLayoutModule,
+    MatToolbarModule,
+    CollapseModule,
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    FormsModule,
+    HttpClientModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatExpansionModule,
+    MatRadioModule,
+    MatCardModule,
+    MatRippleModule,
+    MatIconModule,
 
-        MatInputModule,
-
-        MatDialogModule,
+    MatInputModule,
+    MatDialogModule,
         ReactiveFormsModule,
         MatDatepickerModule,
         MatNativeDateModule,
         FlexLayoutModule,
         MaterialFileInputModule,
-        QRCodeModule,
         NgxQRCodeModule,
         ZXingScannerModule,
-    ],
+    MatDialogModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    FlexLayoutModule,
+    MaterialFileInputModule,
+    NgxQRCodeModule,
+    MatCardModule,
 
+    ],
 
   providers: [VehiclesService,
     {

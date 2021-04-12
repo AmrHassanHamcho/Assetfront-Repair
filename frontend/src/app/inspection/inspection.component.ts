@@ -10,8 +10,6 @@ import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfe
 import {PDFService} from '../PDF/pdf.service';
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
 
-
-
 interface InspectionState {
   value: string;
   viewValue: string;
@@ -23,7 +21,7 @@ interface InspectionState {
   templateUrl: './inspection.component.html',
   styleUrls: ['./inspection.component.scss']
 })
-export class InspectionComponent implements OnInit {
+export class InspectionComponent  implements OnInit {
 
 
   constructor(public fileService: FileServiceService,

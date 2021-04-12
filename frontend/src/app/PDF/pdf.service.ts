@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import {jsPDF} from 'jspdf';
 
-
-
 @Injectable({
   providedIn: 'root'
 })
@@ -186,7 +184,13 @@ export class PDFService  {
 
     this.LongText(Comment);
 
+    try{
     this.doc.addImage(this.download(), 'png', 140, 30, 30, 30);
+    }
+    catch (error){
+      console.log('Error');
+    }
+
 
     this.doc.save(this.DateToday(VINNumber));
     this.doc = null;
@@ -202,7 +206,12 @@ export class PDFService  {
     this.Reset();
     this.HeaderFooter();
     this.doc.setFontSize(12);
-    this.doc.addImage(this.download(), 'png', 160, 30, 20, 20);
+    try{
+      this.doc.addImage(this.download(), 'png', 140, 30, 30, 30);
+    }
+    catch (error){
+      console.log('Error');
+    }
     this.Person(Company, Name, Date, Email, PhoneNR);
     this.doc.text('State: ' + State, this.PdfStartX, this.PdfStartY);
     this.doc.save(this.DateToday(VINNumber));
@@ -218,6 +227,7 @@ export class PDFService  {
     this.PdfStartY = 30;
     this.MaxWidth = 175;
     this.MaxHight = 10;
+    this.Page = 1;
   }
 }
 

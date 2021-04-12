@@ -1,8 +1,9 @@
 <div *ngIf="request.successfulRequest && request.assetDetails.length>0">
+
   <mat-card  fxLayoutAlign="space-between center end " fxLayout="column">
-        <mat-card-title > Filled By </mat-card-title>
-        <div>
+          <div>
           <mat-card>
+            <mat-card-title style="align-self: center; color: grey" >Personal Detail</mat-card-title>
             <mat-card-content fxLayoutAlign="space-between center end">
               <form [formGroup]="registerForm" (submit)="registerForm">
 
@@ -41,12 +42,17 @@
 
       </mat-card-content>
       </mat-card>
-        <mat-card-actions >
+       <mat-card-actions>
           <div  fxLayoutAlign="space-between even end" fxLayout="row" class="mat-button">
-            <button class="back" mat-button  mat-raised-button  (click)="BackToTcr()"> << Back</button>
+<!--
+            <button class="back" mat-button  mat-raised-button  (click)="backToTcr()"> << Back</button>
             <button mat-button class="submit"  mat-raised-button color="primary" (click)="upload(); calltcr()" mat-ripple> Submit</button>
+-->
+            <button class="back" mat-button  mat-raised-button  (click)="backToTcr()"> Back</button>
+            <button mat-button class="submit"  mat-raised-button color="primary" [disabled]="!registerForm.valid"  (click)="upload(); success()" mat-ripple>Submit</button>
+
           </div>
-        </mat-card-actions>
+       </mat-card-actions>
         </div>
     </mat-card>
 

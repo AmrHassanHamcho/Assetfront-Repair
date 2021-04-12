@@ -21,7 +21,7 @@ export class InputDataTransferService{
   phone;
   coast;
   inspectionState;
-  serialNumber;
+  serialNumber = '';
   elementType = NgxQrcodeElementTypes.URL;
   correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   value;
@@ -43,6 +43,7 @@ export class InputDataTransferService{
       this.serialNumber);
   }
   callPdfService() {
+    this.serialNumber = this.vehicle.getSerNo();
     // tslint:disable-next-line:max-line-length
     this.PDF.Service(
       this.company,

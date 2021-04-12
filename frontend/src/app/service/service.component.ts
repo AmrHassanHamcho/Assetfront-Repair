@@ -68,12 +68,12 @@ export class ServiceComponent implements OnInit {
     public idt: InputDataTransferService,
     private service: VehiclesService
     ){
+    this.value = service.getSerNo();
 
   }
 
 
   ngOnInit(): void {
-   // this.buildForm();
   }
 
 
@@ -168,6 +168,8 @@ export class ServiceComponent implements OnInit {
 
 //////////////////////////////////////////// DIALOG
 
+
+
 @Component({
   selector: 'app-service',
   templateUrl: 'dialog-content-dialog.html',
@@ -175,8 +177,9 @@ export class ServiceComponent implements OnInit {
 //  providers: [ServiceComponent],
 })
 
-
 export class DialogContentExampleDialog {
   constructor(public idf: InputDataTransferService) {
   }
 }
+
+

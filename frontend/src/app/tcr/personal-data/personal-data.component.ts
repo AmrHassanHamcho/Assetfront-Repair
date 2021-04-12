@@ -9,6 +9,8 @@ import * as S3 from 'aws-sdk/clients/s3';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediaries/ngx-qrcode';
 import {InputDataTransferService} from '../../ inputDataTransfer/input-data-transfer.service';
+import {MatDialog} from '@angular/material/dialog';
+import {TcrDialogComponent} from '../tcr-dialog/tcr-dialog.component';
 @Component({
   selector: 'app-personal-data',
   templateUrl: './personal-data.component.html',
@@ -25,9 +27,9 @@ export class PersonalDataComponent implements OnInit {
               public pdf: PDFService ,
               private vehicleservice: VehiclesService,
               public request: ApiRequestService,
-              public idt: InputDataTransferService) {
-    this.idt.value =  this.vehicleservice.getSerNo();
-  }
+              public idt: InputDataTransferService,
+              public dialog: MatDialog)
+  {this.idt.value =  this.vehicleservice.getSerNo(); }
   picker: Date;
   lName: string;
   fName: string;
@@ -44,16 +46,12 @@ export class PersonalDataComponent implements OnInit {
     date: [''],
   });
 
- /* submitForm() {
-return this.registerForm;
-  }*/
-  color = 'Green';
-
   ngOnInit(): void {
   }
 
   upload() {
     const test = this.registerForm.value;
+    // (test.workshop, test.fName + ' ' + test.lName, test.date)
     console.log('First Name: ' + test.fName);
     console.log('Last Name: ' + test.lName);
     console.log('workshop Name: ' + test.workshop);
@@ -63,13 +61,22 @@ return this.registerForm;
     const contentType = 'json';
     const FOLDER = 'TCR';
     const file = 'tcr.json';
-    const bucket = new S3(
+   /* const bucket = new S3(
       {
         accessKeyId: 'AKIAXTNQB7H3IMBOMEGL',
         secretAccessKey: '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',
         region: 'eu-north-1'
       }
+    );*/
+
+    const bucket = new S3(
+      {
+        accessKeyId: 'AKIA3MSMUCO2MSPHGAKV',
+        secretAccessKey: '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',
+        region: 'eu-north-1'
+      }
     );
+
     const params = {
       Bucket: 'json-file/' + this.tcr.getTcr().resourceId + '/' + FOLDER,
       Key: file,
@@ -88,7 +95,7 @@ return this.registerForm;
     });
   }
 
-  BackToTcr() {
+  backToTcr() {
     this.router.navigate(['/tcr']);
   }
 
@@ -115,11 +122,32 @@ return this.registerForm;
 
   }
 
-  getErrorMessage(){
+
+  getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'You must enter a value';
     }
 
     return this.email.hasError('email') ? 'Not a valid email' : '';
   }
+
+  success() {
+    const dialogref =  this.dialog.open(TcrDialogComponent);
+    dialogref.afterClosed().subscribe(result => {
+     if (result){
+        this.calltcr();
+      }else {
+       this.toSearch();
+     }
+   });
+  }
+  downloadAsPdf(){
+    console.log('Downloading PDF...');
+
+  }
+  toSearch() {
+    console.log('to search component...');
+    this.router.navigate(['../search']);
+  }
+
 }
