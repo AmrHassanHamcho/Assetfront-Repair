@@ -89,13 +89,6 @@ export class ServiceComponent implements OnInit {
 
 
 
-
-
-
-
-
-
-
   selectFile(event)
   {
     this.selFiles = event.target.files;

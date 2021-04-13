@@ -42,5 +42,5 @@
 </mat-dialog-content>
 <mat-dialog-actions >
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" (click)="idf.callPdfInspection()">Download as PDF</button>
+  <button mat-button [mat-dialog-close]="true" (click)="idf.callPdfInspection();idf.upload() ">Download as PDF</button>
 </mat-dialog-actions>

@@ -144,7 +144,8 @@ export class PDFService  {
     this.doc.save(this.DateToday(VINNumber));
 
     this.Reset();
-    this.doc = null;
+    return this.doc;
+   // this.doc = null;
   }
 
 
@@ -201,6 +202,8 @@ export class PDFService  {
   }
 
   Inspection(Company, Name, Date, State, Email, PhoneNR, VINNumber){
+    this.doc = null;
+    this.Reset();
 
     this.doc = new jsPDF();
     this.Reset();
@@ -214,9 +217,10 @@ export class PDFService  {
     }
     this.Person(Company, Name, Date, Email, PhoneNR);
     this.doc.text('State: ' + State, this.PdfStartX, this.PdfStartY);
-    this.doc.save(this.DateToday(VINNumber));
-    this.doc = null;
-    this.Reset();
+    const file = this.doc.output('arraybuffer');
+    // this.doc.save(this.DateToday(VINNumber)); //this was used to download directly
+
+    return file;
   }
 
   Reset(){
@@ -228,6 +232,10 @@ export class PDFService  {
     this.MaxWidth = 175;
     this.MaxHight = 10;
     this.Page = 1;
+  }
+
+  Save(VINNumber){
+    this.doc.save(this.DateToday(VINNumber));
   }
 }
 
