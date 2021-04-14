@@ -50,12 +50,8 @@ export class ServiceComponent implements OnInit {
 
   });
 
-
-
-
   private files: any;
   private counter = 0;
-
 
   constructor(
 
@@ -77,8 +73,6 @@ export class ServiceComponent implements OnInit {
   }
 
 
-
-
   getErrorMessage(){
     if (this.Email.hasError('required')) {
       return 'You must enter a value';
@@ -86,13 +80,6 @@ export class ServiceComponent implements OnInit {
 
     return this.Email.hasError('email') ? 'Not a valid email' : '';
   }
-
-
-
-
-
-
-
 
 
 
@@ -117,8 +104,8 @@ export class ServiceComponent implements OnInit {
     console.log(this.selFiles);
 
   }
-  upload() {
 
+  upload() {
     if (this.selFiles !== undefined && this.selFiles !== null){
       let file;
       let contentType;
