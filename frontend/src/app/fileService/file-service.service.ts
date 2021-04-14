@@ -49,7 +49,6 @@ export class FileServiceService {
 
 
   }
-
   oneFileUploadSuccess(){
     return this.fileUploaded;
   }

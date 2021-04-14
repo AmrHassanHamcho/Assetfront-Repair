@@ -102,7 +102,7 @@ export class InspectionComponent  implements OnInit {
 
   }
 
-  upload() {
+  upload(){
 
     if (this.selFiles !== undefined && this.selFiles !== null) {
       let file;
