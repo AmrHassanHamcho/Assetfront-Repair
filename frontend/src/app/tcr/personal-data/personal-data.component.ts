@@ -117,7 +117,7 @@ export class PersonalDataComponent implements OnInit {
   calltcr() {
     const person = this.registerForm.value;
     this.pdf.PlaceForm(this.tcr.getTcr().tcr, person.workshop, person.fName + ' '
-      + person.lName, person.date.toLocaleDateString(), person.email, ' 4554 ', this.vehicleservice.getSerNo());
+      + person.lName, person.date.toLocaleDateString(), person.email, ' 4554 ');
     // (json: any, Company, Name, Date, Email, PhoneNR)
 
   }

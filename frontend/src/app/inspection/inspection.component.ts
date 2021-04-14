@@ -31,7 +31,10 @@ export class InspectionComponent  implements OnInit {
               public idt: InputDataTransferService,
               public PDF: PDFService,
               private router: Router,
-              private service: VehiclesService) {
+              private service: VehiclesService
+              ) {
+          this.idt.serialNumber = 'stringify(1)';
+          console.log(this.idt.serialNumber );
   }
 
   inspectionStatus = '';
@@ -143,9 +146,36 @@ export class InspectionComponent  implements OnInit {
     this.idt.lName = this.registerForm.value.lName;
     this.idt.Email = this.registerForm.value.Email;
     this.idt.phone = this.registerForm.value.phone;
+    this.idt.value =  this.service.getSerNo();
+    }
 
-    this.idt.value =  this.service.getSerNo(); }
+  UploadGeneratedPDF() {
+    this.idt.serialNumber = 'this.service.getSerNo()';
+    const date = this.registerForm.value.date.toLocaleDateString();
+    const state = this.registerForm.value.inspectionStates?.viewValue;
+    const company = this.registerForm.value.company;
+    const firstName = this.registerForm.value.fName;
+    const lastName = this.registerForm.value.lName;
+    const email = this.registerForm.value.Email;
+    const phone = this.registerForm.value.phone;
+    // calling Inspection PDF and saving it in a variable:
+    const file = this.PDF.Inspection(company, firstName + ` ` + lastName, date, state, email, phone);
+    console.log('test:' + file);
+    const resourceId =  'this.apiRequest.getAssetDetails()[0].tcr.resourceId';
+    const contentType = 'application/pdf';
+    const params = {
+      Bucket: 'json-file/' + 12346 + '/' + 'FOLDER',
+      Key: 'inspection.pdf',
+      Body: file,
+      ACL: 'public-read',
+      ContentType: contentType
+    };
+
+    this.fileService.upload(params);
+  }
+
 }
+
 
 
 @Component({
@@ -159,8 +189,4 @@ export class InspectionComponent  implements OnInit {
 export class DialogInspectionComponent {
   constructor( public idf: InputDataTransferService) {
   }
-
-
-
-
 }

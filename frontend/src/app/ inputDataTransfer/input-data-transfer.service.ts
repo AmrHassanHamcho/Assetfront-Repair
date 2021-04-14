@@ -39,8 +39,7 @@ export class InputDataTransferService{
       this.date,
       this.inspectionState,
       this.Email,
-      this.phone,
-      this.serialNumber);
+      this.phone);
     this.PDF.Save('1234');
     console.log('Here: ' + this.company,
         this.fName + ' ' +
@@ -49,7 +48,7 @@ export class InputDataTransferService{
         this.inspectionState,
         this.Email,
         this.phone,
-        this.serialNumber);
+    this.value);
 
   }
   callPdfService() {
@@ -64,10 +63,9 @@ export class InputDataTransferService{
       this.coast,
       this.comment,
       this.Email,
-      this.phone,
-      this.serialNumber);
+      this.phone);
   }
-
+/*
   upload() {
     const contentType = 'application/pdf';
     const FOLDER = 'Inspection';
@@ -104,5 +102,5 @@ export class InputDataTransferService{
       console.log('may be from here');
       return true; }
     });
-  }
+  } */
 }

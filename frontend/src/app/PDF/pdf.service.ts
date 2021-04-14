@@ -66,9 +66,6 @@ export class PDFService  {
     const day = ('0' + now.getDate()).slice(-2);
     const month = ('0' + (now.getMonth() + 1)).slice(-2);
     const Vintoday = (VINNum) + '_' + (day) + '-' + (month) + '-' + now.getFullYear() + '.pdf';
-
-    // console.log(Vim_today);
-    // this.doc.save(this.newPDF.DateToday('VinNumber'));
     return Vintoday;
   }
 
@@ -90,7 +87,7 @@ export class PDFService  {
     this.doc.setFontSize(7);
   }
 
-  PlaceForm(json: any, Company, Name, Date, Email, PhoneNR, VINNumber){
+  PlaceForm(json: any, Company, Name, Date, Email, PhoneNR){
     this.doc = new jsPDF();
     this.Person(Company, Name, Date, Email, PhoneNR);
     try {
@@ -141,7 +138,7 @@ export class PDFService  {
 
     this.HeaderFooter();
 
-    this.doc.save(this.DateToday(VINNumber));
+    // this.doc.save(this.DateToday(VINNumber));
 
     this.Reset();
     return this.doc;
@@ -162,8 +159,8 @@ export class PDFService  {
 
   download() {
     const qrcode = document.getElementById('qrcode');
-
-    return  this.imageData = this.getBase64Image(qrcode.firstChild.firstChild);
+    this.imageData = this.getBase64Image(qrcode.firstChild.firstChild);
+    return  this.imageData;
   }
 
   LongText(Message){
@@ -172,7 +169,7 @@ export class PDFService  {
     this.doc.text(split, this.PdfStartX, this.PdfStartY += 10);
   }
 
-  Service(Company, Name, Date, Hours, Cost, Comment, Email, PhoneNr, VINNumber){
+  Service(Company, Name, Date, Hours, Cost, Comment, Email, PhoneNr){
     this.doc = new jsPDF();
     // this.Reset();
 
@@ -192,16 +189,11 @@ export class PDFService  {
       console.log('Error');
     }
 
-
-    this.doc.save(this.DateToday(VINNumber));
-    this.doc = null;
-
-    this.Reset();
-
-
+    const file = this.doc.output('arraybuffer');
+    return file;
   }
 
-  Inspection(Company, Name, Date, State, Email, PhoneNR, VINNumber){
+  Inspection(Company, Name, Date, State, Email, PhoneNR){
     this.doc = null;
     this.Reset();
 
@@ -209,6 +201,7 @@ export class PDFService  {
     this.Reset();
     this.HeaderFooter();
     this.doc.setFontSize(12);
+    this.doc.addImage(this.download(), 'png', 140, 30, 30, 30);
     try{
       this.doc.addImage(this.download(), 'png', 140, 30, 30, 30);
     }
@@ -218,7 +211,6 @@ export class PDFService  {
     this.Person(Company, Name, Date, Email, PhoneNR);
     this.doc.text('State: ' + State, this.PdfStartX, this.PdfStartY);
     const file = this.doc.output('arraybuffer');
-    // this.doc.save(this.DateToday(VINNumber)); //this was used to download directly
 
     return file;
   }

@@ -50,12 +50,8 @@ export class ServiceComponent implements OnInit {
 
   });
 
-
-
-
   private files: any;
   private counter = 0;
-
 
   constructor(
 
@@ -75,8 +71,6 @@ export class ServiceComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-
 
 
   getErrorMessage(){
@@ -110,8 +104,8 @@ export class ServiceComponent implements OnInit {
     console.log(this.selFiles);
 
   }
-  upload() {
 
+  upload() {
     if (this.selFiles !== undefined && this.selFiles !== null){
       let file;
       let contentType;
