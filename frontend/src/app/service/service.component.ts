@@ -133,6 +133,9 @@ export class ServiceComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      if(result){
+        this.pdf.Save(this.idt.value);
+      }
     });
 
     ////// Send data over////
