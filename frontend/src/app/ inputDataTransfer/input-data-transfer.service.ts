@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import {PDFService} from '../PDF/pdf.service';
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
 import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediaries/ngx-qrcode';
-import * as S3 from 'aws-sdk/clients/s3';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -28,7 +26,11 @@ export class InputDataTransferService{
   value;
 
   constructor( private PDF: PDFService,
-               private vehicle: VehiclesService) {}
+               private vehicle: VehiclesService) {
+   this.elementType = NgxQrcodeElementTypes.URL;
+   this.correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+
+  }
 
    callPdfInspection(){
     this.serialNumber = this.vehicle.getSerNo();

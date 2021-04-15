@@ -47,6 +47,7 @@ export class PersonalDataComponent implements OnInit {
     fName: [''],
     lName: [''],
     date: [''],
+    phoneNo: [''],
   });
 
   ngOnInit(): void {
@@ -102,11 +103,13 @@ export class PersonalDataComponent implements OnInit {
     this.router.navigate(['/tcr']);
   }
 
-  calltcr() {
+  calltcr(){
+
     const person = this.registerForm.value;
     const file = this.pdf.PlaceForm(this.tcr.getTcr().tcr, person.workshop, person.fName + ' '
       + person.lName, person.date.toLocaleDateString(), person.email, ' 4554 ');
     return file;
+
   }
   getErrorMessage() {
     if (this.email.hasError('required')) {
@@ -120,15 +123,11 @@ export class PersonalDataComponent implements OnInit {
     const dialogref =  this.dialog.open(TcrDialogComponent);
     dialogref.afterClosed().subscribe(result => {
      if (result){
-        this.calltcr();
+        this.pdf.Save(this.idt.value);
       }else {
        this.toSearch();
      }
    });
-  }
-  downloadAsPdf(){
-    console.log('Downloading PDF...');
-
   }
   toSearch() {
     console.log('to search component...');

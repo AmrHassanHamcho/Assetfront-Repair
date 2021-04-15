@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
 
 @Injectable({
@@ -59,7 +58,6 @@ export class FileServiceService {
 
 
   }
-
   public upload( params){
     this.getS3Bucket().upload(params, (err, data) => {
       if (err) {
@@ -75,8 +73,6 @@ export class FileServiceService {
     this.fileUploaded = true;
 
   }
-
-
   oneFileUploadSuccess(){
     return this.fileUploaded;
   }
