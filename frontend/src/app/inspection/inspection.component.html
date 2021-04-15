@@ -7,7 +7,6 @@
           <mat-label>Please Upload files here (PDF, PNG, JPEG only)</mat-label>
           <ngx-mat-file-input  [accept]="'.pdf, .jpeg, .png'" (change)="selectFile($event)" multiple></ngx-mat-file-input>
 
-
           <mat-icon matSuffix>folder</mat-icon>
 
         </mat-form-field>
@@ -20,13 +19,13 @@
 
         <mat-form-field class="form-field" appearance="fill">
           <mat-label>Vehicle state</mat-label>
-                  <mat-select formControlName="inspectionStates" required>
-                    <mat-option>--</mat-option>
-                    <mat-option *ngFor="let st of inspectionStates" [value]="st">
-                      {{st.value}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-hint>{{registerForm.value.inspectionStates?.viewValue}}</mat-hint>
+          <mat-select formControlName="inspectionStates" required>
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let st of inspectionStates" [value]="st">
+              {{st.value}}
+            </mat-option>
+          </mat-select>
+          <mat-hint>{{registerForm.value.inspectionStates?.viewValue}}</mat-hint>
 
         </mat-form-field>
         <h2 mat-card-title> Personal Details</h2>
@@ -41,7 +40,6 @@
 
           <input matInput required type="text" formControlName="fName" >
 
-
         </mat-form-field>
 
         <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
@@ -49,9 +47,6 @@
           <input matInput required type="text" placeholder="L Name" formControlName="lName">
 
         </mat-form-field>
-
-
-
 
         <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
           <mat-label>Email</mat-label>

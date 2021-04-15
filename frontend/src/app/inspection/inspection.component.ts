@@ -31,11 +31,10 @@ export class InspectionComponent  implements OnInit {
               public PDF: PDFService,
               private router: Router,
               private service: VehiclesService
-              ) {
-          this.idt.value = service.getSerNo();
-          console.log(this.idt.serialNumber );
-  }
 
+  ) {
+    this.idt.value = service.getSerNo();
+  }
   inspectionStatus = '';
   selectedStatus: string;
   selectedFile: File = null;

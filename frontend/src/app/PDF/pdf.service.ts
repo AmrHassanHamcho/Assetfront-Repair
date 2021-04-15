@@ -88,14 +88,18 @@ export class PDFService  {
   }
 
   PlaceForm(json: any, Company, Name, Date, Email, PhoneNR){
+    this.Reset();
+    this.doc = null;
     this.doc = new jsPDF();
     this.Person(Company, Name, Date, Email, PhoneNR);
+
     try {
       this.doc.addImage(this.download(), 'png', 140, 30, 30, 30);
     }
     catch (error) {
       console.error('Unable to generate QR-code', error);
     }
+
     this.doc.setFontSize(7);
     this.doc.setLineWidth(0);
     // this.Rectangle()
@@ -138,11 +142,9 @@ export class PDFService  {
 
     this.HeaderFooter();
 
-    // this.doc.save(this.DateToday(VINNumber));
+    const file = this.doc.output('arraybuffer');
 
-    this.Reset();
-    return this.doc;
-   // this.doc = null;
+    return file;
   }
 
 
@@ -170,8 +172,10 @@ export class PDFService  {
   }
 
   Service(Company, Name, Date, Hours, Cost, Comment, Email, PhoneNr){
+    this.Reset();
+    this.doc = null;
     this.doc = new jsPDF();
-    // this.Reset();
+
 
     this.HeaderFooter();
     this.doc.setFontSize(12);
@@ -201,7 +205,6 @@ export class PDFService  {
     this.Reset();
     this.HeaderFooter();
     this.doc.setFontSize(12);
-    this.doc.addImage(this.download(), 'png', 140, 30, 30, 30);
     try{
       this.doc.addImage(this.download(), 'png', 140, 30, 30, 30);
     }
