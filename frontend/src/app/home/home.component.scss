@@ -1,76 +1,64 @@
+$card-color: grey;
 #home{
-  #card-row{
-    box-shadow: 0 10px 20px 0 rgba(0,0,0,.15);
-    width: 600px;
-      .card {
-        width: 100%;
-        height: 100%;
-        background-color: darkgrey;
-        #title{
-          margin-left: auto;
-          font-size: 1.7rem;
-          font-weight: 450;
-        }
-        #vehicle-image{
-          width: 100%;
-          margin-left: auto;
-        }
-        .list-group-item{
-          background: linear-gradient(45deg, #d22424, #e53d06);
-          width: 100%;
-        }
-        .mat-button{
-          width: 11rem;
-          border: none;
-          box-shadow: 0 10px 20px 0 rgba(153, 153, 153, 0.15);
-          transition: .8s cubic-bezier(.2,1,.2,1);
-          cursor: pointer;
-        }
+  justify-content: center;
+  mat-card {
+    background-color: rgb(0 0 0 / 20%);
+    max-width: 20rem;
+    box-shadow: inset 0 0 10px;
+    #title{
+      font-size: 1rem;
+      font-family: Roboto, "Helvetica Neue", sans-serif;
+    }
+    li{
+      background: linear-gradient(45deg, #4da39c, #2F6C73);
+      margin-top: 2px;
+      padding: 4px;
+    }
+    button{
+      margin-right: auto;
+      margin-left: auto;
+      margin-top: 4px;
+      padding: 0;
+      width: 9rem;
+      color: black;
+      background-color: rgb(0 0 0 / 20%);
+      border: 1px solid white;
+      i{
+        margin-right: 4px;
       }
     }
   }
-/*
-  .row{
-    .col-md-8{
-      border: solid red;
-    }
-    #title{
-      font-size: 2rem;
-      font-weight: 600;
-      height: 100px;
-      margin-right: auto;
-      margin-left: auto;
-      text-align: center;
-      border: solid red;
-    }
-    #bilde{
-      display: block;
-      height: 300px;
-      width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-      border: solid red;
-    }
-    .col-md-4{
-      border: solid red;
-    }
-    #tittle{
-      font-size: 2rem;
-      font-weight: 600;
-      height: 100px;
-      margin-right: auto;
-      margin-left: auto;
-      text-align: center;
-      border: solid red;
-    }
-    #bilder{
-      display: block;
-      height: 300px;
-      width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-      border: solid red;
+}
+
+@media screen and (max-width: 320px){
+  #home{
+    mat-card{
+      max-width: 15.5rem;
+      #title{
+          font-size: 1rem;
+      }
+      button{
+        margin-left: 3rem;
+      }
     }
   }
-*/
+}
+@media screen and (min-width: 550px){
+  #home{
+    mat-card {
+      min-width: 35rem;
+      max-width: 43rem;
+      #title{
+        font-size: 1.8rem;
+      }
+      #vehicle-image{
+        width: 100%;
+        margin-left: auto;
+      }
+      button{
+        margin-left: 1.4rem;
+      }
+    }
+  }
+}
 
