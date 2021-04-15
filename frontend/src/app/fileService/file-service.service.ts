@@ -58,7 +58,6 @@ export class FileServiceService {
 
 
   }
-
   public upload( params){
     this.getS3Bucket().upload(params, (err, data) => {
       if (err) {

@@ -149,7 +149,7 @@ export class InspectionComponent  implements OnInit {
     const resourceId =  this.apiRequest.assetDetails[0].resourceId;
     const contentType = 'application/pdf';
     const params = {
-      Bucket: 'json-file/' + resourceId + '/' + 'FOLDER',
+      Bucket: 'asset-repair/' + resourceId + '/' + 'inspection',
       Key: 'inspection.pdf',
       Body: file,
       ACL: 'public-read',
