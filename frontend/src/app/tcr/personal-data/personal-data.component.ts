@@ -11,6 +11,7 @@ import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediar
 import {InputDataTransferService} from '../../ inputDataTransfer/input-data-transfer.service';
 import {MatDialog} from '@angular/material/dialog';
 import {TcrDialogComponent} from '../tcr-dialog/tcr-dialog.component';
+import {FileServiceService} from '../../fileService/file-service.service';
 @Component({
   selector: 'app-personal-data',
   templateUrl: './personal-data.component.html',
@@ -28,7 +29,9 @@ export class PersonalDataComponent implements OnInit {
               private vehicleservice: VehiclesService,
               public request: ApiRequestService,
               public idt: InputDataTransferService,
-              public dialog: MatDialog)
+              public dialog: MatDialog,
+              private fileService: FileServiceService,
+  )
   {this.idt.value =  this.vehicleservice.getSerNo(); }
   picker: Date;
   lName: string;
@@ -99,30 +102,12 @@ export class PersonalDataComponent implements OnInit {
     this.router.navigate(['/tcr']);
   }
 
-  /*allFilled(){
-    for (let tcri = 0; tcri < this.ttrCopy.tcr.length; tcri++){
-      for ( let cpi = 0; cpi < this.ttrCopy.tcr[tcri].checkpoint.length; cpi ++){
-        this.all[cpi] = false;
-        if (this.ttrCopy.tcr[tcri].checkpoint[cpi].value > -1){
-
-        }
-
-      }
-
-    }
-
-  }
-*/
-
   calltcr() {
     const person = this.registerForm.value;
-    this.pdf.PlaceForm(this.tcr.getTcr().tcr, person.workshop, person.fName + ' '
+    const file = this.pdf.PlaceForm(this.tcr.getTcr().tcr, person.workshop, person.fName + ' '
       + person.lName, person.date.toLocaleDateString(), person.email, ' 4554 ');
-    // (json: any, Company, Name, Date, Email, PhoneNR)
-
+    return file;
   }
-
-
   getErrorMessage() {
     if (this.email.hasError('required')) {
       return 'You must enter a value';
@@ -149,5 +134,35 @@ export class PersonalDataComponent implements OnInit {
     console.log('to search component...');
     this.router.navigate(['../search']);
   }
+
+
+  UploadGeneratedPDF() {
+    this.initIdt();
+    // calling Inspection PDF and saving it in a variable:
+    const file = this.calltcr();
+    const resourceId =  this.request.assetDetails[0].resourceId;
+    const contentType = 'application/pdf';
+    const params = {
+      Bucket: 'asset-repair/' + resourceId + '/' + 'TCR',
+      Key: 'tcr.pdf',
+      Body: file,
+      ACL: 'public-read',
+      ContentType: contentType
+    };
+
+    this.fileService.upload(params);
+    // this.onRouteSubmit();
+
+  }
+  initIdt(){
+    this.idt.date = this.registerForm.value.date.toLocaleDateString();
+    this.idt.company = this.registerForm.value.workshop;
+    this.idt.fName = this.registerForm.value.fName;
+    this.idt.lName = this.registerForm.value.lName;
+    this.idt.Email = this.registerForm.value.email;
+    this.idt.phone = this.registerForm.value.phone;
+    this.idt.value =  this.vehicleservice.getSerNo();
+  }
+
 
 }

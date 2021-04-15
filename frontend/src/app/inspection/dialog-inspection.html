@@ -1,41 +1,41 @@
 <h2 mat-dialog-title>The application has been submitted successfully!</h2>
 <mat-dialog-content class="mat-typography">
   <h3>Inspection Date</h3>
-  <p> {{idf.date}} </p>
+  <p> {{idt.date}} </p>
   <hr>
 
   <h3>Inspection State</h3>
-  <p>{{idf.inspectionState}}</p>
+  <p>{{idt.inspectionState}}</p>
 
   <hr>
 
   <h2 mat-dialog-actions> Personal Details</h2>
 
   <h3>First Name</h3>
-  <p>{{idf.fName}}</p>
+  <p>{{idt.fName}}</p>
   <hr>
 
   <h3>Last Name</h3>
-  <p>{{idf.lName}}</p>
+  <p>{{idt.lName}}</p>
   <hr>
 
 
   <h3>Email</h3>
 
-  <p>{{idf.Email}}</p>
+  <p>{{idt.Email}}</p>
   <hr>
 
   <h3>Company</h3>
-  <p>{{idf.company}}</p>
+  <p>{{idt.company}}</p>
   <hr>
 
 
   <h3>Tlf number</h3>
-  <p>{{idf.phone}}</p>
+  <p>{{idt.phone}}</p>
 
 
 </mat-dialog-content>
 <mat-dialog-actions >
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" (click)="idf.callPdfInspection(); ">Download as PDF</button>
+  <button mat-button [mat-dialog-close]="true" (click)="idt.callPdfInspection(); ">Download as PDF</button>
 </mat-dialog-actions>

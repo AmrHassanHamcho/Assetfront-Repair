@@ -49,7 +49,7 @@
             <button mat-button class="submit"  mat-raised-button color="primary" (click)="upload(); calltcr()" mat-ripple> Submit</button>
 -->
             <button class="back" mat-button  mat-raised-button  (click)="backToTcr()"> Back</button>
-            <button mat-button class="submit"  mat-raised-button color="primary" [disabled]="!registerForm.valid"  (click)="upload(); success()" mat-ripple>Submit</button>
+            <button mat-button class="submit"  mat-raised-button color="primary" [disabled]="!registerForm.valid"  (click)="UploadGeneratedPDF(); success()" mat-ripple>Submit</button>
 
           </div>
        </mat-card-actions>
