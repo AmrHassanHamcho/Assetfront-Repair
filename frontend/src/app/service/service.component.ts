@@ -50,12 +50,8 @@ export class ServiceComponent implements OnInit {
 
   });
 
-
-
-
   private files: any;
   private counter = 0;
-
 
   constructor(
 
@@ -66,17 +62,16 @@ export class ServiceComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
     public idt: InputDataTransferService,
-    private service: VehiclesService
+    private service: VehiclesService,
+    private pdf: PDFService
     ){
-    this.value = service.getSerNo();
+    this.idt.value = service.getSerNo();
 
   }
 
 
   ngOnInit(): void {
   }
-
-
 
 
   getErrorMessage(){
@@ -86,13 +81,6 @@ export class ServiceComponent implements OnInit {
 
     return this.Email.hasError('email') ? 'Not a valid email' : '';
   }
-
-
-
-
-
-
-
 
 
 
@@ -117,8 +105,8 @@ export class ServiceComponent implements OnInit {
     console.log(this.selFiles);
 
   }
-  upload() {
 
+  upload() {
     if (this.selFiles !== undefined && this.selFiles !== null){
       let file;
       let contentType;
@@ -164,10 +152,46 @@ export class ServiceComponent implements OnInit {
   onBackSubmit(){
     this.router.navigate(['../home']);
   }
+
+
+  UploadGeneratedPDF() {
+    this.initIdt();
+    // calling Inspection PDF and saving it in a variable:
+    const file = this.pdf.Service(this.idt.company, this.idt.fName + ` ` + this.idt.lName,
+      this.idt.date, this.idt.hours, this.idt.coast, this.idt.comment, this.idt.Email, this.idt.phone);
+
+    const resourceId =  this.apiRequest.assetDetails[0].resourceId;
+    const contentType = 'application/pdf';
+    const params = {
+      Bucket: 'asset-repair/' + resourceId + '/' + 'Service',
+      Key: 'inspection.pdf',
+      Body: file,
+      ACL: 'public-read',
+      ContentType: contentType
+    };
+
+    this.fileService.upload(params);
+    this.onRouteSubmit();
+
+  }
+  initIdt(){
+    this.idt.date = this.registerForm.value.date.toLocaleDateString();
+    this.idt.inspectionState = this.registerForm.value.inspectionStates?.viewValue;
+    this.idt.company = this.registerForm.value.company;
+    this.idt.fName = this.registerForm.value.fName;
+    this.idt.lName = this.registerForm.value.lName;
+    this.idt.Email = this.registerForm.value.Email;
+    this.idt.phone = this.registerForm.value.phone;
+    this.idt.comment = this.registerForm.value.comment;
+    this.idt.coast = this.registerForm.value.coast;
+    this.idt.hours = this.registerForm.value.hours;
+    this.idt.value =  this.service.getSerNo();
+  }
+
+
 }
 
 //////////////////////////////////////////// DIALOG
-
 
 
 @Component({

@@ -24,6 +24,11 @@
             </mat-form-field>
 
             <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
+              <mat-label>Phone Number</mat-label>
+              <input matInput required type="number" placeholder="Phone Number" formControlName="phoneNo">
+            </mat-form-field>
+
+            <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
                 <mat-label>Email</mat-label>
                 <input matInput required placeholder="you@example.no"  formControlName="email" >
               <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
@@ -38,11 +43,9 @@
           </form>
         </mat-card-content>
       </mat-card>
+
       <mat-card-actions>
         <div  fxLayoutAlign="center">
-        <!--<button class="back" mat-button  mat-raised-button  (click)="backToTcr()"> << Back</button>
-        <button mat-button class="submit"  mat-raised-button color="primary" (click)="upload(); calltcr()" mat-ripple> Submit</button>
-        -->
           <button mat-button
                   class="back"
                   color="warn"
@@ -55,7 +58,7 @@
                   mat-raised-button
                   color="primary"
                   [disabled]="!registerForm.valid"
-                  (click)="upload(); success()"
+                  (click)="UploadGeneratedPDF(); success()"
                   mat-ripple>Submit<i class="fa fa-file"></i></button>
         </div>
       </mat-card-actions>

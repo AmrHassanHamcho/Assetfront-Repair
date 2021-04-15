@@ -3,6 +3,10 @@ import {ApiRequestService} from '../API-request/api-request.service';
 import {Router} from '@angular/router';
 import {TcrService} from './tcr.service';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {PDFService} from '../PDF/pdf.service';
+import {FileServiceService} from '../fileService/file-service.service';
+import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
+import {VehiclesService} from '../../vehicle-service/vehicle.service';
 
 @Component({
   selector: 'app-tcr',
@@ -15,7 +19,8 @@ export class TcrComponent implements OnInit,  AfterViewChecked {
               private router: Router,
               public tcr: TcrService,
               private formBuilder: FormBuilder,
-              private changeRef: ChangeDetectorRef) {
+              private changeRef: ChangeDetectorRef,
+              ) {
   }
 
   all = [];
@@ -23,10 +28,6 @@ export class TcrComponent implements OnInit,  AfterViewChecked {
   searchedSerialNo: boolean;
   ttrCopy = this.request.getAssetDetails()[0];
 
-  registerForm = this.formBuilder.group({
-    selected: ['', [Validators.required]]
-
-  });
 
   ngOnInit(): void {
 
@@ -85,4 +86,5 @@ export class TcrComponent implements OnInit,  AfterViewChecked {
   toHome() {
     this.router.navigate(['/home']);
   }
+
 }

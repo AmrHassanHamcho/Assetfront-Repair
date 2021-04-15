@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as AWS from 'aws-sdk/global';
 import * as S3 from 'aws-sdk/clients/s3';
 
 @Injectable({
@@ -11,16 +10,26 @@ export class FileServiceService {
 
   constructor() { }
 
-  private getS3Bucket(): any {
-    const bucket = new S3(
-      {
-        accessKeyId: 'AKIA3MSMUCO2MSPHGAKV',
-        secretAccessKey: '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',
-        region: 'eu-north-1'
-      }
-    );
+  public getS3Bucket(): any {
+   // const bucket = new S3(
+      // {
+        // accessKeyId: 'AKIA3MSMUCO2MSPHGAKV',
+        // secretAccessKey: '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',
+        // region: 'eu-north-1'
 
-    return bucket;
+        // accessKeyId: 'AKIA3MSMUCO2MSPHGAKV',
+        // secretAccessKey: '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',
+        //region: 'eu-north-1'
+     // }
+   // );
+        const bucket = new S3(
+          {
+            accessKeyId: 'AKIAXTNQB7H3IMBOMEGL',
+            secretAccessKey: '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',
+            region: 'eu-north-1'
+          }
+        );
+        return bucket;
   }
 
   uploadFile(file, FOLDER, resourceId) {
@@ -34,7 +43,7 @@ export class FileServiceService {
     };
 
 
-    this.getS3Bucket().upload(params, function (err, data) {
+    this.getS3Bucket().upload(params, (err, data) => {
       if (err) {
         console.log('There was an error uploading your file: ', err);
         return false;
@@ -49,7 +58,21 @@ export class FileServiceService {
 
 
   }
+  public upload( params){
+    this.getS3Bucket().upload(params, (err, data) => {
+      if (err) {
+        console.log('There was an error uploading your file: ', err);
+        return false;
+      }else{
+        console.log('Successfully uploaded file.', data);
+        return true;
+      }
+    });
 
+
+    this.fileUploaded = true;
+
+  }
   oneFileUploadSuccess(){
     return this.fileUploaded;
   }

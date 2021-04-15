@@ -66,9 +66,6 @@ export class PDFService  {
     const day = ('0' + now.getDate()).slice(-2);
     const month = ('0' + (now.getMonth() + 1)).slice(-2);
     const Vintoday = (VINNum) + '_' + (day) + '-' + (month) + '-' + now.getFullYear() + '.pdf';
-
-    // console.log(Vim_today);
-    // this.doc.save(this.newPDF.DateToday('VinNumber'));
     return Vintoday;
   }
 
@@ -90,15 +87,19 @@ export class PDFService  {
     this.doc.setFontSize(7);
   }
 
-  PlaceForm(json: any, Company, Name, Date, Email, PhoneNR, VINNumber){
+  PlaceForm(json: any, Company, Name, Date, Email, PhoneNR){
+    this.Reset();
+    this.doc = null;
     this.doc = new jsPDF();
     this.Person(Company, Name, Date, Email, PhoneNR);
+
     try {
       this.doc.addImage(this.download(), 'png', 140, 30, 30, 30);
     }
     catch (error) {
       console.error('Unable to generate QR-code', error);
     }
+
     this.doc.setFontSize(7);
     this.doc.setLineWidth(0);
     // this.Rectangle()
@@ -141,10 +142,9 @@ export class PDFService  {
 
     this.HeaderFooter();
 
-    this.doc.save(this.DateToday(VINNumber));
+    const file = this.doc.output('arraybuffer');
 
-    this.Reset();
-    this.doc = null;
+    return file;
   }
 
 
@@ -161,8 +161,8 @@ export class PDFService  {
 
   download() {
     const qrcode = document.getElementById('qrcode');
-
-    return  this.imageData = this.getBase64Image(qrcode.firstChild.firstChild);
+    this.imageData = this.getBase64Image(qrcode.firstChild.firstChild);
+    return  this.imageData;
   }
 
   LongText(Message){
@@ -171,9 +171,11 @@ export class PDFService  {
     this.doc.text(split, this.PdfStartX, this.PdfStartY += 10);
   }
 
-  Service(Company, Name, Date, Hours, Cost, Comment, Email, PhoneNr, VINNumber){
+  Service(Company, Name, Date, Hours, Cost, Comment, Email, PhoneNr){
+    this.Reset();
+    this.doc = null;
     this.doc = new jsPDF();
-    // this.Reset();
+
 
     this.HeaderFooter();
     this.doc.setFontSize(12);
@@ -191,16 +193,13 @@ export class PDFService  {
       console.log('Error');
     }
 
-
-    this.doc.save(this.DateToday(VINNumber));
-    this.doc = null;
-
-    this.Reset();
-
-
+    const file = this.doc.output('arraybuffer');
+    return file;
   }
 
-  Inspection(Company, Name, Date, State, Email, PhoneNR, VINNumber){
+  Inspection(Company, Name, Date, State, Email, PhoneNR){
+    this.doc = null;
+    this.Reset();
 
     this.doc = new jsPDF();
     this.Reset();
@@ -214,9 +213,9 @@ export class PDFService  {
     }
     this.Person(Company, Name, Date, Email, PhoneNR);
     this.doc.text('State: ' + State, this.PdfStartX, this.PdfStartY);
-    this.doc.save(this.DateToday(VINNumber));
-    this.doc = null;
-    this.Reset();
+    const file = this.doc.output('arraybuffer');
+
+    return file;
   }
 
   Reset(){
@@ -228,6 +227,10 @@ export class PDFService  {
     this.MaxWidth = 175;
     this.MaxHight = 10;
     this.Page = 1;
+  }
+
+  Save(VINNumber){
+    this.doc.save(this.DateToday(VINNumber));
   }
 }
 
