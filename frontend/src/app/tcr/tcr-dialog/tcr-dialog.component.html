@@ -4,8 +4,8 @@
 
   <mat-card-actions >
     <div fxLayoutAlign="space-between even end">
-    <button mat-dialog-close mat-dialog-close="true" > Download PDF </button>
-      <button mat-dialog-close mat-dialog-close = "false">Exit</button>
+    <button mat-dialog-close [mat-dialog-close]="true" > Download PDF </button>
+      <button mat-dialog-close [mat-dialog-close] = "false">Exit</button>
     </div>
   </mat-card-actions>
 </div>

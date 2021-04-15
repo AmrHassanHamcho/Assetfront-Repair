@@ -44,6 +44,7 @@ export class PersonalDataComponent implements OnInit {
     fName: [''],
     lName: [''],
     date: [''],
+    phoneNo: [''],
   });
 
   ngOnInit(): void {
@@ -99,27 +100,11 @@ export class PersonalDataComponent implements OnInit {
     this.router.navigate(['/tcr']);
   }
 
-  /*allFilled(){
-    for (let tcri = 0; tcri < this.ttrCopy.tcr.length; tcri++){
-      for ( let cpi = 0; cpi < this.ttrCopy.tcr[tcri].checkpoint.length; cpi ++){
-        this.all[cpi] = false;
-        if (this.ttrCopy.tcr[tcri].checkpoint[cpi].value > -1){
-
-        }
-
-      }
-
-    }
-
-  }
-*/
-
-  calltcr() {
+  calltcr(){
     const person = this.registerForm.value;
     this.pdf.PlaceForm(this.tcr.getTcr().tcr, person.workshop, person.fName + ' '
-      + person.lName, person.date.toLocaleDateString(), person.email, ' 4554 ', this.vehicleservice.getSerNo());
+      + person.lName, person.date.toLocaleDateString(), person.email, ' 4554 ');
     // (json: any, Company, Name, Date, Email, PhoneNR)
-
   }
 
 
@@ -140,10 +125,6 @@ export class PersonalDataComponent implements OnInit {
        this.toSearch();
      }
    });
-  }
-  downloadAsPdf(){
-    console.log('Downloading PDF...');
-
   }
   toSearch() {
     console.log('to search component...');
