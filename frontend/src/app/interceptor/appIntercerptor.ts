@@ -31,8 +31,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
               errorMessage = `Error: ${error.error.message}`;
           }else {
             // if the error is server-side error
-              errorMessage = `Error code:  ${error.status}\nMessage:  Access denied!
-             pls check your internet connection`;
+              errorMessage = `Error code:  ${error.status}\nMessage:  Access denied! Something went wrong`;
           }
            window.alert(errorMessage);
            return throwError(errorMessage);
