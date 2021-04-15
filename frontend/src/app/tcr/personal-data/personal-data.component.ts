@@ -100,7 +100,7 @@ export class PersonalDataComponent implements OnInit {
     this.router.navigate(['/tcr']);
   }
 
-  calltcr() {
+  calltcr(){
     const person = this.registerForm.value;
     this.pdf.PlaceForm(this.tcr.getTcr().tcr, person.workshop, person.fName + ' '
       + person.lName, person.date.toLocaleDateString(), person.email, ' 4554 ');

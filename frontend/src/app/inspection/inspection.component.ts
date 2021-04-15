@@ -3,7 +3,6 @@ import {FileServiceService} from '../fileService/file-service.service';
 import {ApiRequestService} from '../API-request/api-request.service';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
-import {DialogContentExampleDialog, ServiceComponent} from '../service/service.component';
 import {MatDialog} from '@angular/material/dialog';
 import validate = WebAssembly.validate;
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
