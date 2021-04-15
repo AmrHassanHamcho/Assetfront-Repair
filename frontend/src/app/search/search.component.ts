@@ -13,6 +13,7 @@ import {VehiclesService} from '../../vehicle-service/vehicle.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
+
   constructor(
     public request: ApiRequestService,
     private dialog: MatDialog,
@@ -23,13 +24,18 @@ export class SearchComponent implements OnInit {
   qrResultString: string;
   ShowHide = false;
   ngOnInit(): void {
-
   }
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    this.dialog.open(DialogWindowComponent, dialogConfig);
+    if (this.vehicle.getSerNo() !== undefined){
+      dialogConfig.autoFocus = true;
+      this.dialog.open(DialogWindowComponent, dialogConfig);
+    }
+      else{
+        this.dialog.closeAll();
+        dialogConfig.autoFocus = false;
+    }
   }
 
   showDiv(){
