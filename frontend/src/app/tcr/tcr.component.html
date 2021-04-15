@@ -1,3 +1,4 @@
+
 <div *ngIf="onSuccessfullSearch()">
   <div>
     <mat-card>
@@ -20,7 +21,7 @@
                 <h1 *ngFor="let checkp of ttrCopy.tcr[indexTcr].checkpoint; let indexCp = index">
                   <mat-card class="card" id="card">
                     <mat-card-content>
-                      <h1 id="subTitle">{{ttrCopy.tcr[indexTcr].checkpoint[indexCp].name }}
+                      <h1 id="subTitle" >{{ttrCopy.tcr[indexTcr].checkpoint[indexCp].name }}
                         <p id="required" style="color: red">
                           {{'*'}}
                         </p>
@@ -40,7 +41,7 @@
                           {{printHeleArray()}}
                           <div>{{allFilled()}}</div>
                           <div class="col-lg-7">
-                            {{ttrCopy.tcr[indexTcr].checkpoint[indexCp].options[value].description}}
+                             {{ttrCopy.tcr[indexTcr].checkpoint[indexCp].options[value].description}}
                           </div>
                         </div>
                       </h2>
