@@ -42,15 +42,7 @@ export class InputDataTransferService{
       this.inspectionState,
       this.Email,
       this.phone);
-    this.PDF.Save('1234');
-    console.log('Here: ' + this.company,
-        this.fName + ' ' +
-        this.lName,
-        this.date,
-        this.inspectionState,
-        this.Email,
-        this.phone,
-    this.value);
+    this.PDF.Save(this.value);
 
   }
   callPdfService() {
