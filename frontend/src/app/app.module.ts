@@ -39,7 +39,6 @@ import { TestComponent } from './test/test.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {MaterialFileInputModule} from 'ngx-material-file-input';
 import { PersonalDataComponent } from './tcr/personal-data/personal-data.component';
-import { QRCodeModule } from 'angular2-qrcode';
 import { NgxQRCodeModule } from '@techiediaries/ngx-qrcode';
 import {PDFService} from './PDF/pdf.service';
 @NgModule({
@@ -87,7 +86,6 @@ import {PDFService} from './PDF/pdf.service';
         MatNativeDateModule,
         FlexLayoutModule,
         MaterialFileInputModule,
-        QRCodeModule,
         NgxQRCodeModule
     ],
 
