@@ -1,15 +1,19 @@
-
-.mat-button{
-margin: 3rem;
+mat-card{
+  mat-card-title{
+    align-items: center;
+    color: grey;
+  }
+  .form-field{
+    width: 100%;
+  }
+  mat-card-actions{
+    button{
+      .fa-arrow-left{
+        margin-right: 1rem;
+      }
+      .fa-file{
+        margin-left: 1rem;
+      }
+    }
+  }
 }
-.form-field{
-  width: 100%;
-}
-.card{
-  align-items: center;
-  background-color: grey;
-}
-.back{
-  background-color: aqua;
-}
-
