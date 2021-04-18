@@ -11,14 +11,21 @@
     </mat-card-content>
     <mat-card-actions>
       <div class="row justify-content-center">
-        <button mat-button type="submit" (click)="acceptVehicle()" mat-raised-button>
+        <button class="btn btn-success" mat-button type="submit" (click)="acceptVehicle()" mat-raised-button>
           <i class="fa fa-check" aria-hidden="true"></i>
         </button>
-        <button mat-button type="submit" (click)="deniedVehicle()" mat-raised-button>
-          <i class="fa fa-ban" aria-hidden="true"></i>
+        <button class="btn-danger" mat-button type="submit" (click)="deniedVehicle()" mat-raised-button>
+          <i class="fa fa-window-close" aria-hidden="true"></i>
         </button>
       </div>
     </mat-card-actions>
   </mat-card>
 </div>
 
+<div >
+  <h1 mat-dialog-title>Dialog with elements</h1>
+  <div mat-dialog-content>This dialog showcases the title, close, content and actions elements.</div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </div>
+</div>

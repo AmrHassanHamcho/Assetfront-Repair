@@ -6,12 +6,10 @@
 
   <h3>Service Hours</h3>
   <p>{{idf.hours}}</p>
-
   <hr>
 
   <h3>Cost</h3>
   <p>{{idf.coast}}</p>
-
   <hr>
 
   <h3>Comment</h3>
@@ -19,7 +17,6 @@
   <hr>
 
   <h2 mat-dialog-actions> Personal Details</h2>
-
   <h3>First Name</h3>
   <p>{{idf.fName}}</p>
   <hr>
@@ -28,9 +25,7 @@
   <p>{{idf.lName}}</p>
   <hr>
 
-
   <h3>Email</h3>
-
   <p>{{idf.Email}}</p>
   <hr>
 
@@ -38,13 +33,14 @@
   <p>{{idf.company}}</p>
   <hr>
 
-
   <h3>Tlf number</h3>
   <p>{{idf.phone}}</p>
-
+  <hr>
 </mat-dialog-content>
-<mat-dialog-actions >
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" (click)="idf.callPdfService()" >Download as PDF</button>
 
+<mat-dialog-actions>
+  <div fxLayoutAlign="center">
+    <button color="warn" mat-button mat-dialog-close><i class="fa fa-window-close"></i>Cancel</button>
+    <button mat-button [mat-dialog-close]="true" (click)="idf.callPdfService()" ><i class="fa fa-download"></i>Download as PDF</button>
+  </div>
 </mat-dialog-actions>

@@ -1,13 +1,13 @@
 <div class="row mx-0" id="searchBar" >
-  <div class="col- col-md-5 col-lg-5 mx-auto" id="col">
-    <label id="label">Please enter VIN number!</label>
+  <div class="col-12 col-md-10 col-lg-8 mx-auto" id="col">
+    <label id="label"></label>
     <input
       #serialNo
       id="Search_id"
       type="text"
       value = ""
       class="form-control"
-      placeholder="Search ..."
+      placeholder="Please enter VIN number!"
       required="required">
     <p *ngIf="request.assetDetails.length === 0 " id="errorMessage">
     {{request.getErrorMessage()}}
