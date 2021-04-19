@@ -3,21 +3,39 @@
     <label id="label">Please enter VIN number!</label>
     <input
       #serialNo
+      id="Search_id"
       type="text"
+      value = ""
       class="form-control"
-      placeholder="Search ...">
-
-    <p *ngIf="request.assetDetails.length === 0" id="errorMessage">
+      placeholder="Search ..."
+      required="required">
+    <p *ngIf="request.assetDetails.length === 0 " id="errorMessage">
     {{request.getErrorMessage()}}
     </p>
     <div class="input-group">
       <span class="input-group-btn mx-auto">
         <button
-          (click)="openDialog(); request.setSerialNo(serialNo.value);"
-          class="btn btn-secondary"
+          (click)=" request.setSerialNo(serialNo.value); openDialog();"
+          class="btn"
           type="submit"
-          id="submit"
-        >Search</button>
+          id="submit">
+          <i class="fa fa-search " aria-hidden="true"></i>
+          Search
+        </button>
+
+        <button
+          (click)="showDiv()"
+          class="btn"
+          id="QR-Button">
+          <i class="fa fa-camera" aria-hidden="true"></i>
+          QR-Code
+        </button>
+
+      <div *ngIf="ShowHide">
+        <div id="QR-Window" style="display:block;">
+          <zxing-scanner id="QR-Reader " (scanSuccess)="onCodeResult($event)"></zxing-scanner>
+        </div>
+      </div>
       </span>
     </div>
   </div>

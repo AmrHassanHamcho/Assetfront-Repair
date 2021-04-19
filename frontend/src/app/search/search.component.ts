@@ -1,5 +1,6 @@
 
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation, AfterViewInit, ViewChild} from '@angular/core';
+
 import {ApiRequestService} from '../API-request/api-request.service';
 import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
 import {DialogWindowComponent} from './dialog-window/dialog-window.component';
@@ -9,7 +10,7 @@ import {VehiclesService} from '../../vehicle-service/vehicle.service';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
-  styleUrls: ['./search.component.scss']
+  styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
 
@@ -17,18 +18,43 @@ export class SearchComponent implements OnInit {
     public request: ApiRequestService,
     private dialog: MatDialog,
     public vehicle: VehiclesService,
-    ) {
+  ) {
   }
 
+  qrResultString: string;
+  ShowHide = false;
   ngOnInit(): void {
-
   }
 
   openDialog() {
-      const dialogConfig = new MatDialogConfig();
+    const dialogConfig = new MatDialogConfig();
+    if (this.vehicle.getSerNo() !== undefined){
       dialogConfig.autoFocus = true;
       this.dialog.open(DialogWindowComponent, dialogConfig);
+    }
+      else{
+        this.dialog.closeAll();
+        dialogConfig.autoFocus = false;
+    }
   }
+
+  showDiv(){
+    if (!this.ShowHide){
+    this.ShowHide = true;
+    }
+    else{
+      this.ShowHide = false;
+      // document.getElementById('QR-Window').style.display = 'none';
+      console.log(this.ShowHide);
+    }
+  }
+
+  onCodeResult(resultString: string) {
+    this.qrResultString = resultString;
+    (document.getElementById('Search_id') as HTMLInputElement).value = resultString;
+
+  }
+
   /**
    * @param value of serial number entered by a user
    */
@@ -45,5 +71,5 @@ export class SearchComponent implements OnInit {
 
   // }
 
-
 }
+

@@ -12,7 +12,8 @@ import {Inject} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
 import {daLocale} from 'ngx-bootstrap/chronos';
-import {PDFService} from "../PDF/pdf.service";
+import {PDFService} from '../PDF/pdf.service';
+import {VehiclesService} from '../../vehicle-service/vehicle.service';
 
 
 
@@ -29,6 +30,7 @@ export class ServiceComponent implements OnInit {
   selFiles: FileList;
   fileName = '';
   extension = '';
+  value;
 
 
 
@@ -48,12 +50,8 @@ export class ServiceComponent implements OnInit {
 
   });
 
-
-
-
   private files: any;
   private counter = 0;
-
 
   constructor(
 
@@ -63,17 +61,17 @@ export class ServiceComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private router: Router,
-    public idt: InputDataTransferService
+    public idt: InputDataTransferService,
+    private service: VehiclesService,
+    private pdf: PDFService
     ){
+    this.idt.value = service.getSerNo();
 
   }
 
 
   ngOnInit(): void {
-   // this.buildForm();
   }
-
-
 
 
   getErrorMessage(){
@@ -83,13 +81,6 @@ export class ServiceComponent implements OnInit {
 
     return this.Email.hasError('email') ? 'Not a valid email' : '';
   }
-
-
-
-
-
-
-
 
 
 
@@ -114,8 +105,8 @@ export class ServiceComponent implements OnInit {
     console.log(this.selFiles);
 
   }
-  upload() {
 
+  upload() {
     if (this.selFiles !== undefined && this.selFiles !== null){
       let file;
       let contentType;
@@ -142,6 +133,9 @@ export class ServiceComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
+      if(result){
+        this.pdf.Save(this.idt.value);
+      }
     });
 
     ////// Send data over////
@@ -155,15 +149,53 @@ export class ServiceComponent implements OnInit {
     this.idt.Email = this.registerForm.value.Email;
     this.idt.phone = this.registerForm.value.phone;
 
+    this.idt.value = this.service.getSerNo();
   }
 
   onBackSubmit(){
-
     this.router.navigate(['../home']);
   }
+
+
+  UploadGeneratedPDF() {
+    this.initIdt();
+    // calling Inspection PDF and saving it in a variable:
+    const file = this.pdf.Service(this.idt.company, this.idt.fName + ` ` + this.idt.lName,
+      this.idt.date, this.idt.hours, this.idt.coast, this.idt.comment, this.idt.Email, this.idt.phone);
+
+    const resourceId =  this.apiRequest.assetDetails[0].resourceId;
+    const contentType = 'application/pdf';
+    const params = {
+      Bucket: 'asset-repair/' + resourceId + '/' + 'Service',
+      Key: 'inspection.pdf',
+      Body: file,
+      ACL: 'public-read',
+      ContentType: contentType
+    };
+
+    this.fileService.upload(params);
+    this.onRouteSubmit();
+
+  }
+  initIdt(){
+    this.idt.date = this.registerForm.value.date.toLocaleDateString();
+    this.idt.inspectionState = this.registerForm.value.inspectionStates?.viewValue;
+    this.idt.company = this.registerForm.value.company;
+    this.idt.fName = this.registerForm.value.fName;
+    this.idt.lName = this.registerForm.value.lName;
+    this.idt.Email = this.registerForm.value.Email;
+    this.idt.phone = this.registerForm.value.phone;
+    this.idt.comment = this.registerForm.value.comment;
+    this.idt.coast = this.registerForm.value.coast;
+    this.idt.hours = this.registerForm.value.hours;
+    this.idt.value =  this.service.getSerNo();
+  }
+
+
 }
 
 //////////////////////////////////////////// DIALOG
+
 
 @Component({
   selector: 'app-service',
@@ -172,8 +204,9 @@ export class ServiceComponent implements OnInit {
 //  providers: [ServiceComponent],
 })
 
-
 export class DialogContentExampleDialog {
   constructor(public idf: InputDataTransferService) {
   }
 }
+
+

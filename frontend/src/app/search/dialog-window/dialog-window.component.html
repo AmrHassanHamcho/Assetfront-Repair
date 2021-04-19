@@ -1,24 +1,24 @@
-<h1 *ngFor="let vehicleInfo of request.assetDetails">
-  <div class="row justify-content-center" id="card-row">
-    <mat-card class="card">
-      <mat-card-header>
-        <mat-card-title id="title">{{vehicleInfo.productClass.title}}</mat-card-title>
-      </mat-card-header>
-      <img mat-card-image src="{{vehicleInfo.mainImageUrl}}" alt="Machine Image" id="vehicle-image">
-      <mat-card-actions>
-        <div class="row justify-content-center">
-          <h1>Is this the right vehicle?</h1>
-        </div>
-        <div class="row justify-content-center">
-          <div class="col-md-4">
-            <button mat-button id="tcr" type="submit" (click)="acceptVehicle()" mat-raised-button color="warn">Yes
-            </button>
-          </div>
-          <div class="col-md-4">
-            <button mat-button id="service" type="submit" (click)="deniedVehicle()" mat-raised-button color="primary">No</button>
-          </div>
-        </div>
-      </mat-card-actions>
-    </mat-card>
-  </div>
-</h1>
+<div class="row justify-content-center" *ngFor="let vehicleInfo of request.assetDetails" id="dialog">
+  <mat-card class="card">
+    <mat-card-header>
+      <mat-card-title id="title">{{vehicleInfo.productClass.title}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{vehicleInfo.mainImageUrl}}" alt="Machine Image" id="vehicle-image" onerror="this.style.display='none'">
+    <mat-card-content>
+      <div class="row justify-content-center">
+        <h2>Is this the right vehicle?</h2>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="row justify-content-center">
+        <button mat-button type="submit" (click)="acceptVehicle()" mat-raised-button>
+          <i class="fa fa-check" aria-hidden="true"></i>
+        </button>
+        <button mat-button type="submit" (click)="deniedVehicle()" mat-raised-button>
+          <i class="fa fa-ban" aria-hidden="true"></i>
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>
+

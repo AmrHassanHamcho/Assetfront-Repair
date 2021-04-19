@@ -10,7 +10,10 @@ import {ApiRequestService} from '../API-request/api-request.service';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(public request: ApiRequestService) { }
+  constructor(
+    public request: ApiRequestService,
+    public vehicle: VehiclesService,
+  ) { }
 
   ngOnInit(): void {
   }

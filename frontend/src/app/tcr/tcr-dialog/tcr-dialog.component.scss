@@ -1,0 +1,15 @@
+mat-card{
+  h2{
+    color: green;
+  }
+  mat-card-actions{
+    button{
+      .fa-download{
+        margin-right: 4px;
+      }
+      .fa-times{
+        margin-right: 4px;
+      }
+    }
+  }
+}
