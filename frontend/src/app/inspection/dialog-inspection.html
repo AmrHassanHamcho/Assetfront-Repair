@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>The application has been submitted successfully!</h2>
+<h2 mat-dialog-title id="dialog-title">The application has been submitted successfully!</h2>
 <mat-dialog-content class="mat-typography">
   <h3>Inspection Date</h3>
   <p> {{idt.date}} </p>
@@ -32,9 +32,20 @@
 </mat-dialog-content>
 
 <mat-dialog-actions >
-  <div fxLayoutAlign="center">
-    <button color="warn" mat-button mat-dialog-close><i class="fa fa-window-close"></i>Cancel</button>
-    <button mat-button [mat-dialog-close]="true" (click)="idt.callPdfInspection();"><i class="fa fa-download"></i>Download as PDF</button>
+  <div fxLayoutAlign="space-between even end" id="buttons">
+    <button
+      class="btn btn-success"
+      mat-button
+      mat-raised-button
+      [mat-dialog-close]="true"
+      (click)="idt.callPdfInspection();">
+      <i class="fa fa-download"></i>Download as PDF</button>
+
+    <button
+      class="btn btn-danger"
+      mat-button
+      mat-raised-button
+      mat-dialog-close>
+      <i class="fa fa-window-close"></i>Cancel</button>
   </div>
 </mat-dialog-actions>
-
