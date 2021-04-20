@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {SearchComponent} from '../search/search.component';
 import { VehiclesService} from '../../vehicle-service/vehicle.service';
 import {ApiRequestService} from '../API-request/api-request.service';
 
@@ -9,13 +8,17 @@ import {ApiRequestService} from '../API-request/api-request.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-
+  workingPlaceholder = '../../assets/images/default-image.jpg';
   constructor(
     public request: ApiRequestService,
     public vehicle: VehiclesService,
   ) { }
 
   ngOnInit(): void {
+  }
+
+  onLoaded(isFallback: boolean) {
+    console.log(isFallback);
   }
 
   exportTCR(): void {
