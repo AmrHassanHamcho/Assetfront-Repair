@@ -119,7 +119,6 @@ import { TcrDialogComponent } from './tcr/tcr-dialog/tcr-dialog.component';
     MaterialFileInputModule,
     NgxQRCodeModule,
     MatCardModule,
-
     ],
 
   providers: [VehiclesService,

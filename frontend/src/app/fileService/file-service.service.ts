@@ -32,10 +32,10 @@ export class FileServiceService {
         return bucket;
   }
 
-  uploadFile(file, FOLDER, resourceId) {
+    uploadFile(file, FOLDER, resourceId) {
 
     const params = {
-      Bucket: 'assetfront-repair/' + resourceId + '/' + FOLDER ,
+      Bucket: 'assetfront-repair/' + resourceId + '/' + FOLDER,
       Key:  file.name,
       Body: file,
       ACL: 'public-read',
@@ -55,7 +55,6 @@ export class FileServiceService {
 
 
     this.fileUploaded = true;
-
 
   }
   public upload( params){

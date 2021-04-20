@@ -1,51 +1,65 @@
-<div class="row justify-content-center" id="home" *ngFor="let vehicleInfo of request.assetDetails">
+<div class="row justify-content-center" id="home" *ngFor="let vehicleInfo of apiRequest.assetDetails">
   <mat-card>
-      <mat-card-header>
-        <mat-card-title id="title">{{vehicleInfo.productClass.title}}</mat-card-title>
-      </mat-card-header>
-      <img mat-card-image src="{{vehicleInfo.mainImageUrl}}" alt="Image of a Vehicle" id="vehicle-image" onerror="this.style.display='none'">
-      <mat-card-content>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">{{'VIN Number: ' + vehicle.getSerNo()}}<br></li>
-          <li class="list-group-item">{{'Product Id: ' + vehicleInfo.productClass.id}}<br></li>
-        </ul>
-      </mat-card-content>
-      <mat-card-actions class="justify-content-center">
+    <mat-card-header>
+      <mat-card-title id="title">{{vehicleInfo.productClass.title}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{vehicleInfo.mainImageUrl}}" alt="Image of a Vehicle" id="vehicle-image" onerror="this.style.display='none'">
+    <mat-card-content>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{'VIN Number: ' + vehicle.getSerNo()}}<br></li>
+        <li class="list-group-item">{{'Product Id: ' + vehicleInfo.productClass.id}}<br></li>
+      </ul>
+    </mat-card-content>
+    <mat-card-actions class="justify-content-center">
 
-        <div class="row">
-          <button mat-button type="submit" (click)="exportTCR()" mat-raised-button>
-            <i class="fa fa-download" aria-hidden="true"></i>
-            TCR
-          </button>
+      <div class="row">
+        <button mat-button type="submit"  mat-raised-button>
+          <i class="fa fa-download" aria-hidden="true"></i>
+          TCR
+        </button>
 
-          <button mat-button type="submit" (click)="exportService()" mat-raised-button>
-            <i class="fa fa-download" aria-hidden="true"></i>
-            Service
-          </button>
+        <button mat-button type="submit" (click)="exportService()" mat-raised-button>
+          <i class="fa fa-download" aria-hidden="true"></i>
+          Service
+        </button>
+      <button mat-button type="submit" (click)="exportInspection()" mat-raised-button>
+        <i class="fa fa-download" aria-hidden="true"></i>
+          Inspection
+     </button>
 
-          <button mat-button type="submit" (click)="exportInspection()" mat-raised-button>
-            <i class="fa fa-download" aria-hidden="true"></i>
-            Inspection
-          </button>
-        </div>
 
-        <div class="row">
-          <button mat-button type="submit" (click)="exportTCR()" mat-raised-button>
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-            Send TCR
-          </button>
 
-          <button mat-button type="submit" (click)="exportService()" mat-raised-button>
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-            Send Service
-          </button>
 
-          <button mat-button type="submit" (click)="exportInspection()" mat-raised-button>
-            <i class="fa fa-paper-plane" aria-hidden="true"></i>
-            Send Inspection
-          </button>
-        </div>
 
-      </mat-card-actions>
-    </mat-card>
+
+
+
+      </div>
+
+      <div class="row">
+        <button mat-button type="submit" (click)="exportTCR()" mat-raised-button>
+          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          Send TCR
+        </button>
+
+        <button mat-button type="submit" (click)="exportService()" mat-raised-button>
+          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          Send Service
+        </button>
+
+        <button mat-button type="submit" (click)="exportInspection()" mat-raised-button>
+          <i class="fa fa-paper-plane" aria-hidden="true"></i>
+          Send Inspection
+        </button>
+      </div>
+
+    </mat-card-actions>
+  </mat-card>
 </div>
+<!--         <a class="btn btn-secondary dropdown-toggle" href="#" (click)="getListObject()" role="button" id="dropdown1MenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--          Download inspection-->
+<!--          </a>-->
+
+<!--      <div *ngFor=" let file of data.Contents.Key; let i = index" class="dropdown-menu" aria-labelledby="dropdownMenuLink">-->
+<!--      <a class="dropdown-item">{{i}}</a>-->
+<!--        </div>-->

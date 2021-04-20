@@ -1,11 +1,7 @@
 import {AfterViewInit, Component, ElementRef, Injectable, OnInit, ViewChild} from '@angular/core';
-
 import {HttpClient, HttpClientModule} from '@angular/common/http';
-import * as AWS from 'aws-sdk/global';
-import * as S3 from 'aws-sdk/clients/s3';
 import {FileServiceService} from '../fileService/file-service.service';
 import {ApiRequestService} from '../API-request/api-request.service';
-
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
 import {Inject} from '@angular/core';
@@ -26,11 +22,11 @@ import {VehiclesService} from '../../vehicle-service/vehicle.service';
 })
 export class ServiceComponent implements OnInit {
 
-  form: FormGroup;
-  selFiles: FileList;
-  fileName = '';
-  extension = '';
-  value;
+  private form: FormGroup;
+  private selFiles: FileList;
+  private fileName = '';
+  private extension = '';
+  private value;
 
 
 
@@ -107,6 +103,7 @@ export class ServiceComponent implements OnInit {
   }
 
   upload() {
+   const resourceId = this.apiRequest.getAssetDetails()[0].resourceId;
     if (this.selFiles !== undefined && this.selFiles !== null){
       let file;
       let contentType;
@@ -116,7 +113,15 @@ export class ServiceComponent implements OnInit {
        file = this.selFiles.item(index);
        contentType = file.type;
        name = file.name;
-       this.fileService.uploadFile(file, 'Service', this.apiRequest.assetDetails[0].resourceId);
+        const params = {
+
+          Bucket: 'asset-repair/' + resourceId + '/' + 'Service',
+          Key:  file.name,
+          Body: file,
+          ACL: 'public-read',
+          ContentType: file.type
+        };
+       this.fileService.upload(params);
        this.onRouteSubmit();
      }
     }
@@ -159,6 +164,7 @@ export class ServiceComponent implements OnInit {
 
   UploadGeneratedPDF() {
     this.initIdt();
+    const fileName = this.pdf.DateToday(this.service.getSerNo());
     // calling Inspection PDF and saving it in a variable:
     const file = this.pdf.Service(this.idt.company, this.idt.fName + ` ` + this.idt.lName,
       this.idt.date, this.idt.hours, this.idt.coast, this.idt.comment, this.idt.Email, this.idt.phone);
@@ -167,7 +173,7 @@ export class ServiceComponent implements OnInit {
     const contentType = 'application/pdf';
     const params = {
       Bucket: 'asset-repair/' + resourceId + '/' + 'Service',
-      Key: 'inspection.pdf',
+      Key: fileName,
       Body: file,
       ACL: 'public-read',
       ContentType: contentType

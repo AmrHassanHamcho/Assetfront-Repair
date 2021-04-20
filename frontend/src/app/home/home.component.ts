@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {SearchComponent} from '../search/search.component';
 import { VehiclesService} from '../../vehicle-service/vehicle.service';
 import {ApiRequestService} from '../API-request/api-request.service';
+import {FileServiceService} from "../fileService/file-service.service";
+import { createPopper } from '@popperjs/core';
 
 @Component({
   selector: 'app-home',
@@ -9,11 +11,15 @@ import {ApiRequestService} from '../API-request/api-request.service';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  data : any;
 
   constructor(
-    public request: ApiRequestService,
+    public apiRequest: ApiRequestService,
     public vehicle: VehiclesService,
-  ) { }
+    public fileService: FileServiceService,
+  ) {
+
+  }
 
   ngOnInit(): void {
   }
@@ -29,4 +35,27 @@ export class HomeComponent implements OnInit {
   exportService(): void {
     alert('Export Service');
   }
+
+  getListObject() {
+    const resourceId = this.apiRequest.getAssetDetails()[0].resourceId;
+    const params = { // Bucket info
+
+
+      Bucket: 'asset-repair' ,
+      Delimiter: '/',
+        Prefix: resourceId + '/inspection/',
+    }
+
+    this.fileService.getS3Bucket().listObjects(params, (err, data) => {
+      if(err){
+        console.log(err);
+      }else {
+        console.log(data);
+        console.log('type:  '+typeof data);
+        this.data = data;
+
+      }
+
+    })
+   }
 }

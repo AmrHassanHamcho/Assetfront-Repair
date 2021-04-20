@@ -71,7 +71,7 @@
                       [errorCorrectionLevel]="idt.correctionLevel"
                       [value]="idt.value"
                       cssClass="shadow"></ngx-qrcode>
-          <button  mat-button  mat-raised-button [disabled]="!registerForm.valid"  color="primary" (click)="UploadGeneratedPDF()" mat-ripple> Submit</button>
+          <button  mat-button  mat-raised-button [disabled]="!registerForm.valid"  color="primary" (click)="UploadGeneratedPDF(); upload()" mat-ripple> Submit</button>
 
         </div>
         <div class="col">
