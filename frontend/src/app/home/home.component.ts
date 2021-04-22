@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {SearchComponent} from '../search/search.component';
 import { VehiclesService} from '../../vehicle-service/vehicle.service';
 import {ApiRequestService} from '../API-request/api-request.service';
 import {FileServiceService} from "../fileService/file-service.service";
 import { createPopper } from '@popperjs/core';
+import {HomeService} from "./home.service";
 
 @Component({
   selector: 'app-home',
@@ -12,16 +12,23 @@ import { createPopper } from '@popperjs/core';
 })
 export class HomeComponent implements OnInit {
   data : any;
-
+  workingPlaceholder = '../../assets/images/default-image.jpg';
+  public commonPrefix;
+  private prefix: any;
   constructor(
     public apiRequest: ApiRequestService,
     public vehicle: VehiclesService,
     public fileService: FileServiceService,
+    public home : HomeService,
   ) {
 
   }
 
   ngOnInit(): void {
+  }
+
+  onLoaded(isFallback: boolean) {
+    console.log(isFallback);
   }
 
   exportTCR(): void {
@@ -33,29 +40,26 @@ export class HomeComponent implements OnInit {
   }
 
   exportService(): void {
-    alert('Export Service');
-  }
+    this.home.getListObject('Service');
+    this.prefix = this.home.lastModified;
+    console.log('this is prefix' + this.prefix);
+    if(this.prefix !== ''){
+      const params = { // Bucket info
+        Bucket: 'asset-repair' ,
+        Delimiter: '/',
+        Prefix: this.prefix,
+      }
+      this.home.listFiles(params);
 
-  getListObject() {
-    const resourceId = this.apiRequest.getAssetDetails()[0].resourceId;
-    const params = { // Bucket info
-
-
-      Bucket: 'asset-repair' ,
-      Delimiter: '/',
-        Prefix: resourceId + '/inspection/',
     }
 
-    this.fileService.getS3Bucket().listObjects(params, (err, data) => {
-      if(err){
-        console.log(err);
-      }else {
-        console.log(data);
-        console.log('type:  '+typeof data);
-        this.data = data;
+    else {
+      console.log("error");
+    }
 
-      }
 
-    })
-   }
+
+  }
+
+
 }

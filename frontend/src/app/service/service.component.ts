@@ -4,12 +4,12 @@ import {FileServiceService} from '../fileService/file-service.service';
 import {ApiRequestService} from '../API-request/api-request.service';
 import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
-import {Inject} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
-import {daLocale} from 'ngx-bootstrap/chronos';
 import {PDFService} from '../PDF/pdf.service';
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
+import { DatePipe } from '@angular/common';
+import {HomeService} from "../home/home.service";
 
 
 
@@ -17,16 +17,24 @@ import {VehiclesService} from '../../vehicle-service/vehicle.service';
   selector: 'app-service',
   templateUrl: './service.component.html',
   styleUrls: ['./service.component.scss'],
+  providers: [DatePipe]
 
 
 })
 export class ServiceComponent implements OnInit {
 
-  private form: FormGroup;
+  /**
+   * A list that holds the files selected by the user
+   */
   private selFiles: FileList;
+
+  /**
+   * String variable to hold the fileName
+   */
   private fileName = '';
   private extension = '';
-  private value;
+   myDate = new Date();
+
 
 
 
@@ -42,12 +50,14 @@ export class ServiceComponent implements OnInit {
     comment: [''],
     company: [''],
     phone: [''],
-    coast: [''],
+    cost: [''],
 
   });
 
   private files: any;
   private counter = 0;
+  currentDate  = this.myDate.getFullYear() + '-' + this.myDate.getMonth() + '-' +  this.myDate.getDate() + '-' +this.myDate.getHours() + '-' + this.myDate.getMinutes();
+
 
   constructor(
 
@@ -59,10 +69,12 @@ export class ServiceComponent implements OnInit {
     private router: Router,
     public idt: InputDataTransferService,
     private service: VehiclesService,
-    private pdf: PDFService
+    private pdf: PDFService,
+    private home : HomeService,
     ){
     this.idt.value = service.getSerNo();
-
+    this.myDate.toLocaleDateString();
+    this.home.getListObject('Service'); // data.common = common
   }
 
 
@@ -99,38 +111,39 @@ export class ServiceComponent implements OnInit {
 
     }
     console.log(this.selFiles);
-
   }
 
   upload() {
-   const resourceId = this.apiRequest.getAssetDetails()[0].resourceId;
+     let test = this.home.getCommonPrefix();
+     test= test+1;
+
+    const resourceId = this.apiRequest.getAssetDetails()[0].resourceId;
     if (this.selFiles !== undefined && this.selFiles !== null){
       let file;
       let contentType;
-      let name;
+      let fileName;
       for (let index = 0 ; index <= this.counter; index ++){
 
        file = this.selFiles.item(index);
        contentType = file.type;
-       name = file.name;
+       fileName =  this.currentDate + file.name;
         const params = {
 
-          Bucket: 'asset-repair/' + resourceId + '/' + 'Service',
-          Key:  file.name,
+          Bucket: 'asset-repair/' + resourceId + '/' + 'Service' + '/' + test,
+          Key:  fileName,
           Body: file,
           ACL: 'public-read',
           ContentType: file.type
         };
        this.fileService.upload(params);
-       this.onRouteSubmit();
+
      }
+      this.onRouteSubmit();
     }
     else{
        alert('No files uploaded!');
        this.onRouteSubmit();
      }
-
-
 
   }
 
@@ -146,7 +159,7 @@ export class ServiceComponent implements OnInit {
     ////// Send data over////
     this.idt.date = this.registerForm.value.date.toLocaleDateString();
     this.idt.hours = this.registerForm.value.hours;
-    this.idt.coast = this.registerForm.value.coast;
+    this.idt.cost = this.registerForm.value.cost;
     this.idt.comment = this.registerForm.value.comment;
     this.idt.company = this.registerForm.value.company;
     this.idt.fName = this.registerForm.value.fName;
@@ -163,16 +176,20 @@ export class ServiceComponent implements OnInit {
 
 
   UploadGeneratedPDF() {
+   let test = this.home.getCommonPrefix();
+   test = test+1;
+
     this.initIdt();
-    const fileName = this.pdf.DateToday(this.service.getSerNo());
+    // const fileName = this.pdf.DateToday(this.service.getSerNo());
+    const fileName = this.currentDate + '-Entire-report.pdf';
     // calling Inspection PDF and saving it in a variable:
     const file = this.pdf.Service(this.idt.company, this.idt.fName + ` ` + this.idt.lName,
-      this.idt.date, this.idt.hours, this.idt.coast, this.idt.comment, this.idt.Email, this.idt.phone);
+      this.idt.date, this.idt.hours, this.idt.cost, this.idt.comment, this.idt.Email, this.idt.phone);
 
     const resourceId =  this.apiRequest.assetDetails[0].resourceId;
     const contentType = 'application/pdf';
     const params = {
-      Bucket: 'asset-repair/' + resourceId + '/' + 'Service',
+      Bucket: 'asset-repair/' + resourceId + '/' + 'Service' + '/' + test,
       Key: fileName,
       Body: file,
       ACL: 'public-read',
@@ -192,7 +209,7 @@ export class ServiceComponent implements OnInit {
     this.idt.Email = this.registerForm.value.Email;
     this.idt.phone = this.registerForm.value.phone;
     this.idt.comment = this.registerForm.value.comment;
-    this.idt.coast = this.registerForm.value.coast;
+    this.idt.cost = this.registerForm.value.cost;
     this.idt.hours = this.registerForm.value.hours;
     this.idt.value =  this.service.getSerNo();
   }

@@ -1,64 +1,72 @@
-$card-color: grey;
 #home{
   justify-content: center;
-  mat-card {
-    background-color: rgb(0 0 0 / 20%);
-    max-width: 20rem;
-    box-shadow: inset 0 0 10px;
-    #title{
-      font-size: 1rem;
-      font-family: Roboto, "Helvetica Neue", sans-serif;
-    }
-    li{
-      background: linear-gradient(45deg, #4da39c, #2F6C73);
-      margin-top: 2px;
-      padding: 4px;
-    }
-    button{
-      margin-right: auto;
-      margin-left: auto;
-      margin-top: 4px;
-      padding: 0;
-      width: 9rem;
-      color: black;
-      background-color: rgb(0 0 0 / 20%);
-      border: 1px solid white;
-      i{
-        margin-right: 4px;
-      }
-    }
+  #title{
+    font-weight: bold;
   }
-}
-
-@media screen and (max-width: 320px){
-  #home{
-    mat-card{
-      max-width: 15.5rem;
-      #title{
-          font-size: 1rem;
-      }
-      button{
-        margin-left: 3rem;
-      }
-    }
-  }
-}
-@media screen and (min-width: 550px){
-  #home{
-    mat-card {
-      min-width: 35rem;
-      max-width: 43rem;
-      #title{
-        font-size: 1.8rem;
-      }
+  #main{
+    justify-content: center;
+    text-align: center;
+    #image-col{
+      margin-bottom: 4px;
       #vehicle-image{
         width: 100%;
-        margin-left: auto;
+        height: auto;
+        margin: 0;
+        max-width: 30rem;
       }
-      button{
-        margin-left: 1.4rem;
+    }
+    #buttons-col{
+      .row{
+        justify-content: center;
+        text-align: center;
+        button{
+          font-size: .5rem;
+          width: 50%;
+          max-width: 8rem;
+          margin-top: 2px;
+        }
+      }
+    }
+  }
+
+  .container{
+    border: 1px solid black;
+    }
+  }
+
+
+
+@media screen and (min-width: 550px){
+
+  #home{
+    #title{
+      font-size: large;
+    }
+    #main{
+      #buttons-col{
+        .row{
+          button{
+            font-size: 0.7rem;
+            margin: 1rem 1rem 0;
+          }
+        }
       }
     }
   }
 }
-
+@media screen and (min-width: 1024px){
+  #home{
+    #main{
+      #buttons-col{
+        #info{
+          margin: 1rem 0 4rem;
+        }
+        .row{
+          button{
+            margin: 1rem 0.2rem 0;
+          }
+        }
+      }
+    }
+  }
+}

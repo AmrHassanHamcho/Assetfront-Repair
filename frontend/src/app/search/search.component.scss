@@ -1,25 +1,25 @@
-$color-default: #131516;
+$color-warn: #F44336;
 #searchBar{
   #col{
     margin-top: 6rem;
     max-width: 25rem !important;
     #submit, #QR-Button{
-        border: 1px solid $color-default;
-        color: black;
+        border: 1px solid $color-warn;
+        color: $color-warn;
         font-size: 1rem;
         cursor: pointer;
         margin: 4px;
       i{
         margin-right: 4px;
+        color: orange;
       }
     }
     #label{
       font-size: 1.3rem;
-      filter: drop-shadow(2px 4px 8px $color-default)
     }
     #errorMessage{
       margin-top: 1rem;
-      color: red;
+      color: $color-warn;
     }
   }
 }

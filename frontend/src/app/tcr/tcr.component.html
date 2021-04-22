@@ -1,7 +1,4 @@
-
 <div *ngIf="onSuccessfullSearch()">
-  <div>
-    <mat-card>
       <mat-accordion>
         <div *ngFor=" let item of ttrCopy.tcr; let indexTcr = index">
           <mat-expansion-panel>
@@ -20,14 +17,14 @@
               <ng-template matExpansionPanelContent>
                 <h1 *ngFor="let checkp of ttrCopy.tcr[indexTcr].checkpoint; let indexCp = index">
                   <mat-card class="card" id="card">
-                    <mat-card-content>
+                    <mat-card-content id="body">
                       <h1 id="subTitle" >{{ttrCopy.tcr[indexTcr].checkpoint[indexCp].name }}
                         <p id="required" style="color: red">
                           {{'*'}}
                         </p>
                       </h1>
                       <h2 *ngFor="let op of ttrCopy.tcr[indexTcr].checkpoint[indexCp].options; let value = index" class="value">
-                        <div class="row">
+                        <div class="row" id="description">
                           <div class="col-lg-1">
                             <mat-radio-button
                               value="value"
@@ -53,21 +50,22 @@
           </mat-expansion-panel>
         </div>
       </mat-accordion>
+
       <mat-card-actions>
         <div fxLayoutAlign="center">
           <button mat-button
+                  id="back"
                   (click)="toHome()"
                   mat-raised-button
                   color="warn">
                   <i class="fa fa-arrow-left"></i>Back</button>
 
           <button mat-button
+                  id="next"
                   (click)="personData()"
                   mat-raised-button
                   color="primary">
                   Next<i class="fa fa-arrow-right"></i></button>
         </div>
       </mat-card-actions>
-    </mat-card>
-  </div>
 </div>

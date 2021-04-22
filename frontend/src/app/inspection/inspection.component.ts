@@ -37,12 +37,14 @@ export class InspectionComponent  implements OnInit {
     this.idt.value = service.getSerNo();
   }
   /**
-   * File name uploaded by the user
+   * String variable to hold the fileName
    */
   private fileName = '';
+
+
   private extension = '';
   /**
-   * An array to hold the files selected by the user
+   * A list to hold the files selected by the user
    */
   private selFiles: FileList;
 
@@ -172,7 +174,8 @@ export class InspectionComponent  implements OnInit {
 
   /**
    *
-   * Open dialog
+   * Open dialog DialogInspectionComponent which displays the user input and gives
+   * a chance to download data as a PDF file
    *
    */
 
@@ -182,15 +185,22 @@ export class InspectionComponent  implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
 
-    ////// Send data over////
+
   }
 
+  /**
+   *
+   * A method that uploads the generated PDF to AWS S3 bucket
+   * a chance to download data as a PDF file
+   *
+   */
+
   UploadGeneratedPDF() {
-    this.initIdt();
+    this.initIdt(); // A method that sets data to variables in InputDataTransferService service
     // calling Inspection PDF and saving it in a variable:
     const fileName = this.PDF.DateToday(this.service.getSerNo())
     const file = this.PDF.Inspection(this.idt.company, this.idt.fName + ` ` + this.idt.lName,
-      this.idt.date, this.idt.inspectionState, this.idt.Email, this.idt.phone);
+      this.idt.date, this.idt.inspectionState, this.idt.Email, this.idt.phone); // file naming
     const resourceId =  this.apiRequest.assetDetails[0].resourceId;
     const contentType = 'application/pdf';
     const params = {
@@ -201,10 +211,17 @@ export class InspectionComponent  implements OnInit {
       ContentType: contentType
     };
 
-    this.fileService.upload(params);
-    this.onRouteSubmit();
+    this.fileService.upload(params); // calling upload method with the given parameters
+    this.onRouteSubmit(); // calling onRouteSubmit method
 
   }
+
+  /**
+   *
+   *A method that sets data to variables in InputDataTransferService service
+   *
+   */
+
   initIdt(){
     this.idt.date = this.registerForm.value.date.toLocaleDateString();
     this.idt.inspectionState = this.registerForm.value.inspectionStates?.viewValue;
@@ -218,7 +235,12 @@ export class InspectionComponent  implements OnInit {
 
 }
 
-
+/**
+ *
+ * Dialog that displays the user input and gives the user the chance to download
+ * the input as PDF file
+ *
+ */
 
 @Component({
   selector: 'app-service',

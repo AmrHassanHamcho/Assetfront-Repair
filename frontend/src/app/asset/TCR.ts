@@ -1,3 +1,5 @@
+// Place holder for the information to be fetched from api
+
 import {Checkpoint} from './checkPoint';
 
 export class Tcr {
@@ -10,15 +12,5 @@ export class Tcr {
     this.id  = id;
     this.checkpoint = checkpoint;
 
-  }
-
-  getId(){
-    return this.id;
-  }
-  getName(){
-    return this.name;
-  }
-  getCheckpoint(){
-    return this.checkpoint;
   }
 }

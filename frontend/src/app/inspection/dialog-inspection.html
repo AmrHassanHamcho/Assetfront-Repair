@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>The application has been submitted successfully!</h2>
+<h2 mat-dialog-title id="dialog-title">The application has been submitted successfully!</h2>
 <mat-dialog-content class="mat-typography">
   <h3>Inspection Date</h3>
   <p> {{idt.date}} </p>
@@ -6,11 +6,9 @@
 
   <h3>Inspection State</h3>
   <p>{{idt.inspectionState}}</p>
-
   <hr>
 
   <h2 mat-dialog-actions> Personal Details</h2>
-
   <h3>First Name</h3>
   <p>{{idt.fName}}</p>
   <hr>
@@ -21,7 +19,6 @@
 
 
   <h3>Email</h3>
-
   <p>{{idt.Email}}</p>
   <hr>
 
@@ -29,13 +26,26 @@
   <p>{{idt.company}}</p>
   <hr>
 
-
   <h3>Tlf number</h3>
   <p>{{idt.phone}}</p>
-
-
+  <hr>
 </mat-dialog-content>
+
 <mat-dialog-actions >
-  <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button [mat-dialog-close]="true" (click)="idt.callPdfInspection(); ">Download as PDF</button>
+  <div fxLayoutAlign="space-between even end" id="buttons">
+    <button
+      class="btn btn-success"
+      mat-button
+      mat-raised-button
+      [mat-dialog-close]="true"
+      (click)="idt.callPdfInspection();">
+      <i class="fa fa-download"></i>Download as PDF</button>
+
+    <button
+      class="btn btn-danger"
+      mat-button
+      mat-raised-button
+      mat-dialog-close>
+      <i class="fa fa-window-close"></i>Cancel</button>
+  </div>
 </mat-dialog-actions>

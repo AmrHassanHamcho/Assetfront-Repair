@@ -1,65 +1,68 @@
-mat-card{
-    mat-accordion{
-      justify-content: center;
-      padding: 1rem;
-      margin: auto;
-      #card{
-        background-color: #dbdcdc;
-      }
-      #subTitle{
-        margin: 0;
-        #required{
-          margin: 0;
-        }
-      }
-      .mat-expansion-panel{
-        width: 80%;
-        margin: auto;
-        background-color: white;
-        border: 2px solid grey;
-        .mat-icon{
-          color: darkgreen;
-        }
-      }
-      .row{
+mat-accordion{
+  justify-content: center;
+  padding: 0;
+  margin: auto;
+  #card{
+    padding: 0;
+    background-color: #dbdcdc;
+  }
+  #subTitle{
+    font-size: 1rem;
+    margin: 0;
+    #required{
+      margin: 0;
+    }
+  }
+  mat-expansion-panel{
+    width: 80%;
+    margin: 1rem auto 0;
+    background-color: white;
+    .mat-icon{
+      color: darkgreen;
+    }
+    #body{
+      #description{
         width: 97%;
         margin: auto;
-        padding: 2rem;
-        box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+        padding: 0.25rem;
+        border: .2px solid darkgrey;
+        .col-lg-1,.col-lg-7{
+          font-size: .75rem;
+          padding: 0;
+        }
       }
-    }
-  button{
-    .fa-arrow-left{
-      margin-right: 1rem;
-    }
-    .fa-arrow-right{
-      margin-left: 1rem;
     }
   }
 }
-@media  screen and (max-width: 375px){
+
+#back, #next{
+  margin: 1rem;
+  .fa-arrow-left{
+    margin-right: 1rem;
+  }
+  .fa-arrow-right{
+    margin-left: 1rem;
+  }
+}
+
+@media  screen and (min-width: 500px){
   mat-accordion{
-    .mat-expansion-panel-header-title{
-      margin: 0;
-    }
-    .row{
-      padding: 0;
-      border: solid darkgrey;
-    }
-    #card{
-      padding: 0;
-    }
-    .col-lg-7{
-      font-size: .75rem;
-      padding: 0;
-      margin: auto;
-    }
-    .col-lg-1{
-      padding: 0;
-      margin: auto
-    }
-    #subTitle{
-      font-size: 1rem;
+    mat-expansion-panel{
+      #body{
+        #subTitle{
+          font-size: 1rem;
+          margin: 0;
+        }
+        #description{
+          padding: 2rem;
+          border: none;
+          box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+          .col-lg-1,.col-lg-7{
+            font-size: 1.25rem;
+            padding: 0;
+          }
+        }
+      }
     }
   }
 }
