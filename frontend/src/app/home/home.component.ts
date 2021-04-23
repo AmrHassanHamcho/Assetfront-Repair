@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
     public fileService: FileServiceService,
     public home : HomeService,
   ) {
-
+    this.home.listFiles('Service');
   }
 
   ngOnInit(): void {
@@ -31,34 +31,34 @@ export class HomeComponent implements OnInit {
     console.log(isFallback);
   }
 
-  exportTCR(): void {
+  downloadTCR(): void {
     alert('Export TCR');
   }
 
-  exportInspection(): void {
+  downloadInspection(): void {
     alert('Export Inspection');
   }
 
-  exportService(): void {
-    this.home.getListObject('Service');
-    this.prefix = this.home.lastModified;
-    console.log('this is prefix' + this.prefix);
-    if(this.prefix !== ''){
-      const params = { // Bucket info
-        Bucket: 'asset-repair' ,
-        Delimiter: '/',
-        Prefix: this.prefix,
-      }
-      this.home.listFiles(params);
 
-    }
+  downloadService(): void {
+    this.home.listFiles('Service');
 
-    else {
-      console.log("error");
-    }
-
-
-
+    // this.home.getListObject('Service');
+    // this.prefix = this.home.lastModified;
+    // console.log('this is prefix' + this.prefix);
+    // if(this.prefix !== ''){
+    //   const params = { // Bucket info
+    //     Bucket: 'asset-repair' ,
+    //     Delimiter: '/',
+    //     Prefix: this.prefix,
+    //   }
+    //   this.home.listFiles(params);
+    //
+    // }
+    //
+    // else {
+    //   console.log("error");
+    // }
   }
 
 
