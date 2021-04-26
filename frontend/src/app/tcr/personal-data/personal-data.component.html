@@ -58,7 +58,7 @@
                   mat-raised-button
                   color="primary"
                   [disabled]="!registerForm.valid"
-                  (click)="UploadGeneratedPDF(); success()"
+                  (click)="UploadGeneratedPDF(); success(); upload()"
                   mat-ripple>Submit<i class="fa fa-file"></i></button>
         </div>
       </mat-card-actions>

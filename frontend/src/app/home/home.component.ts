@@ -15,13 +15,22 @@ export class HomeComponent implements OnInit {
   workingPlaceholder = '../../assets/images/default-image.jpg';
   public commonPrefix;
   private prefix: any;
+  displayService = false;
+  public displayInspection =  false;
+  public displayTCR = false;
+  public emptyArray = false;
+
   constructor(
     public apiRequest: ApiRequestService,
     public vehicle: VehiclesService,
     public fileService: FileServiceService,
     public home : HomeService,
   ) {
-    this.home.listFiles('Service');
+    //this.home.listFiles('Service');
+    //this.home.setCommonPreFixes('Service');
+    //this.home.setCommonPreFixes('Inspection');
+    //this.home.setCommonPreFixes('TCR');
+
   }
 
   ngOnInit(): void {
@@ -32,17 +41,51 @@ export class HomeComponent implements OnInit {
   }
 
   downloadTCR(): void {
-    alert('Export TCR');
+    this.home.getListObject('TCR');
+    if(this.displayTCR){
+      this.displayTCR   = false;
+    }
+    else{
+      this.displayTCR  = true;
+      this.displayInspection = false;
+      this.displayService = false;
+    }
   }
 
   downloadInspection(): void {
-    alert('Export Inspection');
+    this.home.getListObject('Inspection');
+
+    if(this.displayInspection){
+      this.displayInspection  = false;
+    }
+    else{
+      this.displayInspection = true;
+      this.displayTCR   = false;
+      this.displayService = false;
+    }
+
+
   }
 
 
   downloadService(): void {
-    this.home.listFiles('Service');
+    this.home.getListObject('Service');
 
+    if(this.displayService){
+      this.displayService  = false;
+    }
+    else{
+      this.displayService = true;
+      this.displayInspection = false;
+      this.displayTCR = false;
+    }
+    //
+    // if(this.home.arrayOfFiles.length > 0){
+    //   this.fullArray = true;
+    // }
+
+   // this.home.listFiles('Service');
+    //this.home.getData();
     // this.home.getListObject('Service');
     // this.prefix = this.home.lastModified;
     // console.log('this is prefix' + this.prefix);

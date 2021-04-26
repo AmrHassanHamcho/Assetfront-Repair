@@ -18,8 +18,6 @@ import {HomeService} from "../home/home.service";
   templateUrl: './service.component.html',
   styleUrls: ['./service.component.scss'],
   providers: [DatePipe]
-
-
 })
 export class ServiceComponent implements OnInit {
 
@@ -34,10 +32,6 @@ export class ServiceComponent implements OnInit {
   private fileName = '';
   private extension = '';
    myDate = new Date();
-
-
-
-
   Email = new FormControl('', [Validators.required, Validators.email]);
 
   registerForm = this.formBuilder.group({
@@ -57,6 +51,7 @@ export class ServiceComponent implements OnInit {
   private files: any;
   private counter = 0;
   currentDate  = this.myDate.getFullYear() + '-' + this.myDate.getMonth() + '-' +  this.myDate.getDate() + '-' +this.myDate.getHours() + '-' + this.myDate.getMinutes();
+  private commonPrefix = 0;
 
 
   constructor(
@@ -74,7 +69,7 @@ export class ServiceComponent implements OnInit {
     ){
     this.idt.value = service.getSerNo();
     this.myDate.toLocaleDateString();
-    this.home.getListObject('Service'); // data.common = common
+    this.validateResourceId();
   }
 
 
@@ -108,15 +103,19 @@ export class ServiceComponent implements OnInit {
             this.selFiles = null;
             break;
           }
-
     }
     console.log(this.selFiles);
   }
 
   upload() {
-     let test = this.home.getCommonPrefix();
-     test= test+1;
 
+
+    this.home.setCommonPreFixes('Service');
+
+
+    let commonPrefix = this.home.getCommonPrefix();
+    console.log('CommonPrefix upload = ' + commonPrefix);
+    commonPrefix = commonPrefix + 1;
     const resourceId = this.apiRequest.getAssetDetails()[0].resourceId;
     if (this.selFiles !== undefined && this.selFiles !== null){
       let file;
@@ -129,16 +128,16 @@ export class ServiceComponent implements OnInit {
        fileName =  this.currentDate + file.name;
         const params = {
 
-          Bucket: 'asset-repair/' + resourceId + '/' + 'Service' + '/' + test,
+          Bucket: 'asset-repair/' + resourceId + '/' + 'Service' + '/' + commonPrefix,
           Key:  fileName,
           Body: file,
           ACL: 'public-read',
           ContentType: file.type
         };
        this.fileService.upload(params);
-
      }
       this.onRouteSubmit();
+
     }
     else{
        alert('No files uploaded!');
@@ -148,6 +147,7 @@ export class ServiceComponent implements OnInit {
   }
 
   onRouteSubmit() {
+
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -155,6 +155,7 @@ export class ServiceComponent implements OnInit {
         this.pdf.Save(this.idt.value);
       }
     });
+
 
     ////// Send data over////
     this.idt.date = this.registerForm.value.date.toLocaleDateString();
@@ -176,8 +177,10 @@ export class ServiceComponent implements OnInit {
 
 
   UploadGeneratedPDF() {
-   let test = this.home.getCommonPrefix();
-   test = test+1;
+    this.home.setCommonPreFixes('Service');
+
+    let commonPrefix = this.home.getCommonPrefix();
+    commonPrefix = commonPrefix + 1;
 
     this.initIdt();
     // const fileName = this.pdf.DateToday(this.service.getSerNo());
@@ -189,7 +192,7 @@ export class ServiceComponent implements OnInit {
     const resourceId =  this.apiRequest.assetDetails[0].resourceId;
     const contentType = 'application/pdf';
     const params = {
-      Bucket: 'asset-repair/' + resourceId + '/' + 'Service' + '/' + test,
+      Bucket: 'asset-repair/' + resourceId + '/' + 'Service' + '/' + commonPrefix,
       Key: fileName,
       Body: file,
       ACL: 'public-read',
@@ -198,6 +201,8 @@ export class ServiceComponent implements OnInit {
 
     this.fileService.upload(params);
     this.onRouteSubmit();
+
+
 
   }
   initIdt(){
@@ -214,7 +219,11 @@ export class ServiceComponent implements OnInit {
     this.idt.value =  this.service.getSerNo();
   }
 
-
+  validateResourceId(){
+    if(this.apiRequest.getAssetDetails().length>0){
+      this.home.setCommonPreFixes('Service');
+    }
+  }
 }
 
 //////////////////////////////////////////// DIALOG

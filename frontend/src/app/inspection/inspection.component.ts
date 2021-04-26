@@ -8,6 +8,7 @@ import validate = WebAssembly.validate;
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
 import {PDFService} from '../PDF/pdf.service';
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
+import {HomeService} from "../home/home.service";
 
 
 interface InspectionState {
@@ -31,10 +32,12 @@ export class InspectionComponent  implements OnInit {
               public idt: InputDataTransferService,
               public PDF: PDFService,
               private router: Router,
-              private service: VehiclesService
+              private service: VehiclesService,
+              private home: HomeService
 
   ) {
     this.idt.value = service.getSerNo();
+    this.validateResourceId();
   }
   /**
    * String variable to hold the fileName
@@ -133,27 +136,35 @@ export class InspectionComponent  implements OnInit {
    */
 
   upload(){
+
+    this.home.setCommonPreFixes('Inspection');
+
+    let commonPrefix = this.home.getCommonPrefix();
+    console.log('CommonPrefix upload = ' + commonPrefix);
+    commonPrefix= commonPrefix+1;
+
     const resourceId = this.apiRequest.getAssetDetails()[0].resourceId;
     if (this.selFiles !== undefined && this.selFiles !== null) {
       let file;
       let contentType;
-      let name;
-      // loop through files
+      let fileName;
+
       for (let index = 0; index <= this.counter; index++) {
 
         file = this.selFiles.item(index);
         contentType = file.type;
-        name = file.name;
-        const params = { // Bucket info
+        fileName = file.name;
+        const params = {
 
-          Bucket: 'asset-repair/' + resourceId + '/' + 'Inspection',
-          Key:  file.name,
+          Bucket: 'asset-repair/' + resourceId + '/' + 'Inspection' + '/' + commonPrefix,
+          Key:  fileName,
           Body: file,
           ACL: 'public-read',
-          ContentType: file.type}
-        this.fileService.upload(params); // call upload function
-        this.onRouteSubmit(); // call onRouteSubmit
+          ContentType: file.type
+        };
+        this.fileService.upload(params);
       }
+      this.onRouteSubmit(); // call onRouteSubmit
     } else {
       alert('No files uploaded!'); //display alert pop-up
       this.onRouteSubmit();
@@ -196,6 +207,12 @@ export class InspectionComponent  implements OnInit {
    */
 
   UploadGeneratedPDF() {
+
+    this.home.setCommonPreFixes('Inspection');
+
+    let commonPrefix = this.home.getCommonPrefix();
+    commonPrefix = commonPrefix+1;
+
     this.initIdt(); // A method that sets data to variables in InputDataTransferService service
     // calling Inspection PDF and saving it in a variable:
     const fileName = this.PDF.DateToday(this.service.getSerNo())
@@ -204,7 +221,7 @@ export class InspectionComponent  implements OnInit {
     const resourceId =  this.apiRequest.assetDetails[0].resourceId;
     const contentType = 'application/pdf';
     const params = {
-      Bucket: 'asset-repair/' + resourceId + '/' + 'Inspection',
+      Bucket: 'asset-repair/' + resourceId + '/' + 'Inspection' + '/' + commonPrefix,
       Key: fileName,
       Body: file,
       ACL: 'public-read',
@@ -231,6 +248,12 @@ export class InspectionComponent  implements OnInit {
     this.idt.Email = this.registerForm.value.Email;
     this.idt.phone = this.registerForm.value.phone;
     this.idt.value =  this.service.getSerNo();
+  }
+
+  validateResourceId(){
+    if(this.apiRequest.getAssetDetails().length>0){
+      this.home.setCommonPreFixes('Inspection');
+    }
   }
 
 }

@@ -45,6 +45,7 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { MatCardModule} from '@angular/material/card';
 import { TcrDialogComponent } from './tcr/tcr-dialog/tcr-dialog.component';
 import { ImgFallbackModule } from 'ngx-img-fallback';
+import { FileSaverModule } from 'ngx-filesaver';
 
 @NgModule({
   declarations: [
@@ -102,14 +103,13 @@ import { ImgFallbackModule } from 'ngx-img-fallback';
     MatCardModule,
     MatRippleModule,
     MatIconModule,
+    FileSaverModule,
 
     MatInputModule,
     MatDialogModule,
         ReactiveFormsModule,
         MatDatepickerModule,
         MatNativeDateModule,
-        FlexLayoutModule,
-        MaterialFileInputModule,
         NgxQRCodeModule,
         ZXingScannerModule,
     MatDialogModule,
