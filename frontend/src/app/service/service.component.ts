@@ -9,7 +9,7 @@ import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfe
 import {PDFService} from '../PDF/pdf.service';
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
 import { DatePipe } from '@angular/common';
-import {HomeService} from "../home/home.service";
+import {HomeService} from '../home/home.service';
 
 
 
@@ -50,8 +50,11 @@ export class ServiceComponent implements OnInit {
 
   private files: any;
   private counter = 0;
-  currentDate  = this.myDate.getFullYear() + '-' + this.myDate.getMonth() + '-' +  this.myDate.getDate() + '-' +this.myDate.getHours() + '-' + this.myDate.getMinutes();
-  private commonPrefix = 0;
+  currentDate  = this.myDate.getFullYear() + '-'
+    + this.myDate.getMonth() + '-' +
+    this.myDate.getDate()
+    + '-' + this.myDate.getHours() + '-'
+    + this.myDate.getMinutes();
 
 
   constructor(
@@ -65,7 +68,7 @@ export class ServiceComponent implements OnInit {
     public idt: InputDataTransferService,
     private service: VehiclesService,
     private pdf: PDFService,
-    private home : HomeService,
+    private home: HomeService,
     ){
     this.idt.value = service.getSerNo();
     this.myDate.toLocaleDateString();
@@ -126,7 +129,7 @@ export class ServiceComponent implements OnInit {
        file = this.selFiles.item(index);
        contentType = file.type;
        fileName =  this.currentDate + file.name;
-        const params = {
+       const params = {
 
           Bucket: 'asset-repair/' + resourceId + '/' + 'Service' + '/' + commonPrefix,
           Key:  fileName,
@@ -151,7 +154,7 @@ export class ServiceComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
-      if(result){
+      if (result){
         this.pdf.Save(this.idt.value);
       }
     });
@@ -220,7 +223,7 @@ export class ServiceComponent implements OnInit {
   }
 
   validateResourceId(){
-    if(this.apiRequest.getAssetDetails().length>0){
+    if (this.apiRequest.getAssetDetails().length > 0){
       this.home.setCommonPreFixes('Service');
     }
   }
