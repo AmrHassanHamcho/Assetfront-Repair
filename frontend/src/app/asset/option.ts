@@ -1,4 +1,4 @@
-
+// Place holder for the information to be fetched from api
 export class Option {
   id: number;
   value: number;
@@ -8,16 +8,6 @@ export class Option {
     this.id = id;
     this.value = value;
     this.description = description;
-  }
-
-  getId(){
-    return this.id;
-  }
-  getValue(){
-    return this.value;
-  }
-  getDescription(){
-    return this.description;
   }
 }
 

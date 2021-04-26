@@ -1,7 +1,7 @@
 #home{
   justify-content: center;
   #title{
-    text-align: center;
+    font-weight: bold;
   }
   #main{
     justify-content: center;
@@ -28,10 +28,20 @@
       }
     }
   }
-}
+
+  .container{
+      border: solid black;
+    }
+  }
+
+
 
 @media screen and (min-width: 550px){
+
   #home{
+    #title{
+      font-size: large;
+    }
     #main{
       #buttons-col{
         .row{

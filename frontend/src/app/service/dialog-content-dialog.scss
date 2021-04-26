@@ -2,11 +2,12 @@
   color: green;
 }
 #buttons{
+  #cancel{
+    margin-left: 1rem;
+  }
   button {
-    margin-right: auto;
-    margin-left: auto;
     i{
-      margin-right: 1rem;
+      margin-right: 0.2rem;
     }
   }
 }

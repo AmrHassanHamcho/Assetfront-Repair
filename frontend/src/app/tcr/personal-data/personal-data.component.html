@@ -3,7 +3,7 @@
     <div>
       <mat-card>
         <mat-card-title style="align-self: center; color: grey" >
-          Personal Detail
+          User Details
         </mat-card-title>
         <mat-card-content fxLayoutAlign="space-between center end">
           <form [formGroup]="registerForm" (submit)="registerForm">
@@ -20,12 +20,12 @@
 
             <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
               <mat-label>Last Name</mat-label>
-              <input matInput required type="text" placeholder="L Name" formControlName="lName">
+              <input matInput required type="text"  formControlName="lName">
             </mat-form-field>
 
             <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
               <mat-label>Phone Number</mat-label>
-              <input matInput required type="number" placeholder="Phone Number" formControlName="phoneNo">
+              <input matInput required type="number"  formControlName="phoneNo">
             </mat-form-field>
 
             <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
@@ -58,7 +58,7 @@
                   mat-raised-button
                   color="primary"
                   [disabled]="!registerForm.valid"
-                  (click)="UploadGeneratedPDF(); success()"
+                  (click)="UploadGeneratedPDF(); success(); upload()"
                   mat-ripple>Submit<i class="fa fa-file"></i></button>
         </div>
       </mat-card-actions>

@@ -62,10 +62,13 @@ export class PDFService  {
   }
 
   DateToday(VINNum: string) {
-    const now = new Date();
-    const day = ('0' + now.getDate()).slice(-2);
-    const month = ('0' + (now.getMonth() + 1)).slice(-2);
-    const Vintoday = (VINNum) + '_' + (day) + '-' + (month) + '-' + now.getFullYear() + '.pdf';
+
+    const today = new Date();
+    const hour = today.getHours();
+    const min = today.getMinutes();
+    const day = ('0' + today.getDate()).slice(-2);
+    const month = ('0' + (today.getMonth() + 1)).slice(-2);
+    const Vintoday = (VINNum) + '_' + min +'-' + hour + '-' + (day) + '-' + (month) + '-' + today.getFullYear() + '.pdf';
     return Vintoday;
   }
 

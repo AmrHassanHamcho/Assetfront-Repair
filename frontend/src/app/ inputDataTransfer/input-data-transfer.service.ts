@@ -2,28 +2,48 @@ import { Injectable } from '@angular/core';
 import {PDFService} from '../PDF/pdf.service';
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
 import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediaries/ngx-qrcode';
+
+/**
+ * Injectable service to pass data to ServiceComponent and InspectionComponent
+ * As well as the dialogs attached to them
+ */
+
+
 @Injectable({
   providedIn: 'root'
 })
 
 
+/*
+* InputDataTransferService Service class
+*/
+
+
 
 export class InputDataTransferService{
-  workshop;
-  Email;
-  fName;
-  lName;
-  date;
-  hours;
-  comment;
-  company;
-  phone;
-  coast;
-  inspectionState;
-  serialNumber = '';
-  elementType = NgxQrcodeElementTypes.URL;
-  correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
-  value;
+
+
+/*
+* Declaring public variables to hold the value from the input forms in ServiceComponent
+* and InspectionComponent
+* The variables will be passed further to display the summary of the form
+* As well as to PDF service where the final pdf is generated
+*/
+
+  public Email : string;
+  public fName: string;
+  public lName: string;
+  public date: any;
+  public hours: number;
+  public comment: string;
+  public company: string;
+  public phone: string;
+  public cost: number;
+  public inspectionState: any;
+  public serialNumber: string = '' ;
+  public elementType = NgxQrcodeElementTypes.URL;
+  public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  public value: any;
 
   constructor( private PDF: PDFService,
                private vehicle: VehiclesService) {
@@ -32,6 +52,7 @@ export class InputDataTransferService{
 
   }
 
+  // Method for storing data in PDF which will be generated from Inspection form
    callPdfInspection(){
     this.serialNumber = this.vehicle.getSerNo();
     this.PDF.Inspection(
@@ -45,6 +66,8 @@ export class InputDataTransferService{
     this.PDF.Save(this.value);
 
   }
+
+  // Method for storing data in PDF which will be generated from Service form
   callPdfService() {
     this.serialNumber = this.vehicle.getSerNo();
     // tslint:disable-next-line:max-line-length
@@ -54,47 +77,10 @@ export class InputDataTransferService{
       this.lName,
       this.date,
       this.hours,
-      this.coast,
+      this.cost,
       this.comment,
       this.Email,
       this.phone);
   }
-/*
-  upload() {
-    const contentType = 'application/pdf';
-    const FOLDER = 'Inspection';
-    const file = this.PDF.Inspection(
-      this.company,
-      this.fName + ' ' +
-      this.lName,
-      this.date,
-      this.inspectionState,
-      this.Email,
-      this.phone,
-      this.serialNumber);
-    const bucket = new S3(
-       {
-         accessKeyId: 'AKIAXTNQB7H3IMBOMEGL',
-         secretAccessKey: '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',
-         region: 'eu-north-1'
-       }
-     );
-    const params = {
-      Bucket: 'json-file/' + 12346 + '/' + FOLDER,
-      Key: 'inspection.pdf',
-      Body: file,
-      ACL: 'public-read',
-      ContentType: contentType
-    };
 
-    bucket.upload(params, (err, data) => {
-      if (err) {
-        console.log('There was an error uploading your file: ', err);
-        return false;
-      }else {
-      console.log('Successfully uploaded file.', data);
-      console.log('may be from here');
-      return true; }
-    });
-  } */
 }

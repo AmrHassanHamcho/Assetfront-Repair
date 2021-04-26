@@ -9,7 +9,7 @@
   <hr>
 
   <h3>Cost</h3>
-  <p>{{idf.coast}}</p>
+  <p>{{idf.cost}}</p>
   <hr>
 
   <h3>Comment</h3>
@@ -42,6 +42,7 @@
   <div fxLayoutAlign="space-between even end" id="buttons">
     <button
       class="btn btn-success"
+      id="download"
       mat-button
       mat-raised-button
       [mat-dialog-close]="true"
@@ -50,6 +51,7 @@
 
     <button
       class="btn btn-danger"
+      id="cancel"
       mat-button
       mat-dialog-close
       mat-raised-button>
