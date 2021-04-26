@@ -10,6 +10,8 @@ import {VehiclesService} from '../../../vehicle-service/vehicle.service';
   styleUrls: ['./dialog-window.component.scss']
 })
 export class DialogWindowComponent implements OnInit {
+  workingPlaceholder = '../../assets/images/default-image.jpg';
+
   constructor(
     public service: VehiclesService,
     public request: ApiRequestService,
@@ -18,6 +20,10 @@ export class DialogWindowComponent implements OnInit {
   ){ }
 
   ngOnInit(): void {
+  }
+
+  onLoaded(isFallback: boolean) {
+    console.log(isFallback);
   }
 
   acceptVehicle(){

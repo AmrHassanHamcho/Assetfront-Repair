@@ -1,6 +1,12 @@
 import { Injectable } from '@angular/core';
 import * as S3 from 'aws-sdk/clients/s3';
 
+/**
+ * Injectable service to handle file related operations
+ * And Amazon bucket declaration
+ */
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,17 +16,20 @@ export class FileServiceService {
 
   constructor() { }
 
+  //Method for Amazon Bucket verification data
+
+  /**
+   * Function for Amazon Bucket verification data
+   * @return Bucket which contains the project files
+   */
+
   public getS3Bucket(): any {
    // const bucket = new S3(
-      // {
-        // accessKeyId: 'AKIA3MSMUCO2MSPHGAKV',
-        // secretAccessKey: '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',
-        // region: 'eu-north-1'
-
-        // accessKeyId: 'AKIA3MSMUCO2MSPHGAKV',
-        // secretAccessKey: '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',
-        //region: 'eu-north-1'
-     // }
+   //    {
+   //      accessKeyId: 'AKIA3MSMUCO2MSPHGAKV',
+   //      secretAccessKey: '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',
+   //      region: 'eu-north-1'
+   //   }
    // );
         const bucket = new S3(
           {
@@ -32,33 +41,38 @@ export class FileServiceService {
         return bucket;
   }
 
-  uploadFile(file, FOLDER, resourceId) {
+  //   uploadFile(file, FOLDER, resourceId) {
+  //
+  //   const params = {
+  //     Bucket: 'assetfront-repair/' + resourceId + '/' + FOLDER,
+  //     Key:  file.name,
+  //     Body: file,
+  //     ACL: 'public-read',
+  //     ContentType: file.type
+  //   };
+  //
+  //
+  //   this.getS3Bucket().upload(params, (err, data) => {
+  //     if (err) {
+  //       console.log('There was an error uploading your file: ', err);
+  //       return false;
+  //     }
+  //
+  //     console.log('Successfully uploaded file.', data);
+  //     return true;
+  //   });
+  //
+  //
+  //   this.fileUploaded = true;
+  //
+  // }
 
-    const params = {
-      Bucket: 'assetfront-repair/' + resourceId + '/' + FOLDER ,
-      Key:  file.name,
-      Body: file,
-      ACL: 'public-read',
-      ContentType: file.type
-    };
-
-
-    this.getS3Bucket().upload(params, (err, data) => {
-      if (err) {
-        console.log('There was an error uploading your file: ', err);
-        return false;
-      }
-
-      console.log('Successfully uploaded file.', data);
-      return true;
-    });
-
-
-    this.fileUploaded = true;
-
-
-  }
-  public upload( params){
+  /**
+   * Function for uploading a file to Amazon Bucket
+   * @return true if the file is legal
+   * @return false otherwise
+   */
+  public upload(params){
     this.getS3Bucket().upload(params, (err, data) => {
       if (err) {
         console.log('There was an error uploading your file: ', err);
@@ -69,11 +83,8 @@ export class FileServiceService {
       }
     });
 
-
     this.fileUploaded = true;
 
   }
-  oneFileUploadSuccess(){
-    return this.fileUploaded;
-  }
+
 }

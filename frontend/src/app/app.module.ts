@@ -44,6 +44,8 @@ import {PDFService} from './PDF/pdf.service';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { MatCardModule} from '@angular/material/card';
 import { TcrDialogComponent } from './tcr/tcr-dialog/tcr-dialog.component';
+import { ImgFallbackModule } from 'ngx-img-fallback';
+import { FileSaverModule } from 'ngx-filesaver';
 
 @NgModule({
   declarations: [
@@ -83,6 +85,8 @@ import { TcrDialogComponent } from './tcr/tcr-dialog/tcr-dialog.component';
     MatCardModule,
     MatRippleModule,
     MatIconModule,
+    FileSaverModule,
+    ZXingScannerModule,
     MatDialogModule,
     ReactiveFormsModule,
     MatDatepickerModule,
@@ -90,9 +94,8 @@ import { TcrDialogComponent } from './tcr/tcr-dialog/tcr-dialog.component';
     FlexLayoutModule,
     MaterialFileInputModule,
     NgxQRCodeModule,
-    ZXingScannerModule,
-  ],
-
+    ImgFallbackModule,
+    ],
   providers: [VehiclesService,
     {
       provide: HTTP_INTERCEPTORS,

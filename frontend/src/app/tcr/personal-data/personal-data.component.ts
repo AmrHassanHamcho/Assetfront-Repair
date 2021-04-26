@@ -12,6 +12,7 @@ import {InputDataTransferService} from '../../ inputDataTransfer/input-data-tran
 import {MatDialog} from '@angular/material/dialog';
 import {TcrDialogComponent} from '../tcr-dialog/tcr-dialog.component';
 import {FileServiceService} from '../../fileService/file-service.service';
+import {HomeService} from "../../home/home.service";
 @Component({
   selector: 'app-personal-data',
   templateUrl: './personal-data.component.html',
@@ -21,6 +22,8 @@ export class PersonalDataComponent implements OnInit {
   optionHolder = [];
   elementType = NgxQrcodeElementTypes.URL;
   correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
+  myDate = new Date();
+  currentDate  = this.myDate.getFullYear() + '-' + this.myDate.getMonth() + '-' +  this.myDate.getDate() + '-' +this.myDate.getHours() + '-' + this.myDate.getMinutes();
   value = 'https://assetfront.com';
   constructor(public tcr: TcrService,
               private router: Router,
@@ -31,9 +34,13 @@ export class PersonalDataComponent implements OnInit {
               public idt: InputDataTransferService,
               public dialog: MatDialog,
               private fileService: FileServiceService,
+              private home: HomeService
   )
-  {this.idt.value =  this.vehicleservice.getSerNo(); }
-  picker: Date;
+  {
+    this.idt.value =  this.vehicleservice.getSerNo();
+    this.home.setCommonPreFixes('TCR');
+  }
+
   lName: string;
   fName: string;
   workshop: string;
@@ -54,42 +61,25 @@ export class PersonalDataComponent implements OnInit {
   }
 
   upload() {
-    const test = this.registerForm.value;
-    // (test.workshop, test.fName + ' ' + test.lName, test.date)
-    console.log('First Name: ' + test.fName);
-    console.log('Last Name: ' + test.lName);
-    console.log('workshop Name: ' + test.workshop);
-    console.log('Email: ' + test.email);
-    console.log('DATE in dd/mm/yyyy: ' + test.date.toLocaleDateString());
+    this.home.setCommonPreFixes('TCR');
 
+    let commonPrefix = this.home.getCommonPrefix();
+    commonPrefix = commonPrefix + 1;
+
+    const resourceId =  this.request.assetDetails[0].resourceId;
     const contentType = 'json';
-    const FOLDER = 'TCR';
-    const file = 'tcr.json';
-   /* const bucket = new S3(
-      {
-        accessKeyId: 'AKIAXTNQB7H3IMBOMEGL',
-        secretAccessKey: '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',
-        region: 'eu-north-1'
-      }
-    );*/
 
-    const bucket = new S3(
-      {
-        accessKeyId: 'AKIA3MSMUCO2MSPHGAKV',
-        secretAccessKey: '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',
-        region: 'eu-north-1'
-      }
-    );
+
 
     const params = {
-      Bucket: 'json-file/' + this.tcr.getTcr().resourceId + '/' + FOLDER,
-      Key: file,
-      Body: JSON.stringify(this.tcr.getTcr()),
+      Bucket: 'asset-repair/' + resourceId + '/' + 'TCR' + '/' + commonPrefix,
+      Key: 'Tcr.json',
+      Body:  JSON.stringify(this.tcr.getTcr()),
       ACL: 'public-read',
       ContentType: contentType
     };
 
-    bucket.upload(params, (err, data) => {
+    this.fileService.getS3Bucket().upload(params, (err, data) => {
       if (err) {
         console.log('There was an error uploading your file: ', err);
         return false;
@@ -107,7 +97,7 @@ export class PersonalDataComponent implements OnInit {
 
     const person = this.registerForm.value;
     const file = this.pdf.PlaceForm(this.tcr.getTcr().tcr, person.workshop, person.fName + ' '
-      + person.lName, person.date.toLocaleDateString(), person.email, ' 4554 ');
+      + person.lName, person.date.toLocaleDateString(), person.email, this.idt.phone);
     return file;
 
   }
@@ -136,21 +126,26 @@ export class PersonalDataComponent implements OnInit {
 
 
   UploadGeneratedPDF() {
+    this.home.setCommonPreFixes('TCR');
+
+    let commonPrefix = this.home.getCommonPrefix();
+    commonPrefix = commonPrefix + 1;
     this.initIdt();
     // calling Inspection PDF and saving it in a variable:
     const file = this.calltcr();
     const resourceId =  this.request.assetDetails[0].resourceId;
+    const fileName = this.currentDate + '-Entire-report.pdf';
     const contentType = 'application/pdf';
     const params = {
-      Bucket: 'asset-repair/' + resourceId + '/' + 'TCR',
-      Key: 'tcr.pdf',
+      Bucket: 'asset-repair/' + resourceId + '/' + 'TCR' +'/'+commonPrefix,
+      Key: fileName,
       Body: file,
       ACL: 'public-read',
       ContentType: contentType
     };
 
     this.fileService.upload(params);
-    // this.onRouteSubmit();
+
 
   }
   initIdt(){
