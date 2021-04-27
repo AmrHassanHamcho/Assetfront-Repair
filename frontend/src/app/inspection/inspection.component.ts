@@ -69,9 +69,9 @@ export class InspectionComponent  implements OnInit {
   });
 
   inspectionStates: InspectionState[] = [
-    {value: 'Bad', viewValue: 'Bad'},
-    {value: 'Good', viewValue: 'Good'},
-    {value: 'Excellent', viewValue: 'Excellent'}
+    {value: 'Approved', viewValue: 'Approved'},
+    {value: 'Disapproved', viewValue: 'Disapproved'},
+
 
   ];
 
@@ -146,7 +146,7 @@ export class InspectionComponent  implements OnInit {
         contentType = file.type;
         fileName = file.name;
         const params = {
-          Bucket: 'asset-repair/' + resourceId + '/' + 'Inspection' + '/' + commonPrefix,
+          Bucket: 'asset-repair/' + resourceId + '/' + 'Inspection' + '/' + commonPrefix + '/' + 'Attached-files',
           Key:  fileName,
           Body: file,
           ACL: 'public-read',
@@ -209,7 +209,7 @@ export class InspectionComponent  implements OnInit {
     const resourceId =  this.apiRequest.assetDetails[0].resourceId;
     const contentType = 'application/pdf';
     const params = {
-      Bucket: 'asset-repair/' + resourceId + '/' + 'Inspection' + '/' + commonPrefix,
+      Bucket: 'asset-repair/' + resourceId + '/' + 'Inspection' + '/' + commonPrefix + '/' + 'Report',
       Key: fileName,
       Body: file,
       ACL: 'public-read',

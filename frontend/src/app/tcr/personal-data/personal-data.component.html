@@ -10,7 +10,7 @@
 
             <mat-form-field class="form-field"  appearance="fill">
               <mat-label>DD-MM-YYYY</mat-label>
-              <input matInput [matDatepicker]="picker" formControlName="date">
+              <input matInput required [matDatepicker]="picker" formControlName="date">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -38,9 +38,8 @@
 
             <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
               <mat-label>Phone Number</mat-label>
-              <input matInput required type="tel"  formControlName="phoneNo">
+              <input matInput required type="tel"  formControlName="phone">
               <mat-icon matSuffix>phone</mat-icon>
-              <mat-hint>Include area code</mat-hint>
             </mat-form-field>
 
           </form>
