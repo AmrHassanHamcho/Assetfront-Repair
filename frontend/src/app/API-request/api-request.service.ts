@@ -67,7 +67,7 @@ export class ApiRequestService {
     //   this.submitButtonPressed = true;
     // }
  // }
-setSerialNo(value){
+/*setSerialNo(value){
   if (value) {
     return this.request.getVehicleData(value)
       .pipe()
@@ -76,13 +76,32 @@ setSerialNo(value){
         this.assetDetails = resp.body;
         this.statusCode = resp.status;
         return this.assetDetails;
-      });
+      });*/
 
 
-  }
+ // }
 
 
-}
+// }
+setSerialNo(value){
+  const promise = new Promise((resolve, reject) =>
+
+  {
+  this.request.getVehicleData(value)
+   .toPromise()
+   .then( resp => {
+   if (resp.status === 200) {
+     this.assetDetails = resp.body;
+     resolve();
+   }
+   } )
+   .catch((error) => {console.log(error );
+                      reject(error);
+  });
+   });
+  return promise;
+   }
+
   /**
    * @return getter that return asset Details
    */
