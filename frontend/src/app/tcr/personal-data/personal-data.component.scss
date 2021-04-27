@@ -1,13 +1,19 @@
-mat-card{
-  mat-card-title{
-    align-items: center;
-    color: grey;
-  }
-  .form-field{
-    width: 100%;
+.container{
+  margin-top: 1rem;
+  font-size: .5rem;
+  mat-card{
+    mat-card-title{
+      align-items: center;
+      color: grey;
+    }
+    .form-field{
+      width: 80%;
+    }
+
   }
   mat-card-actions{
     button{
+      margin: 1rem;
       .fa-arrow-left{
         margin-right: 1rem;
       }

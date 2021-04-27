@@ -1,6 +1,5 @@
 .container{
   margin-top: 1rem;
-  font-size: .5rem;
   mat-label{
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -27,11 +26,5 @@
     input {
       font-weight: bold;
     }
-  }
-}
-
-@media screen and (min-width: 600px){
-  .container{
-    font-size: 1rem;
   }
 }
