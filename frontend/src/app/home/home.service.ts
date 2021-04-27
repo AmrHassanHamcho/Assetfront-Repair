@@ -134,8 +134,8 @@ export class HomeService {
        else    {
        //  console.log(data);
          console.log(data);       }
-       const blob = new File([data.Body],  key, {type: data.ContentType});
-       this.fileSaver.save(blob);
+       const file = new File([data.Body], key , {type: data.ContentType});
+       this.fileSaver.save(file);
 
     });
 
