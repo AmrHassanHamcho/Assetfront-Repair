@@ -69,9 +69,9 @@ export class InspectionComponent  implements OnInit {
   });
 
   inspectionStates: InspectionState[] = [
-    {value: 'Bad', viewValue: 'Bad'},
-    {value: 'Good', viewValue: 'Good'},
-    {value: 'Excellent', viewValue: 'Excellent'}
+    {value: 'Approved', viewValue: 'Approved'},
+    {value: 'Not Approved', viewValue: 'Not Approved'},
+  //  {value: 'Excellent', viewValue: 'Excellent'}
 
   ];
 
