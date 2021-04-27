@@ -1,7 +1,7 @@
 <div class="row mx-0" id="searchBar" >
   <div class="col-12 col-md-10 col-lg-8 mx-auto" id="col">
     <label id="label"></label>
-    <input
+    <input (keypress)="inputValidation($event)"
       #serialNo
       id="Search_id"
       type="text"
@@ -10,12 +10,12 @@
       placeholder="Please enter VIN (Vehicle identification number)"
       required="required">
     <p *ngIf="request.assetDetails.length === 0 " id="errorMessage">
-    {{request.getErrorMessage()}}
+    {{errorMessage}}
     </p>
     <div class="input-group">
       <span class="input-group-btn mx-auto">
         <button
-          (click)=" request.setSerialNo(serialNo.value); openDialog();"
+          (click)=" setSerialNo(serialNo.value)"
           class="btn"
           type="submit"
           id="submit">

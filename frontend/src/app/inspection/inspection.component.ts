@@ -8,7 +8,7 @@ import validate = WebAssembly.validate;
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
 import {PDFService} from '../PDF/pdf.service';
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
-import {HomeService} from "../home/home.service";
+import {HomeService} from '../home/home.service';
 
 
 interface InspectionState {
@@ -27,13 +27,13 @@ export class InspectionComponent  implements OnInit {
 
   constructor(public fileService: FileServiceService,
               private formBuilder: FormBuilder,
-              private apiRequest: ApiRequestService,
+              public apiRequest: ApiRequestService,
               public dialog: MatDialog,
               public idt: InputDataTransferService,
               public PDF: PDFService,
               private router: Router,
               private service: VehiclesService,
-              private home: HomeService
+              public home: HomeService
 
   ) {
     this.idt.value = service.getSerNo();

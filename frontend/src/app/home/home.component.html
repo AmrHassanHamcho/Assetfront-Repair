@@ -1,4 +1,4 @@
-<div *ngIf="apiRequest.successfulRequest && apiRequest.assetDetails.length>0">
+<div *ngIf=" apiRequest.assetDetails.length>0">
 <div class="container mx-auto" id="home" *ngFor="let vehicleInfo of apiRequest.assetDetails">
       <mat-card>
         <div class="col-12 col-md-10 col-lg-8" id="title">
@@ -88,18 +88,14 @@
             </div>
           </div>
         </div>
-
-
-
-
           <div *ngIf="displayService || displayInspection || displayTCR" class="container" >
              <div *ngIf="home.arrayOfFiles.length > 0 ; else msg">
-                  <h1 mat-card-title>Choose a file to download</h1>
+                  <h1 mat-card-title >Choose a file to download</h1>
 
                     <h2 *ngFor="let file of this.home.arrayOfFiles; let index = index">
 
                     <div class="row first-row">
-                      <div class="col-lg-5">{{'File ' + index + ' : ' + file}}
+                      <div class="col-lg-5">{{ index+1 + '   ' + file}}
                         <button (click)="this.home.downloadFiles(file)"> <i class="fa fa-download"></i> </button></div>
                     </div>
 
