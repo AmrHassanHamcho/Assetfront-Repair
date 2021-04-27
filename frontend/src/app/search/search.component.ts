@@ -50,8 +50,9 @@ export class SearchComponent implements OnInit {
     (document.getElementById('Search_id') as HTMLInputElement).value = resultString;
 
   }
+/*
 
-/**
+/!**
  * @param value of serial number entered by a user
  // tslint:disable-next-line:jsdoc-format
  // setSerialNo(value: string): void {
@@ -63,34 +64,38 @@ export class SearchComponent implements OnInit {
  assigns deta recieved from observable to this local SearchComponent property
 .subscribe(data => this.vehcilesDetail = data); }
  }
-**/
- test(value: string) {
-         const regExpr = new RegExp(/^[A-Za-z0-9]/);
-         if (value.match(regExpr)) {
-         this.loading = true;
-         try {
-         this.request.setSerialNo(value).then(r => {
-         this.loading = false;
-         if (this.request.statusCode !== 200) {
-         console.log( 'this.request.statusCode');
-         }else {  if (this.request.assetDetails.length > 0) {
-         this.openDialog();
-         } else {
-         this.errorMessage = 'Invalid VIN(Vehicle Identification Number)';
-         }}
-         });
-         } catch (error){
-         console.log(error + 'From Test');
-         }
-         }
-         }
- inputValidation($event: KeyboardEvent): boolean{
-         const regExpr = new RegExp(/^[A-Za-z0-9]/);
-         console.log($event.key);
-         if ($event.key.match(regExpr)) {
-         return true;
-         } else {
-         return false;
-         }
-         }
+**!/
+*/
+
+   setSerialNo(value: string)
+   {
+     const regExpr = new RegExp(/^[A-Za-z0-9]/);
+     if (value.match(regExpr))
+     {
+       this.loading = true;
+       try {
+         this.request.setSerialNo(value).then(r =>
+         {
+           this.loading = false;
+           if (this.request.assetDetails.length > 0) {
+           this.openDialog();
+           }
+           else {
+           this.errorMessage = 'Invalid VIN(Vehicle Identification Number)';
+           }
+           });
+       } catch (error){
+           console.log(error + 'From Test');
+       }
+     }
+   }
+   inputValidation($event: KeyboardEvent): boolean{
+           const regExpr = new RegExp(/^[A-Za-z0-9]/);
+           console.log($event.key);
+           if ($event.key.match(regExpr)) {
+           return true;
+           } else {
+           return false;
+           }
+           }
  }
