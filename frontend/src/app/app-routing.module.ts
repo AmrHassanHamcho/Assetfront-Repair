@@ -9,7 +9,6 @@ import {HomeComponent} from './home/home.component';
 import {TcrComponent} from './tcr/tcr.component';
 
 import {FallBackComponent} from './fall-back/fall-back.component';
-import {TestComponent} from './test/test.component';
 import {PersonalDataComponent} from './tcr/personal-data/personal-data.component';
 import {TcrDialogComponent} from './tcr/tcr-dialog/tcr-dialog.component';
 
