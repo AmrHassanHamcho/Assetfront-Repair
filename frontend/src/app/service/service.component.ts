@@ -61,7 +61,7 @@ export class ServiceComponent implements OnInit {
 
     private http: HttpClient,
     public fileService: FileServiceService,
-    private apiRequest: ApiRequestService,
+    public apiRequest: ApiRequestService,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
     private router: Router,
