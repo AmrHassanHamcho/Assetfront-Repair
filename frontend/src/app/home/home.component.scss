@@ -1,5 +1,6 @@
 #home{
   justify-content: center;
+  mat-card{
   #title{
     font-weight: bold;
   }
@@ -16,11 +17,15 @@
       }
     }
     #buttons-col{
+      #info{
+        li{
+        }
+      }
       .row{
         justify-content: center;
         text-align: center;
         button{
-          font-size: .5rem;
+          font-size: .7rem;
           width: 50%;
           max-width: 8rem;
           margin-top: 2px;
@@ -28,44 +33,63 @@
       }
     }
   }
-
-  .container{
-      border: solid black;
+}
+  #downloadFile{
+    margin-top: 1rem;
+    padding: 0.5rem;
+    .row{
+      #downloadButton{
+        margin-bottom: 2px;
+      }
+      #fileName{
+        margin-bottom: .3rem;
+        font-size: 0.8rem;
+        box-shadow: 1px 1px 1px 1px;
+      }
     }
   }
-
-
+}
 
 @media screen and (min-width: 550px){
-
   #home{
-    #title{
-      font-size: large;
-    }
-    #main{
-      #buttons-col{
-        .row{
-          button{
-            font-size: 0.7rem;
-            margin: 1rem 1rem 0;
+    mat-card{
+      #title{
+        font-size: large;
+      }
+      #main{
+        #buttons-col{
+          .row{
+            button{
+              margin: 1rem 1rem 0;
+            }
           }
         }
       }
     }
   }
 }
+
 @media screen and (min-width: 1024px){
   #home{
-    #main{
-      #buttons-col{
-        #info{
-          margin: 1rem 0 4rem;
-        }
-        .row{
-          button{
-            margin: 1rem 0.2rem 0;
+    mat-card{
+      #main{
+        #buttons-col{
+          #info{
+            margin: 1rem 0 4rem;
+          }
+          .row{
+            button{
+              margin: 1rem 0.2rem 0;
+            }
           }
         }
+      }
+    }
+    #downloadFile{
+      .row{
+      }
+      #fileName{
+        margin-left: 1rem;
       }
     }
   }

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {ApiRequestService} from "../API-request/api-request.service";
-import {FileServiceService} from "../fileService/file-service.service";
+import {ApiRequestService} from '../API-request/api-request.service';
+import {FileServiceService} from '../fileService/file-service.service';
 import {FileSaverModule, FileSaverService} from 'ngx-filesaver';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {resolve} from "dns";
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
+import {resolve} from 'dns';
 
 
 
@@ -22,12 +22,10 @@ export class HomeService {
 
   private resourceId;
   constructor(private apiRequest: ApiRequestService,
-              private fileService:  FileServiceService,
+              private fileService: FileServiceService,
               private fileSaver: FileSaverService,
               private http: HttpClient)
-  {
-
-  }
+  { }
 
   setCommonPreFixes(folder){
 
@@ -35,12 +33,11 @@ export class HomeService {
     const params = { // Bucket info
       Bucket: 'asset-repair' ,
       Delimiter: '/',
-      Prefix: this.resourceId + '/'+ folder + '/',
-    }
-
+      Prefix: this.resourceId + '/' + folder + '/',
+    };
 
     this.fileService.getS3Bucket().listObjectsV2(params, (err, data) => {
-      if(err){
+      if (err){
         console.log(err);
 
 
@@ -54,49 +51,44 @@ export class HomeService {
 
   getListObject(folder){
    this.resourceId = this.apiRequest.getAssetDetails()[0].resourceId;
-    const params = { // Bucket info
+   const params = { // Bucket info
       Bucket: 'asset-repair' ,
       Delimiter: '/',
-      Prefix: this.resourceId + '/'+ folder + '/',
-    }
+      Prefix: this.resourceId + '/' + folder + '/',
+    };
 
 
-    this.fileService.getS3Bucket().listObjectsV2(params, (err, data) => {
-      if(err){
+   this.fileService.getS3Bucket().listObjectsV2(params, (err, data) => {
+      if (err){
         console.log(err);
         this.lastModified = '';
 
       }
       else {
         this.commonPrefix = data.CommonPrefixes.length;
-        console.log("commonprefix in else is: " + this.commonPrefix);
+        console.log('commonprefix in else is: ' + this.commonPrefix);
         this.data = data;
-        if(this.commonPrefix >  0 ) {
+        if (this.commonPrefix >  0 ) {
           this.lastModified = data.CommonPrefixes[this.commonPrefix - 1].Prefix;
-          console.log("LM in else is: " + this.lastModified);
+          console.log('LM in else is: ' + this.lastModified);
         }
-
-
-
-
-
 
         const paramsForList = { // Bucket info
           Bucket: 'asset-repair' ,
           Delimiter: '/',
           Prefix: this.lastModified,
-        }
+        };
 
         this.fileService.getS3Bucket().listObjectsV2(paramsForList, (err, data) => {
           if (err) {
             console.log(err);
           } else {
             console.log(data);
-            for(let i = 0; i < data.Contents.length; i++){
+            for (let i = 0; i < data.Contents.length; i++){
               this.arrayOfFiles[i] = data.Contents[i].Key.split(this.lastModified)[1];
             }
           }
-        })
+        });
       }
     });
   }
@@ -128,7 +120,7 @@ export class HomeService {
     const params = { // Bucket info
       Bucket: 'asset-repair',
       Key: this.lastModified  + key
-    }
+    };
   // const url = this.fileService.getS3Bucket().getSignedUrl(params, function(err, data) {
   //     if (err) console.log(err, err.stack); // an error occurred
   //     else    {
@@ -141,10 +133,8 @@ export class HomeService {
     const url = this.fileService.getS3Bucket().getSignedUrl('getObject', {
       Bucket: 'asset-repair',
       Key: this.lastModified + key});
-        saveAs(url);
-
+    saveAs(url);
   }
-
 
   getCommonPrefix(){
     return this.commonPrefix;
@@ -153,7 +143,4 @@ export class HomeService {
   getArrayOfFiles(){
       return this.arrayOfFiles;
   }
-
-
-
 }
