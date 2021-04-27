@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import {ApiRequestService} from '../API-request/api-request.service';
 import {FileServiceService} from '../fileService/file-service.service';
-import {FileSaverModule, FileSaverService} from 'ngx-filesaver';
+import {FileSaverService} from 'ngx-filesaver';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {resolve} from 'dns';
-
-
 
 @Injectable({
   providedIn: 'root'
@@ -39,14 +35,11 @@ export class HomeService {
     this.fileService.getS3Bucket().listObjectsV2(params, (err, data) => {
       if (err){
         console.log(err);
-
-
       }
       else {
         this.commonPrefix = data.CommonPrefixes.length;
       }
     });
-
   }
 
   getListObject(folder){
@@ -56,7 +49,6 @@ export class HomeService {
       Delimiter: '/',
       Prefix: this.resourceId + '/' + folder + '/',
     };
-
 
    this.fileService.getS3Bucket().listObjectsV2(params, (err, data) => {
       if (err){
@@ -79,40 +71,19 @@ export class HomeService {
           Prefix: this.lastModified,
         };
 
-        this.fileService.getS3Bucket().listObjectsV2(paramsForList, (err, data) => {
-          if (err) {
-            console.log(err);
+        this.fileService.getS3Bucket().listObjectsV2(paramsForList, ((error, data) => {
+          if (error) {
+            console.log(error);
           } else {
             console.log(data);
             for (let i = 0; i < data.Contents.length; i++){
               this.arrayOfFiles[i] = data.Contents[i].Key.split(this.lastModified)[1];
             }
           }
-        });
+        }));
       }
     });
   }
-
-  // listFiles(folder){
-  //
-  //   this.getListObject(folder);
-  //   this.resourceId = this.apiRequest.getAssetDetails()[0].resourceId;
-  //   const params = { // Bucket info
-  //     Bucket: 'asset-repair' ,
-  //     Delimiter: '/',
-  //     Prefix: this.lastModified,
-  //   }
-  //   this.fileService.getS3Bucket().listObjects(params, (err, data) => {
-  //     if (err) {
-  //       console.log(err);
-  //     } else {
-  //       console.log(data);
-  //       for(let i = 0; i < data.Contents.length; i++){
-  //         this.arrayOfFiles[i] = data.Contents[i].Key.split(this.lastModified)[1];
-  //       }
-  //     }
-  //   })
-  // }
 
   downloadFiles(key){
     console.log('this is the 8a6osh key: ' + key);
@@ -121,19 +92,15 @@ export class HomeService {
       Bucket: 'asset-repair',
       Key: this.lastModified  + key
     };
-  // const url = this.fileService.getS3Bucket().getSignedUrl(params, function(err, data) {
-  //     if (err) console.log(err, err.stack); // an error occurred
-  //     else    {
-  //
-  //       console.log(data);
-  //       console.log(data.Body);//       }
 
-   // });
-
-    const url = this.fileService.getS3Bucket().getSignedUrl('getObject', {
-      Bucket: 'asset-repair',
-      Key: this.lastModified + key});
-    saveAs(url);
+    this.fileService.getS3Bucket().getObject(params, (err, data) => {
+       if (err) { console.log(err, err.stack); } // an error occurred
+       else    {
+       //  console.log(data);
+         console.log(data);       }
+       const file = new File([data.Body], key , {type: data.ContentType});
+       this.fileSaver.save(file);
+    });
   }
 
   getCommonPrefix(){

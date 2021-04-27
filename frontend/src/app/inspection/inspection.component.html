@@ -1,4 +1,4 @@
-<div *ngIf="apiRequest.successfulRequest && apiRequest.assetDetails.length>0">
+<div *ngIf="apiRequest.assetDetails.length>0">
   <div class="container">
     <form  [formGroup]="registerForm" (submit)="registerForm">
       <mat-card id="inspectionInput">
@@ -53,7 +53,7 @@
 
         <mat-form-field class="form-field" floatLabel="auto" appearance="fill">
           <mat-label>Phone Number</mat-label>
-          <input matInput required type="number"  formControlName="tel">
+          <input matInput required type="tel"  formControlName="phone">
           <mat-icon matSuffix>phone</mat-icon>
           <mat-hint>Include area code</mat-hint>
         </mat-form-field>

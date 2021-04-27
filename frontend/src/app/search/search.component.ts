@@ -1,11 +1,8 @@
-
-import {Component, OnInit, ViewEncapsulation, AfterViewInit, ViewChild} from '@angular/core';
-
+import {Component, OnInit} from '@angular/core';
 import {ApiRequestService} from '../API-request/api-request.service';
-import {MatDialog, MatDialogConfig, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
 import {DialogWindowComponent} from './dialog-window/dialog-window.component';
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
-
 
 @Component({
   selector: 'app-search',
@@ -13,6 +10,7 @@ import {VehiclesService} from '../../vehicle-service/vehicle.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
+  errorMessage = '';
 
   constructor(
     public request: ApiRequestService,
@@ -23,28 +21,21 @@ export class SearchComponent implements OnInit {
 
   qrResultString: string;
   ShowHide = false;
+  loading = false;
   ngOnInit(): void {
   }
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();
-    if (this.vehicle.getSerNo() !== undefined){
-      dialogConfig.autoFocus = true;
-      this.dialog.open(DialogWindowComponent, dialogConfig);
-    }
-      else{
-        this.dialog.closeAll();
-        dialogConfig.autoFocus = false;
-    }
+    this.dialog.open(DialogWindowComponent, dialogConfig);
   }
 
   showDiv(){
     if (!this.ShowHide){
-    this.ShowHide = true;
+      this.ShowHide = true;
     }
     else{
       this.ShowHide = false;
-      // document.getElementById('QR-Window').style.display = 'none';
       console.log(this.ShowHide);
     }
   }
@@ -52,24 +43,32 @@ export class SearchComponent implements OnInit {
   onCodeResult(resultString: string) {
     this.qrResultString = resultString;
     (document.getElementById('Search_id') as HTMLInputElement).value = resultString;
-
   }
 
-  /**
-   * @param value of serial number entered by a user
-   */
+   setSerialNo(value: string) {
+     const regExpr = new RegExp(/^[A-Za-z0-9]/);
+     if (value.match(regExpr)) {
+       try {
+         this.request.setSerialNo(value).then(r => {
+           if (this.request.assetDetails.length > 0) {
+           this.openDialog();
+           }
+           else {
+           this.errorMessage = 'Invalid VIN(Vehicle Identification Number)';
+           }
+           });
+       } catch (error){
+       }
+     }
+   }
 
-  // setSerialNo(value: string): void {
-  //   if (value) { // calls request.getVehicleData() if and only if the value is entered
-  //     // if not does nothing
-  //     this.request.getVehicleData(value)
-  //       // assigns deta recieved from observable to this local SearchComponent property
-  //       .subscribe(data => this.vehcilesDetail = data);
-  //
-  //
-  //   }
-
-  // }
-
+   inputValidation($event: KeyboardEvent): boolean{
+    const regExpr = new RegExp(/^[A-Za-z0-9]/);
+    console.log($event.key);
+    if ($event.key.match(regExpr)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
-

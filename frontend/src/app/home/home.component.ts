@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { VehiclesService} from '../../vehicle-service/vehicle.service';
 import {ApiRequestService} from '../API-request/api-request.service';
-import {FileServiceService} from "../fileService/file-service.service";
+import {FileServiceService} from '../fileService/file-service.service';
 import { createPopper } from '@popperjs/core';
-import {HomeService} from "./home.service";
+import {HomeService} from './home.service';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,7 @@ import {HomeService} from "./home.service";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  data : any;
+  data: any;
   workingPlaceholder = '../../assets/images/default-image.jpg';
   public commonPrefix;
   private prefix: any;
@@ -24,12 +24,12 @@ export class HomeComponent implements OnInit {
     public apiRequest: ApiRequestService,
     public vehicle: VehiclesService,
     public fileService: FileServiceService,
-    public home : HomeService,
+    public home: HomeService,
   ) {
-    //this.home.listFiles('Service');
-    //this.home.setCommonPreFixes('Service');
-    //this.home.setCommonPreFixes('Inspection');
-    //this.home.setCommonPreFixes('TCR');
+    // this.home.listFiles('Service');
+    // this.home.setCommonPreFixes('Service');
+    // this.home.setCommonPreFixes('Inspection');
+    // this.home.setCommonPreFixes('TCR');
 
   }
 
@@ -42,7 +42,7 @@ export class HomeComponent implements OnInit {
 
   downloadTCR(): void {
     this.home.getListObject('TCR');
-    if(this.displayTCR){
+    if (this.displayTCR){
       this.displayTCR   = false;
     }
     else{
@@ -55,7 +55,7 @@ export class HomeComponent implements OnInit {
   downloadInspection(): void {
     this.home.getListObject('Inspection');
 
-    if(this.displayInspection){
+    if (this.displayInspection){
       this.displayInspection  = false;
     }
     else{
@@ -71,7 +71,7 @@ export class HomeComponent implements OnInit {
   downloadService(): void {
     this.home.getListObject('Service');
 
-    if(this.displayService){
+    if (this.displayService){
       this.displayService  = false;
     }
     else{
@@ -85,7 +85,7 @@ export class HomeComponent implements OnInit {
     // }
 
    // this.home.listFiles('Service');
-    //this.home.getData();
+    // this.home.getData();
     // this.home.getListObject('Service');
     // this.prefix = this.home.lastModified;
     // console.log('this is prefix' + this.prefix);

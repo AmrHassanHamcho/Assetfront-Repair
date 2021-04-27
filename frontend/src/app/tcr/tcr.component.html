@@ -60,7 +60,7 @@
                   color="warn">
                   <i class="fa fa-arrow-left"></i>Back</button>
 
-          <button mat-button
+          <button mat-button [disabled]="!allSelected"
                   id="next"
                   (click)="personData()"
                   mat-raised-button

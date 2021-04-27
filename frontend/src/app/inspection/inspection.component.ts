@@ -1,21 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import {FileServiceService} from '../fileService/file-service.service';
 import {ApiRequestService} from '../API-request/api-request.service';
-import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import {FormBuilder, Validators, FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import validate = WebAssembly.validate;
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
 import {PDFService} from '../PDF/pdf.service';
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
-import {HomeService} from "../home/home.service";
+import {HomeService} from '../home/home.service';
 
 
 interface InspectionState {
   value: string;
   viewValue: string;
 }
-
 
 @Component({
   selector: 'app-inspection',
@@ -24,16 +23,15 @@ interface InspectionState {
 })
 export class InspectionComponent  implements OnInit {
 
-
   constructor(public fileService: FileServiceService,
               private formBuilder: FormBuilder,
-              private apiRequest: ApiRequestService,
+              public apiRequest: ApiRequestService,
               public dialog: MatDialog,
               public idt: InputDataTransferService,
               public PDF: PDFService,
               private router: Router,
               private service: VehiclesService,
-              private home: HomeService
+              public home: HomeService
 
   ) {
     this.idt.value = service.getSerNo();
@@ -43,7 +41,6 @@ export class InspectionComponent  implements OnInit {
    * String variable to hold the fileName
    */
   private fileName = '';
-
 
   private extension = '';
   /**
@@ -71,7 +68,6 @@ export class InspectionComponent  implements OnInit {
 
   });
 
-
   inspectionStates: InspectionState[] = [
     {value: 'Bad', viewValue: 'Bad'},
     {value: 'Good', viewValue: 'Good'},
@@ -93,7 +89,6 @@ export class InspectionComponent  implements OnInit {
     if (this.Email.hasError('required')) {
       return 'You must enter a value';
     }
-
     return this.Email.hasError('email') ? 'Not a valid email' : ''; // illegal email format
   }
 
@@ -123,10 +118,7 @@ export class InspectionComponent  implements OnInit {
 
     }
     console.log(this.selFiles); // informative log of the files list to console
-
   }
-
-
 
   /**
    * Upload selected files to Amazon S3 bucket
@@ -136,12 +128,11 @@ export class InspectionComponent  implements OnInit {
    */
 
   upload(){
-
     this.home.setCommonPreFixes('Inspection');
 
     let commonPrefix = this.home.getCommonPrefix();
     console.log('CommonPrefix upload = ' + commonPrefix);
-    commonPrefix= commonPrefix+1;
+    commonPrefix = commonPrefix + 1;
 
     const resourceId = this.apiRequest.getAssetDetails()[0].resourceId;
     if (this.selFiles !== undefined && this.selFiles !== null) {
@@ -155,7 +146,6 @@ export class InspectionComponent  implements OnInit {
         contentType = file.type;
         fileName = file.name;
         const params = {
-
           Bucket: 'asset-repair/' + resourceId + '/' + 'Inspection' + '/' + commonPrefix,
           Key:  fileName,
           Body: file,
@@ -166,11 +156,9 @@ export class InspectionComponent  implements OnInit {
       }
       this.onRouteSubmit(); // call onRouteSubmit
     } else {
-      alert('No files uploaded!'); //display alert pop-up
+      alert('No files uploaded!'); // display alert pop-up
       this.onRouteSubmit();
     }
-
-
   }
 
   /**
@@ -211,11 +199,11 @@ export class InspectionComponent  implements OnInit {
     this.home.setCommonPreFixes('Inspection');
 
     let commonPrefix = this.home.getCommonPrefix();
-    commonPrefix = commonPrefix+1;
+    commonPrefix = commonPrefix + 1;
 
     this.initIdt(); // A method that sets data to variables in InputDataTransferService service
     // calling Inspection PDF and saving it in a variable:
-    const fileName = this.PDF.DateToday(this.service.getSerNo())
+    const fileName = this.PDF.DateToday(this.service.getSerNo());
     const file = this.PDF.Inspection(this.idt.company, this.idt.fName + ` ` + this.idt.lName,
       this.idt.date, this.idt.inspectionState, this.idt.Email, this.idt.phone); // file naming
     const resourceId =  this.apiRequest.assetDetails[0].resourceId;
@@ -230,12 +218,11 @@ export class InspectionComponent  implements OnInit {
 
     this.fileService.upload(params); // calling upload method with the given parameters
     this.onRouteSubmit(); // calling onRouteSubmit method
-
   }
 
   /**
    *
-   *A method that sets data to variables in InputDataTransferService service
+   **A method that sets data to variables in InputDataTransferService service
    *
    */
 
@@ -251,7 +238,7 @@ export class InspectionComponent  implements OnInit {
   }
 
   validateResourceId(){
-    if(this.apiRequest.getAssetDetails().length>0){
+    if (this.apiRequest.getAssetDetails().length > 0){
       this.home.setCommonPreFixes('Inspection');
     }
   }
