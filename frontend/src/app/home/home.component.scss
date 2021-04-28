@@ -1,39 +1,42 @@
 #home{
   justify-content: center;
   mat-card{
-  #title{
-    font-weight: bold;
-  }
-  #main{
-    justify-content: center;
-    text-align: center;
-    #image-col{
-      margin-bottom: 4px;
-      #vehicle-image{
-        width: 100%;
-        height: auto;
-        margin: 0;
-        max-width: 30rem;
-      }
+    #title{
+      font-size: 1.3rem;
     }
-    #buttons-col{
-      #info{
-        li{
+    #subTitle{
+      font-size: 1rem;
+    }
+    #main{
+      justify-content: center;
+      text-align: center;
+      #image-col{
+        margin-bottom: 4px;
+        #vehicle-image{
+          width: 100%;
+          height: auto;
+          margin: 0;
+          max-width: 30rem;
         }
       }
-      .row{
-        justify-content: center;
-        text-align: center;
-        button{
-          font-size: .7rem;
-          width: 50%;
-          max-width: 8rem;
-          margin-top: 2px;
+      #buttons-col{
+        #info{
+          li{
+          }
+        }
+        .row{
+          justify-content: center;
+          text-align: center;
+          button{
+            font-size: .7rem;
+            width: 50%;
+            max-width: 8rem;
+            margin-top: 2px;
+          }
         }
       }
     }
   }
-}
   #downloadFile{
     margin-top: 1rem;
     padding: 0.5rem;

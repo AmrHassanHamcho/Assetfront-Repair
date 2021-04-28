@@ -1,118 +1,118 @@
 <div *ngIf=" apiRequest.assetDetails.length>0">
-<div class="container mx-auto" id="home" *ngFor="let vehicleInfo of apiRequest.assetDetails">
-      <mat-card>
-        <div class="col-12 col-md-10 col-lg-8" id="title">
-          <h1>{{vehicleInfo.title}}</h1>
+  <div class="container mx-auto" id="home" *ngFor="let vehicleInfo of apiRequest.assetDetails">
+    <mat-card>
+      <div class="col-12 col-md-10 col-lg-8">
+        <mat-card-title id="title">{{vehicleInfo.productClass.title}}</mat-card-title>
+        <mat-card-subtitle id="subTitle">{{vehicleInfo.title}}</mat-card-subtitle>
+      </div>
+      <div class="row" id="main">
+        <div class="col-12 col-md-7 col-lg-7 mx-auto" id="image-col">
+          <img
+            mat-card-image
+            id="vehicle-image"
+            src="{{vehicleInfo.mainImageUrl}}"
+            alt="Error"
+            [src-fallback]="workingPlaceholder"
+            (loaded)="onLoaded($event)">
         </div>
-        <div class="row" id="main">
-          <div class="col-12 col-md-7 col-lg-7 mx-auto" id="image-col">
-            <img
-              mat-card-image
-              id="vehicle-image"
-              src="{{vehicleInfo.mainImageUrl}}"
-              alt="Error"
-              [src-fallback]="workingPlaceholder"
-              (loaded)="onLoaded($event)">
+        <div class="col-lg-4 mx-auto" id="buttons-col">
+          <div class="row" id="info">
+            <mat-card-content>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">{{'VIN Number: ' + vehicle.getSerNo()}}<br></li>
+                <li class="list-group-item">{{'Product Id: ' + vehicleInfo.productClass.id}}<br></li>
+              </ul>
+            </mat-card-content>
           </div>
-          <div class="col-lg-4 mx-auto" id="buttons-col">
-            <div class="row" id="info">
-              <mat-card-content>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">{{'VIN Number: ' + vehicle.getSerNo()}}<br></li>
-                  <li class="list-group-item">{{'Product Id: ' + vehicleInfo.productClass.id}}<br></li>
-                </ul>
-              </mat-card-content>
-            </div>
 
-            <div class="row">
-              <button
-                mat-button
-                type="submit"
-                (click)="downloadTCR()"
-                mat-raised-button>
-                <i class="fa fa-download" aria-hidden="true"></i>
-                TCR
-              </button>
+          <div class="row">
+            <button
+              mat-button
+              type="submit"
+              (click)="downloadTCR()"
+              mat-raised-button>
+              <i class="fa fa-download" aria-hidden="true"></i>
+              TCR
+            </button>
 
-              <button
-                mat-button
-                type="submit"
-                [routerLink]="['/tcr']"
-                mat-raised-button
-                color="primary">
-                <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                Send TCR
-              </button>
-            </div>
+            <button
+              mat-button
+              type="submit"
+              [routerLink]="['/tcr']"
+              mat-raised-button
+              color="primary">
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              Send TCR
+            </button>
+          </div>
 
-            <div class="row">
-              <button
-                mat-button
-                type="submit"
-                (click)="downloadService()"
-                mat-raised-button>
-                <i class="fa fa-download" aria-hidden="true"></i>
-                Service
-              </button>
+          <div class="row">
+            <button
+              mat-button
+              type="submit"
+              (click)="downloadService()"
+              mat-raised-button>
+              <i class="fa fa-download" aria-hidden="true"></i>
+              Service
+            </button>
 
-              <button
-                mat-button
-                type="submit"
-                [routerLink]="['/service']"
-                mat-raised-button
-                color="primary">
-                <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                Send Service
-              </button>
-            </div>
+            <button
+              mat-button
+              type="submit"
+              [routerLink]="['/service']"
+              mat-raised-button
+              color="primary">
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              Send Service
+            </button>
+          </div>
 
-            <div class="row">
-              <button
-                mat-button
-                type="submit"
-                (click)="downloadInspection() "
-                mat-raised-button>
-                <i class="fa fa-download" aria-hidden="true"></i>
-                Inspection
-              </button>
+          <div class="row">
+            <button
+              mat-button
+              type="submit"
+              (click)="downloadInspection() "
+              mat-raised-button>
+              <i class="fa fa-download" aria-hidden="true"></i>
+              Inspection
+            </button>
 
-              <button
-                mat-button
-                type="submit"
-                [routerLink]="['/inspection']"
-                mat-raised-button
-                color="primary">
-                <i class="fa fa-paper-plane" aria-hidden="true"></i>
-                Send Inspection
-              </button>
-            </div>
+            <button
+              mat-button
+              type="submit"
+              [routerLink]="['/inspection']"
+              mat-raised-button
+              color="primary">
+              <i class="fa fa-paper-plane" aria-hidden="true"></i>
+              Send Inspection
+            </button>
           </div>
         </div>
-        <div *ngIf="displayService || displayInspection || displayTCR" class="container"  id="downloadFile">
-          <hr>
-          <div *ngIf="home.arrayOfFiles.length > 0 ; else msg">
+      </div>
+      <div *ngIf="displayService || displayInspection || displayTCR" class="container"  id="downloadFile">
+        <hr>
+        <div *ngIf="home.arrayOfFiles.length > 0 ; else msg">
+          <h2 mat-card-title>Choose a file to download</h2>
 
-            <h2 mat-card-title>Choose a file to download</h2>
-
-            <h2 *ngFor="let file of this.home.arrayOfFiles; let index = index">
-              <div class="row">
-                <div class="col-12 col-md-10 col-lg-6" id="fileName">
-                  <h4>File {{index + 1 + ' : ' + file}}</h4>
-                </div>
-                <div class="col-1">
-                  <button
-                    mat-raised-button
-                    id="downloadButton"
-                    (click)="this.home.downloadFiles(file)">
-                    <i class="fa fa-download" aria-hidden="true"></i>
-                  </button>
-                </div>
-
+          <h2 *ngFor="let file of this.home.arrayOfFiles; let index = index">
+            <div class="row">
+              <div class="col-12 col-md-10 col-lg-6" id="fileName">
+                <h4>File {{index + 1 + ' : ' + file}}</h4>
               </div>
-            </h2>
-          </div>
-          <ng-template #msg>  <h3>The folder is empty! No files detected! </h3></ng-template>
+              <div class="col-1">
+                <button
+                  mat-raised-button
+                  id="downloadButton"
+                  (click)="this.home.downloadFiles(file)">
+                  <i class="fa fa-download" aria-hidden="true"></i>
+                </button>
+              </div>
+
+            </div>
+          </h2>
         </div>
-      </mat-card>
-    </div>
+        <ng-template #msg>  <h3>The folder is empty! No files detected! </h3></ng-template>
+      </div>
+    </mat-card>
+  </div>
 </div>
