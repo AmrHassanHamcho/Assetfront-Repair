@@ -32,7 +32,6 @@ import {MatDialogModule} from '@angular/material/dialog';
 
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule, MatRippleModule} from '@angular/material/core';
-import { TestComponent } from './test/test.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -63,7 +62,6 @@ import { FileSaverModule } from 'ngx-filesaver';
     DialogWindowComponent,
     PersonalDataComponent,
     DialogInspectionComponent,
-    TestComponent,
     DialogContentExampleDialog,
     TcrDialogComponent,
   ],

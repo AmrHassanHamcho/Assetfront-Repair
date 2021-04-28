@@ -69,9 +69,9 @@ export class InspectionComponent  implements OnInit {
   });
 
   inspectionStates: InspectionState[] = [
-    {value: 'Bad', viewValue: 'Bad'},
-    {value: 'Good', viewValue: 'Good'},
-    {value: 'Excellent', viewValue: 'Excellent'}
+    {value: 'Approved', viewValue: 'Approved'},
+    {value: 'Not Approved', viewValue: 'Not Approved'},
+  //  {value: 'Excellent', viewValue: 'Excellent'}
 
   ];
 
@@ -220,12 +220,7 @@ export class InspectionComponent  implements OnInit {
     this.onRouteSubmit(); // calling onRouteSubmit method
   }
 
-  /**
-   *
-   **A method that sets data to variables in InputDataTransferService service
-   *
-   */
-
+     // A method that sets data to variables in InputDataTransferService service
   initIdt(){
     this.idt.date = this.registerForm.value.date.toLocaleDateString();
     this.idt.inspectionState = this.registerForm.value.inspectionStates?.viewValue;
