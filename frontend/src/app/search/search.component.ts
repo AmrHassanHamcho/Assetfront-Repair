@@ -27,7 +27,10 @@ export class SearchComponent implements OnInit {
 
   openDialog() {
     const dialogConfig = new MatDialogConfig();
-    this.dialog.open(DialogWindowComponent, dialogConfig);
+    this.dialog.open(DialogWindowComponent, {
+      data: {},
+      panelClass: 'my-custom-dialog-class'
+    });
   }
 
   showDiv(){
