@@ -27,8 +27,6 @@ export class TcrComponent implements OnInit,  AfterViewChecked {
   allSelected = false;
   searchedSerialNo: boolean;
   ttrCopy = this.request.getAssetDetails()[0];
-
-
   ngOnInit(): void {
 
   }
@@ -74,7 +72,6 @@ export class TcrComponent implements OnInit,  AfterViewChecked {
         this.all[cpi] = false;
         if (this.ttrCopy.tcr[tcri].checkpoint[cpi].value > -1){
           this.all[cpi] = true;
-
         }
 
       }
