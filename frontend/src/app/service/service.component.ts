@@ -131,7 +131,7 @@ export class ServiceComponent implements OnInit {
        fileName =  this.currentDate + file.name;
        const params = {
 
-          Bucket: 'asset-repair/' + resourceId + '/' + 'Service' + '/' + commonPrefix,
+          Bucket: 'asset-repair/' + resourceId + '/' + 'Service' + '/' + commonPrefix + '/' +'Attached-files',
           Key:  fileName,
           Body: file,
           ACL: 'public-read',
@@ -195,7 +195,7 @@ export class ServiceComponent implements OnInit {
     const resourceId =  this.apiRequest.assetDetails[0].resourceId;
     const contentType = 'application/pdf';
     const params = {
-      Bucket: 'asset-repair/' + resourceId + '/' + 'Service' + '/' + commonPrefix,
+      Bucket: 'asset-repair/' + resourceId + '/' + 'Service' + '/' + commonPrefix + '/'+ 'Report',
       Key: fileName,
       Body: file,
       ACL: 'public-read',

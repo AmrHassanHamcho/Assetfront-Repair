@@ -54,7 +54,7 @@ export class PersonalDataComponent implements OnInit {
     fName: [''],
     lName: [''],
     date: [''],
-    phoneNo: [''],
+    phone: [''],
   });
 
   ngOnInit(): void {
@@ -72,7 +72,7 @@ export class PersonalDataComponent implements OnInit {
 
 
     const params = {
-      Bucket: 'asset-repair/' + resourceId + '/' + 'TCR' + '/' + commonPrefix,
+      Bucket: 'asset-repair/' + resourceId + '/' + 'TCR' + '/' + commonPrefix + '/' + 'Attached-files',
       Key: 'Tcr.json',
       Body:  JSON.stringify(this.tcr.getTcr()),
       ACL: 'public-read',
@@ -97,7 +97,7 @@ export class PersonalDataComponent implements OnInit {
 
     const person = this.registerForm.value;
     const file = this.pdf.PlaceForm(this.tcr.getTcr().tcr, person.workshop, person.fName + ' '
-      + person.lName, person.date.toLocaleDateString(), person.email, person.phoneNo);
+      + person.lName, person.date.toLocaleDateString(), person.email, person.phone);
     return file;
 
   }
@@ -137,7 +137,7 @@ export class PersonalDataComponent implements OnInit {
     const fileName = this.currentDate + '-Entire-report.pdf';
     const contentType = 'application/pdf';
     const params = {
-      Bucket: 'asset-repair/' + resourceId + '/' + 'TCR' +'/'+commonPrefix,
+      Bucket: 'asset-repair/' + resourceId + '/' + 'TCR' +'/'+commonPrefix + '/' + 'Report',
       Key: fileName,
       Body: file,
       ACL: 'public-read',
