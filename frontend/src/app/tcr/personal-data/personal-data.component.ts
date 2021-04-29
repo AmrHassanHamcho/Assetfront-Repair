@@ -54,7 +54,7 @@ export class PersonalDataComponent implements OnInit {
     fName: [''],
     lName: [''],
     date: [''],
-    phoneNo: [''],
+    phone: [''],
   });
 
   ngOnInit(): void {
@@ -97,7 +97,7 @@ export class PersonalDataComponent implements OnInit {
 
     const person = this.registerForm.value;
     const file = this.pdf.PlaceForm(this.tcr.getTcr().tcr, person.workshop, person.fName + ' '
-      + person.lName, person.date.toLocaleDateString(), person.email, person.phoneNo);
+      + person.lName, person.date.toLocaleDateString(), person.email, person.phone);
     return file;
 
   }

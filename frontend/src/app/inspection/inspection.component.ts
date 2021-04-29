@@ -71,8 +71,6 @@ export class InspectionComponent  implements OnInit {
   inspectionStates: InspectionState[] = [
     {value: 'Approved', viewValue: 'Approved'},
     {value: 'Disapproved', viewValue: 'Disapproved'},
-
-
   ];
 
   ngOnInit(): void {
@@ -220,12 +218,7 @@ export class InspectionComponent  implements OnInit {
     this.onRouteSubmit(); // calling onRouteSubmit method
   }
 
-  /**
-   *
-   **A method that sets data to variables in InputDataTransferService service
-   *
-   */
-
+     // A method that sets data to variables in InputDataTransferService service
   initIdt(){
     this.idt.date = this.registerForm.value.date.toLocaleDateString();
     this.idt.inspectionState = this.registerForm.value.inspectionStates?.viewValue;

@@ -1,25 +1,28 @@
 <div *ngFor="let vehicleInfo of request.assetDetails" id="dialog">
-  <h1 mat-dialog-title id="title">{{vehicleInfo.productClass.title}}</h1>
-  <hr>
-  <img
-    mat-card-image
-    id="vehicle-image"
-    src="{{vehicleInfo.mainImageUrl}}"
-    alt="Vehicle Image"
-    [src-fallback]="workingPlaceholder"
-    (loaded)="onLoaded($event)">
-    <div class="row justify-content-center">
-      <h2>Is this the right vehicle?</h2>
-    </div>
-  <hr>
-  <mat-card-actions>
-    <div class="row justify-content-center">
-      <button class="btn btn-success" mat-button type="submit" (click)="acceptVehicle()" mat-raised-button>
-        <i class="fa fa-check" aria-hidden="true"></i>
-      </button>
-      <button class="btn-danger" mat-button type="submit" (click)="deniedVehicle()" mat-raised-button>
-        <i class="fa fa-window-close" aria-hidden="true"></i>
-      </button>
-    </div>
-  </mat-card-actions>
+  <mat-card>
+    <mat-card-title id="title">{{vehicleInfo.productClass.title}}</mat-card-title>
+    <mat-card-subtitle id="subTitle">{{vehicleInfo.title}}</mat-card-subtitle>
+    <hr>
+    <img
+      mat-card-image
+      id="vehicle-image"
+      src="{{vehicleInfo.mainImageUrl}}"
+      alt="Vehicle Image"
+      [src-fallback]="workingPlaceholder"
+      (loaded)="onLoaded($event)">
+      <div class="row justify-content-center">
+        <h2>Is this the right vehicle?</h2>
+      </div>
+    <hr>
+    <mat-card-actions>
+      <div class="row justify-content-center">
+        <button class="btn btn-success" mat-button type="submit" (click)="acceptVehicle()" mat-raised-button>
+          <i class="fa fa-check" aria-hidden="true"></i>
+        </button>
+        <button class="btn-danger" mat-button type="submit" (click)="deniedVehicle()" mat-raised-button>
+          <i class="fa fa-window-close" aria-hidden="true"></i>
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
 </div>
