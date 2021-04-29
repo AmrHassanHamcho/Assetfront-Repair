@@ -89,15 +89,15 @@
           </div>
         </div>
       </div>
+
       <div *ngIf="displayService || displayInspection || displayTCR" class="container"  id="downloadFile">
         <hr>
         <div *ngIf="home.arrayOfFiles.length > 0 ; else msg">
           <h2 mat-card-title>Choose a file to download</h2>
-
           <h2 *ngFor="let file of this.home.arrayOfFiles; let index = index">
             <div class="row">
               <div class="col-12 col-md-10 col-lg-6" id="fileName">
-                <h4>File {{index + 1 + ' : ' + file}}</h4>
+                <h4>File {{file}}</h4>
               </div>
               <div class="col-1">
                 <button
@@ -107,7 +107,6 @@
                   <i class="fa fa-download" aria-hidden="true"></i>
                 </button>
               </div>
-
             </div>
           </h2>
         </div>

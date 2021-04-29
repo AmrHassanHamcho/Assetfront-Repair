@@ -10,7 +10,7 @@
 
             <mat-form-field class="form-field"  appearance="fill">
               <mat-label>DD-MM-YYYY</mat-label>
-              <input matInput [matDatepicker]="picker" formControlName="date">
+              <input matInput required [matDatepicker]="picker" formControlName="date">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -74,6 +74,8 @@
               [elementType]="idt.elementType"
               [errorCorrectionLevel]="idt.correctionLevel"
               [value]="idt.value"
-              cssClass="shadow"></ngx-qrcode>
+              cssClass="shadow">
+
+      </ngx-qrcode>
     </div>
 </div>

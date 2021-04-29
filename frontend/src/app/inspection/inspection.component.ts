@@ -70,9 +70,7 @@ export class InspectionComponent  implements OnInit {
 
   inspectionStates: InspectionState[] = [
     {value: 'Approved', viewValue: 'Approved'},
-    {value: 'Not Approved', viewValue: 'Not Approved'},
-  //  {value: 'Excellent', viewValue: 'Excellent'}
-
+    {value: 'Disapproved', viewValue: 'Disapproved'},
   ];
 
   ngOnInit(): void {
@@ -146,7 +144,7 @@ export class InspectionComponent  implements OnInit {
         contentType = file.type;
         fileName = file.name;
         const params = {
-          Bucket: 'asset-repair/' + resourceId + '/' + 'Inspection' + '/' + commonPrefix,
+          Bucket: 'asset-repair/' + resourceId + '/' + 'Inspection' + '/' + commonPrefix + '/' + 'Attached-files',
           Key:  fileName,
           Body: file,
           ACL: 'public-read',
@@ -209,7 +207,7 @@ export class InspectionComponent  implements OnInit {
     const resourceId =  this.apiRequest.assetDetails[0].resourceId;
     const contentType = 'application/pdf';
     const params = {
-      Bucket: 'asset-repair/' + resourceId + '/' + 'Inspection' + '/' + commonPrefix,
+      Bucket: 'asset-repair/' + resourceId + '/' + 'Inspection' + '/' + commonPrefix + '/' + 'Report',
       Key: fileName,
       Body: file,
       ACL: 'public-read',

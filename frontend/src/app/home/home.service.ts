@@ -61,14 +61,14 @@ export class HomeService {
         console.log('commonprefix in else is: ' + this.commonPrefix);
         this.data = data;
         if (this.commonPrefix >  0 ) {
-          this.lastModified = data.CommonPrefixes[this.commonPrefix - 1].Prefix;
+          this.lastModified = data.CommonPrefixes[this.commonPrefix - 1].Prefix + 'Report' + '/';
           console.log('LM in else is: ' + this.lastModified);
         }
 
         const paramsForList = { // Bucket info
           Bucket: 'asset-repair' ,
           Delimiter: '/',
-          Prefix: this.lastModified,
+          Prefix: this.lastModified ,
         };
 
         this.fileService.getS3Bucket().listObjectsV2(paramsForList, ((error, data) => {
