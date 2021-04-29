@@ -12,15 +12,12 @@ export class HomeService {
   public arrayOfFiles = [];
   public commonPrefix = 0;
   public lastModified = '';
-  public commonPrefixService = 0;
   public commonPreFixInspection = 0;
-  public commonPreFixTCR = 0;
 
   private resourceId;
   constructor(private apiRequest: ApiRequestService,
               private fileService: FileServiceService,
-              private fileSaver: FileSaverService,
-              private http: HttpClient)
+              private fileSaver: FileSaverService)
   { }
 
   setCommonPreFixes(folder){
@@ -41,7 +38,6 @@ export class HomeService {
       }
     });
   }
-
   getListObject(folder){
    this.resourceId = this.apiRequest.getAssetDetails()[0].resourceId;
    const params = { // Bucket info
