@@ -1,4 +1,4 @@
-import {Component, Injectable, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 
 import {VehiclesService} from '../../vehicle-service/vehicle.service';
 import {ApiRequestService} from '../API-request/api-request.service';
@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // Method to set the variable AcceptOrDenied to false
+  // Method to set the variable AcceptOrDenied from Search Dialog Window
   displayFalse(){
     this.service.AcceptOrDenied = false;
   }
@@ -33,12 +33,8 @@ export class HeaderComponent implements OnInit {
    */
 
   display(){
-    if(this.service.AcceptOrDenied === true && this.request.assetDetails.length > 0){ //checks whether AcceptOrDenied variable is true and there is a vehicle retrieved by the API
-      this.displayHeader = true;
-    }
-    else {
-      this.displayHeader = false;
-    }
+    // checks whether AcceptOrDenied variable is true and there is a vehicle retrieved by the API
+    this.displayHeader = this.service.AcceptOrDenied === true && this.request.assetDetails.length > 0;
     return this.displayHeader;
   }
 }

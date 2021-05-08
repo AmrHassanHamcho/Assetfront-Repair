@@ -31,7 +31,7 @@ export class ServiceComponent implements OnInit {
    */
   private fileName = '';
   private extension = '';
-   myDate = new Date();
+  myDate = new Date();
   Email = new FormControl('', [Validators.required, Validators.email]);
 
   registerForm = this.formBuilder.group({
@@ -131,7 +131,7 @@ export class ServiceComponent implements OnInit {
        fileName =  this.currentDate + file.name;
        const params = {
 
-          Bucket: 'asset-repair/' + resourceId + '/' + 'Service' + '/' + commonPrefix + '/' +'Attached-files',
+          Bucket: 'asset-repair/' + resourceId + '/' + 'Service' + '/' + commonPrefix + '/' + 'Attached-files',
           Key:  fileName,
           Body: file,
           ACL: 'public-read',
@@ -195,7 +195,7 @@ export class ServiceComponent implements OnInit {
     const resourceId =  this.apiRequest.assetDetails[0].resourceId;
     const contentType = 'application/pdf';
     const params = {
-      Bucket: 'asset-repair/' + resourceId + '/' + 'Service' + '/' + commonPrefix + '/'+ 'Report',
+      Bucket: 'asset-repair/' + resourceId + '/' + 'Service' + '/' + commonPrefix + '/' + 'Report',
       Key: fileName,
       Body: file,
       ACL: 'public-read',

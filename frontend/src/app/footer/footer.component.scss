@@ -1,4 +1,6 @@
 #footer{
+  justify-content: center;
+  text-align: center;
   background-color: #2f2f2f;
   position: relative;
   bottom: 0;
@@ -11,17 +13,18 @@
     max-height: 4rem;
     max-width: 100%;
     margin-top: 1.5rem;
-    margin-left: 2rem;
   }
   #info{
     color: white;
     font-size: 1rem;
-    margin-left: 2rem;
+    padding: 0 1rem 1rem 1rem;
+    border: 1px solid gray;
   }
 }
+
+
 @media screen and (max-width: 320px){
   #footer {
-    justify-content: center;
     #logo{
       max-height: 3rem;
     }
@@ -30,18 +33,15 @@
     }
   }
 }
-@media screen and (max-width: 375px){
-  #footer{
-    justify-content: center;
-    #logo{
-      margin-right: auto;
-      margin-left: auto;
-    }
+@media screen and (min-width: 500px){
+  #footer {
+    justify-content: left;
+    text-align: left;
     #info{
-      margin-right: auto;
-      margin-left: auto;
-      padding: 0 1rem 1rem 1rem;
-      border: 1px solid gray;
+      border: none;
+    }
+    #logo{
+      margin: 2rem 0 0 2rem;
     }
   }
 }
