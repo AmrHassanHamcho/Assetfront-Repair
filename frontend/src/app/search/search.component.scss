@@ -24,11 +24,21 @@ $color-warn: #F44336;
   }
 }
 
+@media screen and (max-width: 375px) {
+  ::ng-deep .my-custom-dialog-class {
+    mat-dialog-container {
+      max-height: 80vh;
+      width: 100vw !important;
+      max-width: none !important;
+    };
+  }
+}
+
 ::ng-deep .my-custom-dialog-class {
   mat-dialog-container {
     padding: 0;
     border-radius: 15px !important;
-    overflow-y: hidden !important;
+    overflow-y: visible !important;
     overflow-x: hidden !important;
   }
 }
