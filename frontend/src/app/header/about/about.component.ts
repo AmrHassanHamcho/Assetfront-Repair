@@ -5,11 +5,14 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './about.component.html',
   styleUrls: ['./about.component.scss']
 })
+
+/*
+* About Repair Component
+*/
 export class AboutComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }
