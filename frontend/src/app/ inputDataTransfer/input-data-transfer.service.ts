@@ -13,16 +13,11 @@ import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediar
   providedIn: 'root'
 })
 
-
 /*
 * InputDataTransferService Service class
 */
 
-
-
 export class InputDataTransferService{
-
-
 /*
 * Declaring public variables to hold the value from the input forms in ServiceComponent
 * and InspectionComponent
@@ -30,7 +25,7 @@ export class InputDataTransferService{
 * As well as to PDF service where the final pdf is generated
 */
 
-  public Email : string;
+  public Email: string;
   public fName: string;
   public lName: string;
   public date: any;
@@ -40,7 +35,7 @@ export class InputDataTransferService{
   public phone: string;
   public cost: number;
   public inspectionState: any;
-  public serialNumber: string = '' ;
+  public serialNumber = '' ;
   public elementType = NgxQrcodeElementTypes.URL;
   public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   public value: any;
@@ -70,7 +65,7 @@ export class InputDataTransferService{
   // Method for storing data in PDF which will be generated from Service form
   callPdfService() {
     this.serialNumber = this.vehicle.getSerNo();
-    // tslint:disable-next-line:max-line-length
+
     this.PDF.Service(
       this.company,
       this.fName + ' ' +

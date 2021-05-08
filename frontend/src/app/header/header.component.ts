@@ -33,12 +33,8 @@ export class HeaderComponent implements OnInit {
    */
 
   display(){
-    if(this.service.AcceptOrDenied === true && this.request.assetDetails.length > 0){ //checks whether AcceptOrDenied variable is true and there is a vehicle retrieved by the API
-      this.displayHeader = true;
-    }
-    else {
-      this.displayHeader = false;
-    }
+      // checks whether AcceptOrDenied variable is true and there is a vehicle retrieved by the API
+    this.displayHeader = this.service.AcceptOrDenied === true && this.request.assetDetails.length > 0;
     return this.displayHeader;
   }
 }

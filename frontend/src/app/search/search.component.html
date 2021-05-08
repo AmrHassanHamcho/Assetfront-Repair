@@ -8,7 +8,7 @@
       type="text"
       value = ""
       class="form-control"
-      placeholder="Please enter VIN (Vehicle identification number)"
+      placeholder="Please Enter VIN (Vehicle Identification Number)"
       required="required"
       autocomplete="off">
     <p *ngIf="request.assetDetails.length === 0 " id="errorMessage">
@@ -23,8 +23,8 @@
           id="submit">
           <i class="fa fa-search " aria-hidden="true"></i>
           Search
-        </button>
 
+        </button>
         <button
           (click)="showDiv()"
           class="btn"
@@ -33,7 +33,7 @@
           QR-Code
         </button>
 
-      <div *ngIf="ShowHide">
+      <div *ngIf="hide">
         <div id="QR-Window" style="display:block;">
           <zxing-scanner id="QR-Reader " (scanSuccess)="onCodeResult($event)"></zxing-scanner>
         </div>

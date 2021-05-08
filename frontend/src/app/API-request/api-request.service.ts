@@ -11,10 +11,8 @@ import {VehiclesService} from '../../vehicle-service/vehicle.service';
 })
 export class ApiRequestService {
   public assetDetails: any = [];
-  private errorMessage = '';
   statusCode: number;
-  public successfulRequest = false;
-  constructor(private request: VehiclesService) { }
+    constructor(private request: VehiclesService) { }
 
   /**
    * This is a Setter function which fetches the value from the API

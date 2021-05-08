@@ -20,7 +20,7 @@ export class SearchComponent implements OnInit {
   }
 
   qrResultString: string;
-  ShowHide = false;
+  hide = false;
   loading = false;
   ngOnInit(): void {
   }
@@ -34,17 +34,18 @@ export class SearchComponent implements OnInit {
   }
 
   showDiv(){
-    if (!this.ShowHide){
-      this.ShowHide = true;
+    if (!this.hide){
+      this.hide = true;
     }
     else{
-      this.ShowHide = false;
-      console.log(this.ShowHide);
+      this.hide = false;
+      console.log(this.hide);
     }
   }
 
   onCodeResult(resultString: string) {
     this.qrResultString = resultString;
+    this.hide = false;
     (document.getElementById('Search_id') as HTMLInputElement).value = resultString;
   }
 
@@ -52,7 +53,7 @@ export class SearchComponent implements OnInit {
      const regExpr = new RegExp(/^[A-Za-z0-9]/);
      if (value.match(regExpr)) {
        try {
-         this.request.setSerialNo(value).then(r => {
+         this.request.setSerialNo(value).then(() => {
            if (this.request.assetDetails.length > 0) {
            this.openDialog();
            }

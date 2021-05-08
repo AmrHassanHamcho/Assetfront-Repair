@@ -4,26 +4,27 @@ import {ApiRequestService} from '../../API-request/api-request.service';
 import {TcrService} from '../tcr.service';
 import {PDFService} from '../../PDF/pdf.service';
 import {Router} from '@angular/router';
-import * as AWS from 'aws-sdk/global';
-import * as S3 from 'aws-sdk/clients/s3';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediaries/ngx-qrcode';
 import {InputDataTransferService} from '../../ inputDataTransfer/input-data-transfer.service';
 import {MatDialog} from '@angular/material/dialog';
 import {TcrDialogComponent} from '../tcr-dialog/tcr-dialog.component';
 import {FileServiceService} from '../../fileService/file-service.service';
-import {HomeService} from "../../home/home.service";
+import {HomeService} from '../../home/home.service';
 @Component({
   selector: 'app-personal-data',
   templateUrl: './personal-data.component.html',
   styleUrls: ['./personal-data.component.scss']
 })
 export class PersonalDataComponent implements OnInit {
-  optionHolder = [];
   elementType = NgxQrcodeElementTypes.URL;
   correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   myDate = new Date();
-  currentDate  = this.myDate.getFullYear() + '-' + this.myDate.getMonth() + '-' +  this.myDate.getDate() + '-' +this.myDate.getHours() + '-' + this.myDate.getMinutes();
+  currentDate  = this.myDate.getFullYear() + '-' +
+    this.myDate.getMonth() + '-' +
+    this.myDate.getDate() + '-' +
+    this.myDate.getHours() + '-' +
+    this.myDate.getMinutes();
   value = 'https://assetfront.com';
   constructor(public tcr: TcrService,
               private router: Router,
@@ -137,7 +138,7 @@ export class PersonalDataComponent implements OnInit {
     const fileName = this.currentDate + '-Entire-report.pdf';
     const contentType = 'application/pdf';
     const params = {
-      Bucket: 'asset-repair/' + resourceId + '/' + 'TCR' +'/'+commonPrefix + '/' + 'Report',
+      Bucket: 'asset-repair/' + resourceId + '/' + 'TCR' + '/' + commonPrefix + '/' + 'Report',
       Key: fileName,
       Body: file,
       ACL: 'public-read',

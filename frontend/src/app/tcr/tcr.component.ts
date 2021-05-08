@@ -1,13 +1,8 @@
-import {AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChildren} from '@angular/core';
+import {AfterViewChecked, ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {ApiRequestService} from '../API-request/api-request.service';
 import {Router} from '@angular/router';
 import {TcrService} from './tcr.service';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {PDFService} from '../PDF/pdf.service';
-import {FileServiceService} from '../fileService/file-service.service';
-import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
-import {VehiclesService} from '../../vehicle-service/vehicle.service';
-
+import {FormBuilder} from '@angular/forms';
 @Component({
   selector: 'app-tcr',
   templateUrl: './tcr.component.html',

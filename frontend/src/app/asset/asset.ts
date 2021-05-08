@@ -6,4 +6,5 @@ export interface Asset {
   resourceId: string;
   productClass: ProductClass;
   tcr: Tcr[];
+
 }
