@@ -57,7 +57,15 @@ export class ServiceComponent implements OnInit {
 
   });
 
+  /**
+   *  Targeted file from $event
+   */
   private files: any;
+
+
+   /**
+   *  Counter of files targeted   
+   */
   private counter = 0;
 
 
