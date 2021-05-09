@@ -11,10 +11,19 @@ import {HomeService} from './home.service';
 export class HomeComponent implements OnInit {
   data: any;
   workingPlaceholder = '../../assets/images/default-image.jpg';
-  displayService = false;
-  public displayInspection =  false;
+  /**
+   * Bool variable to display download service div
+   */
+  public displayService = false;
+  /**
+   * Bool variable to display download inspection div
+   */
+  public displayInspection = false;
+  /**
+   * Bool variable to display download TCR div
+   */
   public displayTCR = false;
-  public emptyArray = false;
+
 
   constructor(
     public apiRequest: ApiRequestService,
@@ -30,8 +39,12 @@ export class HomeComponent implements OnInit {
     console.log(isFallback);
   }
 
+  /**
+   * Function that displays the latest TCR for the user to download
+   */
   downloadTCR(): void {
-    this.home.getListObject('TCR');
+    this.home.getListObject('TCR'); // Lists Objects in Report folder in Latest TCR
+    //open and close download div
     if (this.displayTCR){
       this.displayTCR   = false;
     }
@@ -41,10 +54,12 @@ export class HomeComponent implements OnInit {
       this.displayService = false;
     }
   }
-
+  /**
+   * Function that displays the latest TCR for the user to download
+   */
   downloadInspection(): void {
-    this.home.getListObject('Inspection');
-
+    this.home.getListObject('Inspection');// Lists Objects in Report folder in Latest inspection
+    //open and close download div
     if (this.displayInspection){
       this.displayInspection  = false;
     }
@@ -55,9 +70,12 @@ export class HomeComponent implements OnInit {
     }
   }
 
+  /**
+   * Function that displays the latest TCR for the user to download
+   */
   downloadService(): void {
-    this.home.getListObject('Service');
-
+    this.home.getListObject('Service');// Lists Objects in Report folder in Latest service
+    //open and close download div
     if (this.displayService){
       this.displayService  = false;
     }

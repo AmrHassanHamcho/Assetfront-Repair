@@ -27,7 +27,7 @@ import { TcrDialogComponent } from './tcr/tcr-dialog/tcr-dialog.component';
 import { ContactUsComponent } from './header/contact-us/contact-us.component';
 import { PersonalDataComponent } from './tcr/personal-data/personal-data.component';
 import { DialogWindowComponent } from './search/dialog-window/dialog-window.component';
-import { DialogContentExampleDialog, ServiceComponent } from './service/service.component';
+import { DialogServiceComponent, ServiceComponent } from './service/service.component';
 import { DialogInspectionComponent, InspectionComponent } from './inspection/inspection.component';
 
 // Material Design modules
@@ -67,8 +67,8 @@ import {VehiclesService} from './vehicle-service/vehicle.service';
     InspectionComponent,
     DialogWindowComponent,
     PersonalDataComponent,
+    DialogServiceComponent,
     DialogInspectionComponent,
-    DialogContentExampleDialog,
   ],
   imports: [
     FormsModule,

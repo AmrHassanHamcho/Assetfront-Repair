@@ -37,7 +37,7 @@ setSerialNo(value){
    }
 
   /**
-   * @return getter that return asset Details
+   * @return getter that returns asset Details
    */
   getAssetDetails() {
     return this.assetDetails;
