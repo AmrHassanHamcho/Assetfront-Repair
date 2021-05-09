@@ -33,9 +33,10 @@
           QR-Code
         </button>
 
-      <div *ngIf="hide">
+      <div *ngIf="show">
         <div id="QR-Window" style="display:block;">
-          <zxing-scanner id="QR-Reader " (scanSuccess)="onCodeResult($event)"></zxing-scanner>
+          <zxing-scanner id="QR-Reader " (scanSuccess)="onCodeResult($event); setSerialNo($event)">
+          </zxing-scanner>
         </div>
       </div>
       </span>

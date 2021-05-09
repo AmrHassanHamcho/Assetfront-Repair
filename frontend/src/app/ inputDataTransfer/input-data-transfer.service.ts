@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {PDFService} from '../PDF/pdf.service';
-import {VehiclesService} from '../../vehicle-service/vehicle.service';
+import {VehiclesService} from '../vehicle-service/vehicle.service';
 import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediaries/ngx-qrcode';
 
 /**
@@ -26,8 +26,8 @@ export class InputDataTransferService{
 */
 
   public Email: string;
-  public fName: string;
-  public lName: string;
+  public firstName: string;
+  public lastName: string;
   public date: any;
   public hours: number;
   public comment: string;
@@ -52,8 +52,8 @@ export class InputDataTransferService{
     this.serialNumber = this.vehicle.getSerNo();
     this.PDF.Inspection(
       this.company,
-      this.fName + ' ' +
-      this.lName,
+      this.firstName + ' ' +
+      this.lastName,
       this.date,
       this.inspectionState,
       this.Email,
@@ -68,8 +68,8 @@ export class InputDataTransferService{
 
     this.PDF.Service(
       this.company,
-      this.fName + ' ' +
-      this.lName,
+      this.firstName + ' ' +
+      this.lastName,
       this.date,
       this.hours,
       this.cost,

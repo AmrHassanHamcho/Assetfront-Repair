@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiRequestService} from '../API-request/api-request.service';
-import {MatDialog, MatDialogConfig} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {DialogWindowComponent} from './dialog-window/dialog-window.component';
-import {VehiclesService} from '../../vehicle-service/vehicle.service';
+import {VehiclesService} from '../vehicle-service/vehicle.service';
 
 @Component({
   selector: 'app-search',
@@ -10,7 +10,7 @@ import {VehiclesService} from '../../vehicle-service/vehicle.service';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-  errorMessage = '';
+  errorMessage = ''; // Nothing to display in the beginning
 
   constructor(
     public request: ApiRequestService,
@@ -19,45 +19,44 @@ export class SearchComponent implements OnInit {
   ) {
   }
 
-  qrResultString: string;
-  hide = false;
-  loading = false;
+  qrResultString: string; // scanned value
+  show = false; // hide the camera
   ngOnInit(): void {
   }
 
   openDialog() {
-    const dialogConfig = new MatDialogConfig();
     this.dialog.open(DialogWindowComponent, {
       data: {},
       panelClass: 'my-custom-dialog-class'
     });
   }
-
+/*** Toggles the Qr-window's div by changing the hide value to true or false
+ * */
   showDiv(){
-    if (!this.hide){
-      this.hide = true;
+    if (!this.show){
+      this.show = true;
     }
     else{
-      this.hide = false;
-      console.log(this.hide);
+      this.show = false;
     }
   }
 
   onCodeResult(resultString: string) {
-    this.qrResultString = resultString;
-    this.hide = false;
+    this.qrResultString = resultString; // Assign the scanned value to qrResultString
+    this.show = false; // hide the camera
     (document.getElementById('Search_id') as HTMLInputElement).value = resultString;
   }
 
    setSerialNo(value: string) {
-     const regExpr = new RegExp(/^[A-Za-z0-9]/);
+     const regExpr = new RegExp(/^[A-Za-z0-9]/); // allowed characters A-Z , a-z, 0-9
      if (value.match(regExpr)) {
        try {
          this.request.setSerialNo(value).then(() => {
-           if (this.request.assetDetails.length > 0) {
+           if (this.request.assetDetails.length > 0) { // open dialog window if the vehicle is found
            this.openDialog();
            }
            else {
+             // wrong VIN entered
            this.errorMessage = 'Invalid VIN(Vehicle Identification Number)';
            }
            });
@@ -67,8 +66,8 @@ export class SearchComponent implements OnInit {
    }
 
    inputValidation($event: KeyboardEvent): boolean{
+    // Validate user input
     const regExpr = new RegExp(/^[A-Za-z0-9]/);
-    console.log($event.key);
     if ($event.key.match(regExpr)) {
       return true;
     } else {
