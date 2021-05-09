@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ApiRequestService} from '../../API-request/api-request.service';
 import {MatDialogRef} from '@angular/material/dialog';
 import {Router} from '@angular/router';
-import {VehiclesService} from '../../../vehicle-service/vehicle.service';
+import {VehiclesService} from '../../vehicle-service/vehicle.service';
 
 @Component({
   selector: 'app-dialog-window',

@@ -7,7 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import validate = WebAssembly.validate;
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
 import {PDFService} from '../PDF/pdf.service';
-import {VehiclesService} from '../../vehicle-service/vehicle.service';
+import {VehiclesService} from '../vehicle-service/vehicle.service';
 import {HomeService} from '../home/home.service';
 
 
@@ -76,14 +76,13 @@ export class InspectionComponent  implements OnInit {
   ngOnInit(): void {
   }
 
+
   /**
-   * Returns an error message in case of illegal input
-   *
-   * @returns The function returns an error message
-   *
+   * Function for displaying an error msg in case of invalid email format
+   * @return returns a 'Not a valid email' in case of mistype, or 'must enter a value' in case of empty field.
    */
 
-  getErrorMessage() {
+   getErrorMessage() {
     if (this.Email.hasError('required')) {
       return 'You must enter a value';
     }
@@ -137,12 +136,13 @@ export class InspectionComponent  implements OnInit {
       let file;
       let contentType;
       let fileName;
-
+      //loop through the selected files, if there is any
       for (let index = 0; index <= this.counter; index++) {
 
         file = this.selFiles.item(index);
         contentType = file.type;
         fileName = file.name;
+        //S3 bucket params
         const params = {
           Bucket: 'asset-repair/' + resourceId + '/' + 'Inspection' + '/' + commonPrefix + '/' + 'Attached-files',
           Key:  fileName,
@@ -150,9 +150,9 @@ export class InspectionComponent  implements OnInit {
           ACL: 'public-read',
           ContentType: file.type
         };
-        this.fileService.upload(params);
+        this.fileService.upload(params); // upload files to S3 bucket
       }
-      this.onRouteSubmit(); // call onRouteSubmit
+      this.onRouteSubmit(); //open dialog
     } else {
       alert('No files uploaded!'); // display alert pop-up
       this.onRouteSubmit();
@@ -160,9 +160,7 @@ export class InspectionComponent  implements OnInit {
   }
 
   /**
-   *
    * Reroute to home page
-   *
    */
 
   onBackSubmit() {
@@ -170,10 +168,8 @@ export class InspectionComponent  implements OnInit {
   }
 
   /**
-   *
    * Open dialog DialogInspectionComponent which displays the user input and gives
-   * a chance to download data as a PDF file
-   *
+   * An option to download data as a PDF file
    */
 
   onRouteSubmit() {
@@ -186,23 +182,17 @@ export class InspectionComponent  implements OnInit {
   }
 
   /**
-   *
-   * A method that uploads the generated PDF to AWS S3 bucket
-   * a chance to download data as a PDF file
-   *
+   * Function that uploads the generated PDF to AWS S3 bucket
    */
 
   UploadGeneratedPDF() {
-
-    this.home.setCommonPreFixes('Inspection');
-
+    this.home.setCommonPreFixes('Inspection'); //Updating common preFixes from the folder 'Inspection' in S3
     let commonPrefix = this.home.getCommonPrefix();
-    commonPrefix = commonPrefix + 1;
-
+    commonPrefix = commonPrefix + 1; //upload to the next folder (count up)
     this.initIdt(); // A method that sets data to variables in InputDataTransferService service
     // calling Inspection PDF and saving it in a variable:
     const fileName = this.PDF.DateToday(this.service.getSerNo());
-    const file = this.PDF.Inspection(this.idt.company, this.idt.fName + ` ` + this.idt.lName,
+    const file = this.PDF.Inspection(this.idt.company, this.idt.firstName + ` ` + this.idt.lastName,
       this.idt.date, this.idt.inspectionState, this.idt.Email, this.idt.phone); // file naming
     const resourceId =  this.apiRequest.assetDetails[0].resourceId;
     const contentType = 'application/pdf';
@@ -218,31 +208,31 @@ export class InspectionComponent  implements OnInit {
     this.onRouteSubmit(); // calling onRouteSubmit method
   }
 
-     // A method that sets data to variables in InputDataTransferService service
+  // A method that sets data to variables in InputDataTransferService service
   initIdt(){
-    this.idt.date = this.registerForm.value.date.toLocaleDateString();
     this.idt.inspectionState = this.registerForm.value.inspectionStates?.viewValue;
     this.idt.company = this.registerForm.value.company;
-    this.idt.fName = this.registerForm.value.fName;
-    this.idt.lName = this.registerForm.value.lName;
+    this.idt.firstName = this.registerForm.value.firstName;
+    this.idt.lastName = this.registerForm.value.lastName;
     this.idt.Email = this.registerForm.value.Email;
     this.idt.phone = this.registerForm.value.phone;
     this.idt.value =  this.service.getSerNo();
+    this.idt.date = this.registerForm.value.date.toLocaleDateString();
+
   }
 
   validateResourceId(){
+    //if the user had access to any VIN
     if (this.apiRequest.getAssetDetails().length > 0){
-      this.home.setCommonPreFixes('Inspection');
+      this.home.setCommonPreFixes('Inspection'); //Updating common preFixes from the folder 'Inspection' in S3
     }
   }
 
 }
 
 /**
- *
- * Dialog that displays the user input and gives the user the chance to download
- * the input as PDF file
- *
+ * Dialog that displays the user input and gives the user the option to download
+ * the data as PDF file
  */
 
 @Component({
@@ -251,8 +241,6 @@ export class InspectionComponent  implements OnInit {
   styleUrls: ['./dialog-inspection.scss'],
 //  providers: [ServiceComponent],
 })
-
-
 export class DialogInspectionComponent {
   constructor( public idt: InputDataTransferService) {
   }

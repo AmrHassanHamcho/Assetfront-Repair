@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { VehiclesService} from '../../vehicle-service/vehicle.service';
+import { VehiclesService} from '../vehicle-service/vehicle.service';
 import {ApiRequestService} from '../API-request/api-request.service';
-import {FileServiceService} from '../fileService/file-service.service';
-import { createPopper } from '@popperjs/core';
 import {HomeService} from './home.service';
 
 @Component({
@@ -13,24 +11,25 @@ import {HomeService} from './home.service';
 export class HomeComponent implements OnInit {
   data: any;
   workingPlaceholder = '../../assets/images/default-image.jpg';
-  public commonPrefix;
-  private prefix: any;
-  displayService = false;
-  public displayInspection =  false;
+  /**
+   * Bool variable to display download service div
+   */
+  public displayService = false;
+  /**
+   * Bool variable to display download inspection div
+   */
+  public displayInspection = false;
+  /**
+   * Bool variable to display download TCR div
+   */
   public displayTCR = false;
-  public emptyArray = false;
+
 
   constructor(
     public apiRequest: ApiRequestService,
     public vehicle: VehiclesService,
-    public fileService: FileServiceService,
     public home: HomeService,
   ) {
-    // this.home.listFiles('Service');
-    // this.home.setCommonPreFixes('Service');
-    // this.home.setCommonPreFixes('Inspection');
-    // this.home.setCommonPreFixes('TCR');
-
   }
 
   ngOnInit(): void {
@@ -40,8 +39,12 @@ export class HomeComponent implements OnInit {
     console.log(isFallback);
   }
 
+  /**
+   * Function that displays the latest TCR for the user to download
+   */
   downloadTCR(): void {
-    this.home.getListObject('TCR');
+    this.home.getListObject('TCR'); // Lists Objects in Report folder in Latest TCR
+    //open and close download div
     if (this.displayTCR){
       this.displayTCR   = false;
     }
@@ -51,10 +54,12 @@ export class HomeComponent implements OnInit {
       this.displayService = false;
     }
   }
-
+  /**
+   * Function that displays the latest TCR for the user to download
+   */
   downloadInspection(): void {
-    this.home.getListObject('Inspection');
-
+    this.home.getListObject('Inspection');// Lists Objects in Report folder in Latest inspection
+    //open and close download div
     if (this.displayInspection){
       this.displayInspection  = false;
     }
@@ -63,14 +68,14 @@ export class HomeComponent implements OnInit {
       this.displayTCR   = false;
       this.displayService = false;
     }
-
-
   }
 
-
+  /**
+   * Function that displays the latest TCR for the user to download
+   */
   downloadService(): void {
-    this.home.getListObject('Service');
-
+    this.home.getListObject('Service');// Lists Objects in Report folder in Latest service
+    //open and close download div
     if (this.displayService){
       this.displayService  = false;
     }
@@ -79,29 +84,6 @@ export class HomeComponent implements OnInit {
       this.displayInspection = false;
       this.displayTCR = false;
     }
-    //
-    // if(this.home.arrayOfFiles.length > 0){
-    //   this.fullArray = true;
-    // }
-
-   // this.home.listFiles('Service');
-    // this.home.getData();
-    // this.home.getListObject('Service');
-    // this.prefix = this.home.lastModified;
-    // console.log('this is prefix' + this.prefix);
-    // if(this.prefix !== ''){
-    //   const params = { // Bucket info
-    //     Bucket: 'asset-repair' ,
-    //     Delimiter: '/',
-    //     Prefix: this.prefix,
-    //   }
-    //   this.home.listFiles(params);
-    //
-    // }
-    //
-    // else {
-    //   console.log("error");
-    // }
   }
 
 
