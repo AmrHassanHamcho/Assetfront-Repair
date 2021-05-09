@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {PDFService} from '../PDF/pdf.service';
-import {VehiclesService} from '../../vehicle-service/vehicle.service';
+import {VehiclesService} from '../vehicle-service/vehicle.service';
 import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediaries/ngx-qrcode';
 
 /**
@@ -13,16 +13,11 @@ import {NgxQrcodeElementTypes, NgxQrcodeErrorCorrectionLevels} from '@techiediar
   providedIn: 'root'
 })
 
-
 /*
 * InputDataTransferService Service class
 */
 
-
-
 export class InputDataTransferService{
-
-
 /*
 * Declaring public variables to hold the value from the input forms in ServiceComponent
 * and InspectionComponent
@@ -30,9 +25,9 @@ export class InputDataTransferService{
 * As well as to PDF service where the final pdf is generated
 */
 
-  public Email : string;
-  public fName: string;
-  public lName: string;
+  public Email: string;
+  public firstName: string;
+  public lastName: string;
   public date: any;
   public hours: number;
   public comment: string;
@@ -40,7 +35,7 @@ export class InputDataTransferService{
   public phone: string;
   public cost: number;
   public inspectionState: any;
-  public serialNumber: string = '' ;
+  public serialNumber = '' ;
   public elementType = NgxQrcodeElementTypes.URL;
   public correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
   public value: any;
@@ -57,8 +52,8 @@ export class InputDataTransferService{
     this.serialNumber = this.vehicle.getSerNo();
     this.PDF.Inspection(
       this.company,
-      this.fName + ' ' +
-      this.lName,
+      this.firstName + ' ' +
+      this.lastName,
       this.date,
       this.inspectionState,
       this.Email,
@@ -70,11 +65,11 @@ export class InputDataTransferService{
   // Method for storing data in PDF which will be generated from Service form
   callPdfService() {
     this.serialNumber = this.vehicle.getSerNo();
-    // tslint:disable-next-line:max-line-length
+
     this.PDF.Service(
       this.company,
-      this.fName + ' ' +
-      this.lName,
+      this.firstName + ' ' +
+      this.lastName,
       this.date,
       this.hours,
       this.cost,

@@ -28,8 +28,8 @@ $color-warn: #F44336;
   ::ng-deep .my-custom-dialog-class {
     mat-dialog-container {
       max-height: 80vh;
-      width: 100vw; !important;
-      max-width: none; !important;
+      width: 100vw !important;
+      max-width: none !important;
     };
   }
 }

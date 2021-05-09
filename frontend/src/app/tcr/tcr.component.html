@@ -1,29 +1,29 @@
-<div *ngIf="onSuccessfullSearch()">
+<div *ngIf="onSuccessfulSearch()">
       <mat-accordion>
-        <div *ngFor=" let item of ttrCopy.tcr; let indexTcr = index">
+        <div *ngFor=" let item of tcrCopy.tcr; let indexTcr = index">
           <mat-expansion-panel>
             <mat-expansion-panel-header  matRipple [matRippleColor]="color" >
               <mat-panel-title fxLayoutAlign="space-between center end">
-                <div>{{ttrCopy.tcr[indexTcr].name}}</div>
-                <div *ngFor="let n of ttrCopy.tcr[indexTcr].checkpoint let in = index">
-                  {{good(indexTcr)}}
-                  <div *ngIf="allSelected && all.length >= ttrCopy.tcr[indexTcr].checkpoint.length">
-                    <mat-icon *ngIf=" ttrCopy.tcr[indexTcr].checkpoint.length-1 === in">
+                <div>{{tcrCopy.tcr[indexTcr].name}}</div>
+                <div *ngFor="let n of tcrCopy.tcr[indexTcr].checkpoint let in = index">
+                  {{allCheckPointSelected(indexTcr)}}
+                  <div *ngIf="allSelected && all.length >= tcrCopy.tcr[indexTcr].checkpoint.length">
+                    <mat-icon *ngIf=" tcrCopy.tcr[indexTcr].checkpoint.length-1 === in">
                       check_circle_outline
                     </mat-icon>
                   </div>
                 </div>
               </mat-panel-title>
               <ng-template matExpansionPanelContent>
-                <h1 *ngFor="let checkp of ttrCopy.tcr[indexTcr].checkpoint; let indexCp = index">
+                <h1 *ngFor="let checkp of tcrCopy.tcr[indexTcr].checkpoint; let indexCp = index">
                   <mat-card class="card" id="card">
                     <mat-card-content id="body">
-                      <h1 id="subTitle" >{{ttrCopy.tcr[indexTcr].checkpoint[indexCp].name }}
+                      <h1 id="subTitle" >{{tcrCopy.tcr[indexTcr].checkpoint[indexCp].name }}
                         <p id="required" style="color: red">
                           {{'*'}}
                         </p>
                       </h1>
-                      <h2 *ngFor="let op of ttrCopy.tcr[indexTcr].checkpoint[indexCp].options; let value = index" class="value">
+                      <h2 *ngFor="let op of tcrCopy.tcr[indexTcr].checkpoint[indexCp].options; let value = index" class="value">
                         <div class="row" id="description">
                           <div class="col-lg-1">
                             <mat-radio-button
@@ -31,14 +31,14 @@
                               labelPosition="after"
                               (change)="updateValue(value,indexTcr,indexCp)"
                               color="primary"
-                              name="{{ttrCopy.tcr[indexTcr].checkpoint[indexCp].name}}">
-                              {{ttrCopy.tcr[indexTcr].checkpoint[indexCp].options[value].value}}
+                              name="{{tcrCopy.tcr[indexTcr].checkpoint[indexCp].name}}">
+                              {{tcrCopy.tcr[indexTcr].checkpoint[indexCp].options[value].value}}
                             </mat-radio-button>
                           </div>
-                          {{printHeleArray()}}
-                          <div>{{allFilled()}}</div>
+                          {{getNewlyFilledTcr()}}
+                          <div>{{allCheckPointSelected(indexTcr)}}</div>
                           <div class="col-lg-7">
-                             {{ttrCopy.tcr[indexTcr].checkpoint[indexCp].options[value].description}}
+                             {{tcrCopy.tcr[indexTcr].checkpoint[indexCp].options[value].description}}
                           </div>
                         </div>
                       </h2>
@@ -60,7 +60,7 @@
                   color="warn">
                   <i class="fa fa-arrow-left"></i>Back</button>
 
-          <button mat-button [disabled]="!allSelected"
+          <button mat-button
                   id="next"
                   (click)="personData()"
                   mat-raised-button

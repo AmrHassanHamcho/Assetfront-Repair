@@ -7,7 +7,7 @@ import {MatDialog} from '@angular/material/dialog';
 import validate = WebAssembly.validate;
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
 import {PDFService} from '../PDF/pdf.service';
-import {VehiclesService} from '../../vehicle-service/vehicle.service';
+import {VehiclesService} from '../vehicle-service/vehicle.service';
 import {HomeService} from '../home/home.service';
 
 
@@ -202,7 +202,7 @@ export class InspectionComponent  implements OnInit {
     this.initIdt(); // A method that sets data to variables in InputDataTransferService service
     // calling Inspection PDF and saving it in a variable:
     const fileName = this.PDF.DateToday(this.service.getSerNo());
-    const file = this.PDF.Inspection(this.idt.company, this.idt.fName + ` ` + this.idt.lName,
+    const file = this.PDF.Inspection(this.idt.company, this.idt.firstName + ` ` + this.idt.lastName,
       this.idt.date, this.idt.inspectionState, this.idt.Email, this.idt.phone); // file naming
     const resourceId =  this.apiRequest.assetDetails[0].resourceId;
     const contentType = 'application/pdf';
@@ -220,14 +220,15 @@ export class InspectionComponent  implements OnInit {
 
      // A method that sets data to variables in InputDataTransferService service
   initIdt(){
-    this.idt.date = this.registerForm.value.date.toLocaleDateString();
     this.idt.inspectionState = this.registerForm.value.inspectionStates?.viewValue;
     this.idt.company = this.registerForm.value.company;
-    this.idt.fName = this.registerForm.value.fName;
-    this.idt.lName = this.registerForm.value.lName;
+    this.idt.firstName = this.registerForm.value.firstName;
+    this.idt.lastName = this.registerForm.value.lastName;
     this.idt.Email = this.registerForm.value.Email;
     this.idt.phone = this.registerForm.value.phone;
     this.idt.value =  this.service.getSerNo();
+    this.idt.date = this.registerForm.value.date.toLocaleDateString();
+
   }
 
   validateResourceId(){

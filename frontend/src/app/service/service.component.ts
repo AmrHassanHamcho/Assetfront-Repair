@@ -2,12 +2,12 @@ import {AfterViewInit, Component, ElementRef, Injectable, OnInit, ViewChild} fro
 import {HttpClient, HttpClientModule} from '@angular/common/http';
 import {FileServiceService} from '../fileService/file-service.service';
 import {ApiRequestService} from '../API-request/api-request.service';
-import {FormGroup, FormBuilder, Validators, FormControl} from '@angular/forms';
+import { FormBuilder, Validators, FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
 import {PDFService} from '../PDF/pdf.service';
-import {VehiclesService} from '../../vehicle-service/vehicle.service';
+import {VehiclesService} from '../vehicle-service/vehicle.service';
 import { DatePipe } from '@angular/common';
 import {HomeService} from '../home/home.service';
 
@@ -107,7 +107,6 @@ export class ServiceComponent implements OnInit {
             break;
           }
     }
-    console.log(this.selFiles);
   }
 
   upload() {
@@ -166,8 +165,8 @@ export class ServiceComponent implements OnInit {
     this.idt.cost = this.registerForm.value.cost;
     this.idt.comment = this.registerForm.value.comment;
     this.idt.company = this.registerForm.value.company;
-    this.idt.fName = this.registerForm.value.fName;
-    this.idt.lName = this.registerForm.value.lName;
+    this.idt.firstName = this.registerForm.value.firstName;
+    this.idt.lastName = this.registerForm.value.lastName;
     this.idt.Email = this.registerForm.value.Email;
     this.idt.phone = this.registerForm.value.phone;
 
@@ -189,7 +188,7 @@ export class ServiceComponent implements OnInit {
     // const fileName = this.pdf.DateToday(this.service.getSerNo());
     const fileName = this.currentDate + '-Entire-report.pdf';
     // calling Inspection PDF and saving it in a variable:
-    const file = this.pdf.Service(this.idt.company, this.idt.fName + ` ` + this.idt.lName,
+    const file = this.pdf.Service(this.idt.company, this.idt.firstName + ` ` + this.idt.lastName,
       this.idt.date, this.idt.hours, this.idt.cost, this.idt.comment, this.idt.Email, this.idt.phone);
 
     const resourceId =  this.apiRequest.assetDetails[0].resourceId;
@@ -212,8 +211,8 @@ export class ServiceComponent implements OnInit {
     this.idt.date = this.registerForm.value.date.toLocaleDateString();
     this.idt.inspectionState = this.registerForm.value.inspectionStates?.viewValue;
     this.idt.company = this.registerForm.value.company;
-    this.idt.fName = this.registerForm.value.fName;
-    this.idt.lName = this.registerForm.value.lName;
+    this.idt.firstName = this.registerForm.value.firstName;
+    this.idt.lastName = this.registerForm.value.lastName;
     this.idt.Email = this.registerForm.value.Email;
     this.idt.phone = this.registerForm.value.phone;
     this.idt.comment = this.registerForm.value.comment;
