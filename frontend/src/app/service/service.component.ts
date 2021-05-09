@@ -1,10 +1,10 @@
-import {AfterViewInit, Component, ElementRef, Injectable, OnInit, ViewChild} from '@angular/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 import {FileServiceService} from '../fileService/file-service.service';
 import {ApiRequestService} from '../API-request/api-request.service';
 import { FormBuilder, Validators, FormControl} from '@angular/forms';
 import {Router} from '@angular/router';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import {MatDialog} from '@angular/material/dialog';
 import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
 import {PDFService} from '../PDF/pdf.service';
 import {VehiclesService} from '../vehicle-service/vehicle.service';
@@ -64,7 +64,7 @@ export class ServiceComponent implements OnInit {
 
 
    /**
-   *  Counter of files targeted   
+   *  Counter of files targeted
    */
   private counter = 0;
 
@@ -174,7 +174,7 @@ export class ServiceComponent implements OnInit {
      * An option to download data as a PDF file
      */
   onRouteSubmit() {
-    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+    const dialogRef = this.dialog.open(DialogServiceComponent);
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
       if (result){
@@ -257,11 +257,11 @@ export class ServiceComponent implements OnInit {
  */
 @Component({
   selector: 'app-service',
-  templateUrl: 'dialog-content-dialog.html',
-  styleUrls: ['./dialog-content-dialog.scss'],
-//  providers: [ServiceComponent],
+  templateUrl: 'dialog-service.html',
+  styleUrls: ['./dialog-service.scss'],
+
 })
-export class DialogContentExampleDialog {
+export class DialogServiceComponent {
   constructor(public idf: InputDataTransferService) {
   }
 }

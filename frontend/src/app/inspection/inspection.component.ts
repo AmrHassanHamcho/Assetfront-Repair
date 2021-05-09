@@ -65,7 +65,6 @@ export class InspectionComponent  implements OnInit {
     date: [''],
     phone: [''],
     inspectionStates: ['', {validate}],
-
   });
 
   inspectionStates: InspectionState[] = [
@@ -112,7 +111,6 @@ export class InspectionComponent  implements OnInit {
         this.selFiles = null;
         break;
       }
-
     }
     console.log(this.selFiles); // informative log of the files list to console
   }
@@ -177,8 +175,6 @@ export class InspectionComponent  implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
     });
-
-
   }
 
   /**
@@ -227,19 +223,15 @@ export class InspectionComponent  implements OnInit {
       this.home.setCommonPreFixes('Inspection'); //Updating common preFixes from the folder 'Inspection' in S3
     }
   }
-
 }
-
 /**
  * Dialog that displays the user input and gives the user the option to download
  * the data as PDF file
  */
-
 @Component({
   selector: 'app-service',
   templateUrl: 'dialog-inspection.html',
   styleUrls: ['./dialog-inspection.scss'],
-//  providers: [ServiceComponent],
 })
 export class DialogInspectionComponent {
   constructor( public idt: InputDataTransferService) {
