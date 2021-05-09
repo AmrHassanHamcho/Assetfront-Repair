@@ -1,11 +1,17 @@
 #navigation{
-  font: 1.2rem interstate, sans-serif;
-  background-color: #131516;
+  font-size: 1.3rem;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 300;
+  background-color: #2f2f2f;
   #logo{
     height: 4rem;
   }
+  .navbar-toggler-icon{
+    background-image: url("../../assets/images/toggle.png");
+  }
   #navbar{
     #navbar-row-1,#navbar-row-2{
+      border-radius: 25px;
       .nav-link {
         color: whitesmoke;
       }
@@ -18,6 +24,9 @@
         text-decoration: underline;
       }
     }
+    #navbar-row-2{
+      background-color: #131516;
+    }
   }
 }
 
@@ -28,10 +37,11 @@
     }
   }
 }
-@media screen and (min-width: 769px) {
+@media screen and (min-width: 770px) {
   #navigation{
     #logo{
       height: 5rem;
+      margin-left: 2rem;
     }
   }
 }

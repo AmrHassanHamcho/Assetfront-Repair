@@ -1,17 +1,44 @@
+$color-warn: #F44336;
 #searchBar{
   #col{
-    margin-top: 10rem;
+    margin-top: 6rem;
     max-width: 25rem !important;
-    #submit{
-      color: black;
+    #submit, #QR-Button{
+        border: 1px solid $color-warn;
+        color: $color-warn;
+        font-size: 1rem;
+        cursor: pointer;
+        margin: 4px;
+      i{
+        margin-right: 4px;
+        color: orange;
+      }
     }
     #label{
       font-size: 1.3rem;
-      filter: drop-shadow(2px 4px 8px #131516);
     }
     #errorMessage{
       margin-top: 1rem;
-      color: red;
+      color: $color-warn;
     }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  ::ng-deep .my-custom-dialog-class {
+    mat-dialog-container {
+      max-height: 80vh;
+      width: 100vw !important;
+      max-width: none !important;
+    };
+  }
+}
+
+::ng-deep .my-custom-dialog-class {
+  mat-dialog-container {
+    padding: 0;
+    border-radius: 15px !important;
+    overflow-y: visible !important;
+    overflow-x: hidden !important;
   }
 }

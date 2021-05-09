@@ -1,76 +1,99 @@
 #home{
-  #card-row{
-    box-shadow: 0 10px 20px 0 rgba(0,0,0,.15);
-    width: 600px;
-      .card {
-        width: 100%;
-        height: 100%;
-        background-color: darkgrey;
-        #title{
-          margin-left: auto;
-          font-size: 1.7rem;
-          font-weight: 450;
-        }
+  justify-content: center;
+  mat-card{
+    #title{
+      font-size: 1.3rem;
+    }
+    #subTitle{
+      font-size: 1rem;
+    }
+    #main{
+      justify-content: center;
+      text-align: center;
+      #image-col{
+        margin-bottom: 4px;
         #vehicle-image{
           width: 100%;
-          margin-left: auto;
+          height: auto;
+          margin: 0;
+          max-width: 30rem;
         }
-        .list-group-item{
-          background: linear-gradient(45deg, #d22424, #e53d06);
-          width: 100%;
+      }
+      #buttons-col{
+        #info{
+          li{
+          }
         }
-        .mat-button{
-          width: 11rem;
-          border: none;
-          box-shadow: 0 10px 20px 0 rgba(153, 153, 153, 0.15);
-          transition: .8s cubic-bezier(.2,1,.2,1);
-          cursor: pointer;
+        .row{
+          justify-content: center;
+          text-align: center;
+          button{
+            font-size: .7rem;
+            width: 50%;
+            max-width: 8rem;
+            margin-top: 2px;
+          }
         }
       }
     }
   }
-/*
-  .row{
-    .col-md-8{
-      border: solid red;
-    }
-    #title{
-      font-size: 2rem;
-      font-weight: 600;
-      height: 100px;
-      margin-right: auto;
-      margin-left: auto;
-      text-align: center;
-      border: solid red;
-    }
-    #bilde{
-      display: block;
-      height: 300px;
-      width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-      border: solid red;
-    }
-    .col-md-4{
-      border: solid red;
-    }
-    #tittle{
-      font-size: 2rem;
-      font-weight: 600;
-      height: 100px;
-      margin-right: auto;
-      margin-left: auto;
-      text-align: center;
-      border: solid red;
-    }
-    #bilder{
-      display: block;
-      height: 300px;
-      width: 300px;
-      margin-left: auto;
-      margin-right: auto;
-      border: solid red;
+  #downloadFile{
+    margin-top: 1rem;
+    padding: 0.5rem;
+    .row{
+      #downloadButton{
+        margin-bottom: 2px;
+      }
+      #fileName{
+        margin-bottom: .3rem;
+        font-size: 0.8rem;
+        box-shadow: 1px 1px 1px 1px;
+      }
     }
   }
-*/
+}
 
+@media screen and (min-width: 550px){
+  #home{
+    mat-card{
+      #title{
+        font-size: large;
+      }
+      #main{
+        #buttons-col{
+          .row{
+            button{
+              margin: 1rem 1rem 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1024px){
+  #home{
+    mat-card{
+      #main{
+        #buttons-col{
+          #info{
+            margin: 1rem 0 4rem;
+          }
+          .row{
+            button{
+              margin: 1rem 0.2rem 0;
+            }
+          }
+        }
+      }
+    }
+    #downloadFile{
+      .row{
+      }
+      #fileName{
+        margin-left: 1rem;
+      }
+    }
+  }
+}

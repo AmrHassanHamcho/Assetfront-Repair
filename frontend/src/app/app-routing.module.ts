@@ -7,9 +7,10 @@ import {InspectionComponent} from './inspection/inspection.component';
 import {ServiceComponent} from './service/service.component';
 import {HomeComponent} from './home/home.component';
 import {TcrComponent} from './tcr/tcr.component';
+
 import {FallBackComponent} from './fall-back/fall-back.component';
-import {TestComponent} from "./test/test.component";
 import {PersonalDataComponent} from './tcr/personal-data/personal-data.component';
+import {TcrDialogComponent} from './tcr/tcr-dialog/tcr-dialog.component';
 
 const routes: Routes = [
   {path: '', pathMatch: 'full', redirectTo: 'search'},
@@ -21,6 +22,9 @@ const routes: Routes = [
   {path: 'service', component: ServiceComponent},
   {path: 'tcr', component: TcrComponent},
   {path: 'tcr/personal-data', component: PersonalDataComponent},
+  {path: 'tcr/tcr-dialog', component: TcrDialogComponent},
+
+
   {path: '**', component: FallBackComponent}
 
 ];

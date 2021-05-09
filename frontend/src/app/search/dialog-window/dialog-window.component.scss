@@ -1,0 +1,35 @@
+#dialog{
+  justify-content: center;
+  text-align: center;
+  mat-card{
+    padding: 1rem 0 1rem;
+    #title, #subTitle{
+      padding: .3rem;
+    }
+    #vehicle-image{
+      max-width: 15rem;
+      min-width: 10rem;
+    }
+    button{
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+}
+
+@media screen and (max-width: 300px){
+  #dialog{
+    #vehicle-image{
+      max-width: 10rem;
+    }
+  }
+}
+
+@media screen and (min-width: 600px){
+  #dialog{
+    min-width: 20rem;
+    #vehicle-image{
+      min-width: 20rem;
+    }
+  }
+}

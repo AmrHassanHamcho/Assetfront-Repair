@@ -1,33 +1,35 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewChecked, ChangeDetectorRef, Component, EventEmitter, OnInit, Output, ViewChildren} from '@angular/core';
 import {ApiRequestService} from '../API-request/api-request.service';
-import {PersonalDataComponent} from './personal-data/personal-data.component';
 import {Router} from '@angular/router';
 import {TcrService} from './tcr.service';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
+import {PDFService} from '../PDF/pdf.service';
+import {FileServiceService} from '../fileService/file-service.service';
+import {InputDataTransferService} from '../ inputDataTransfer/input-data-transfer.service';
+import {VehiclesService} from '../../vehicle-service/vehicle.service';
 
 @Component({
   selector: 'app-tcr',
   templateUrl: './tcr.component.html',
   styleUrls: ['./tcr.component.scss']
 })
-export class TcrComponent implements OnInit {
-  private i = 0;
+export class TcrComponent implements OnInit,  AfterViewChecked {
   color: 'lightblue';
-  private allSelected = false;
   constructor(public request: ApiRequestService,
               private router: Router,
-              public tcr: TcrService) {
+              public tcr: TcrService,
+              private formBuilder: FormBuilder,
+              private changeRef: ChangeDetectorRef,
+              ) {
   }
 
+  all = [];
+  allSelected = false;
   searchedSerialNo: boolean;
   ttrCopy = this.request.getAssetDetails()[0];
-  // logToconsole(indexTcr: number, indexCp: number){
-  // console.log(this.ttrCopy.tcr[indexTcr].checkpoint[indexCp].value);
-  // }
-  tests = [];
-
   ngOnInit(): void {
-  }
 
+  }
   onSuccessfullSearch(): boolean {
     if (this.ttrCopy === undefined) {
       this.searchedSerialNo = false;
@@ -36,38 +38,50 @@ export class TcrComponent implements OnInit {
     } else {
       this.searchedSerialNo = true;
       return this.searchedSerialNo;
-
     }
   }
 
-  updateValue(value: number, indexTcr: number, indexCp: number) {
-    this.ttrCopy.tcr[indexTcr].checkpoint[indexCp].value = value;
-    return this.ttrCopy.tcr[indexTcr].checkpoint[indexCp].value;
+  updateValue(value: number, indexTcr: number, indexCp: number ) {
+  this.ttrCopy.tcr[indexTcr].checkpoint[indexCp].value = value;
+  return this.ttrCopy.tcr[indexTcr].checkpoint[indexCp].value;
   }
 
   printHeleArray() {
-    // console.log(this.ttrCopy);
     this.tcr.setTcr(this.ttrCopy);
   }
 
   personData() {
-    // if (this.allFilled())  {
-      this.router.navigate(['/tcr/personal-data']);
-    // }
+    this.router.navigate(['/tcr/personal-data']);
   }
 
-  allFilled() {
-    for (const tcr of this.ttrCopy.tcr) {
-      for (const cp of tcr.checkpoint) {
-        if (cp.value > 0) {
-          this.tests.push(true);
-        } else {
-          this.tests.push(false);
+  ngAfterViewChecked(): void { this.changeRef.detectChanges(); }
+  good(tcri: number) {
+    this.allSelected = false;
+    this.all = [];
+    for ( let i = 0; i < this.ttrCopy.tcr[tcri].checkpoint.length; i ++){
+      this.all[i] = false;
+      if (this.ttrCopy.tcr[tcri].checkpoint[i].value > -1){
+            this.all[i] = true;
+          }
+   }
+    this.allSelected = this.all.every(v => v === true);
+  }
+  allFilled(){
+    for (let tcri = 0; tcri < this.ttrCopy.tcr.length; tcri++){
+      for ( let cpi = 0; cpi < this.ttrCopy.tcr[tcri].checkpoint.length; cpi ++){
+        this.all[cpi] = false;
+        if (this.ttrCopy.tcr[tcri].checkpoint[cpi].value > -1){
+          this.all[cpi] = true;
         }
-      }
-    }
-    this.allSelected = this.tests.every(v => v === true);
-    return this.allSelected;
-  }
-}
 
+      }
+
+    }
+    this.allSelected = this.all.every(v => v === true);
+
+  }
+  toHome() {
+    this.router.navigate(['/home']);
+  }
+
+}

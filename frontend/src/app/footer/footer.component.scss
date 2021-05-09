@@ -1,6 +1,7 @@
 #footer{
-  display: flex;
-  background-color: #131516;
+  justify-content: center;
+  text-align: center;
+  background-color: #2f2f2f;
   position: relative;
   bottom: 0;
   margin: 0;
@@ -8,24 +9,39 @@
     margin-top: 3px;
   }
   #logo{
+    height: auto;
     max-height: 4rem;
+    max-width: 100%;
     margin-top: 1.5rem;
-    margin-left: 2rem;
   }
   #info{
     color: white;
     font-size: 1rem;
-    margin-left: 2rem;
+    padding: 0 1rem 1rem 1rem;
+    border: 1px solid gray;
   }
 }
 
-@media screen and (max-width: 375px){
-  #footer{
+
+@media screen and (max-width: 320px){
+  #footer {
     #logo{
-      margin-left: 1rem;
+      max-height: 3rem;
     }
+    #info {
+      font-size: 0.8rem;
+    }
+  }
+}
+@media screen and (min-width: 500px){
+  #footer {
+    justify-content: left;
+    text-align: left;
     #info{
-      margin-left: 1rem;
+      border: none;
+    }
+    #logo{
+      margin: 2rem 0 0 2rem;
     }
   }
 }

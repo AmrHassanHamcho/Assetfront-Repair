@@ -1,70 +1,28 @@
-
-.container{
-  font-size: large;
-  background-color: white;
-}
-.btn-add{
-
-  background: #e1efe6;
-  color: black;
-}
-
-
-.row{
-  height: auto;
-}
-.row-1{
-margin-top: 20px;
-}
-
-hr{
-  position: relative;
-  background: black;
-  height: 1px;
-}
-.last-hr{
-  position: relative;
-  background: white;
-  height: 1px;
-}
-
- .hours{
-  height: 50px;
-  width: 200px;
-  border-radius: 16px;
-}
-
- .comment{
-   height: 100px;
-   width: 600px;
- }
-.btn-submit{
-  border-radius: 9px;
-  background-color: dodgerblue;
-}
-.btn-back{
-  border-radius: 9px;
-  border-color: gray;
-  color: black;
-}
-
-.mat-button{
-  margin: 3rem;
-}
-.form-field{
-  width: 70%;
-}
-.card{
-  align-items: center;
-}
-
-.mat-dialog-actions {
-
-  &[align='end'] {
-    justify-content: flex-end;
+.container {
+  margin-top: 1rem;
+  mat-label{
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    hyphens: auto;
   }
-
-  &[align='start'] {
-    justify-content: start;
+  #serviceInput {
+  }
+  #personalInfoCard {
+    margin-top: 1rem;
+  }
+  button {
+    margin: 1rem;
+    .fa-arrow-left {
+      margin-right: 1rem;
+    }
+    .fa-file {
+      margin-left: 1rem;
+    }
+  }
+  .form-field {
+    width: 80%;
+    input{
+      font-weight: bold;
+    }
   }
 }
