@@ -22,7 +22,7 @@ export class VehiclesService {
   public getSerNo() {
     return this.serNo;
   }
-// inject the constractor with HttpClient
+// inject the constructor with HttpClient
   constructor(private httpClient: HttpClient) {
 
   }

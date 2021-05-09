@@ -84,8 +84,6 @@ export class PDFService  {
     const Vintoday = (VINNum) + '_' + (day) + '-' + (month) + '-' + now.getFullYear() + '.pdf';
     return Vintoday;
   }
-
-
   SmallRectangle(fill, x, y) {
     /**
      * @param fill: if the rectangle will get filled or not. x: x coordinate. y: y coordinate
@@ -110,14 +108,13 @@ export class PDFService  {
     this.Page++;
     this.doc.setFontSize(7);
   }
-
   PlaceForm(json: any, Company, Name, Date, Email, PhoneNR){
     /**
      * @param:
      * Json: modified json file from user input
      * Company, Name, Date, Email, PhoneNR are user input
      *
-     * This function goes mainly through the JSON file inputted and tries to sort everything into a PDF document
+     * This function goes mainly through the JSON file inputed and tries to sort everything into a PDF document
      *
      * @return Returns the PDF file as an object
      */
@@ -141,43 +138,41 @@ export class PDFService  {
     let CheckpointName = '';
     let tcrName = ' ';
     let width = 0;
-    for (const tcr of json) {
-      this.PageLimit(230);
-      tcrName = tcr.name;
-      this.doc.setFontSize(9);
-      this.doc.text( tcrName , this.FormStartX - 2 , this.PdfStartY += 4.5);
-      width = this.doc.getTextWidth(tcrName);
-      this.doc.setLineWidth(0.2);
-      this.doc.line(this.FormStartX - 2, this.PdfStartY += 1, this.FormStartX + width,  this.PdfStartY);
-      this.doc.setLineWidth(0);
-      this.doc.setFontSize(7);
-      this.PdfStartY += 3;
-      for (const cp of tcr.checkpoint) {
-        this.PageLimit(240);
-        CheckpointName = cp.name ;
-        this.doc.text(CheckpointName, this.FormStartX, this.PdfStartY += 4.5);
-        this.PdfStartY += 1;
-        for (let opi = 0; opi < cp.options.length; opi ++){
-          this.optionHolder[opi] = cp.options[opi].description;
-          if ( opi === cp.value) {
-            this.SmallRectangle(true, xNow - 20, this.PdfStartY += 3);  // Filled
-            this.doc.text(this.optionHolder[opi], xNow - 7, this.PdfStartY += 3.5);
-          } else {
-            this.SmallRectangle(false, xNow - 20, this.PdfStartY += 3); // Hollow
-            this.doc.text(this.optionHolder[opi], xNow - 7, this.PdfStartY += 3.5);
+    for (let tcri = 0; tcri < json.length; tcri++){
+      for(let i = 0; json[tcri].checkpoint.length > i; i++){
+        if (!(json[tcri].checkpoint[i].value === -1)){
+          this.PageLimit(230);
+          tcrName = json[tcri].name;
+          this.doc.setFontSize(9);
+          this.doc.text( tcrName , this.FormStartX - 2 , this.PdfStartY += 4.5);
+          width = this.doc.getTextWidth(tcrName);
+          this.doc.setLineWidth(0.2);
+          this.doc.line(this.FormStartX - 2, this.PdfStartY += 1, this.FormStartX + width,  this.PdfStartY);
+          this.doc.setLineWidth(0);
+          this.doc.setFontSize(7);
+          this.PdfStartY += 3;
+          for (let cpi = 0; cpi < json[tcri].checkpoint.length; cpi ++){
+            if (!(json[tcri].checkpoint[cpi].value === -1)){
+              this.PageLimit(240);
+              CheckpointName = json[tcri].checkpoint[cpi].name ;
+              this.doc.text(CheckpointName, this.FormStartX, this.PdfStartY += 4.5);
+              this.PdfStartY += 1;
+              for (let opi = 0; opi < json[tcri].checkpoint[cpi].options.length; opi ++){
+                this.optionHolder[opi] = json[tcri].checkpoint[cpi].options[opi].description;
+                if ( opi === json[tcri].checkpoint[cpi].value) {
+                  this.SmallRectangle(true, xNow - 20, this.PdfStartY += 3);  // Filled
+                  this.doc.text(this.optionHolder[opi], xNow - 7, this.PdfStartY += 3.5);
+                } else {
+                  this.SmallRectangle(false, xNow - 20, this.PdfStartY += 3); // Hollow
+                  this.doc.text(this.optionHolder[opi], xNow - 7, this.PdfStartY += 3.5);
 
-          }
-        }
+                }
+              }}}}
         this.PdfStartY += 3;
       }
-
     }
-
     this.HeaderFooter();
-
-    const file = this.doc.output('arraybuffer');
-
-    return file;
+    return this.doc.output('arraybuffer');;
   }
 
 
@@ -234,12 +229,9 @@ export class PDFService  {
     this.Reset();
     this.doc = null;
     this.doc = new jsPDF();
-
-
     this.HeaderFooter();
     this.doc.setFontSize(12);
     this.Person(Company, Name, Date, Email, PhoneNr);
-
     this.doc.text('Hours: ' + Hours, this.PdfStartX, this.PdfStartY);
     this.doc.text('Cost: ' + Cost, this.PdfStartX, this.PdfStartY += 10);
 
@@ -251,9 +243,7 @@ export class PDFService  {
     catch (error){
       console.log('Error');
     }
-
-    const file = this.doc.output('arraybuffer');
-    return file;
+    return this.doc.output('arraybuffer');
   }
 
   Inspection(Company, Name, Date, State, Email, PhoneNR){
@@ -279,9 +269,7 @@ export class PDFService  {
     }
     this.Person(Company, Name, Date, Email, PhoneNR);
     this.doc.text('State: ' + State, this.PdfStartX, this.PdfStartY);
-    const file = this.doc.output('arraybuffer');
-
-    return file;
+    return this.doc.output('arraybuffer');
   }
 
   Reset(){
@@ -305,5 +293,3 @@ export class PDFService  {
     this.doc.save(this.DateToday(VINNumber));
   }
 }
-
-

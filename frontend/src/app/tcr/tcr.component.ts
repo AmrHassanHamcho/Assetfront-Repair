@@ -10,6 +10,7 @@ import {FormBuilder} from '@angular/forms';
 })
 export class TcrComponent implements OnInit,  AfterViewChecked {
   color: 'lightblue'; // ripple effect color
+  public atLeastOneSelected: boolean;
   constructor(public request: ApiRequestService,
               private router: Router,
               public tcr: TcrService,
@@ -17,8 +18,7 @@ export class TcrComponent implements OnInit,  AfterViewChecked {
               private changeRef: ChangeDetectorRef,
               ) {
   }
-
-  all = []; // place holder for checkpoint
+  allCheckPoint = []; // place holder for checkpoint
   allSelected = false; // All checkpoint selected false at the beginning
   searchedSerialNo: boolean;
   tcrCopy = this.request.getAssetDetails()[0]; // copy of the TCR
@@ -45,15 +45,21 @@ export class TcrComponent implements OnInit,  AfterViewChecked {
  * would be updated by the value a user selects from radio button
  */
   updateValue(value: number, indexTcr: number, indexCp: number ) {
-  this.tcrCopy.tcr[indexTcr].checkpoint[indexCp].value = value;
-  return this.tcrCopy.tcr[indexTcr].checkpoint[indexCp].value;
+    this.tcrCopy.tcr[indexTcr].checkpoint[indexCp].value = value;
+    this.allCheckPointSelected(indexTcr);
+    if (value > -1 && this.allSelected){
+      this.atLeastOneSelected = true;
+    }
+    return this.tcrCopy.tcr[indexTcr].checkpoint[indexCp].value;
   }
-/** @return the newly filled tcr
+/**
+ * @return the newly filled tcr
  */
   getNewlyFilledTcr() {
   return   this.tcr.setTcr(this.tcrCopy);
   }
- /**redirect to personal-data component
+  /**
+  *redirect to personal-data component
   */
   personData() {
     this.router.navigate(['/tcr/personal-data']);
@@ -62,38 +68,27 @@ export class TcrComponent implements OnInit,  AfterViewChecked {
   ngAfterViewChecked(): void { this.changeRef.detectChanges(); }
 /** @param tcrIndex index of the tcr where user is selecting radiobutton
  * It loops through checkpoint of tcrCopy at desired index
- * and fills the array all[] with boolean which is false
+ * and fills the array allCheckPoint[] with boolean which is false
  * If the value of checkpoint at currentIndex of tcrCopy of currentIndex
- * is greater than -1, i,e the user selected a radiobutton, then it updates the array all[]
+ * is greater than -1, i,e the user selected a radiobutton, then it updates the array allCheckPoint[]
  * at current index with boolean value which is true.
  * Finally it assigns the global variable allSelected with true or false, i.e
- * allSelected = true if all values in array all[] are true otherwise
+ * allSelected = true if all values in array allCheckPoint[] are true otherwise
  * allSelected = false
  */
-  allCheckPointSelected(tcrIndex: number) {
+  allCheckPointSelected(tcrIndex: number){
     this.allSelected = false;
-    this.all = [];
-    for (let i = 0; i < this.tcrCopy.tcr[tcrIndex].checkpoint.length; i ++){
-      this.all[i] = false;
-      if (this.tcrCopy.tcr[tcrIndex].checkpoint[i].value > -1){
-            this.all[i] = true;
+    this.allCheckPoint = [];
+    for(let i = 0; i < this.tcrCopy.tcr[tcrIndex].checkpoint.length; i++){
+      this.allCheckPoint[i] = false;
+      if(this.tcrCopy.tcr[tcrIndex].checkpoint[i].value > -1){
+            this.allCheckPoint[i] = true;
           }
-   }
-    this.allSelected = this.all.every(v => v === true);
-  }
-  /*allFilled(){
-    for (let tcri = 0; tcri < this.tcrCopy.tcr.length; tcri++){
-      for ( let cpi = 0; cpi < this.tcrCopy.tcr[tcri].checkpoint.length; cpi ++){
-        this.all[cpi] = false;
-        if (this.tcrCopy.tcr[tcri].checkpoint[cpi].value > -1){
-          this.all[cpi] = true;
-        }
-     }
     }
-    this.allSelected = this.all.every(v => v === true);
-}*/
-  toHome() {
-    this.router.navigate(['/home']);
+    this.allSelected = this.allCheckPoint.every(v => v === true);
   }
 
+  toHome(){
+    this.router.navigate(['/home']);
+  }
 }
