@@ -14,7 +14,7 @@ export class AppHttpInterceptor implements HttpInterceptor {
 /**
  * @param req HttpRequest of ivehice interface.
  * @param next HttpHandler.
- * The functon sets the httpRequest header's content-type to application/json and
+ * The function sets the httpRequest header's content-type to application/json and
  * Authorization of type api_key to JFg26WuKBjgZ.
  * @return returns request header.
  */

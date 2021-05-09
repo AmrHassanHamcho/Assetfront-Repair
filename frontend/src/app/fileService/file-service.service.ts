@@ -16,7 +16,7 @@ export class FileServiceService {
 
   constructor() { }
 
-  //Method for Amazon Bucket verification data
+  // Method for Amazon Bucket verification data
 
   /**
    * Function for Amazon Bucket verification data
@@ -24,13 +24,6 @@ export class FileServiceService {
    */
 
   public getS3Bucket(): any {
-   // const bucket = new S3(
-   //    {
-   //      accessKeyId: 'AKIA3MSMUCO2MSPHGAKV',
-   //      secretAccessKey: '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',
-   //      region: 'eu-north-1'
-   //   }
-   // );
         const bucket = new S3(
           {
             accessKeyId: 'AKIAXTNQB7H3IMBOMEGL',
@@ -40,32 +33,6 @@ export class FileServiceService {
         );
         return bucket;
   }
-
-  //   uploadFile(file, FOLDER, resourceId) {
-  //
-  //   const params = {
-  //     Bucket: 'assetfront-repair/' + resourceId + '/' + FOLDER,
-  //     Key:  file.name,
-  //     Body: file,
-  //     ACL: 'public-read',
-  //     ContentType: file.type
-  //   };
-  //
-  //
-  //   this.getS3Bucket().upload(params, (err, data) => {
-  //     if (err) {
-  //       console.log('There was an error uploading your file: ', err);
-  //       return false;
-  //     }
-  //
-  //     console.log('Successfully uploaded file.', data);
-  //     return true;
-  //   });
-  //
-  //
-  //   this.fileUploaded = true;
-  //
-  // }
 
   /**
    * Function for uploading a file to Amazon Bucket

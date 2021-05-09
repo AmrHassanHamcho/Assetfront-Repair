@@ -48,7 +48,7 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 
 // Service files
 import { PDFService } from './PDF/pdf.service';
-import { VehiclesService } from '../vehicle-service/vehicle.service';
+import {VehiclesService} from './vehicle-service/vehicle.service';
 
 
 @NgModule({
