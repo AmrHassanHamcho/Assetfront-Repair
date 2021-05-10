@@ -60,8 +60,8 @@ export class InspectionComponent  implements OnInit {
   registerForm = this.formBuilder.group({
     company: [''],
     Email: ['', {validators: [Validators.required, Validators.email]}],
-    fName: [''],
-    lName: [''],
+    firstName: [''],
+    lastName: [''],
     date: [''],
     phone: [''],
     inspectionStates: ['', {validate}],

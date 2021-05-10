@@ -97,7 +97,6 @@ export class HomeService {
    * Function that Downloads a specified file
    * @param key is the name of the file which be be displayed
    */
-
   downloadFiles(key){
     this.resourceId = this.apiRequest.getAssetDetails()[0].resourceId;
     const params = { // Bucket info that has the key of the specified file

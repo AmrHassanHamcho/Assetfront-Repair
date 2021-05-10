@@ -46,8 +46,8 @@ export class ServiceComponent implements OnInit {
    */registerForm = this.formBuilder.group({
     workshop: [''],
     Email: ['', { validators: [Validators.required, Validators.email]}],
-    fName: [''],
-    lName: [''],
+    firstName: [''],
+    lastName: [''],
     date: [''],
     hours: [''],
     comment: [''],
