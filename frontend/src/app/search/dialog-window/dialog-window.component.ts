@@ -22,6 +22,10 @@ export class DialogWindowComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  /**
+   *
+   * @param isFallback logs the fallBack to console
+   */
   onLoaded(isFallback: boolean) {
     console.log(isFallback);
   }

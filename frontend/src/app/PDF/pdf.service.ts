@@ -84,6 +84,8 @@ export class PDFService  {
     const Vintoday = (VINNum) + '_' + (day) + '-' + (month) + '-' + now.getFullYear() + '.pdf';
     return Vintoday;
   }
+
+
   SmallRectangle(fill, x, y) {
     /**
      * @param fill: if the rectangle will get filled or not. x: x coordinate. y: y coordinate
@@ -108,6 +110,7 @@ export class PDFService  {
     this.Page++;
     this.doc.setFontSize(7);
   }
+
   PlaceForm(json: any, Company, Name, Date, Email, PhoneNR){
     /**
      * @param:
@@ -139,40 +142,37 @@ export class PDFService  {
     let tcrName = ' ';
     let width = 0;
     for (let tcri = 0; tcri < json.length; tcri++){
-      for(let i = 0; json[tcri].checkpoint.length > i; i++){
-        if (!(json[tcri].checkpoint[i].value === -1)){
-          this.PageLimit(230);
-          tcrName = json[tcri].name;
-          this.doc.setFontSize(9);
-          this.doc.text( tcrName , this.FormStartX - 2 , this.PdfStartY += 4.5);
-          width = this.doc.getTextWidth(tcrName);
-          this.doc.setLineWidth(0.2);
-          this.doc.line(this.FormStartX - 2, this.PdfStartY += 1, this.FormStartX + width,  this.PdfStartY);
-          this.doc.setLineWidth(0);
-          this.doc.setFontSize(7);
-          this.PdfStartY += 3;
-          for (let cpi = 0; cpi < json[tcri].checkpoint.length; cpi ++){
-            if (!(json[tcri].checkpoint[cpi].value === -1)){
-              this.PageLimit(240);
-              CheckpointName = json[tcri].checkpoint[cpi].name ;
-              this.doc.text(CheckpointName, this.FormStartX, this.PdfStartY += 4.5);
-              this.PdfStartY += 1;
-              for (let opi = 0; opi < json[tcri].checkpoint[cpi].options.length; opi ++){
-                this.optionHolder[opi] = json[tcri].checkpoint[cpi].options[opi].description;
-                if ( opi === json[tcri].checkpoint[cpi].value) {
-                  this.SmallRectangle(true, xNow - 20, this.PdfStartY += 3);  // Filled
-                  this.doc.text(this.optionHolder[opi], xNow - 7, this.PdfStartY += 3.5);
-                } else {
-                  this.SmallRectangle(false, xNow - 20, this.PdfStartY += 3); // Hollow
-                  this.doc.text(this.optionHolder[opi], xNow - 7, this.PdfStartY += 3.5);
+      this.PageLimit(230);
+      tcrName = json[tcri].name;
+      this.doc.setFontSize(9);
+      this.doc.text( tcrName , this.FormStartX - 2 , this.PdfStartY += 4.5);
+      width = this.doc.getTextWidth(tcrName);
+      this.doc.setLineWidth(0.2);
+      this.doc.line(this.FormStartX - 2, this.PdfStartY += 1, this.FormStartX + width,  this.PdfStartY);
+      this.doc.setLineWidth(0);
+      this.doc.setFontSize(7);
+      this.PdfStartY += 3;
+      for (let cpi = 0; cpi < json[tcri].checkpoint.length; cpi ++){
+        this.PageLimit(240);
+        CheckpointName = json[tcri].checkpoint[cpi].name ;
+        this.doc.text(CheckpointName, this.FormStartX, this.PdfStartY += 4.5);
+        this.PdfStartY += 1;
+        for (let opi = 0; opi < json[tcri].checkpoint[cpi].options.length; opi ++){
+          this.optionHolder[opi] = json[tcri].checkpoint[cpi].options[opi].description;
+          if ( opi === json[tcri].checkpoint[cpi].value) {
+            this.SmallRectangle(true, xNow - 20, this.PdfStartY += 3);  // Filled
+            this.doc.text(this.optionHolder[opi], xNow - 7, this.PdfStartY += 3.5);
+          } else {
+            this.SmallRectangle(false, xNow - 20, this.PdfStartY += 3); // Hollow
+            this.doc.text(this.optionHolder[opi], xNow - 7, this.PdfStartY += 3.5);
 
-                }
-              }}}}
+          }
+        }
         this.PdfStartY += 3;
       }
     }
     this.HeaderFooter();
-    return this.doc.output('arraybuffer');;
+    return this.doc.output('arraybuffer');
   }
 
 
@@ -190,8 +190,7 @@ export class PDFService  {
     canvas.height = img.height;
     const ctx = canvas.getContext('2d');
     ctx.drawImage(img, 0, 0);
-    const dataURL = canvas.toDataURL('image/png');
-    return dataURL;
+    return canvas.toDataURL('image/png');
   }
 
   download() {
@@ -229,9 +228,12 @@ export class PDFService  {
     this.Reset();
     this.doc = null;
     this.doc = new jsPDF();
+
+
     this.HeaderFooter();
     this.doc.setFontSize(12);
     this.Person(Company, Name, Date, Email, PhoneNr);
+
     this.doc.text('Hours: ' + Hours, this.PdfStartX, this.PdfStartY);
     this.doc.text('Cost: ' + Cost, this.PdfStartX, this.PdfStartY += 10);
 

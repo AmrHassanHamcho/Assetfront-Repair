@@ -10,7 +10,9 @@ import {FormBuilder} from '@angular/forms';
 })
 export class TcrComponent implements OnInit,  AfterViewChecked {
   color: 'lightblue'; // ripple effect color
+  checkRequiredFields = false;
   public atLeastOneSelected: boolean;
+  array = [];
   constructor(public request: ApiRequestService,
               private router: Router,
               public tcr: TcrService,
@@ -91,4 +93,5 @@ export class TcrComponent implements OnInit,  AfterViewChecked {
   toHome(){
     this.router.navigate(['/home']);
   }
+
 }

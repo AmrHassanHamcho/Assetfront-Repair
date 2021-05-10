@@ -44,7 +44,6 @@ export class InputDataTransferService{
                private vehicle: VehiclesService) {
    this.elementType = NgxQrcodeElementTypes.URL;
    this.correctionLevel = NgxQrcodeErrorCorrectionLevels.HIGH;
-
   }
 
   // Method for storing data in PDF which will be generated from Inspection form
@@ -58,14 +57,13 @@ export class InputDataTransferService{
       this.inspectionState,
       this.Email,
       this.phone);
-    this.PDF.Save(this.value);
+      this.PDF.Save(this.value);
 
   }
 
   // Method for storing data in PDF which will be generated from Service form
   callPdfService() {
     this.serialNumber = this.vehicle.getSerNo();
-
     this.PDF.Service(
       this.company,
       this.firstName + ' ' +

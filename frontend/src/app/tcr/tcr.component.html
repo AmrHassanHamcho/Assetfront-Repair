@@ -18,7 +18,7 @@
                 <h1 *ngFor="let checkp of tcrCopy.tcr[indexTcr].checkpoint; let indexCp = index">
                   <mat-card class="card" id="card">
                     <mat-card-content id="body">
-                      <h1 id="subTitle" >{{tcrCopy.tcr[indexTcr].checkpoint[indexCp].name}}
+                      <h1 id="subTitle" >{{tcrCopy.tcr[indexTcr].checkpoint[indexCp].name }}
                       </h1>
                       <h2 *ngFor="let op of tcrCopy.tcr[indexTcr].checkpoint[indexCp].options; let value = index" class="value">
                         <div class="row" id="description">
